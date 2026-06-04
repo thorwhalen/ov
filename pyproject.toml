@@ -118,9 +118,12 @@ sdist = true
 wheel = true
 
 [tool.wads.ci.publish]
-# Disabled deliberately: `ov` is unpublished and should not ship 0.1.0 to PyPI on
-# every merge to main. Re-enable when the package is ready for a deliberate release.
-enabled = false
+# Auto-publish to PyPI on merge to main (wads norm). The version is auto-bumped
+# from the max across sources (git tag / PyPI / pyproject) then patch-incremented,
+# so it never regresses; the push-back of the bump uses the repo's SSH deploy key.
+# Use `[bump minor]` / `[bump major]` in a commit message for a larger bump, or
+# `[skip ci]` to skip a publish.
+enabled = true
 skip_ci_marker = "[skip ci]"
 publish_marker = "[publish]"
 
