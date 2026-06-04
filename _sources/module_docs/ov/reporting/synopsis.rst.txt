@@ -1,0 +1,4 @@
+ov.reporting.synopsis
+=====================
+.. automodule:: ov.reporting.synopsis
+   :members:

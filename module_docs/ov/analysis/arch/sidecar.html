@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.analysis.arch.sidecar &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="ov.analysis.context" href="../context.html" />
+    <link rel="prev" title="ov.analysis.arch.rendering" href="rendering.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.analysis.arch.sidecar</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sidecar.Sidecar"><code class="docutils literal notranslate"><span class="pre">Sidecar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.analysis.arch.sidecar.Sidecar.available"><code class="docutils literal notranslate"><span class="pre">Sidecar.available()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.analysis.arch.sidecar.Sidecar.call"><code class="docutils literal notranslate"><span class="pre">Sidecar.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.analysis.arch.sidecar.Sidecar.close"><code class="docutils literal notranslate"><span class="pre">Sidecar.close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.analysis.arch.sidecar.Sidecar.consume_source_map"><code class="docutils literal notranslate"><span class="pre">Sidecar.consume_source_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.analysis.arch.sidecar.Sidecar.extract_literals"><code class="docutils literal notranslate"><span class="pre">Sidecar.extract_literals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.analysis.arch.sidecar.Sidecar.unpack_bundle"><code class="docutils literal notranslate"><span class="pre">Sidecar.unpack_bundle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sidecar.SidecarUnavailable"><code class="docutils literal notranslate"><span class="pre">SidecarUnavailable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.analysis.arch.sidecar</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/module_docs/ov/analysis/arch/sidecar.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.analysis.arch.sidecar">
+<span id="ov-analysis-arch-sidecar"></span><h1>ov.analysis.arch.sidecar<a class="headerlink" href="#module-ov.analysis.arch.sidecar" title="Link to this heading"></a></h1>
+<p>Python facade over the Node reverse-engineering sidecar (§6.1, D2).</p>
+<p>The mature JS-only tooling (<code class="docutils literal notranslate"><span class="pre">source-map</span></code>, bundle unpacking, AST literal
+extraction) lives in a long-lived Node process spoken to over <strong>newline-delimited
+JSON-RPC 2.0 on stdio</strong> – the same transport MCP uses, sub-process-bound with no
+network exposure of a process that ingests untrusted JS. The wire contract is
+defined once here as typed methods; the sidecar functions are pure and stateless.</p>
+<p>Everything degrades gracefully: if Node or the sidecar deps are absent,
+<a class="reference internal" href="#ov.analysis.arch.sidecar.Sidecar.available" title="ov.analysis.arch.sidecar.Sidecar.available"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Sidecar.available()</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code> and callers skip recovery rather than fail.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.analysis.arch.sidecar.Sidecar">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sidecar.</span></span><span class="sig-name descname"><span class="pre">Sidecar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">script</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sidecar.html#Sidecar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sidecar.Sidecar" title="Link to this definition"></a></dt>
+<dd><p>A lazily-started Node sidecar process exposing pure JSON-RPC functions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.analysis.arch.sidecar.Sidecar.available">
+<span class="sig-name descname"><span class="pre">available</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sidecar.html#Sidecar.available"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sidecar.Sidecar.available" title="Link to this definition"></a></dt>
+<dd><p>True when the script exists and its <code class="docutils literal notranslate"><span class="pre">node_modules</span></code> are installed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.analysis.arch.sidecar.Sidecar.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sidecar.html#Sidecar.call"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sidecar.Sidecar.call" title="Link to this definition"></a></dt>
+<dd><p>Invoke a sidecar method; raise <a class="reference internal" href="#ov.analysis.arch.sidecar.SidecarUnavailable" title="ov.analysis.arch.sidecar.SidecarUnavailable"><code class="xref py py-class docutils literal notranslate"><span class="pre">SidecarUnavailable</span></code></a> on transport error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.analysis.arch.sidecar.Sidecar.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sidecar.html#Sidecar.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sidecar.Sidecar.close" title="Link to this definition"></a></dt>
+<dd><p>Terminate the sidecar process (idempotent).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.analysis.arch.sidecar.Sidecar.consume_source_map">
+<span class="sig-name descname"><span class="pre">consume_source_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_json</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sidecar.html#Sidecar.consume_source_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sidecar.Sidecar.consume_source_map" title="Link to this definition"></a></dt>
+<dd><p>Recover <code class="docutils literal notranslate"><span class="pre">{files:</span> <span class="pre">[{path,</span> <span class="pre">content}],</span> <span class="pre">sources}</span></code> from a source map.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.analysis.arch.sidecar.Sidecar.extract_literals">
+<span class="sig-name descname"><span class="pre">extract_literals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">js_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sidecar.html#Sidecar.extract_literals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sidecar.Sidecar.extract_literals" title="Link to this definition"></a></dt>
+<dd><p>Static AST extraction of <code class="docutils literal notranslate"><span class="pre">{strings,</span> <span class="pre">urls,</span> <span class="pre">routes}</span></code> (never evals JS).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.analysis.arch.sidecar.Sidecar.unpack_bundle">
+<span class="sig-name descname"><span class="pre">unpack_bundle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">js_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sidecar.html#Sidecar.unpack_bundle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sidecar.Sidecar.unpack_bundle" title="Link to this definition"></a></dt>
+<dd><p>Unpack a bundle into <code class="docutils literal notranslate"><span class="pre">{modules:</span> <span class="pre">[...]}</span></code> (names lost without a map).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ov.analysis.arch.sidecar.SidecarUnavailable">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sidecar.</span></span><span class="sig-name descname"><span class="pre">SidecarUnavailable</span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sidecar.html#SidecarUnavailable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sidecar.SidecarUnavailable" title="Link to this definition"></a></dt>
+<dd><p>Raised when the Node sidecar cannot be used (Node/deps missing).</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rendering.html" class="btn btn-neutral float-left" title="ov.analysis.arch.rendering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../context.html" class="btn btn-neutral float-right" title="ov.analysis.context" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

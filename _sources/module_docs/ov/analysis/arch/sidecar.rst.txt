@@ -1,0 +1,4 @@
+ov.analysis.arch.sidecar
+========================
+.. automodule:: ov.analysis.arch.sidecar
+   :members:

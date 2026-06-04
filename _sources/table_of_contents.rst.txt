@@ -5,11 +5,29 @@
    module_docs/ov
    module_docs/ov/__main__
    module_docs/ov/analysis
+   module_docs/ov/analysis/arch
+   module_docs/ov/analysis/arch/api
+   module_docs/ov/analysis/arch/bundles
+   module_docs/ov/analysis/arch/dependencies
+   module_docs/ov/analysis/arch/framework
+   module_docs/ov/analysis/arch/pipeline
+   module_docs/ov/analysis/arch/rendering
+   module_docs/ov/analysis/arch/sidecar
+   module_docs/ov/analysis/context
+   module_docs/ov/analysis/run
+   module_docs/ov/analysis/ux
+   module_docs/ov/analysis/ux/a11y
+   module_docs/ov/analysis/ux/contrast_focus
+   module_docs/ov/analysis/ux/cwv
+   module_docs/ov/analysis/ux/heuristics
+   module_docs/ov/analysis/ux/metrics
+   module_docs/ov/analysis/ux/severity
    module_docs/ov/base
    module_docs/ov/capture
    module_docs/ov/capture/browser
    module_docs/ov/capture/cdp
    module_docs/ov/capture/probes
+   module_docs/ov/capture/probes/a11y
    module_docs/ov/capture/probes/assets
    module_docs/ov/capture/probes/console
    module_docs/ov/capture/probes/dom
@@ -34,4 +52,8 @@
    module_docs/ov/operate/strategies
    module_docs/ov/registry
    module_docs/ov/reporting
+   module_docs/ov/reporting/overview
+   module_docs/ov/reporting/render
+   module_docs/ov/reporting/sections
+   module_docs/ov/reporting/synopsis
    module_docs/ov/util

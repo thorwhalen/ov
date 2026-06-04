@@ -1,0 +1,216 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.analysis.ux.severity &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="ov.base" href="../../base.html" />
+    <link rel="prev" title="ov.analysis.ux.metrics" href="metrics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.analysis.ux.severity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.ux.severity.A11Y_TIER_WEIGHT"><code class="docutils literal notranslate"><span class="pre">A11Y_TIER_WEIGHT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.ux.severity.UX_TIER_WEIGHT"><code class="docutils literal notranslate"><span class="pre">UX_TIER_WEIGHT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.ux.severity.make_severity"><code class="docutils literal notranslate"><span class="pre">make_severity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.ux.severity.tier_weight"><code class="docutils literal notranslate"><span class="pre">tier_weight()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.analysis.ux.severity</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/module_docs/ov/analysis/ux/severity.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.analysis.ux.severity">
+<span id="ov-analysis-ux-severity"></span><h1>ov.analysis.ux.severity<a class="headerlink" href="#module-ov.analysis.ux.severity" title="Link to this heading"></a></h1>
+<p>Severity scoring: <code class="docutils literal notranslate"><span class="pre">score</span> <span class="pre">=</span> <span class="pre">impact_tier</span> <span class="pre">x</span> <span class="pre">reach</span></code> (D3 §1).</p>
+<p>The design goal is that a high-reach moderate issue outranks a rare critical one.
+<code class="docutils literal notranslate"><span class="pre">reach</span></code> combines how many nodes/states an issue touches with the fraction of
+the journey it affects:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reach_magnitude</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">states_affected</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">reach_value</span>     <span class="o">=</span> <span class="n">reach_magnitude</span> <span class="o">*</span> <span class="n">journey_fraction</span>
+<span class="n">score</span>           <span class="o">=</span> <span class="n">impact_weight</span> <span class="o">*</span> <span class="n">reach_value</span>
+</pre></div>
+</div>
+<p>So a <em>serious</em> (3) issue on 12 nodes across 80% of journeys scores
+<code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">*</span> <span class="pre">(12</span> <span class="pre">*</span> <span class="pre">0.8)</span> <span class="pre">=</span> <span class="pre">28.8</span></code>, while a <em>critical</em> (4) issue on 1 node in 5% of
+journeys scores <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">*</span> <span class="pre">0.05)</span> <span class="pre">=</span> <span class="pre">0.2</span></code> – exactly the prioritization D3 wants.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="ov.analysis.ux.severity.A11Y_TIER_WEIGHT">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.ux.severity.</span></span><span class="sig-name descname"><span class="pre">A11Y_TIER_WEIGHT</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'critical':</span> <span class="pre">4,</span> <span class="pre">'minor':</span> <span class="pre">1,</span> <span class="pre">'moderate':</span> <span class="pre">2,</span> <span class="pre">'serious':</span> <span class="pre">3}</span></span><a class="headerlink" href="#ov.analysis.ux.severity.A11Y_TIER_WEIGHT" title="Link to this definition"></a></dt>
+<dd><p>axe-style accessibility impact tiers -&gt; numeric weight.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ov.analysis.ux.severity.UX_TIER_WEIGHT">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.ux.severity.</span></span><span class="sig-name descname"><span class="pre">UX_TIER_WEIGHT</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'0':</span> <span class="pre">0,</span> <span class="pre">'1':</span> <span class="pre">1,</span> <span class="pre">'2':</span> <span class="pre">2,</span> <span class="pre">'3':</span> <span class="pre">3,</span> <span class="pre">'4':</span> <span class="pre">4}</span></span><a class="headerlink" href="#ov.analysis.ux.severity.UX_TIER_WEIGHT" title="Link to this definition"></a></dt>
+<dd><p>Nielsen UX severity tiers (0 cosmetic .. 4 catastrophe) -&gt; numeric weight.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.ux.severity.make_severity">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.ux.severity.</span></span><span class="sig-name descname"><span class="pre">make_severity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">impact_tier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states_affected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">journey_fraction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../base.html#ov.base.Severity" title="ov.base.Severity"><span class="pre">Severity</span></a></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/ux/severity.html#make_severity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.ux.severity.make_severity" title="Link to this definition"></a></dt>
+<dd><p>Build a <a class="reference internal" href="../../base.html#ov.base.Severity" title="ov.base.Severity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Severity</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">impact</span> <span class="pre">x</span> <span class="pre">reach</span></code> score.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">make_severity</span><span class="p">(</span><span class="s2">&quot;serious&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span><span class="o">.</span><span class="n">score</span>
+<span class="go">28.8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">make_severity</span><span class="p">(</span><span class="s2">&quot;critical&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">0.2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.ux.severity.tier_weight">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.ux.severity.</span></span><span class="sig-name descname"><span class="pre">tier_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">impact_tier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/ux/severity.html#tier_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.ux.severity.tier_weight" title="Link to this definition"></a></dt>
+<dd><p>Map an a11y label or a UX <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;..&quot;4&quot;</span></code> tier to its numeric weight (default 2).</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="metrics.html" class="btn btn-neutral float-left" title="ov.analysis.ux.metrics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../base.html" class="btn btn-neutral float-right" title="ov.base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

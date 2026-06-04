@@ -1,0 +1,4 @@
+ov.analysis.arch.bundles
+========================
+.. automodule:: ov.analysis.arch.bundles
+   :members:

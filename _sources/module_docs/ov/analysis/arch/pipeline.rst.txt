@@ -1,0 +1,4 @@
+ov.analysis.arch.pipeline
+=========================
+.. automodule:: ov.analysis.arch.pipeline
+   :members:

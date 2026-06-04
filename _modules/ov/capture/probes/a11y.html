@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.capture.probes.a11y &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../ov.html">ov</a></li>
+          <li class="breadcrumb-item"><a href="../probes.html">ov.capture.probes</a></li>
+      <li class="breadcrumb-item active">ov.capture.probes.a11y</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ov.capture.probes.a11y</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Accessibility-signals probe: computed text styles (for contrast) + optional axe.</span>
+
+<span class="sd">Contrast cannot be judged from static DOM -- it needs *computed* colors. This</span>
+<span class="sd">probe snapshots, per visible text element, the effective foreground/background</span>
+<span class="sd">colors, font size/weight, and bbox, so the deterministic</span>
+<span class="sd">:mod:`ov.analysis.ux.contrast_focus` analyzer can compute WCAG ratios offline.</span>
+
+<span class="sd">If an axe-core bundle is resolvable (``OV_AXE_PATH`` or the sidecar&#39;s</span>
+<span class="sd">``node_modules/axe-core/axe.min.js``), it is injected and ``axe.run()`` results</span>
+<span class="sd">are stored as an ``axe`` artifact -- additive, never required. axe-core is used</span>
+<span class="sd">as an external tool here (no vendoring), keeping the package license-clean.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">...base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Artifact</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...util</span><span class="w"> </span><span class="kn">import</span> <span class="n">sidecar_dir</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">Probe</span><span class="p">,</span> <span class="n">ProbeContext</span><span class="p">,</span> <span class="n">register_probe</span>
+
+<span class="n">_STYLES_JS</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">(maxEls) =&gt; {</span>
+<span class="s2">  const toRGB = (s) =&gt; {</span>
+<span class="s2">    const m = (s || &#39;&#39;).match(/rgba?\(([^)]+)\)/);</span>
+<span class="s2">    if (!m) return null;</span>
+<span class="s2">    const p = m[1].split(&#39;,&#39;).map(x =&gt; parseFloat(x));</span>
+<span class="s2">    return [p[0] || 0, p[1] || 0, p[2] || 0, p[3] === undefined ? 1 : p[3]];</span>
+<span class="s2">  };</span>
+<span class="s2">  const effBg = (el) =&gt; {</span>
+<span class="s2">    let n = el;</span>
+<span class="s2">    while (n &amp;&amp; n.nodeType === 1) {</span>
+<span class="s2">      const rgb = toRGB(getComputedStyle(n).backgroundColor);</span>
+<span class="s2">      if (rgb &amp;&amp; rgb[3] !== 0) return rgb.slice(0, 3);</span>
+<span class="s2">      n = n.parentElement;</span>
+<span class="s2">    }</span>
+<span class="s2">    return [255, 255, 255];</span>
+<span class="s2">  };</span>
+<span class="s2">  const sel = (el) =&gt; {</span>
+<span class="s2">    if (el.id) return &#39;#&#39; + el.id;</span>
+<span class="s2">    const parts = []; let n = el;</span>
+<span class="s2">    while (n &amp;&amp; n.nodeType === 1 &amp;&amp; parts.length &lt; 4) {</span>
+<span class="s2">      let s = n.tagName.toLowerCase();</span>
+<span class="s2">      const p = n.parentElement;</span>
+<span class="s2">      if (p) {</span>
+<span class="s2">        const sib = Array.from(p.children).filter(c =&gt; c.tagName === n.tagName);</span>
+<span class="s2">        if (sib.length &gt; 1) s += &#39;:nth-of-type(&#39; + (sib.indexOf(n) + 1) + &#39;)&#39;;</span>
+<span class="s2">      }</span>
+<span class="s2">      parts.unshift(s); n = p;</span>
+<span class="s2">    }</span>
+<span class="s2">    return parts.join(&#39;&gt;&#39;);</span>
+<span class="s2">  };</span>
+<span class="s2">  const out = [];</span>
+<span class="s2">  const els = document.querySelectorAll(</span>
+<span class="s2">    &#39;p,span,a,button,h1,h2,h3,h4,h5,h6,li,td,th,label,strong,em,small&#39;);</span>
+<span class="s2">  for (const el of els) {</span>
+<span class="s2">    if (out.length &gt;= maxEls) break;</span>
+<span class="s2">    const txt = Array.from(el.childNodes).filter(n =&gt; n.nodeType === 3)</span>
+<span class="s2">                  .map(n =&gt; n.textContent).join(&#39;&#39;).trim();</span>
+<span class="s2">    if (!txt) continue;</span>
+<span class="s2">    const cs = getComputedStyle(el);</span>
+<span class="s2">    const fg = toRGB(cs.color);</span>
+<span class="s2">    if (!fg) continue;</span>
+<span class="s2">    const fontSize = parseFloat(cs.fontSize) || 16;</span>
+<span class="s2">    const bold = (parseInt(cs.fontWeight) || 400) &gt;= 700;</span>
+<span class="s2">    const large = fontSize &gt;= 24 || (fontSize &gt;= 18.66 &amp;&amp; bold);</span>
+<span class="s2">    const r = el.getBoundingClientRect();</span>
+<span class="s2">    if (r.width === 0 &amp;&amp; r.height === 0) continue;</span>
+<span class="s2">    out.push({selector: sel(el), text: txt.slice(0, 60), fg: fg.slice(0, 3),</span>
+<span class="s2">              bg: effBg(el), fontSize, bold, large});</span>
+<span class="s2">  }</span>
+<span class="s2">  return out;</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_axe_source</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve an axe-core bundle path (env override, then sidecar node_modules).&quot;&quot;&quot;</span>
+    <span class="n">override</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OV_AXE_PATH&quot;</span><span class="p">)</span>
+    <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">override</span><span class="p">)]</span> <span class="k">if</span> <span class="n">override</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="n">candidates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sidecar_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;node_modules&quot;</span> <span class="o">/</span> <span class="s2">&quot;axe-core&quot;</span> <span class="o">/</span> <span class="s2">&quot;axe.min.js&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+                <span class="k">continue</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="A11yProbe">
+<a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/a11y.html#ov.capture.probes.a11y.A11yProbe">[docs]</a>
+<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a11y_styles&quot;</span><span class="p">,</span> <span class="s2">&quot;axe&quot;</span><span class="p">))</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">A11yProbe</span><span class="p">(</span><span class="n">Probe</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Capture computed text styles (always) + axe-core results (when available).&quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;a11y&quot;</span>
+    <span class="n">max_text_elements</span> <span class="o">=</span> <span class="mi">400</span>
+
+<div class="viewcode-block" id="A11yProbe.capture">
+<a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/a11y.html#ov.capture.probes.a11y.A11yProbe.capture">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]:</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">page</span>
+        <span class="k">if</span> <span class="n">page</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">step_id</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">step</span><span class="o">.</span><span class="n">id</span> <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">step</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">artifacts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">styles</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">_STYLES_JS</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_text_elements</span><span class="p">)</span>
+            <span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
+                    <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">styles</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
+                    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;a11y_styles&quot;</span><span class="p">,</span>
+                    <span class="n">step_id</span><span class="o">=</span><span class="n">step_id</span><span class="p">,</span>
+                    <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+                    <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">styles</span><span class="p">)},</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
+            <span class="k">pass</span>
+
+        <span class="n">src</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;axe_source&quot;</span><span class="p">,</span> <span class="s2">&quot;missing&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">src</span> <span class="o">==</span> <span class="s2">&quot;missing&quot;</span><span class="p">:</span>  <span class="c1"># resolve once per session</span>
+            <span class="n">src</span> <span class="o">=</span> <span class="n">_axe_source</span><span class="p">()</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">extras</span><span class="p">[</span><span class="s2">&quot;axe_source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">src</span>
+        <span class="k">if</span> <span class="n">src</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">add_script_tag</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">src</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
+                    <span class="s2">&quot;async () =&gt; await axe.run(document, &quot;</span>
+                    <span class="s2">&quot;{runOnly: {type: &#39;tag&#39;, values: [&#39;wcag2a&#39;,&#39;wcag21aa&#39;,&#39;wcag22aa&#39;]}})&quot;</span>
+                <span class="p">)</span>
+                <span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
+                        <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
+                        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;axe&quot;</span><span class="p">,</span>
+                        <span class="n">step_id</span><span class="o">=</span><span class="n">step_id</span><span class="p">,</span>
+                        <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+                        <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;violations&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;violations&quot;</span><span class="p">,</span> <span class="p">[]))},</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001 - axe is best-effort</span>
+                <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">artifacts</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

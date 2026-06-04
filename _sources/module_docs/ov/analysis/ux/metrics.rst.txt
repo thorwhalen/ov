@@ -1,0 +1,4 @@
+ov.analysis.ux.metrics
+======================
+.. automodule:: ov.analysis.ux.metrics
+   :members:

@@ -1,0 +1,4 @@
+ov.analysis.ux.severity
+=======================
+.. automodule:: ov.analysis.ux.severity
+   :members:

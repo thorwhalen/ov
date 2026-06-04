@@ -1,0 +1,4 @@
+ov.analysis.arch.dependencies
+=============================
+.. automodule:: ov.analysis.arch.dependencies
+   :members:
