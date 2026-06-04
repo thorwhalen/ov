@@ -5,6 +5,17 @@ description: >-
   evidence bundle, and add narrative UX judgment as the host. Load this for the UX
   lens: accessibility audit, contrast, Core Web Vitals, form friction, Nielsen
   heuristics, and severity-ranked usability findings with fixes.
+coact:
+  model: sonnet
+  tools: [Read, Grep, Glob]
+  memory: project
+  consumes: evidence_bundle
+  returns:
+    schema_ref: ov.base:Finding
+    description: >-
+      Severity-ranked UX / a11y findings (a list of ov.base:Finding,
+      source_layer="llm") grounded in the evidence bundle under the cite-or-abstain
+      contract — every claim cites a mark/fact id or is downgraded to undetermined.
 ---
 
 # UX & accessibility analysis

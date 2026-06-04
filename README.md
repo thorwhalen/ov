@@ -60,7 +60,44 @@ driver) uses to drive a journey; the journey trace *is* the UX evidence.
 | `ov.synopsis(dir)` | Aggregate reports into one synopsis *(Phase 2)* |
 | `ov.overview(url)` | The one-liner: observe → analyze → report → synopsis *(Phase 2)* |
 
-The CLI mirrors these: `ov observe|analyze|report|synopsis|overview|check|runs`.
+The CLI mirrors these: `ov observe|analyze|report|synopsis|overview|check|runs|mcp`.
+
+## In-package agents (optional — `ov[agents]`)
+
+The host-agent path above is the default and the pit of success. When you need a
+*self-contained* runtime — a non-Claude-Code host, programmatic use, or process
+isolation — `ov.agents` re-hosts the **same** skills + deterministic core as runnable
+agents. It is the spec's "mechanical lift" (Phase 4): nothing is rewritten, the lift
+is done by [`coact`](https://github.com/thorwhalen/coact) (`COMPLETE` a skill into an
+agent definition, `REALIZE` it onto a backend), and `ov.agents` adds only the bits
+coact deliberately leaves out — the operator's live-browser loop, the analyst's
+multimodal evidence-bundle call, and the orchestration topology (via
+[`aw`](https://github.com/thorwhalen/aw)).
+
+```bash
+pip install -e ".[agents]"          # coact[sdk,mcp] + aw + py2mcp + fastmcp
+```
+
+```python
+from ov import agents
+
+# 1. Cheapest: materialize ov's agents as .claude/agents/ so Claude Code runs them
+#    (host backend — zero LLM, no fan-out). The host stays the manager.
+agents.materialize()
+
+# 2. The cost gate before standing up an in-process fleet (~15× the tokens):
+print(agents.estimate(["ux-analyst", "arch-analyst"]).render())
+
+# 3. In-package study (LLM dependency-injected; omit it for a deterministic run):
+result = agents.study("https://example.com", llm=my_model)   # -> synopsis + run
+```
+
+Each agent reuses Phase 1–3 machinery unchanged and routes by the §10 cost gate
+(operator → Haiku, UX-analyst → Sonnet, Arch-analyst / orchestrator → Opus). The
+analyst applies the **cite-or-abstain** contract — every LLM claim cites a
+mark/fact id or is downgraded to `undetermined`. For a foreign MCP host,
+`ov mcp` (or `agents.mcp_server()`) exposes `study_url` / `capture_url` via
+[`py2mcp`](https://github.com/i2mint/py2mcp).
 
 ## Authorization & privacy
 
@@ -71,10 +108,12 @@ and storage values are redacted. It does not defeat access controls.
 
 ## Status
 
-Built in phases (see the GitHub issues). **Phase 1** (capture spine + operate
-primitives) is implemented; Phases 2–3 (deterministic analysis + reports, then
-the host-agent skill layer) follow. In-package agents are an optional, deferred
-Phase 4.
+Built in phases (see the GitHub issues). **Phases 1–3** are shipped: the capture
+spine + operate primitives, the deterministic UX + architecture analysis +
+reports + synopsis, and the host-agent skill layer with the grounded evidence
+bundle. **Phase 4** adds the optional in-package agent layer (`ov[agents]`, above);
+its depth items (review-mode own-target diffing, source-map / GraphQL / Lighthouse
+probes) remain deferred to follow-up issues.
 
 ---
 
