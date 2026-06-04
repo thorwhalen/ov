@@ -145,9 +145,16 @@ class CaptureStore:
         return key
 
     def report_names(self, run_id: str) -> list[str]:
-        """List report keys belonging to ``run_id``."""
+        """List report keys belonging to ``run_id`` (separator-normalized).
+
+        ``dol`` returns directory-listing keys with the OS separator, which is a
+        backslash on Windows; we always speak the logical ``/`` separator (and
+        store/read with it), so normalize before the prefix match.
+        """
         prefix = f"{run_id}/"
-        return sorted(k for k in self.reports if k.startswith(prefix))
+        return sorted(
+            norm for k in self.reports if (norm := k.replace("\\", "/")).startswith(prefix)
+        )
 
     # --- analyses ---------------------------------------------------------- #
 
