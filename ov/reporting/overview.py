@@ -33,8 +33,13 @@ def run_overview(
 
     store = resolve_store(store)
     run = ov.observe(
-        url, headed=headed, mode=mode, probes=probes, store=store,
-        authorized=authorized, **observe_kw,
+        url,
+        headed=headed,
+        mode=mode,
+        probes=probes,
+        store=store,
+        authorized=authorized,
+        **observe_kw,
     )
     run_analysis(run, lenses=lenses, store=store)
     render_reports(run, out_dir=out_dir, store=store)

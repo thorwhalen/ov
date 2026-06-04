@@ -44,7 +44,10 @@ def _count_form_fields(form: Any) -> tuple[int, int]:
     fields = form.css("input, select, textarea")
     count = required = 0
     for f in fields:
-        if f.tag == "input" and (f.attributes.get("type") or "text") in _NON_FRICTION_TYPES:
+        if (
+            f.tag == "input"
+            and (f.attributes.get("type") or "text") in _NON_FRICTION_TYPES
+        ):
             continue
         count += 1
         if "required" in f.attributes or f.attributes.get("aria-required") == "true":
@@ -52,7 +55,9 @@ def _count_form_fields(form: Any) -> tuple[int, int]:
     return count, required
 
 
-@register_analyzer("journey_metrics", lens="ux", requires=("dom",), produces=("findings",))
+@register_analyzer(
+    "journey_metrics", lens="ux", requires=("dom",), produces=("findings",)
+)
 def analyze_metrics(ctx: AnalysisContext) -> AnalyzerOutput:
     """Emit form-friction + backtracking Findings and a journey summary."""
     out = AnalyzerOutput()
@@ -62,7 +67,9 @@ def analyze_metrics(ctx: AnalysisContext) -> AnalyzerOutput:
     for art in ctx.artifacts("dom"):
         tree = HTMLParser(ctx.text(art))
         for i, form in enumerate(tree.css("form"), 1):
-            fid = form.attributes.get("id") or form.attributes.get("action") or f"form{i}"
+            fid = (
+                form.attributes.get("id") or form.attributes.get("action") or f"form{i}"
+            )
             if fid in seen_forms:
                 continue
             seen_forms.add(fid)
@@ -100,7 +107,8 @@ def analyze_metrics(ctx: AnalysisContext) -> AnalyzerOutput:
                 title=f"Journey revisited {summary['revisits']} prior state(s)",
                 heuristic="nielsen-7",
                 severity=make_severity(
-                    "moderate", nodes=summary["revisits"],
+                    "moderate",
+                    nodes=summary["revisits"],
                     journey_fraction=summary["revisits"] / max(summary["steps"], 1),
                 ),
                 evidence_refs=[s.id for s in ctx.run.steps[:1]] or ["journey"],

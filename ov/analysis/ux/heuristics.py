@@ -25,7 +25,9 @@ from ..context import AnalysisContext, AnalyzerOutput
 from .severity import make_severity
 
 
-@register_analyzer("heuristics", lens="ux", requires=("console", "dom"), produces=("findings",))
+@register_analyzer(
+    "heuristics", lens="ux", requires=("console", "dom"), produces=("findings",)
+)
 def analyze_heuristics(ctx: AnalysisContext) -> AnalyzerOutput:
     """Emit Findings for console-on-step, missing feedback, and live-region absence."""
     out = AnalyzerOutput()
@@ -37,7 +39,9 @@ def analyze_heuristics(ctx: AnalysisContext) -> AnalyzerOutput:
     for entries in ctx.jsons("console"):
         for e in entries or []:
             if e.get("type") == "error" or e.get("kind") == "pageerror":
-                errors_by_step.setdefault(e.get("step_id"), []).append(e.get("text", "")[:160])
+                errors_by_step.setdefault(e.get("step_id"), []).append(
+                    e.get("text", "")[:160]
+                )
 
     for step in steps:
         msgs = errors_by_step.get(step.id)
@@ -50,7 +54,9 @@ def analyze_heuristics(ctx: AnalysisContext) -> AnalyzerOutput:
                 category="robustness",
                 title=f"Console error during step '{step.intent}'",
                 heuristic="nielsen-5",
-                severity=make_severity("serious", nodes=len(msgs), journey_fraction=1.0 / num_steps),
+                severity=make_severity(
+                    "serious", nodes=len(msgs), journey_fraction=1.0 / num_steps
+                ),
                 evidence_refs=[step.id],
                 observed="; ".join(msgs[:3]),
                 location={"step_id": step.id, "intent": step.intent},
@@ -75,7 +81,9 @@ def analyze_heuristics(ctx: AnalysisContext) -> AnalyzerOutput:
                     category="ux",
                     title=f"Click produced no visible change ('{step.intent}')",
                     heuristic="nielsen-1",
-                    severity=make_severity("moderate", nodes=1, journey_fraction=1.0 / num_steps),
+                    severity=make_severity(
+                        "moderate", nodes=1, journey_fraction=1.0 / num_steps
+                    ),
                     evidence_refs=[step.id],
                     observed="click did not change the observed state and triggered no network activity",
                     location={"step_id": step.id, "intent": step.intent},
@@ -87,9 +95,12 @@ def analyze_heuristics(ctx: AnalysisContext) -> AnalyzerOutput:
             )
 
     # --- live-region presence (only flag if the journey had dynamic changes) ---
-    had_dynamic = any(s.outcome == "ok" and s.action and s.action.type == "click" for s in steps)
+    had_dynamic = any(
+        s.outcome == "ok" and s.action and s.action.type == "click" for s in steps
+    )
     has_live_region = any(
-        HTMLParser(ctx.text(art)).css_first("[aria-live], [role=status], [role=alert]") is not None
+        HTMLParser(ctx.text(art)).css_first("[aria-live], [role=status], [role=alert]")
+        is not None
         for art in ctx.artifacts("dom")
     )
     if had_dynamic and not has_live_region and ctx.artifacts("dom"):

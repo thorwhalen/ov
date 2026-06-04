@@ -18,7 +18,12 @@ from __future__ import annotations
 from ...base import Severity
 
 #: axe-style accessibility impact tiers -> numeric weight.
-A11Y_TIER_WEIGHT: dict[str, int] = {"minor": 1, "moderate": 2, "serious": 3, "critical": 4}
+A11Y_TIER_WEIGHT: dict[str, int] = {
+    "minor": 1,
+    "moderate": 2,
+    "serious": 3,
+    "critical": 4,
+}
 
 #: Nielsen UX severity tiers (0 cosmetic .. 4 catastrophe) -> numeric weight.
 UX_TIER_WEIGHT: dict[str, int] = {"0": 0, "1": 1, "2": 2, "3": 3, "4": 4}

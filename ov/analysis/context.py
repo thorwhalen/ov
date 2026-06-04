@@ -27,7 +27,9 @@ class AnalyzerOutput:
     endpoints: list[Endpoint] = field(default_factory=list)
     tech: list[TechFinding] = field(default_factory=list)
     run_fields: dict[str, Any] = field(default_factory=dict)  # e.g. rendering_model
-    summary: dict[str, Any] = field(default_factory=dict)  # surfaced in analyze()'s dict
+    summary: dict[str, Any] = field(
+        default_factory=dict
+    )  # surfaced in analyze()'s dict
 
 
 @dataclass

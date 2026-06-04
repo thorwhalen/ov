@@ -19,7 +19,11 @@ ARCH_STAGES = ("rendering", "framework", "bundles", "api_surface", "dependencies
 
 def run_arch_pipeline(ctx: AnalysisContext) -> AnalyzerOutput:
     """Run the arch-lens analyzers in dependency order; return one merged output."""
-    arch_names = [n for n, item in ANALYZER_REGISTRY.items.items() if item.meta.get("lens") == "arch"]
+    arch_names = [
+        n
+        for n, item in ANALYZER_REGISTRY.items.items()
+        if item.meta.get("lens") == "arch"
+    ]
     merged = AnalyzerOutput()
     for item in ANALYZER_REGISTRY.ordered(arch_names):
         out = item.fn(ctx)

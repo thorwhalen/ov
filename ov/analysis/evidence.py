@@ -90,7 +90,11 @@ def fit_to_cap(width: int, height: int, model: str = "opus") -> dict[str, Any]:
     area_factor = math.sqrt(token_cap / tokens) if tokens > token_cap else 1.0
     factor = min(edge_factor, area_factor)
 
-    fw, fh = (round(width * factor), round(height * factor)) if factor < 1.0 else (width, height)
+    fw, fh = (
+        (round(width * factor), round(height * factor))
+        if factor < 1.0
+        else (width, height)
+    )
     return {
         "original": {"w": width, "h": height, "tokens": tokens},
         "fitted": {"w": fw, "h": fh, "tokens": image_token_cost(fw, fh)},
@@ -105,8 +109,11 @@ def _pick_step(run: CaptureRun, step_id: str | None) -> JourneyStep | None:
     if step_id:
         return next((s for s in run.steps if s.id == step_id), None)
     # otherwise the richest step that has a screenshot
-    screenshot_steps = [s for s in run.steps if any(
-        a.kind == "screenshot" and a.step_id == s.id for a in run.artifacts)]
+    screenshot_steps = [
+        s
+        for s in run.steps
+        if any(a.kind == "screenshot" and a.step_id == s.id for a in run.artifacts)
+    ]
     candidates = screenshot_steps or run.steps
     return max(candidates, key=lambda s: len(s.affordances_seen), default=None)
 
@@ -145,7 +152,9 @@ def build_evidence_bundle(
     referenced and a note is recorded.
     """
     step = _pick_step(run, step_id)
-    bundle = EvidenceBundle(step_id=step.id if step else None, contract=_CITE_OR_ABSTAIN, task=task)
+    bundle = EvidenceBundle(
+        step_id=step.id if step else None, contract=_CITE_OR_ABSTAIN, task=task
+    )
     if step is None:
         return bundle
 
@@ -160,7 +169,11 @@ def build_evidence_bundle(
     marks: dict[str, str] = {}
     # Marks are regions ON the screenshot, so only build them when this step has
     # its own screenshot -- otherwise we'd ground marks against the wrong image.
-    affordances = [a for a in step.affordances_seen if a.bbox][:max_marks] if shot is not None else []
+    affordances = (
+        [a for a in step.affordances_seen if a.bbox][:max_marks]
+        if shot is not None
+        else []
+    )
     for i, aff in enumerate(affordances, 1):
         mark_id = f"R{i}"
         ev = Evidence(
@@ -174,28 +187,40 @@ def build_evidence_bundle(
         marks[mark_id] = ev.evidence_id
 
     # deterministic findings touching this step (or global, capped) become facts
-    step_findings = [f for f in run.findings if (f.location or {}).get("step_id") == step.id]
+    step_findings = [
+        f for f in run.findings if (f.location or {}).get("step_id") == step.id
+    ]
     for f in (step_findings or run.findings)[:max_marks]:
-        facts.append(Evidence(
-            evidence_id=f"find:{f.finding_id}",
-            kind=_evidence_kind(f),
-            artifact_id=f.evidence_refs[0] if f.evidence_refs else None,
-            summary=f"{f.signal}: {f.observed or f.title}",
-            meta={"severity": f.severity.score if f.severity else None,
-                  "needs_human_review": f.needs_human_review},
-        ))
+        facts.append(
+            Evidence(
+                evidence_id=f"find:{f.finding_id}",
+                kind=_evidence_kind(f),
+                artifact_id=f.evidence_refs[0] if f.evidence_refs else None,
+                summary=f"{f.signal}: {f.observed or f.title}",
+                meta={
+                    "severity": f.severity.score if f.severity else None,
+                    "needs_human_review": f.needs_human_review,
+                },
+            )
+        )
 
     bundle.facts = facts
     bundle.marks = marks
     bundle.token_budget = budget
 
-    marked_ids, crop_ids = _render_overlay(run, store, step, shot, affordances, budget, out_dir) if overlay else ([], [])
+    marked_ids, crop_ids = (
+        _render_overlay(run, store, step, shot, affordances, budget, out_dir)
+        if overlay
+        else ([], [])
+    )
     if marked_ids:
         bundle.marked_image_artifact_ids = marked_ids
         bundle.crop_artifact_ids = crop_ids
     elif shot is not None:
         bundle.marked_image_artifact_ids = [shot.artifact_id]
-        bundle.token_budget.setdefault("note", "set-of-mark overlay skipped (Pillow not installed)")
+        bundle.token_budget.setdefault(
+            "note", "set-of-mark overlay skipped (Pillow not installed)"
+        )
     return bundle
 
 
@@ -225,8 +250,13 @@ def _render_overlay(run, store, step, shot, affordances, budget, out_dir):
             draw.text((x + 2, max(0, y - 12)), f"R{i}", fill=(255, 0, 0))
         out = io.BytesIO()
         img.save(out, format="PNG")
-        art = store.put_artifact(out.getvalue(), kind="screenshot", step_id=step.id,
-                                 content_type="image/png", meta={"set_of_mark": True})
+        art = store.put_artifact(
+            out.getvalue(),
+            kind="screenshot",
+            step_id=step.id,
+            content_type="image/png",
+            meta={"set_of_mark": True},
+        )
         run.artifacts.append(art)
         if out_dir:
             from pathlib import Path
@@ -242,7 +272,9 @@ def _render_overlay(run, store, step, shot, affordances, budget, out_dir):
         return [], []
 
 
-def _emit_crops(run, store, step, img, affordances, factor, out_dir, *, max_crops=6, pad=24):
+def _emit_crops(
+    run, store, step, img, affordances, factor, out_dir, *, max_crops=6, pad=24
+):
     """Crop a padded region around each marked affordance; store + return ids."""
     import io
 
@@ -250,16 +282,25 @@ def _emit_crops(run, store, step, img, affordances, factor, out_dir, *, max_crop
     iw, ih = img.size
     for i, aff in enumerate(affordances[:max_crops], 1):
         x, y, w, h = (c * factor for c in aff.bbox)
-        box = (max(0, int(x - pad)), max(0, int(y - pad)),
-               min(iw, int(x + w + pad)), min(ih, int(y + h + pad)))
+        box = (
+            max(0, int(x - pad)),
+            max(0, int(y - pad)),
+            min(iw, int(x + w + pad)),
+            min(ih, int(y + h + pad)),
+        )
         if box[2] <= box[0] or box[3] <= box[1]:
             continue
         try:
             crop = img.crop(box)
             buf = io.BytesIO()
             crop.save(buf, format="PNG")
-            art = store.put_artifact(buf.getvalue(), kind="screenshot", step_id=step.id,
-                                     content_type="image/png", meta={"crop_of": f"R{i}"})
+            art = store.put_artifact(
+                buf.getvalue(),
+                kind="screenshot",
+                step_id=step.id,
+                content_type="image/png",
+                meta={"crop_of": f"R{i}"},
+            )
             run.artifacts.append(art)
             crop_ids.append(art.artifact_id)
         except Exception:  # noqa: BLE001

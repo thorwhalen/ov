@@ -52,7 +52,11 @@ def render_reports(
         wanted = {sections} if isinstance(sections, str) else set(sections)
         items = [it for it in items if it.name in wanted]
     else:
-        items = [it for it in items if run.mode in it.meta.get("modes", ("reconstruct", "review"))]
+        items = [
+            it
+            for it in items
+            if run.mode in it.meta.get("modes", ("reconstruct", "review"))
+        ]
 
     out_paths: list[str] = []
     out_dir_path = Path(out_dir) if out_dir else None

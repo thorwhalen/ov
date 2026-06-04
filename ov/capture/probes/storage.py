@@ -46,11 +46,19 @@ class StorageProbe(Probe):
         if page is None:
             return []
         redact = ctx.config.redact_values
-        payload: dict[str, Any] = {"localStorage": {}, "sessionStorage": {}, "indexedDB": []}
+        payload: dict[str, Any] = {
+            "localStorage": {},
+            "sessionStorage": {},
+            "indexedDB": [],
+        }
         try:
             raw = page.evaluate(_READ_JS)
-            payload["localStorage"] = _redact_store(raw.get("localStorage", {}), redact=redact)
-            payload["sessionStorage"] = _redact_store(raw.get("sessionStorage", {}), redact=redact)
+            payload["localStorage"] = _redact_store(
+                raw.get("localStorage", {}), redact=redact
+            )
+            payload["sessionStorage"] = _redact_store(
+                raw.get("sessionStorage", {}), redact=redact
+            )
             payload["indexedDB"] = raw.get("indexedDB", [])
         except Exception:  # noqa: BLE001
             pass

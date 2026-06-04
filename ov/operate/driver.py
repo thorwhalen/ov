@@ -51,7 +51,9 @@ def replay(session: Any, actions: list[Action | dict[str, Any]]) -> list[Journey
             action,
             polite_rate_s=session.config.polite_rate_s,
         )
-        step = make_step(intent=INTENT_REPLAY, action=action, pre_observation=pre, result=result)
+        step = make_step(
+            intent=INTENT_REPLAY, action=action, pre_observation=pre, result=result
+        )
         session.capture_step(step)
         session.run.steps.append(step)
         steps.append(step)
@@ -86,12 +88,16 @@ def crawl(session: Any, *, max_pages: int = 5) -> list[JourneyStep]:
         action = Action(type="navigate", url=url, description=f"crawl to {url}")
         pre = observe(session.page)
         result = act(session.page, action, polite_rate_s=session.config.polite_rate_s)
-        step = make_step(intent=INTENT_ENUMERATE, action=action, pre_observation=pre, result=result)
+        step = make_step(
+            intent=INTENT_ENUMERATE, action=action, pre_observation=pre, result=result
+        )
         session.capture_step(step)
         session.run.steps.append(step)
         steps.append(step)
 
-        sig = progress(session.run.steps, no_progress_steps=session.config.no_progress_steps)
+        sig = progress(
+            session.run.steps, no_progress_steps=session.config.no_progress_steps
+        )
         if sig.loop_suspected or len(session.run.steps) >= session.config.max_steps:
             session.run.notes.append(
                 f"crawl stopped: {'loop_suspected' if sig.loop_suspected else 'max_steps'}"

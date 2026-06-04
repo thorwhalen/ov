@@ -61,27 +61,33 @@ def dedupe_findings(findings: list[Finding]) -> list[dict[str, Any]]:
                 placed = True
                 break
         if not placed:
-            clusters.append({"type": f.type, "norm": nf, "refs": set(rf), "rep": f, "members": [f]})
+            clusters.append(
+                {"type": f.type, "norm": nf, "refs": set(rf), "rep": f, "members": [f]}
+            )
 
     records = []
     for c in clusters:
         rep: Finding = c["rep"]
-        records.append({
-            "id": rep.finding_id,
-            "type": rep.type,
-            "signal": rep.signal,
-            "category": rep.category,
-            "summary": rep.title or rep.observed,
-            "severity_tier": rep.severity.impact_tier if rep.severity else None,
-            "severity_score": _sev_score(rep) if rep.severity else None,
-            "evidence_refs": sorted(c["refs"]),
-            "confidence": rep.confidence,
-            "recommendation": rep.suggested_fix,
-            "needs_human_review": any(m.needs_human_review for m in c["members"]),
-            "occurrences": len(c["members"]),
-            "diff_status": rep.diff_status,
-        })
-    records.sort(key=lambda r: (r["severity_score"] is None, -(r["severity_score"] or 0)))
+        records.append(
+            {
+                "id": rep.finding_id,
+                "type": rep.type,
+                "signal": rep.signal,
+                "category": rep.category,
+                "summary": rep.title or rep.observed,
+                "severity_tier": rep.severity.impact_tier if rep.severity else None,
+                "severity_score": _sev_score(rep) if rep.severity else None,
+                "evidence_refs": sorted(c["refs"]),
+                "confidence": rep.confidence,
+                "recommendation": rep.suggested_fix,
+                "needs_human_review": any(m.needs_human_review for m in c["members"]),
+                "occurrences": len(c["members"]),
+                "diff_status": rep.diff_status,
+            }
+        )
+    records.sort(
+        key=lambda r: (r["severity_score"] is None, -(r["severity_score"] or 0))
+    )
     return records
 
 
@@ -99,10 +105,14 @@ def build_synopsis_doc(run: CaptureRun) -> dict[str, Any]:
         "target_kind": "own" if run.mode == "review" else "foreign",
         "rendering_model": run.rendering_model,
         "source_maps_present": run.source_maps_present,
-        "technologies": [{"name": t.name, "version": t.version, "confidence": t.confidence}
-                          for t in run.fingerprint],
-        "api_endpoints": [{"method": e.method, "path": e.path_template, "kind": e.kind}
-                          for e in run.api_surface],
+        "technologies": [
+            {"name": t.name, "version": t.version, "confidence": t.confidence}
+            for t in run.fingerprint
+        ],
+        "api_endpoints": [
+            {"method": e.method, "path": e.path_template, "kind": e.kind}
+            for e in run.api_surface
+        ],
         "severity_histogram": histogram,
         "findings": records,
     }
@@ -151,7 +161,9 @@ def build_synopsis(run_or_id: Any, *, out: Any = None, store: Any = None) -> str
     if out:
         out_dir = Path(out)
         out_dir.mkdir(parents=True, exist_ok=True)
-        (out_dir / "synopsis.json").write_text(json.dumps(doc, indent=2), encoding="utf-8")
+        (out_dir / "synopsis.json").write_text(
+            json.dumps(doc, indent=2), encoding="utf-8"
+        )
         md_path = out_dir / "SYNOPSIS.md"
         md_path.write_text(md, encoding="utf-8")
         return str(md_path)

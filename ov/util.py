@@ -70,7 +70,11 @@ def redact_value(value: Any) -> str:
     if value is None:
         return _REDACTED
     try:
-        n = len(value) if isinstance(value, (str, bytes, list, dict)) else len(str(value))
+        n = (
+            len(value)
+            if isinstance(value, (str, bytes, list, dict))
+            else len(str(value))
+        )
     except TypeError:
         n = 0
     return f"<redacted:{n}>"
@@ -145,11 +149,17 @@ class RequirementReport:
             lines.append(f"  [{mark}] {r.name}{tag}: {r.detail}")
             if not r.present and r.install_hint:
                 lines.append(f"        install: {r.install_hint}")
-        status = "all required dependencies present" if self.ok else "missing REQUIRED dependencies"
+        status = (
+            "all required dependencies present"
+            if self.ok
+            else "missing REQUIRED dependencies"
+        )
         return f"ov requirements -- {status}\n" + "\n".join(lines)
 
 
-def _which_version(cmd: str, version_args: Iterable[str] = ("--version",)) -> str | None:
+def _which_version(
+    cmd: str, version_args: Iterable[str] = ("--version",)
+) -> str | None:
     """Return the trimmed version string for ``cmd`` if runnable, else ``None``."""
     if shutil.which(cmd) is None:
         return None
@@ -160,7 +170,11 @@ def _which_version(cmd: str, version_args: Iterable[str] = ("--version",)) -> st
             text=True,
             timeout=10,
         )
-        return (out.stdout or out.stderr).strip().splitlines()[0] if (out.stdout or out.stderr) else ""
+        return (
+            (out.stdout or out.stderr).strip().splitlines()[0]
+            if (out.stdout or out.stderr)
+            else ""
+        )
     except (OSError, subprocess.SubprocessError):
         return None
 
@@ -204,7 +218,11 @@ def check_requirements(
     >>> isinstance(rep, RequirementReport)
     True
     """
-    want = set(components) if components is not None else {"browser", "node", "sidecar", "clis"}
+    want = (
+        set(components)
+        if components is not None
+        else {"browser", "node", "sidecar", "clis"}
+    )
     reqs: list[Requirement] = []
 
     if "browser" in want:
@@ -237,7 +255,9 @@ def check_requirements(
             Requirement(
                 "ov-node-sidecar",
                 installed,
-                f"node_modules present at {sd}" if installed else f"not installed at {sd}",
+                f"node_modules present at {sd}"
+                if installed
+                else f"not installed at {sd}",
                 install_hint=f"cd {sd} && npm install",
             )
         )
@@ -249,7 +269,9 @@ def check_requirements(
         ):
             ver = _which_version(cli)
             reqs.append(
-                Requirement(cli, ver is not None, ver or "not found on PATH", install_hint=hint)
+                Requirement(
+                    cli, ver is not None, ver or "not found on PATH", install_hint=hint
+                )
             )
 
     report = RequirementReport(reqs)

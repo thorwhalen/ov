@@ -16,7 +16,16 @@ from .capture.stores import CaptureStore
 from .util import check_requirements as _check_requirements
 
 
-def observe(url, *, headed=False, probes="default", mode="reconstruct", crawl_pages: int = 1, store=None, authorized=False):
+def observe(
+    url,
+    *,
+    headed=False,
+    probes="default",
+    mode="reconstruct",
+    crawl_pages: int = 1,
+    store=None,
+    authorized=False,
+):
     """Capture a target into the store and print a summary of the run."""
     try:
         run = _ov.observe(
@@ -61,9 +70,20 @@ def synopsis(run_id, *, out=None, store=None):
     yield str(_ov.synopsis(run_id, out=out, store=store))
 
 
-def overview(url, *, headed=False, mode="reconstruct", out_dir=None, store=None, authorized=False):
+def overview(
+    url, *, headed=False, mode="reconstruct", out_dir=None, store=None, authorized=False
+):
     """observe -> analyze -> report -> synopsis, the one-liner (Phase 2)."""
-    yield str(_ov.overview(url, headed=headed, mode=mode, out_dir=out_dir, store=store, authorized=authorized))
+    yield str(
+        _ov.overview(
+            url,
+            headed=headed,
+            mode=mode,
+            out_dir=out_dir,
+            store=store,
+            authorized=authorized,
+        )
+    )
 
 
 def evidence(run_id, *, step_id=None, model="opus", out_dir=None, store=None):
@@ -78,7 +98,9 @@ def evidence(run_id, *, step_id=None, model="opus", out_dir=None, store=None):
         yield f"error: could not load run {run_id!r}: {e}"
         yield "run `ov runs` to list available run ids"
         return
-    bundle = build_evidence_bundle(run, s, step_id=step_id, model=model, out_dir=out_dir)
+    bundle = build_evidence_bundle(
+        run, s, step_id=step_id, model=model, out_dir=out_dir
+    )
     yield f"step: {bundle.step_id}"
     yield f"marks: {len(bundle.marks)}  facts: {len(bundle.facts)}"
     yield f"token_budget: {bundle.token_budget}"
@@ -100,8 +122,12 @@ def runs(*, store=None):
 
 def main(argv=None):
     """Entry point for the ``ov`` console script."""
-    parser = argh.ArghParser(prog="ov", description="OverView: web reconnaissance & analysis")
-    argh.add_commands(parser, [observe, analyze, report, synopsis, overview, evidence, check, runs])
+    parser = argh.ArghParser(
+        prog="ov", description="OverView: web reconnaissance & analysis"
+    )
+    argh.add_commands(
+        parser, [observe, analyze, report, synopsis, overview, evidence, check, runs]
+    )
     parser.dispatch(argv=argv)
 
 

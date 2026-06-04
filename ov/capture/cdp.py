@@ -27,7 +27,9 @@ def _ax_value(field: Any) -> Any:
 
 def flatten_ax_node(node: dict[str, Any]) -> dict[str, Any]:
     """Flatten a raw CDP AX node into ``{role, name, value, ...}`` plain values."""
-    props = {p.get("name"): _ax_value(p.get("value")) for p in node.get("properties", [])}
+    props = {
+        p.get("name"): _ax_value(p.get("value")) for p in node.get("properties", [])
+    }
     return {
         "nodeId": node.get("nodeId"),
         "role": _ax_value(node.get("role")),

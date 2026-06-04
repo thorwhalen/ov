@@ -51,7 +51,9 @@ def contrast_ratio(fg: list[float], bg: list[float]) -> float:
     return round((lighter + 0.05) / (darker + 0.05), 2)
 
 
-@register_analyzer("contrast_focus", lens="ux", requires=("a11y_styles", "dom"), produces=("findings",))
+@register_analyzer(
+    "contrast_focus", lens="ux", requires=("a11y_styles", "dom"), produces=("findings",)
+)
 def analyze_contrast_focus(ctx: AnalysisContext) -> AnalyzerOutput:
     """Emit contrast Findings + statically-detectable focus Findings."""
     out = AnalyzerOutput()
@@ -71,8 +73,12 @@ def analyze_contrast_focus(ctx: AnalysisContext) -> AnalyzerOutput:
                 key = rec.get("selector", "?")
                 prior = seen.get(key)
                 if prior is None or ratio < prior["ratio"]:
-                    seen[key] = {"ratio": ratio, "threshold": threshold,
-                                 "text": rec.get("text", ""), "states": 0}
+                    seen[key] = {
+                        "ratio": ratio,
+                        "threshold": threshold,
+                        "text": rec.get("text", ""),
+                        "states": 0,
+                    }
                 seen[key]["states"] += 1
 
     for selector, rec in seen.items():
@@ -85,7 +91,9 @@ def analyze_contrast_focus(ctx: AnalysisContext) -> AnalyzerOutput:
                 wcag_criterion={"id": "1.4.3", "level": "AA"},
                 engine_rule_id=None,
                 severity=make_severity(
-                    "serious", nodes=1, states_affected=rec["states"],
+                    "serious",
+                    nodes=1,
+                    states_affected=rec["states"],
                     journey_fraction=rec["states"] / num_states,
                 ),
                 evidence_refs=[a.artifact_id for a in ctx.artifacts("a11y_styles")[:1]],
@@ -126,7 +134,9 @@ def _static_focus_findings(ctx: AnalysisContext, num_states: int) -> list[Findin
                         category="a11y",
                         title="Positive tabindex disrupts natural focus order",
                         wcag_criterion={"id": "2.4.3", "level": "A"},
-                        severity=make_severity("moderate", nodes=1, journey_fraction=1.0 / num_states),
+                        severity=make_severity(
+                            "moderate", nodes=1, journey_fraction=1.0 / num_states
+                        ),
                         evidence_refs=[art.artifact_id],
                         observed=f"element {sel} uses a positive tabindex",
                         location={"selector": sel},

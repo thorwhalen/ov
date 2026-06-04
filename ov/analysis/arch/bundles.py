@@ -28,11 +28,15 @@ def js_response_bodies(ctx: AnalysisContext) -> list[tuple[str, str]]:
             ct = (rec.get("response_headers") or {}).get("content-type", "")
             is_js = rec.get("resource_type") == "script" or "javascript" in ct
             if is_js and rec.get("body_artifact_id") in body_arts:
-                out.append((rec.get("url", ""), ctx.text(body_arts[rec["body_artifact_id"]])))
+                out.append(
+                    (rec.get("url", ""), ctx.text(body_arts[rec["body_artifact_id"]]))
+                )
     return out
 
 
-def detect_source_maps(js_bodies: list[tuple[str, str]], asset_urls: list[str]) -> tuple[bool, list[str]]:
+def detect_source_maps(
+    js_bodies: list[tuple[str, str]], asset_urls: list[str]
+) -> tuple[bool, list[str]]:
     """Detect source-map presence from JS bodies + asset urls (pure, testable).
 
     >>> detect_source_maps([("a.js", "x=1\\n//# sourceMappingURL=a.js.map")], [])[0]
@@ -53,7 +57,9 @@ def detect_source_maps(js_bodies: list[tuple[str, str]], asset_urls: list[str]) 
     return bool(evidence), evidence
 
 
-@register_analyzer("bundles", lens="arch", requires=("network",), produces=("source_maps_present",))
+@register_analyzer(
+    "bundles", lens="arch", requires=("network",), produces=("source_maps_present",)
+)
 def analyze_bundles(ctx: AnalysisContext) -> AnalyzerOutput:
     """Set ``run.source_maps_present`` and emit an arch_fact (+ optional recovery)."""
     out = AnalyzerOutput()
@@ -75,13 +81,17 @@ def analyze_bundles(ctx: AnalysisContext) -> AnalyzerOutput:
             signal="arch.source_maps",
             category="architecture",
             title=f"Source maps {'present' if present else 'absent'}",
-            evidence_refs=[a.artifact_id for a in ctx.artifacts("network")[:1]] or ["network"],
+            evidence_refs=[a.artifact_id for a in ctx.artifacts("network")[:1]]
+            or ["network"],
             observed=(
                 "; ".join(evidence[:5])
                 if present
                 else "no sourceMappingURL markers or .map assets found"
             ),
-            metric_detail={"source_maps_present": present, "recovered_files": recovered_files},
+            metric_detail={
+                "source_maps_present": present,
+                "recovered_files": recovered_files,
+            },
             judgment=None,
             source_layer="deterministic",
             confidence=0.9 if present else 0.6,
@@ -97,7 +107,10 @@ def _try_recover(ctx: AnalysisContext, asset_urls: list[str]) -> int:
     map_texts: list[str] = []
     for records in ctx.jsons("network"):
         for rec in records or []:
-            if rec.get("url", "").endswith(".map") and rec.get("body_artifact_id") in body_arts:
+            if (
+                rec.get("url", "").endswith(".map")
+                and rec.get("body_artifact_id") in body_arts
+            ):
                 map_texts.append(ctx.text(body_arts[rec["body_artifact_id"]]))
     if not map_texts:
         return 0

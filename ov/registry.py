@@ -107,7 +107,11 @@ class Registry:
         ``requires``. Inputs produced by no selected item are treated as already
         available (captured upstream). Falls back to selection order on a cycle.
         """
-        selected = list(self._items) if names is None else [n for n in names if n in self._items]
+        selected = (
+            list(self._items)
+            if names is None
+            else [n for n in names if n in self._items]
+        )
         chosen = [self._items[n] for n in selected]
 
         producers: dict[str, list[str]] = {}

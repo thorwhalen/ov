@@ -19,9 +19,13 @@ from .. import register_analyzer
 from ..context import AnalysisContext, AnalyzerOutput
 
 _API_RESOURCE_TYPES = {"xhr", "fetch"}
-_UUID_RE = re.compile(r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+_UUID_RE = re.compile(
+    r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+)
 _HEX_RE = re.compile(r"^[0-9a-fA-F]{12,}$")
-_VERB_SEGMENT_RE = re.compile(r"^(get|set|create|update|delete|fetch|list|add|remove)[A-Z]")
+_VERB_SEGMENT_RE = re.compile(
+    r"^(get|set|create|update|delete|fetch|list|add|remove)[A-Z]"
+)
 
 
 def normalize_path(path: str) -> str:
@@ -54,12 +58,19 @@ def classify_endpoint(method: str, path: str, request_body: Any) -> str:
     'rest'
     """
     if path.rstrip("/").endswith("/graphql") or (
-        isinstance(request_body, dict) and ("query" in request_body or "mutation" in request_body)
+        isinstance(request_body, dict)
+        and ("query" in request_body or "mutation" in request_body)
     ):
         return "graphql"
     last = path.rstrip("/").rsplit("/", 1)[-1]
-    is_jsonrpc = isinstance(request_body, dict) and "jsonrpc" in request_body and "method" in request_body
-    if is_jsonrpc or (method.upper() == "POST" and (_VERB_SEGMENT_RE.match(last) or "." in last)):
+    is_jsonrpc = (
+        isinstance(request_body, dict)
+        and "jsonrpc" in request_body
+        and "method" in request_body
+    )
+    if is_jsonrpc or (
+        method.upper() == "POST" and (_VERB_SEGMENT_RE.match(last) or "." in last)
+    ):
         return "rpc"
     return "rest"
 
@@ -85,7 +96,9 @@ def infer_auth(request_headers: dict[str, str]) -> str | None:
     return None
 
 
-@register_analyzer("api_surface", lens="arch", requires=("network",), produces=("endpoints",))
+@register_analyzer(
+    "api_surface", lens="arch", requires=("network",), produces=("endpoints",)
+)
 def analyze_api(ctx: AnalysisContext) -> AnalyzerOutput:
     """Synthesize the API surface from captured XHR/fetch traffic."""
     out = AnalyzerOutput()
@@ -102,9 +115,17 @@ def analyze_api(ctx: AnalysisContext) -> AnalyzerOutput:
             template = normalize_path(path)
             g = groups.setdefault(
                 (method, template),
-                {"req_builder": SchemaBuilder(), "resp_builder": SchemaBuilder(),
-                 "samples": 0, "statuses": set(), "auth": None, "kind": "rest",
-                 "has_req": False, "has_resp": False, "artifact": None},
+                {
+                    "req_builder": SchemaBuilder(),
+                    "resp_builder": SchemaBuilder(),
+                    "samples": 0,
+                    "statuses": set(),
+                    "auth": None,
+                    "kind": "rest",
+                    "has_req": False,
+                    "has_resp": False,
+                    "artifact": None,
+                },
             )
             g["samples"] += 1
             g["statuses"].add(rec.get("status"))
@@ -132,16 +153,23 @@ def analyze_api(ctx: AnalysisContext) -> AnalyzerOutput:
                 path_template=template,
                 kind=g["kind"],
                 request_schema=g["req_builder"].to_schema() if g["has_req"] else None,
-                response_schema=g["resp_builder"].to_schema() if g["has_resp"] else None,
+                response_schema=g["resp_builder"].to_schema()
+                if g["has_resp"]
+                else None,
                 auth=g["auth"],
-                coverage={"samples": g["samples"], "statuses": sorted(s for s in g["statuses"] if s)},
+                coverage={
+                    "samples": g["samples"],
+                    "statuses": sorted(s for s in g["statuses"] if s),
+                },
                 confidence=coverage,
                 provenance=[g["artifact"]] if g["artifact"] else [],
             )
         )
 
-    out.summary = {"endpoints": len(out.endpoints),
-                   "kinds": sorted({e.kind for e in out.endpoints})}
+    out.summary = {
+        "endpoints": len(out.endpoints),
+        "kinds": sorted({e.kind for e in out.endpoints}),
+    }
     return out
 
 
@@ -154,7 +182,7 @@ def _path_of(url: str) -> str:
 def _json_body(ctx: AnalysisContext, artifact) -> Any:
     if artifact is None:
         return None
-    ct = (artifact.content_type or "")
+    ct = artifact.content_type or ""
     if "json" not in ct:
         return None
     return ctx.json(artifact)

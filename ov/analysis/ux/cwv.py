@@ -65,7 +65,9 @@ def analyze_cwv(ctx: AnalysisContext) -> AnalyzerOutput:
         return out
 
     # Pick the snapshot with the most signal (latest, richest vitals).
-    payload = max(perf_states, key=lambda p: len((p.get("vitals") or {}).get("cls", [])) + 1)
+    payload = max(
+        perf_states, key=lambda p: len((p.get("vitals") or {}).get("cls", [])) + 1
+    )
     metrics = cwv_from_perf(payload)
 
     for name, value in metrics.items():
@@ -85,8 +87,11 @@ def analyze_cwv(ctx: AnalysisContext) -> AnalyzerOutput:
                 evidence_refs=[a.artifact_id for a in ctx.artifacts("perf")[:1]],
                 observed=f"{name.upper()} measured at {value}{unit} (threshold {threshold}{unit})",
                 metric_detail={
-                    "metric": name, "value": value, "threshold": threshold,
-                    "unit": unit, "initial_load_only": provisional,
+                    "metric": name,
+                    "value": value,
+                    "threshold": threshold,
+                    "unit": unit,
+                    "initial_load_only": provisional,
                 },
                 suggested_fix=_FIX_HINTS.get(name),
                 source_layer="deterministic",

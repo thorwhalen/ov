@@ -23,7 +23,9 @@ class AssetsProbe(Probe):
 
     def finalize(self, ctx: ProbeContext) -> list[Artifact]:
         records: list[dict[str, Any]] = ctx.extras.get("network_records", [])
-        body_arts = {a.artifact_id: a for a in ctx.extras.get("network_body_artifacts", [])}
+        body_arts = {
+            a.artifact_id: a for a in ctx.extras.get("network_body_artifacts", [])
+        }
         inventory: list[dict[str, Any]] = []
         for rec in records:
             art = body_arts.get(rec.get("body_artifact_id"))

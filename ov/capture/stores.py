@@ -118,7 +118,11 @@ class CaptureStore:
 
     def artifact_bytes(self, artifact_or_uri: Artifact | str) -> bytes:
         """Return the raw bytes for an :class:`Artifact` (or a raw ``uri`` string)."""
-        uri = artifact_or_uri.uri if isinstance(artifact_or_uri, Artifact) else artifact_or_uri
+        uri = (
+            artifact_or_uri.uri
+            if isinstance(artifact_or_uri, Artifact)
+            else artifact_or_uri
+        )
         return self.artifacts[uri]
 
     # --- runs -------------------------------------------------------------- #
@@ -153,7 +157,9 @@ class CaptureStore:
         """
         prefix = f"{run_id}/"
         return sorted(
-            norm for k in self.reports if (norm := k.replace("\\", "/")).startswith(prefix)
+            norm
+            for k in self.reports
+            if (norm := k.replace("\\", "/")).startswith(prefix)
         )
 
     # --- analyses ---------------------------------------------------------- #

@@ -60,7 +60,9 @@ class NavigationProbe(Probe):
                     "kind": "framenavigated",
                     "url": frame.url,
                     "is_main": frame == frame.page.main_frame,
-                    "step_id": self._ctx.step.id if self._ctx and self._ctx.step else None,
+                    "step_id": self._ctx.step.id
+                    if self._ctx and self._ctx.step
+                    else None,
                 }
             )
         except Exception:  # noqa: BLE001

@@ -106,8 +106,12 @@ class NetworkProbe(Probe):
                 "method": req.method,
                 "status": response.status,
                 "resource_type": req.resource_type,
-                "request_headers": _scrub_headers(req.headers, redact=ctx.config.redact_values),
-                "response_headers": _scrub_headers(headers, redact=ctx.config.redact_values),
+                "request_headers": _scrub_headers(
+                    req.headers, redact=ctx.config.redact_values
+                ),
+                "response_headers": _scrub_headers(
+                    headers, redact=ctx.config.redact_values
+                ),
                 "step_id": self._step_id(),
                 "body_artifact_id": None,
                 "body_evicted": False,
@@ -134,7 +138,9 @@ class NetworkProbe(Probe):
         except Exception:  # noqa: BLE001 - never let a probe crash the run
             pass
 
-    def _capture_request_body(self, req: Any, rec: dict[str, Any], ctx: ProbeContext) -> None:
+    def _capture_request_body(
+        self, req: Any, rec: dict[str, Any], ctx: ProbeContext
+    ) -> None:
         """Record the request body's *shape* (JSON only) for API schema synthesis."""
         try:
             post = req.post_data
@@ -146,7 +152,9 @@ class NetworkProbe(Probe):
             parsed = json.loads(post)
         except (ValueError, TypeError):
             return  # form-encoded / multipart / non-JSON: no shape to record
-        rec["request_body"] = _shape_only(parsed) if ctx.config.redact_values else parsed
+        rec["request_body"] = (
+            _shape_only(parsed) if ctx.config.redact_values else parsed
+        )
 
     def _on_failed(self, request: Any) -> None:
         try:

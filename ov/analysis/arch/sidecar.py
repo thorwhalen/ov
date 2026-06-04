@@ -28,7 +28,9 @@ class SidecarUnavailable(RuntimeError):
 class Sidecar:
     """A lazily-started Node sidecar process exposing pure JSON-RPC functions."""
 
-    def __init__(self, *, node: str = "node", script: Path | None = None, timeout: float = 30.0):
+    def __init__(
+        self, *, node: str = "node", script: Path | None = None, timeout: float = 30.0
+    ):
         self.node = node
         self.script = Path(script) if script else sidecar_dir() / "server.js"
         self.timeout = timeout
@@ -66,7 +68,12 @@ class Sidecar:
         self._start()
         assert self._proc is not None and self._proc.stdin and self._proc.stdout
         self._next_id += 1
-        request = {"jsonrpc": "2.0", "id": self._next_id, "method": method, "params": params}
+        request = {
+            "jsonrpc": "2.0",
+            "id": self._next_id,
+            "method": method,
+            "params": params,
+        }
         try:
             self._proc.stdin.write(json.dumps(request) + "\n")
             self._proc.stdin.flush()

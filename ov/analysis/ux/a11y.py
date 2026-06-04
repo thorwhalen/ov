@@ -31,16 +31,41 @@ from .severity import make_severity
 
 # signal -> (wcag id, level, impact tier, human label, fix hint)
 _PERENNIALS = {
-    "a11y.image-alt": ("1.1.1", "A", "critical", "image missing alt attribute",
-                       "add an alt attribute (alt=\"\" if decorative)"),
-    "a11y.link-name": ("2.4.4", "A", "serious", "link has no discernible text",
-                       "give the link text, an aria-label, or a titled child"),
-    "a11y.button-name": ("4.1.2", "A", "critical", "button has no accessible name",
-                         "add text content or an aria-label to the button"),
-    "a11y.form-label": ("1.3.1", "A", "critical", "form control has no associated label",
-                        "add a <label for>, aria-label, or aria-labelledby"),
-    "a11y.html-lang": ("3.1.1", "A", "serious", "document has no lang attribute",
-                       "set <html lang=...> to the page language"),
+    "a11y.image-alt": (
+        "1.1.1",
+        "A",
+        "critical",
+        "image missing alt attribute",
+        'add an alt attribute (alt="" if decorative)',
+    ),
+    "a11y.link-name": (
+        "2.4.4",
+        "A",
+        "serious",
+        "link has no discernible text",
+        "give the link text, an aria-label, or a titled child",
+    ),
+    "a11y.button-name": (
+        "4.1.2",
+        "A",
+        "critical",
+        "button has no accessible name",
+        "add text content or an aria-label to the button",
+    ),
+    "a11y.form-label": (
+        "1.3.1",
+        "A",
+        "critical",
+        "form control has no associated label",
+        "add a <label for>, aria-label, or aria-labelledby",
+    ),
+    "a11y.html-lang": (
+        "3.1.1",
+        "A",
+        "serious",
+        "document has no lang attribute",
+        "set <html lang=...> to the page language",
+    ),
 }
 
 
@@ -150,7 +175,9 @@ def analyze_a11y(ctx: AnalysisContext) -> AnalyzerOutput:
     for art in dom_arts:
         for v in _scan_dom(ctx.text(art)):
             key = (v["signal"], v["selector"])
-            rec = seen.setdefault(key, {**v, "states": 0, "artifact_id": art.artifact_id})
+            rec = seen.setdefault(
+                key, {**v, "states": 0, "artifact_id": art.artifact_id}
+            )
             rec["states"] += 1
 
     for (signal, selector), rec in seen.items():
@@ -165,7 +192,9 @@ def analyze_a11y(ctx: AnalysisContext) -> AnalyzerOutput:
                 wcag_criterion={"id": wcag_id, "level": level},
                 engine_rule_id=None,
                 severity=make_severity(
-                    impact, nodes=1, states_affected=states,
+                    impact,
+                    nodes=1,
+                    states_affected=states,
                     journey_fraction=states / num_states,
                 ),
                 evidence_refs=[rec["artifact_id"]],
@@ -201,7 +230,9 @@ def _map_axe(ctx: AnalysisContext, num_states: int) -> list[Finding]:
                     signal=f"axe.{v.get('id', 'unknown')}",
                     category="a11y",
                     title=v.get("help", v.get("id", "axe violation")),
-                    wcag_criterion={"tags": [t for t in v.get("tags", []) if t.startswith("wcag")]},
+                    wcag_criterion={
+                        "tags": [t for t in v.get("tags", []) if t.startswith("wcag")]
+                    },
                     engine_rule_id=f"axe:{v.get('id')}",
                     severity=make_severity(
                         v.get("impact", "moderate"),

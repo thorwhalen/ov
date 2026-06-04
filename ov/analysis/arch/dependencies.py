@@ -24,13 +24,20 @@ from ..ux.severity import make_severity
 from .bundles import js_response_bodies
 
 
-@register_analyzer("dependencies", lens="arch", requires=("fingerprint",), produces=("findings",))
+@register_analyzer(
+    "dependencies", lens="arch", requires=("fingerprint",), produces=("findings",)
+)
 def analyze_dependencies(ctx: AnalysisContext) -> AnalyzerOutput:
     """Inventory dependencies and flag known-vulnerable versions (Retire.js, optional)."""
     out = AnalyzerOutput()
     libraries = [
-        {"name": t.name, "version": t.version, "confidence": t.confidence,
-         "categories": t.categories, "provenance": t.provenance}
+        {
+            "name": t.name,
+            "version": t.version,
+            "confidence": t.confidence,
+            "categories": t.categories,
+            "provenance": t.provenance,
+        }
         for t in ctx.run.fingerprint
     ]
     out.summary = {"libraries": libraries}
@@ -60,9 +67,12 @@ def analyze_dependencies(ctx: AnalysisContext) -> AnalyzerOutput:
                 category="robustness",
                 title=f"Vulnerable {v.get('component')} {v.get('version')}",
                 severity=make_severity(_sev_tier(v), nodes=1, journey_fraction=1.0),
-                evidence_refs=[a.artifact_id for a in ctx.artifacts("network")[:1]] or ["network"],
+                evidence_refs=[a.artifact_id for a in ctx.artifacts("network")[:1]]
+                or ["network"],
                 observed=f"{v.get('component')} {v.get('version')}: "
-                + ", ".join(str(i.get("summary", i)) for i in v.get("vulnerabilities", []))[:300],
+                + ", ".join(
+                    str(i.get("summary", i)) for i in v.get("vulnerabilities", [])
+                )[:300],
                 metric_detail=v,
                 suggested_fix=f"upgrade {v.get('component')} to a patched version",
                 source_layer="deterministic",
@@ -77,7 +87,12 @@ def _sev_tier(v: dict[str, Any]) -> str:
     sevs = {str(i.get("severity", "")).lower() for i in v.get("vulnerabilities", [])}
     for tier in ("critical", "high", "medium", "low"):
         if tier in sevs:
-            return {"critical": "critical", "high": "serious", "medium": "moderate", "low": "minor"}[tier]
+            return {
+                "critical": "critical",
+                "high": "serious",
+                "medium": "moderate",
+                "low": "minor",
+            }[tier]
     return "moderate"
 
 
@@ -92,8 +107,18 @@ def _run_retire(ctx: AnalysisContext) -> list[dict[str, Any]]:
                 (Path(td) / f"bundle_{i}.js").write_text(text, encoding="utf-8")
             out_path = Path(td) / "retire.json"
             subprocess.run(
-                ["retire", "--path", td, "--outputformat", "json", "--outputpath", str(out_path)],
-                capture_output=True, timeout=120, check=False,
+                [
+                    "retire",
+                    "--path",
+                    td,
+                    "--outputformat",
+                    "json",
+                    "--outputpath",
+                    str(out_path),
+                ],
+                capture_output=True,
+                timeout=120,
+                check=False,
             )
             if not out_path.exists():
                 return []

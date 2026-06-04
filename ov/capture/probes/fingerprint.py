@@ -81,11 +81,21 @@ def detect_technologies(
     """
     findings: dict[str, TechFinding] = {}
 
-    def _add(name: str, cats: list[str], conf: int, version: str | None = None, prov: str = "global") -> None:
+    def _add(
+        name: str,
+        cats: list[str],
+        conf: int,
+        version: str | None = None,
+        prov: str = "global",
+    ) -> None:
         existing = findings.get(name)
         if existing is None:
             findings[name] = TechFinding(
-                name=name, categories=list(cats), version=version, confidence=conf, provenance=[prov]
+                name=name,
+                categories=list(cats),
+                version=version,
+                confidence=conf,
+                provenance=[prov],
             )
             return
         # Accumulate evidence: keep every provenance, the max confidence, the
@@ -107,7 +117,13 @@ def detect_technologies(
                 _add(implied, ["ui-framework"], conf - 10, prov=f"implied-by:{name}")
 
     if signals.get("ngVersion"):
-        _add("Angular", ["framework"], 95, version=signals["ngVersion"], prov="ng-version")
+        _add(
+            "Angular",
+            ["framework"],
+            95,
+            version=signals["ngVersion"],
+            prov="ng-version",
+        )
     if signals.get("reactRoot") and "React" not in findings:
         _add("React", ["ui-framework"], 55, prov="dom:react-root")
 
@@ -145,7 +161,9 @@ class FingerprintProbe(Probe):
         ctx.run.fingerprint = findings
 
         art = ctx.store.put_artifact(
-            json.dumps({"signals": signals, "headers": headers}, indent=2).encode("utf-8"),
+            json.dumps({"signals": signals, "headers": headers}, indent=2).encode(
+                "utf-8"
+            ),
             kind="fingerprint",
             content_type="application/json",
             meta={"technologies": [f.name for f in findings]},

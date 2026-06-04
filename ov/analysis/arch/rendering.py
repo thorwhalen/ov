@@ -40,7 +40,9 @@ def _visible_text_len(html: str) -> int:
     return len(text.split())
 
 
-def classify_rendering(raw_html: str, rendered_html: str, globals_present: dict[str, bool] | None = None) -> tuple[str, int, str]:
+def classify_rendering(
+    raw_html: str, rendered_html: str, globals_present: dict[str, bool] | None = None
+) -> tuple[str, int, str]:
     """Classify the rendering model from raw vs rendered HTML (pure, testable).
 
     Returns ``(model, confidence_0_100, rationale)`` where model is one of
@@ -54,7 +56,8 @@ def classify_rendering(raw_html: str, rendered_html: str, globals_present: dict[
     rendered_len = _visible_text_len(rendered_html or "")
     globals_present = globals_present or {}
     has_injection = any(
-        globals_present.get(k) for k in ("__NEXT_DATA__", "__NUXT__", "__remixContext", "__gatsby")
+        globals_present.get(k)
+        for k in ("__NEXT_DATA__", "__NUXT__", "__remixContext", "__gatsby")
     )
 
     if rendered_len == 0:
@@ -69,7 +72,9 @@ def classify_rendering(raw_html: str, rendered_html: str, globals_present: dict[
         rationale = f"server HTML matched the rendered DOM closely (divergence {divergence:.0%})"
     else:
         model, conf = "hybrid", _CONF_HYBRID
-        rationale = f"partial server markup, hydrated client-side (divergence {divergence:.0%})"
+        rationale = (
+            f"partial server markup, hydrated client-side (divergence {divergence:.0%})"
+        )
 
     if has_injection and model in ("ssr-or-ssg", "hybrid"):
         conf = min(_CONF_MAX, conf + _INJECTION_BOOST)
@@ -92,19 +97,26 @@ def _document_bodies(ctx: AnalysisContext) -> list[str]:
     return htmls
 
 
-@register_analyzer("rendering", lens="arch", requires=("dom", "network"), produces=("rendering_model",))
+@register_analyzer(
+    "rendering", lens="arch", requires=("dom", "network"), produces=("rendering_model",)
+)
 def analyze_rendering(ctx: AnalysisContext) -> AnalyzerOutput:
     """Set ``run.rendering_model`` and emit an arch_fact Finding."""
     out = AnalyzerOutput()
     dom_arts = ctx.artifacts("dom")
     raw_htmls = _document_bodies(ctx)
     if not dom_arts or not raw_htmls:
-        out.summary = {"rendering_model": None, "reason": "missing document body or DOM"}
+        out.summary = {
+            "rendering_model": None,
+            "reason": "missing document body or DOM",
+        }
         return out
 
     fp = ctx.jsons("fingerprint")
     globals_present = (fp[0].get("signals", {}).get("globals") if fp else {}) or {}
-    model, conf, rationale = classify_rendering(raw_htmls[0], ctx.text(dom_arts[0]), globals_present)
+    model, conf, rationale = classify_rendering(
+        raw_htmls[0], ctx.text(dom_arts[0]), globals_present
+    )
     out.run_fields["rendering_model"] = model
     out.findings.append(
         Finding(

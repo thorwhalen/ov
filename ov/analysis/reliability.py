@@ -38,8 +38,9 @@ def resolvable(ref: str, run: CaptureRun, bundle: EvidenceBundle | None = None) 
         return True
     if any(f.finding_id == ref for f in run.findings):
         return True
-    if bundle is not None and (ref in bundle.marks.values()
-                               or any(e.evidence_id == ref for e in bundle.facts)):
+    if bundle is not None and (
+        ref in bundle.marks.values() or any(e.evidence_id == ref for e in bundle.facts)
+    ):
         return True
     return ref.startswith(_PATTERNED_PREFIXES)
 
@@ -111,7 +112,9 @@ def verify_findings(
         # LLM finding: cite-or-abstain
         resolvable_refs = [r for r in f.evidence_refs if resolvable(r, run, bundle)]
         if not resolvable_refs:
-            report.downgraded.append(_downgrade(f, "no resolvable evidence (cite-or-abstain)"))
+            report.downgraded.append(
+                _downgrade(f, "no resolvable evidence (cite-or-abstain)")
+            )
             continue
         # set-of-mark membership: any RN it mentions must exist in the bundle
         if bundle is not None:
@@ -120,10 +123,14 @@ def verify_findings(
             }
             unknown = mentioned - set(bundle.marks)
             if unknown:
-                report.downgraded.append(_downgrade(f, f"references unknown marks {sorted(unknown)}"))
+                report.downgraded.append(
+                    _downgrade(f, f"references unknown marks {sorted(unknown)}")
+                )
                 continue
         report.kept.append(f)
-    report.notes.append(f"verified {len(findings)}: kept {len(report.kept)}, downgraded {len(report.downgraded)}")
+    report.notes.append(
+        f"verified {len(findings)}: kept {len(report.kept)}, downgraded {len(report.downgraded)}"
+    )
     return report
 
 

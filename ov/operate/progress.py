@@ -26,7 +26,9 @@ def _args_hash(step: JourneyStep) -> str:
     return stable_hash([a.type, a.ref, a.url, a.text, a.key, a.value, a.args])
 
 
-def progress(history: list[JourneyStep], *, no_progress_steps: int = 3) -> ProgressSignal:
+def progress(
+    history: list[JourneyStep], *, no_progress_steps: int = 3
+) -> ProgressSignal:
     """Compute loop/no-progress facts from the journey ``history`` so far.
 
     >>> from ov.base import JourneyStep, Action
@@ -57,7 +59,8 @@ def progress(history: list[JourneyStep], *, no_progress_steps: int = 3) -> Progr
     # URL / AX stasis over the recent window
     window = history[-no_progress_steps:]
     urls = {
-        (s.action.url if s.action and s.action.type == "navigate" else None) for s in window
+        (s.action.url if s.action and s.action.type == "navigate" else None)
+        for s in window
     }
     url_stasis = len(window) >= no_progress_steps and len(urls) <= 1
     ax_hashes = {s.post_obs_hash for s in window if s.post_obs_hash is not None}
@@ -69,7 +72,9 @@ def progress(history: list[JourneyStep], *, no_progress_steps: int = 3) -> Progr
         and history[-2].outcome == "error"
     )
 
-    loop_suspected = no_new >= no_progress_steps or (repeated_action and ax_stasis) or repeated_error
+    loop_suspected = (
+        no_new >= no_progress_steps or (repeated_action and ax_stasis) or repeated_error
+    )
 
     return ProgressSignal(
         repeated_action=repeated_action,

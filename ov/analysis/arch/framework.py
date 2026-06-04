@@ -38,7 +38,9 @@ _STATE_SIGNATURES = {
 _MAX_SCAN_CHARS = 2_000_000  # cap total bundle text scanned
 
 
-@register_analyzer("framework", lens="arch", requires=("network", "dom"), produces=("tech",))
+@register_analyzer(
+    "framework", lens="arch", requires=("network", "dom"), produces=("tech",)
+)
 def analyze_framework(ctx: AnalysisContext) -> AnalyzerOutput:
     """Detect bundler + state-management from bundles; reconstruct the route map."""
     out = AnalyzerOutput()
@@ -57,7 +59,10 @@ def analyze_framework(ctx: AnalysisContext) -> AnalyzerOutput:
             prior = detected.get(name)
             if prior is None or conf > prior.confidence:
                 detected[name] = TechFinding(
-                    name=name, categories=cats, confidence=conf, provenance=[f"bundle-signature:{sig}"]
+                    name=name,
+                    categories=cats,
+                    confidence=conf,
+                    provenance=[f"bundle-signature:{sig}"],
                 )
     out.tech = list(detected.values())
 
@@ -68,8 +73,10 @@ def analyze_framework(ctx: AnalysisContext) -> AnalyzerOutput:
                 type="arch_fact",
                 signal="arch.build_tooling",
                 category="architecture",
-                title="Build tooling / state management: " + ", ".join(sorted(detected)),
-                evidence_refs=[a.artifact_id for a in ctx.artifacts("network")[:1]] or ["network"],
+                title="Build tooling / state management: "
+                + ", ".join(sorted(detected)),
+                evidence_refs=[a.artifact_id for a in ctx.artifacts("network")[:1]]
+                or ["network"],
                 observed="; ".join(f"{t.name} ({t.confidence})" for t in out.tech),
                 source_layer="deterministic",
                 confidence=0.8,
@@ -82,7 +89,8 @@ def analyze_framework(ctx: AnalysisContext) -> AnalyzerOutput:
                 signal="arch.routing_map",
                 category="architecture",
                 title=f"{len(routes)} client route(s) discovered",
-                evidence_refs=[a.artifact_id for a in ctx.artifacts("dom")[:1]] or ["dom"],
+                evidence_refs=[a.artifact_id for a in ctx.artifacts("dom")[:1]]
+                or ["dom"],
                 observed="routes: " + ", ".join(sorted(routes)[:20]),
                 metric_detail={"routes": sorted(routes)},
                 source_layer="deterministic",
@@ -100,7 +108,11 @@ def _route_map(ctx: AnalysisContext) -> set[str]:
     for art in ctx.artifacts("dom"):
         for a in HTMLParser(ctx.text(art)).css("a[href]"):
             href = a.attributes.get("href") or ""
-            if href.startswith("#") or href.startswith("javascript:") or href.startswith("mailto:"):
+            if (
+                href.startswith("#")
+                or href.startswith("javascript:")
+                or href.startswith("mailto:")
+            ):
                 continue
             parsed = urlparse(href)
             if parsed.netloc and parsed.netloc != target_host:

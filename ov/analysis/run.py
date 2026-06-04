@@ -62,7 +62,11 @@ def run_analysis(
     run.api_surface = []
 
     ctx = AnalysisContext(run=run, store=store, config=config or OvConfig.from_env())
-    selected = [name for name, item in ANALYZER_REGISTRY.items.items() if item.meta.get("lens") in lenses]
+    selected = [
+        name
+        for name, item in ANALYZER_REGISTRY.items.items()
+        if item.meta.get("lens") in lenses
+    ]
 
     results: dict[str, Any] = {}
     for item in ANALYZER_REGISTRY.ordered(selected):

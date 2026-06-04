@@ -142,7 +142,9 @@ def report(
                 "ov.report (Markdown report rendering) is a Phase 2 feature"
             ) from e
         raise
-    return render_reports(run_or_analyses, sections=sections, out_dir=out_dir, store=store)
+    return render_reports(
+        run_or_analyses, sections=sections, out_dir=out_dir, store=store
+    )
 
 
 def synopsis(reports_or_dir: Any, *, out: Any = None, store: Any = None) -> Any:
