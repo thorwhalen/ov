@@ -25,11 +25,25 @@ def _resolve_run(run_or_id: Any, store: Any) -> CaptureRun:
 
 
 def _load_analyses(store: Any, run_id: str) -> dict[str, Any]:
+    """Assemble the per-section context: analyzer summaries + any review diff.
+
+    The render layer owns gathering everything a section might read. Analyzer
+    summaries land under their analyzer names; the own-target review diff (when
+    present) is injected under the reserved ``"review_diff"`` key so the review
+    section can render drift without needing store access (sections take only
+    ``(run, analyses)``).
+    """
+    from ..analysis.diff import load_diff
+
+    analyses: dict[str, Any] = {}
     try:
-        blob = store.load_analysis(f"analysis_{run_id}")
-        return blob.get("results", {})
+        analyses = dict(store.load_analysis(f"analysis_{run_id}").get("results", {}))
     except KeyError:
-        return {}
+        pass
+    diff = load_diff(store, run_id)
+    if diff is not None:
+        analyses["review_diff"] = diff
+    return analyses
 
 
 def render_reports(

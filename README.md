@@ -56,11 +56,19 @@ driver) uses to drive a journey; the journey trace *is* the UX evidence.
 |---|---|
 | `ov.observe(url)` | Drive + capture → `CaptureRun` (persisted to a store) |
 | `ov.analyze(run)` | Deterministic UX + architecture analyzers → findings *(Phase 2)* |
+| `ov.diff(run)` | Own-target regression: diff a run vs a prior baseline → `RunDiff` *(review mode)* |
 | `ov.report(run)` | Render Markdown report sections *(Phase 2)* |
 | `ov.synopsis(dir)` | Aggregate reports into one synopsis *(Phase 2)* |
 | `ov.overview(url)` | The one-liner: observe → analyze → report → synopsis *(Phase 2)* |
 
-The CLI mirrors these: `ov observe|analyze|report|synopsis|overview|check|runs|mcp`.
+The CLI mirrors these: `ov observe|analyze|diff|report|synopsis|overview|check|runs|mcp`.
+
+In `mode="review"` (your own target), `ov.overview(url, mode="review")` inserts a
+diff step: it compares the run against the latest prior run of the same target and
+reports what is **new**, **changed**, or **resolved** — drift detection for a
+downstream creation/modification agent. Artifacts are content-addressed, so this
+own-target diffing is cheap by design. The first review run has no baseline and is
+a no-op; pass `baseline=<run_id>` to pin a specific prior run.
 
 ## In-package agents (optional — `ov[agents]`)
 
@@ -111,9 +119,10 @@ and storage values are redacted. It does not defeat access controls.
 Built in phases (see the GitHub issues). **Phases 1–3** are shipped: the capture
 spine + operate primitives, the deterministic UX + architecture analysis +
 reports + synopsis, and the host-agent skill layer with the grounded evidence
-bundle. **Phase 4** adds the optional in-package agent layer (`ov[agents]`, above);
-its depth items (review-mode own-target diffing, source-map / GraphQL / Lighthouse
-probes) remain deferred to follow-up issues.
+bundle. **Phase 4** adds the optional in-package agent layer (`ov[agents]`, above)
+and **review mode** — own-target diff / regression detection (`ov.diff`,
+`ov.overview(url, mode="review")`). Its remaining depth items (source-map /
+GraphQL / Lighthouse probes) are deferred to follow-up issues.
 
 ---
 

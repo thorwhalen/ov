@@ -38,12 +38,33 @@ The synopsis is a **structured map-reduce** over `run.findings`:
   to the artifact/record it cites — so a downstream creation/modification agent can
   act on and *verify* a finding.
 
+## Review mode — own-target diff / regression
+For the user's *own* app (`mode="review"`), add a diff against a stored prior run
+of the same target. It's deterministic (no model) and cheap (artifacts are
+content-addressed):
+```python
+diff = ov.diff(run)                 # vs the latest prior run of this target
+diff = ov.diff(run, baseline=prior_run_id)   # or pin a specific baseline
+```
+`ov.diff` returns a `RunDiff` (or `None` on the first run — no baseline yet). It:
+- sets `Finding.diff_status` (`new` / `changed` / `resolved`) on the run in place;
+- persists a `diff_<run_id>` blob the report + synopsis read automatically;
+- rolls each delta into a **direction** (`regression` / `improvement` / `neutral`)
+  so `diff.regressions` is the fix-list for a downstream modification agent.
+
+When a diff exists, the `40_review_audit` section gains a **"Drift vs. prior run"**
+block (new/changed/resolved tables + tech/API/rendering drift) and the synopsis
+gains a **"Regression vs baseline"** block (regressions, improvements, drift).
+`ov.overview(url, mode="review")` runs this diff step automatically between analyze
+and report. From the shell: `ov diff <run_id>` or `ov overview <url> --mode review`.
+
 ## One-liner
 ```python
 ov.overview("https://target", out_dir="out/")   # observe -> analyze -> report -> synopsis
 ```
 runs the whole deterministic pipeline and returns the synopsis path. From the
-shell: `ov overview https://target`.
+shell: `ov overview https://target`. In review mode it becomes
+observe → analyze → **diff** → report → synopsis.
 
 ## What to tell the user in the write-up
 - Lead with the synopsis histogram and the top severity-ranked findings.

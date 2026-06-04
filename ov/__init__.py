@@ -23,7 +23,7 @@ from __future__ import annotations
 
 from typing import Any, Iterable
 
-from .base import CaptureRun
+from .base import CaptureRun, RunDiff
 from .config import OvConfig
 from .util import check_requirements
 
@@ -36,12 +36,14 @@ from .util import check_requirements
 __all__ = [
     "observe",
     "analyze",
+    "diff",
     "report",
     "synopsis",
     "overview",
     "check_requirements",
     "OvConfig",
     "CaptureRun",
+    "RunDiff",
     "__version__",
 ]
 
@@ -124,6 +126,34 @@ def analyze(
             ) from e
         raise
     return run_analysis(run, lenses=tuple(lenses), store=store)
+
+
+def diff(
+    run: Any,
+    *,
+    baseline: Any = None,
+    store: Any = None,
+) -> RunDiff | None:
+    """Diff an analyzed run against a prior baseline run (own-target review mode).
+
+    The distinguishing capability of ``mode="review"``: report what is *new*,
+    *changed*, or *resolved* versus a stored prior run of the same target
+    (regression/drift detection, §10). Fully deterministic -- no browser, no model.
+
+    Args:
+        run: an analyzed :class:`~ov.base.CaptureRun` or a run id.
+        baseline: a run/run-id to compare against, or ``None`` to auto-discover the
+            latest prior run of the same target.
+        store: a :class:`~ov.capture.stores.CaptureStore`, a path, or ``None``.
+
+    Returns:
+        A :class:`~ov.base.RunDiff`, or ``None`` if no baseline exists yet (the
+        first review run). Sets ``Finding.diff_status`` on the run in place and
+        persists a ``diff_<run_id>`` blob that the review report + synopsis read.
+    """
+    from .analysis.diff import build_diff
+
+    return build_diff(run, baseline=baseline, store=store)
 
 
 def report(

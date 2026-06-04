@@ -67,8 +67,12 @@ Chromium isn't launchable). Keep this seam intact.
 
 Tracked in GitHub issues (one per phase). Phase 1 = capture spine + operate
 primitives. Phase 2 = deterministic analysis + reports + Node sidecar. Phase 3 =
-host-agent skills + evidence bundle + reliability passes. Phase 4 (deferred) =
-in-package agents + depth + review-mode diffing.
+host-agent skills + evidence bundle + reliability passes. Phase 4 = in-package
+agents (shipped) + **review-mode own-target diffing** (shipped:
+`ov/analysis/diff.py` → `ov.diff`; `RunDiff`/`FindingDelta` in `base.py`; drift in
+the `40_review_audit` section + a regression synopsis). Remaining Phase-4 depth
+(source-map recovery, GraphQL introspection, Lighthouse, full WS/perf/storage) is
+deferred (issue #13).
 
 ## Running things
 

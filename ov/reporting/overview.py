@@ -22,11 +22,19 @@ def run_overview(
     out_dir: Any = None,
     authorized: bool | None = None,
     lenses: tuple[str, ...] = ("ux", "arch"),
+    baseline: Any = None,
     **observe_kw: Any,
 ) -> str:
-    """Run the full deterministic pipeline and return the synopsis path/key."""
+    """Run the full deterministic pipeline and return the synopsis path/key.
+
+    In ``mode="review"`` it inserts an own-target diff step between analysis and
+    reporting: the run is compared against a stored prior baseline (``baseline``,
+    or the latest prior run of the same target) so the review report and synopsis
+    carry regression/drift detail. A first review run (no baseline) is a no-op.
+    """
     import ov
 
+    from ..analysis.diff import build_diff
     from ..analysis.run import run_analysis
     from .render import render_reports
     from .synopsis import build_synopsis
@@ -42,5 +50,7 @@ def run_overview(
         **observe_kw,
     )
     run_analysis(run, lenses=lenses, store=store)
+    if mode == "review":
+        build_diff(run, baseline=baseline, store=store)
     render_reports(run, out_dir=out_dir, store=store)
     return build_synopsis(run, out=out_dir, store=store)

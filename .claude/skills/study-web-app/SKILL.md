@@ -116,6 +116,16 @@ ov.synopsis(run, out="out/")          # synopsis.json (SSOT) + derived SYNOPSIS.
 ```
 Or the whole deterministic pipeline in one call: `ov.overview(url, out_dir="out/")`.
 
+**Review mode (own target):** add an own-target diff to detect drift/regression
+against a stored prior run before reporting:
+```python
+ov.diff(run)                          # sets Finding.diff_status; persists a diff blob
+```
+The `40_review_audit` section and the synopsis then carry a regression block
+(new/changed/resolved + stack/API drift). `ov.overview(url, mode="review")` runs
+this automatically. The first review run has no baseline (no-op); from then on it
+diffs against the latest prior run of the same target.
+
 ## Honesty constraints (state these in the report)
 - Automated accessibility tooling catches only ~30–40% of WCAG issues. Never report
   "no automated violations" as "accessible"; the `needs_human_review` findings are
