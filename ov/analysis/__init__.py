@@ -6,6 +6,11 @@ Analyzers are registered plugins (:data:`ANALYZER_REGISTRY`) that read a
 synthetic artifacts. The host (or, later, an in-package agent) adds narrative
 judgment *on top* of these via the evidence bundle.
 
+Each analyzer is registered with a ``lens`` (``"ux"`` or ``"arch"``) so
+``ov.analyze(run, lenses=...)`` can select which to run; ``requires``/``produces``
+order them. The builtins are eagerly imported on first import of this package so
+the registry is never half-populated (same robustness rule as the probes).
+
 (The package is named ``analysis`` rather than ``analyze`` so it cannot shadow
 the ``ov.analyze`` facade *function*; see ``ov/__init__.py``.)
 """
@@ -13,6 +18,7 @@ the ``ov.analyze`` facade *function*; see ``ov/__init__.py``.)
 from __future__ import annotations
 
 from ..registry import Registry
+from .context import AnalysisContext, AnalyzerOutput  # noqa: F401
 
 ANALYZER_REGISTRY = Registry("analyzer")
 register_analyzer = ANALYZER_REGISTRY.register
@@ -21,22 +27,11 @@ register_analyzer = ANALYZER_REGISTRY.register
 def load_builtin_analyzers() -> None:
     """Import builtin analyzer modules so their ``@register_analyzer`` runs.
 
-    Populated in Phase 2 (UX engine + arch pipeline). Safe to call repeatedly.
+    Safe to call repeatedly. Invoked once at the bottom of this module so the
+    registry is fully populated on import (no order-dependent gaps).
     """
-    try:
-        from .ux import (  # noqa: F401
-            a11y,
-            contrast_focus,
-            cwv,
-            heuristics,
-            metrics,
-        )
-        from .arch import (  # noqa: F401
-            api,
-            dependencies,
-            framework,
-            rendering,
-        )
-    except ImportError:
-        # Phase 1: analyzer modules not present yet.
-        pass
+    from .arch import api, bundles, dependencies, framework, rendering  # noqa: F401
+    from .ux import a11y, contrast_focus, cwv, heuristics, metrics  # noqa: F401
+
+
+load_builtin_analyzers()

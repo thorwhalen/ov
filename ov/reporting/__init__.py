@@ -21,9 +21,10 @@ register_section = REPORT_SECTION_REGISTRY.register
 def load_builtin_sections() -> None:
     """Import builtin report-section modules so their ``@register_section`` runs.
 
-    Populated in Phase 2. Safe to call repeatedly.
+    Invoked once at the bottom of this module so the section registry is fully
+    populated on import (no order-dependent gaps). Safe to call repeatedly.
     """
-    try:
-        from . import sections  # noqa: F401
-    except ImportError:
-        pass
+    from . import sections  # noqa: F401
+
+
+load_builtin_sections()

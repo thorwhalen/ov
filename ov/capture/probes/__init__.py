@@ -71,6 +71,7 @@ def load_builtin_probes() -> None:
     order. The probe modules pull in no heavy/browser dependencies at import.
     """
     from . import (  # noqa: F401
+        a11y,
         assets,
         console,
         dom,

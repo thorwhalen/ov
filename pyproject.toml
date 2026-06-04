@@ -15,6 +15,9 @@ dependencies = [
     "dol",
     "argh",
     "playwright",
+    "httpx",        # raw-fetch for the rendering-model (JS-disabled) diff
+    "genson",       # per-endpoint JSON Schema merge across journey samples
+    "selectolax",   # fast, dependency-light HTML parsing for the analyzers
 ]
 
 [project.license]
@@ -29,9 +32,7 @@ Repository = "https://github.com/thorwhalen/ov"
 Documentation = "https://thorwhalen.github.io/ov"
 
 [project.optional-dependencies]
-# Architecture/API reconstruction (Phase 2): raw-fetch + schema merge + HTML parse.
-arch = ["httpx", "genson", "selectolax"]
-# Evidence-bundle image marking (Phase 3).
+# Evidence-bundle image marking / set-of-mark overlay (Phase 3).
 evidence = ["pillow"]
 # Optional dataflow DAG backend for the registries (a minimal topo-sort is built in).
 dag = ["meshed"]

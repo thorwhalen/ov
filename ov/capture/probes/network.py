@@ -45,6 +45,28 @@ def _capturable(content_type: str | None, config) -> bool:
     return base in config.capture_body_content_types
 
 
+def _shape_only(obj: Any) -> Any:
+    """Type-preserving redaction of a JSON value (keeps shape for schema synthesis).
+
+    Replaces leaf values with type-zero placeholders so GenSON still infers the
+    correct schema while no actual request value (which may be a secret/PII) is
+    persisted. Arrays are sampled to keep the store bounded.
+    """
+    if isinstance(obj, dict):
+        return {k: _shape_only(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_shape_only(v) for v in obj[:3]]
+    if isinstance(obj, bool):
+        return False
+    if isinstance(obj, int):
+        return 0
+    if isinstance(obj, float):
+        return 0.0
+    if isinstance(obj, str):
+        return ""
+    return None
+
+
 @register_probe("network", produces=("request", "network"))
 class NetworkProbe(Probe):
     """Accumulate request/response records (+ size-capped bodies) via events."""
@@ -90,6 +112,7 @@ class NetworkProbe(Probe):
                 "body_artifact_id": None,
                 "body_evicted": False,
             }
+            self._capture_request_body(req, rec, ctx)
             if _capturable(content_type, ctx.config):
                 try:
                     body = response.body()
@@ -110,6 +133,20 @@ class NetworkProbe(Probe):
             self.records.append(rec)
         except Exception:  # noqa: BLE001 - never let a probe crash the run
             pass
+
+    def _capture_request_body(self, req: Any, rec: dict[str, Any], ctx: ProbeContext) -> None:
+        """Record the request body's *shape* (JSON only) for API schema synthesis."""
+        try:
+            post = req.post_data
+        except Exception:  # noqa: BLE001
+            return
+        if not post or len(post) > ctx.config.max_body_bytes:
+            return
+        try:
+            parsed = json.loads(post)
+        except (ValueError, TypeError):
+            return  # form-encoded / multipart / non-JSON: no shape to record
+        rec["request_body"] = _shape_only(parsed) if ctx.config.redact_values else parsed
 
     def _on_failed(self, request: Any) -> None:
         try:

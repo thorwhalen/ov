@@ -1,0 +1,15 @@
+{
+  "name": "ov-sidecar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ov Node sidecar: JS-only reverse-engineering over newline-delimited JSON-RPC 2.0 on stdio. Static AST only — never evaluates downloaded JS.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.24.0",
+    "source-map": "^0.7.4"
+  }
+}
