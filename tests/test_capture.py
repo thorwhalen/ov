@@ -85,6 +85,27 @@ def test_observe_with_probes_all_adds_perf_storage(local_site, tmp_store):
 
 
 @requires_browser
+def test_overview_pipeline_end_to_end(local_site, tmp_store):
+    import json
+
+    import ov
+
+    md_key = ov.overview(f"{local_site}/index.html", store=tmp_store)
+    assert str(md_key).endswith("SYNOPSIS.md")
+    run_id = tmp_store.run_ids()[-1]
+    run = tmp_store.load_run(run_id)
+    # analysis populated the run
+    assert run.findings
+    assert run.rendering_model in ("csr", "ssr-or-ssg", "hybrid", "unknown")
+    # the test site has a missing-alt image, an unlabeled input, and low-contrast text
+    signals = {f.signal for f in run.findings}
+    assert {"a11y.image-alt", "a11y.form-label"} & signals
+    # synopsis json is the SSOT and resolves
+    doc = json.loads(tmp_store.reports[f"{run_id}/synopsis.json"])
+    assert doc["findings"] and "severity_histogram" in doc
+
+
+@requires_browser
 def test_operate_observe_and_act(local_site, tmp_store):
     from ov.base import Action
     from ov.capture.session import CaptureSession

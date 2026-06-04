@@ -47,6 +47,17 @@ def test_safety_header_scrubbing_enforced():
     assert _scrub_headers(headers, redact=True) != _scrub_headers(headers, redact=False)
 
 
+def test_request_body_shape_only_redaction():
+    from ov.capture.probes.network import _shape_only
+
+    shaped = _shape_only({"user": "alice", "age": 30, "active": True,
+                          "tags": ["a", "b", "c", "d"], "meta": {"k": "secret"}})
+    # values dropped, types + structure preserved (so GenSON still infers schema);
+    # arrays sampled to 3 to bound the store
+    assert shaped == {"user": "", "age": 0, "active": False,
+                      "tags": ["", "", ""], "meta": {"k": ""}}
+
+
 def test_safety_storage_redaction_enforced():
     store = {"token": "secret", "theme": "dark"}
     redacted = _redact_store(store, redact=True)

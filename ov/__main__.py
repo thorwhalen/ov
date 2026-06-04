@@ -56,9 +56,9 @@ def report(run_id, *, sections="default", out_dir=None, store=None):
         yield str(p)
 
 
-def synopsis(reports_dir, *, out=None, store=None):
-    """Aggregate reports into a single synopsis (Phase 2)."""
-    yield str(_ov.synopsis(reports_dir, out=out, store=store))
+def synopsis(run_id, *, out=None, store=None):
+    """Aggregate a run's findings into a single synopsis (synopsis.json + SYNOPSIS.md)."""
+    yield str(_ov.synopsis(run_id, out=out, store=store))
 
 
 def overview(url, *, headed=False, mode="reconstruct", out_dir=None, store=None, authorized=False):

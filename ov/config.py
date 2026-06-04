@@ -47,6 +47,7 @@ DEFAULT_PROBES: tuple[str, ...] = (
     "console",
     "fingerprint",
     "assets",
+    "a11y",  # computed text styles (for contrast) + optional axe-core
 )
 
 
