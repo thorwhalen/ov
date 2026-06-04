@@ -58,6 +58,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
@@ -212,6 +214,28 @@
 
 
 
+<div class="viewcode-block" id="evidence">
+<a class="viewcode-back" href="../../module_docs/ov/__main__.html#ov.__main__.evidence">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">evidence</span><span class="p">(</span><span class="n">run_id</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">step_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;opus&quot;</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a grounded evidence bundle for a run (set-of-mark + token budget).&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.analysis.evidence</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_evidence_bundle</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.capture.stores</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_store</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">resolve_store</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">load_run</span><span class="p">(</span><span class="n">run_id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;error: could not load run </span><span class="si">{</span><span class="n">run_id</span><span class="si">!r}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">yield</span> <span class="s2">&quot;run `ov runs` to list available run ids&quot;</span>
+        <span class="k">return</span>
+    <span class="n">bundle</span> <span class="o">=</span> <span class="n">build_evidence_bundle</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">step_id</span><span class="o">=</span><span class="n">step_id</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;step: </span><span class="si">{</span><span class="n">bundle</span><span class="o">.</span><span class="n">step_id</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;marks: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">marks</span><span class="p">)</span><span class="si">}</span><span class="s2">  facts: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">facts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;token_budget: </span><span class="si">{</span><span class="n">bundle</span><span class="o">.</span><span class="n">token_budget</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;marked_images: </span><span class="si">{</span><span class="n">bundle</span><span class="o">.</span><span class="n">marked_image_artifact_ids</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+
 <div class="viewcode-block" id="check">
 <a class="viewcode-back" href="../../module_docs/ov/__main__.html#ov.__main__.check">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">():</span>
@@ -236,7 +260,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Entry point for the ``ov`` console script.&quot;&quot;&quot;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argh</span><span class="o">.</span><span class="n">ArghParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;ov&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;OverView: web reconnaissance &amp; analysis&quot;</span><span class="p">)</span>
-    <span class="n">argh</span><span class="o">.</span><span class="n">add_commands</span><span class="p">(</span><span class="n">parser</span><span class="p">,</span> <span class="p">[</span><span class="n">observe</span><span class="p">,</span> <span class="n">analyze</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">synopsis</span><span class="p">,</span> <span class="n">overview</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">runs</span><span class="p">])</span>
+    <span class="n">argh</span><span class="o">.</span><span class="n">add_commands</span><span class="p">(</span><span class="n">parser</span><span class="p">,</span> <span class="p">[</span><span class="n">observe</span><span class="p">,</span> <span class="n">analyze</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">synopsis</span><span class="p">,</span> <span class="n">overview</span><span class="p">,</span> <span class="n">evidence</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">runs</span><span class="p">])</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span></div>
 
 

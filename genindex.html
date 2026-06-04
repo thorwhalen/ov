@@ -58,6 +58,8 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
@@ -149,6 +151,7 @@
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
 </div>
@@ -172,6 +175,8 @@
       <li><a href="module_docs/ov/base.html#ov.base.ActionResult">ActionResult (class in ov.base)</a>
 </li>
       <li><a href="module_docs/ov/base.html#ov.base.Affordance">Affordance (class in ov.base)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.ReliabilityReport.all_findings">all_findings (ov.analysis.reliability.ReliabilityReport property)</a>
 </li>
       <li><a href="module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext">AnalysisContext (class in ov.analysis.context)</a>
 </li>
@@ -204,6 +209,8 @@
       <li><a href="module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.analyze_rendering">analyze_rendering() (in module ov.analysis.arch.rendering)</a>
 </li>
       <li><a href="module_docs/ov/analysis/context.html#ov.analysis.context.AnalyzerOutput">AnalyzerOutput (class in ov.analysis.context)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.apply_verification">apply_verification() (in module ov.analysis.reliability)</a>
 </li>
       <li><a href="module_docs/ov/analysis/arch/pipeline.html#ov.analysis.arch.pipeline.ARCH_STAGES">ARCH_STAGES (in module ov.analysis.arch.pipeline)</a>
 </li>
@@ -248,6 +255,8 @@
       <li><a href="module_docs/ov/capture/browser.html#ov.capture.browser.BrowserNotAvailable">BrowserNotAvailable</a>
 </li>
       <li><a href="module_docs/ov/capture/browser.html#ov.capture.browser.BrowserSession">BrowserSession (class in ov.capture.browser)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.build_evidence_bundle">build_evidence_bundle() (in module ov.analysis.evidence)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -361,9 +370,11 @@
 </li>
       <li><a href="module_docs/ov/base.html#ov.base.Endpoint">Endpoint (class in ov.base)</a>
 </li>
+      <li><a href="module_docs/ov/base.html#ov.base.Evidence">Evidence (class in ov.base)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/ov/base.html#ov.base.Evidence">Evidence (class in ov.base)</a>
+      <li><a href="module_docs/ov/__main__.html#ov.__main__.evidence">evidence() (in module ov.__main__)</a>
 </li>
       <li><a href="module_docs/ov/base.html#ov.base.EvidenceBundle">EvidenceBundle (class in ov.base)</a>
 </li>
@@ -400,6 +411,8 @@
       <li><a href="module_docs/ov/base.html#ov.base.Finding">Finding (class in ov.base)</a>
 </li>
       <li><a href="module_docs/ov/capture/probes/fingerprint.html#ov.capture.probes.fingerprint.FingerprintProbe">FingerprintProbe (class in ov.capture.probes.fingerprint)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.fit_to_cap">fit_to_cap() (in module ov.analysis.evidence)</a>
 </li>
       <li><a href="module_docs/ov/capture/cdp.html#ov.capture.cdp.flatten_ax_node">flatten_ax_node() (in module ov.capture.cdp)</a>
 </li>
@@ -441,6 +454,8 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.image_token_cost">image_token_cost() (in module ov.analysis.evidence)</a>
+</li>
       <li><a href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.infer_auth">infer_auth() (in module ov.analysis.arch.api)</a>
 </li>
   </ul></td>
@@ -491,6 +506,8 @@
 </li>
       <li><a href="module_docs/ov/capture/stores.html#ov.capture.stores.CaptureStore.load_run">load_run() (ov.capture.stores.CaptureStore method)</a>
 </li>
+      <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.lookup_evidence">lookup_evidence() (in module ov.analysis.reliability)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -510,6 +527,8 @@
       <li><a href="module_docs/ov/analysis/run.html#ov.analysis.run.merge_output">merge_output() (in module ov.analysis.run)</a>
 </li>
       <li><a href="module_docs/ov/util.html#ov.util.RequirementReport.missing">missing (ov.util.RequirementReport property)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.MODEL_CAPS">MODEL_CAPS (in module ov.analysis.evidence)</a>
 </li>
       <li><a href="module_docs/ov/base.html#ov.base.Action.model_config">model_config (ov.base.Action attribute)</a>
 
@@ -572,6 +591,10 @@
         <li><a href="module_docs/ov/analysis/arch/sidecar.html#module-ov.analysis.arch.sidecar">ov.analysis.arch.sidecar</a>
 </li>
         <li><a href="module_docs/ov/analysis/context.html#module-ov.analysis.context">ov.analysis.context</a>
+</li>
+        <li><a href="module_docs/ov/analysis/evidence.html#module-ov.analysis.evidence">ov.analysis.evidence</a>
+</li>
+        <li><a href="module_docs/ov/analysis/reliability.html#module-ov.analysis.reliability">ov.analysis.reliability</a>
 </li>
         <li><a href="module_docs/ov/analysis/run.html#module-ov.analysis.run">ov.analysis.run</a>
 </li>
@@ -795,6 +818,20 @@
 </li>
       </ul></li>
       <li>
+    ov.analysis.evidence
+
+      <ul>
+        <li><a href="module_docs/ov/analysis/evidence.html#module-ov.analysis.evidence">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.analysis.reliability
+
+      <ul>
+        <li><a href="module_docs/ov/analysis/reliability.html#module-ov.analysis.reliability">module</a>
+</li>
+      </ul></li>
+      <li>
     ov.analysis.run
 
       <ul>
@@ -885,6 +922,8 @@
         <li><a href="module_docs/ov/capture/probes.html#module-ov.capture.probes">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     ov.capture.probes.a11y
 
@@ -892,8 +931,6 @@
         <li><a href="module_docs/ov/capture/probes/a11y.html#module-ov.capture.probes.a11y">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     ov.capture.probes.assets
 
@@ -1133,11 +1170,13 @@
 </li>
       <li><a href="module_docs/ov/operate/perception.html#ov.operate.perception.perceive_screenshot">perceive_screenshot() (in module ov.operate.perception)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/operate/perception.html#ov.operate.perception.PERCEPTION_REGISTRY">PERCEPTION_REGISTRY (in module ov.operate.perception)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/capture/probes/perf.html#ov.capture.probes.perf.PerfProbe">PerfProbe (class in ov.capture.probes.perf)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.png_dimensions">png_dimensions() (in module ov.analysis.evidence)</a>
 </li>
       <li><a href="module_docs/ov/capture/probes.html#ov.capture.probes.Probe">Probe (class in ov.capture.probes)</a>
 </li>
@@ -1177,6 +1216,8 @@
 </li>
       <li><a href="module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.relative_luminance">relative_luminance() (in module ov.analysis.ux.contrast_focus)</a>
 </li>
+      <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.ReliabilityReport">ReliabilityReport (class in ov.analysis.reliability)</a>
+</li>
       <li><a href="module_docs/ov/util.html#ov.util.RequirementReport.render">render() (ov.util.RequirementReport method)</a>
 </li>
       <li><a href="module_docs/ov/reporting/render.html#ov.reporting.render.render_reports">render_reports() (in module ov.reporting.render)</a>
@@ -1200,6 +1241,8 @@
       <li><a href="module_docs/ov/util.html#ov.util.Requirement">Requirement (class in ov.util)</a>
 </li>
       <li><a href="module_docs/ov/util.html#ov.util.RequirementReport">RequirementReport (class in ov.util)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.resolvable">resolvable() (in module ov.analysis.reliability)</a>
 </li>
       <li><a href="module_docs/ov/capture/stores.html#ov.capture.stores.resolve_store">resolve_store() (in module ov.capture.stores)</a>
 </li>
@@ -1296,6 +1339,18 @@
       <li><a href="module_docs/ov/base.html#ov.base.utcnow">utcnow() (in module ov.base)</a>
 </li>
       <li><a href="module_docs/ov/analysis/ux/severity.html#ov.analysis.ux.severity.UX_TIER_WEIGHT">UX_TIER_WEIGHT (in module ov.analysis.ux.severity)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.verification_questions">verification_questions() (in module ov.analysis.reliability)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.verify_findings">verify_findings() (in module ov.analysis.reliability)</a>
 </li>
   </ul></td>
 </tr></table>

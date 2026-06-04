@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.analysis.evidence &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../ov.html">ov</a></li>
+          <li class="breadcrumb-item"><a href="../analysis.html">ov.analysis</a></li>
+      <li class="breadcrumb-item active">ov.analysis.evidence</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ov.analysis.evidence</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;The evidence-bundle assembler (§8.1, D4) -- deterministic, model-free.</span>
+
+<span class="sd">Builds the grounded bundle a vision LLM (the host) reasons over, so token cost and</span>
+<span class="sd">grounding are *computed*, not hoped for:</span>
+
+<span class="sd">* **Set-of-Mark** -- each discussable region (a step&#39;s affordances) gets a stable</span>
+<span class="sd">  mark id (``R1`` ...) that is overlaid on the screenshot, appears in the facts,</span>
+<span class="sd">  and is *required* in the model&#39;s output. This turns &quot;describe what you see&quot; into</span>
+<span class="sd">  &quot;interpret marked region R3&quot;.</span>
+<span class="sd">* **Order** -- the bundle is ``[role/system + cite-or-abstain] -&gt; [marked image(s)]</span>
+<span class="sd">  -&gt; [facts keyed to ids] -&gt; [task last]``.</span>
+<span class="sd">* **Token budget** -- projected as ``Σ(w×h/750)`` per image against the model cap</span>
+<span class="sd">  (≈1568 px / 1568 tok standard; ≈2576 px / 4784 tok on Opus 4.7/4.8) *before* the</span>
+<span class="sd">  call; images are downsampled to fit.</span>
+<span class="sd">* **Omit raw bytes** -- facts are *derived summaries*, never raw HAR/DOM/bundle</span>
+<span class="sd">  text; those stay reachable by ``evidence_id`` for just-in-time retrieval.</span>
+
+<span class="sd">The actual image overlay needs Pillow (the ``evidence`` extra); everything else</span>
+<span class="sd">(dimensions, budget, mark assignment, the bundle structure) is pure stdlib so the</span>
+<span class="sd">budget math and grounding are testable without it.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">Evidence</span><span class="p">,</span> <span class="n">EvidenceBundle</span><span class="p">,</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">JourneyStep</span>
+
+<span class="c1">#: Per-model image caps: (long-edge pixels, token cap). Opus 4.7/4.8 are larger.</span>
+<span class="n">MODEL_CAPS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;opus&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2576</span><span class="p">,</span> <span class="mi">4784</span><span class="p">),</span>
+    <span class="s2">&quot;standard&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1568</span><span class="p">,</span> <span class="mi">1568</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">_CITE_OR_ABSTAIN</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;You are grounding UX/architecture judgments in captured evidence. Rules: &quot;</span>
+    <span class="s2">&quot;(1) discuss ONLY the marked regions (R1, R2, ...) and the listed facts; &quot;</span>
+    <span class="s2">&quot;(2) every claim must cite at least one fact/mark id; &quot;</span>
+    <span class="s2">&quot;(3) if the evidence does not support a claim, output type &#39;undetermined&#39; &quot;</span>
+    <span class="s2">&quot;rather than guessing; (4) never invent a fact field -- cite, never author.&quot;</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="png_dimensions">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/evidence.html#ov.analysis.evidence.png_dimensions">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">png_dimensions</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return ``(width, height)`` of a PNG from its IHDR header (stdlib only).</span>
+
+<span class="sd">    &gt;&gt;&gt; import base64</span>
+<span class="sd">    &gt;&gt;&gt; px = base64.b64decode(&#39;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; png_dimensions(px)</span>
+<span class="sd">    (1, 1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">24</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x89</span><span class="s2">PNG</span><span class="se">\r\n\x1a\n</span><span class="s2">&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;II&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">24</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">width</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">struct</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="image_token_cost">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/evidence.html#ov.analysis.evidence.image_token_cost">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">image_token_cost</span><span class="p">(</span><span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Anthropic image token estimate ``ceil(w*h/750)``.</span>
+
+<span class="sd">    &gt;&gt;&gt; image_token_cost(1000, 1000)</span>
+<span class="sd">    1334</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">width</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">750</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fit_to_cap">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/evidence.html#ov.analysis.evidence.fit_to_cap">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_to_cap</span><span class="p">(</span><span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;opus&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Project tokens and a downsample factor to fit a model&#39;s image cap (pure).</span>
+
+<span class="sd">    Honors BOTH constraints -- the long-edge pixel cap *and* the token (area) cap</span>
+<span class="sd">    -- taking whichever is more restrictive, because a long-edge-only clamp can</span>
+<span class="sd">    still blow the token budget (a 2576x2576 image is ~8853 tokens).</span>
+
+<span class="sd">    &gt;&gt;&gt; r = fit_to_cap(5000, 4000, &quot;opus&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; r[&quot;downsampled&quot;] and r[&quot;fitted&quot;][&quot;tokens&quot;] &lt;= 4784</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; fit_to_cap(800, 600, &quot;opus&quot;)[&quot;downsampled&quot;]</span>
+<span class="sd">    False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">long_edge_cap</span><span class="p">,</span> <span class="n">token_cap</span> <span class="o">=</span> <span class="n">MODEL_CAPS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">MODEL_CAPS</span><span class="p">[</span><span class="s2">&quot;standard&quot;</span><span class="p">])</span>
+    <span class="n">long_edge</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">image_token_cost</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+
+    <span class="n">edge_factor</span> <span class="o">=</span> <span class="n">long_edge_cap</span> <span class="o">/</span> <span class="n">long_edge</span> <span class="k">if</span> <span class="n">long_edge</span> <span class="o">&gt;</span> <span class="n">long_edge_cap</span> <span class="k">else</span> <span class="mf">1.0</span>
+    <span class="n">area_factor</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">token_cap</span> <span class="o">/</span> <span class="n">tokens</span><span class="p">)</span> <span class="k">if</span> <span class="n">tokens</span> <span class="o">&gt;</span> <span class="n">token_cap</span> <span class="k">else</span> <span class="mf">1.0</span>
+    <span class="n">factor</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">edge_factor</span><span class="p">,</span> <span class="n">area_factor</span><span class="p">)</span>
+
+    <span class="n">fw</span><span class="p">,</span> <span class="n">fh</span> <span class="o">=</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">factor</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">factor</span><span class="p">))</span> <span class="k">if</span> <span class="n">factor</span> <span class="o">&lt;</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;original&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="n">height</span><span class="p">,</span> <span class="s2">&quot;tokens&quot;</span><span class="p">:</span> <span class="n">tokens</span><span class="p">},</span>
+        <span class="s2">&quot;fitted&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="n">fw</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="n">fh</span><span class="p">,</span> <span class="s2">&quot;tokens&quot;</span><span class="p">:</span> <span class="n">image_token_cost</span><span class="p">(</span><span class="n">fw</span><span class="p">,</span> <span class="n">fh</span><span class="p">)},</span>
+        <span class="s2">&quot;factor&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s2">&quot;downsampled&quot;</span><span class="p">:</span> <span class="n">factor</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;token_cap&quot;</span><span class="p">:</span> <span class="n">token_cap</span><span class="p">,</span>
+        <span class="s2">&quot;long_edge_cap&quot;</span><span class="p">:</span> <span class="n">long_edge_cap</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_pick_step</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">step_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JourneyStep</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">step_id</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">steps</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">step_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># otherwise the richest step that has a screenshot</span>
+    <span class="n">screenshot_steps</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">steps</span> <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;screenshot&quot;</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="n">step_id</span> <span class="o">==</span> <span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="p">)]</span>
+    <span class="n">candidates</span> <span class="o">=</span> <span class="n">screenshot_steps</span> <span class="ow">or</span> <span class="n">run</span><span class="o">.</span><span class="n">steps</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">affordances_seen</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_screenshot_for</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="n">JourneyStep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return *this step&#39;s own* screenshot, or None.</span>
+
+<span class="sd">    Never falls back to an arbitrary screenshot: set-of-mark grounding requires the</span>
+<span class="sd">    overlaid regions to belong to the image actually shown, so marks are only built</span>
+<span class="sd">    when the selected step has its own screenshot.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">next</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">artifacts</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;screenshot&quot;</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="n">step_id</span> <span class="o">==</span> <span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
+        <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="build_evidence_bundle">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/evidence.html#ov.analysis.evidence.build_evidence_bundle">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_evidence_bundle</span><span class="p">(</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span>
+    <span class="n">store</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">step_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;opus&quot;</span><span class="p">,</span>
+    <span class="n">task</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Assess UX and architecture; cite marks/facts for every claim.&quot;</span><span class="p">,</span>
+    <span class="n">max_marks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">overlay</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">out_dir</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EvidenceBundle</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assemble a grounded :class:`~ov.base.EvidenceBundle` for a step (model-free).</span>
+
+<span class="sd">    Marks are drawn from the step&#39;s affordances (which carry bounding boxes);</span>
+<span class="sd">    facts include those marked regions plus the deterministic findings touching the</span>
+<span class="sd">    step. The token budget is computed against ``model``&#39;s cap. When Pillow is</span>
+<span class="sd">    available and ``overlay`` is set, a numbered overlay screenshot (and crops for</span>
+<span class="sd">    small regions) are rendered and stored; otherwise the original screenshot is</span>
+<span class="sd">    referenced and a note is recorded.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">_pick_step</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">step_id</span><span class="p">)</span>
+    <span class="n">bundle</span> <span class="o">=</span> <span class="n">EvidenceBundle</span><span class="p">(</span><span class="n">step_id</span><span class="o">=</span><span class="n">step</span><span class="o">.</span><span class="n">id</span> <span class="k">if</span> <span class="n">step</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contract</span><span class="o">=</span><span class="n">_CITE_OR_ABSTAIN</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">bundle</span>
+
+    <span class="n">shot</span> <span class="o">=</span> <span class="n">_screenshot_for</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+    <span class="n">budget</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">shot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="n">png_dimensions</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">artifact_bytes</span><span class="p">(</span><span class="n">shot</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">dims</span><span class="p">:</span>
+            <span class="n">budget</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">fit_to_cap</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">model</span><span class="p">))</span>
+
+    <span class="n">facts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Evidence</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">marks</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># Marks are regions ON the screenshot, so only build them when this step has</span>
+    <span class="c1"># its own screenshot -- otherwise we&#39;d ground marks against the wrong image.</span>
+    <span class="n">affordances</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">step</span><span class="o">.</span><span class="n">affordances_seen</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">bbox</span><span class="p">][:</span><span class="n">max_marks</span><span class="p">]</span> <span class="k">if</span> <span class="n">shot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">aff</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">affordances</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">mark_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">ev</span> <span class="o">=</span> <span class="n">Evidence</span><span class="p">(</span>
+            <span class="n">evidence_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;mark:</span><span class="si">{</span><span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">#</span><span class="si">{</span><span class="n">mark_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;mark&quot;</span><span class="p">,</span>
+            <span class="n">artifact_id</span><span class="o">=</span><span class="n">shot</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">if</span> <span class="n">shot</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">summary</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">aff</span><span class="o">.</span><span class="n">role</span><span class="si">}</span><span class="s2"> &#39;</span><span class="si">{</span><span class="n">aff</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span> <span class="k">if</span> <span class="n">aff</span><span class="o">.</span><span class="n">name</span> <span class="k">else</span> <span class="n">aff</span><span class="o">.</span><span class="n">role</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mark&quot;</span><span class="p">:</span> <span class="n">mark_id</span><span class="p">,</span> <span class="s2">&quot;bbox&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">aff</span><span class="o">.</span><span class="n">bbox</span><span class="p">)},</span>
+        <span class="p">)</span>
+        <span class="n">facts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span>
+        <span class="n">marks</span><span class="p">[</span><span class="n">mark_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">evidence_id</span>
+
+    <span class="c1"># deterministic findings touching this step (or global, capped) become facts</span>
+    <span class="n">step_findings</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">findings</span> <span class="k">if</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">location</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;step_id&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="n">step_findings</span> <span class="ow">or</span> <span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="p">)[:</span><span class="n">max_marks</span><span class="p">]:</span>
+        <span class="n">facts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Evidence</span><span class="p">(</span>
+            <span class="n">evidence_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;find:</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">finding_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">kind</span><span class="o">=</span><span class="n">_evidence_kind</span><span class="p">(</span><span class="n">f</span><span class="p">),</span>
+            <span class="n">artifact_id</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">evidence_refs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">evidence_refs</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">summary</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">signal</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">observed</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">f</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">score</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">severity</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                  <span class="s2">&quot;needs_human_review&quot;</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">needs_human_review</span><span class="p">},</span>
+        <span class="p">))</span>
+
+    <span class="n">bundle</span><span class="o">.</span><span class="n">facts</span> <span class="o">=</span> <span class="n">facts</span>
+    <span class="n">bundle</span><span class="o">.</span><span class="n">marks</span> <span class="o">=</span> <span class="n">marks</span>
+    <span class="n">bundle</span><span class="o">.</span><span class="n">token_budget</span> <span class="o">=</span> <span class="n">budget</span>
+
+    <span class="n">marked_ids</span><span class="p">,</span> <span class="n">crop_ids</span> <span class="o">=</span> <span class="n">_render_overlay</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">shot</span><span class="p">,</span> <span class="n">affordances</span><span class="p">,</span> <span class="n">budget</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">overlay</span> <span class="k">else</span> <span class="p">([],</span> <span class="p">[])</span>
+    <span class="k">if</span> <span class="n">marked_ids</span><span class="p">:</span>
+        <span class="n">bundle</span><span class="o">.</span><span class="n">marked_image_artifact_ids</span> <span class="o">=</span> <span class="n">marked_ids</span>
+        <span class="n">bundle</span><span class="o">.</span><span class="n">crop_artifact_ids</span> <span class="o">=</span> <span class="n">crop_ids</span>
+    <span class="k">elif</span> <span class="n">shot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">bundle</span><span class="o">.</span><span class="n">marked_image_artifact_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">shot</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">]</span>
+        <span class="n">bundle</span><span class="o">.</span><span class="n">token_budget</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;note&quot;</span><span class="p">,</span> <span class="s2">&quot;set-of-mark overlay skipped (Pillow not installed)&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bundle</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_evidence_kind</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Finding</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;performance&quot;</span><span class="p">:</span> <span class="s2">&quot;metric&quot;</span><span class="p">,</span> <span class="s2">&quot;architecture&quot;</span><span class="p">:</span> <span class="s2">&quot;stack&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;dom&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_render_overlay</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">shot</span><span class="p">,</span> <span class="n">affordances</span><span class="p">,</span> <span class="n">budget</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Overlay numbered marks on the screenshot (Pillow); return (marked_ids, crop_ids).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">shot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+
+        <span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">artifact_bytes</span><span class="p">(</span><span class="n">shot</span><span class="p">)))</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="n">budget</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;factor&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">factor</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">budget</span><span class="p">[</span><span class="s2">&quot;fitted&quot;</span><span class="p">][</span><span class="s2">&quot;w&quot;</span><span class="p">],</span> <span class="n">budget</span><span class="p">[</span><span class="s2">&quot;fitted&quot;</span><span class="p">][</span><span class="s2">&quot;h&quot;</span><span class="p">]))</span>
+        <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">aff</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">affordances</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">factor</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">aff</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span>
+            <span class="n">draw</span><span class="o">.</span><span class="n">rectangle</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">],</span> <span class="n">outline</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">12</span><span class="p">)),</span> <span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+        <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">)</span>
+        <span class="n">art</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;screenshot&quot;</span><span class="p">,</span> <span class="n">step_id</span><span class="o">=</span><span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                                 <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;image/png&quot;</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;set_of_mark&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+        <span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">art</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">out_dir</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+            <span class="n">Path</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;evidence_</span><span class="si">{</span><span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_bytes</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+
+        <span class="c1"># Full-vs-crop (§8.1): also emit targeted crops so small regions stay</span>
+        <span class="c1"># readable after downsampling. Prefer many small crops over one huge image.</span>
+        <span class="n">crop_ids</span> <span class="o">=</span> <span class="n">_emit_crops</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">affordances</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">],</span> <span class="n">crop_ids</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001 - overlay is best-effort</span>
+        <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_emit_crops</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">affordances</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_crops</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">24</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Crop a padded region around each marked affordance; store + return ids.&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+
+    <span class="n">crop_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">iw</span><span class="p">,</span> <span class="n">ih</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">aff</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">affordances</span><span class="p">[:</span><span class="n">max_crops</span><span class="p">],</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">factor</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">aff</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span>
+        <span class="n">box</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">pad</span><span class="p">)),</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">pad</span><span class="p">)),</span>
+               <span class="nb">min</span><span class="p">(</span><span class="n">iw</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="n">pad</span><span class="p">)),</span> <span class="nb">min</span><span class="p">(</span><span class="n">ih</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">+</span> <span class="n">pad</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">box</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">box</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">crop</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+            <span class="n">buf</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+            <span class="n">crop</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">)</span>
+            <span class="n">art</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;screenshot&quot;</span><span class="p">,</span> <span class="n">step_id</span><span class="o">=</span><span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                                     <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;image/png&quot;</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;crop_of&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">})</span>
+            <span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">art</span><span class="p">)</span>
+            <span class="n">crop_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
+            <span class="k">continue</span>
+    <span class="k">return</span> <span class="n">crop_ids</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

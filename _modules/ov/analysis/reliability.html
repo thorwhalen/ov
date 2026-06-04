@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.analysis.reliability &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../ov.html">ov</a></li>
+          <li class="breadcrumb-item"><a href="../analysis.html">ov.analysis</a></li>
+      <li class="breadcrumb-item active">ov.analysis.reliability</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ov.analysis.reliability</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Reliability passes over findings (§5.2, D4) -- deterministic gates, model-free.</span>
+
+<span class="sd">These enforce the grounding discipline on findings (whether deterministic, or</span>
+<span class="sd">authored by the host LLM over an evidence bundle):</span>
+
+<span class="sd">* **cite-or-abstain** -- every non-``undetermined`` claim must cite at least one</span>
+<span class="sd">  *resolvable* evidence ref; otherwise it is downgraded to ``undetermined`` (a</span>
+<span class="sd">  first-class outcome, not an error).</span>
+<span class="sd">* **set-of-mark membership** -- any mark id a finding references must exist in the</span>
+<span class="sd">  bundle.</span>
+<span class="sd">* **just-in-time retrieval** -- :func:`lookup_evidence` resolves an evidence id</span>
+<span class="sd">  back to its artifact/finding/step so provenance is verifiable.</span>
+<span class="sd">* **factored Chain-of-Verification scaffolding** -- :func:`verification_questions`</span>
+<span class="sd">  generates the questions the *host* answers (independently, via evidence lookup)</span>
+<span class="sd">  for high-severity findings; :func:`apply_verification` downgrades a finding whose</span>
+<span class="sd">  verification fails. The judgment is the host&#39;s; the gating here is deterministic.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">EvidenceBundle</span><span class="p">,</span> <span class="n">Finding</span>
+
+<span class="n">_MARK_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\bR\d+\b&quot;</span><span class="p">)</span>
+<span class="n">_PATTERNED_PREFIXES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;mark:&quot;</span><span class="p">,</span> <span class="s2">&quot;find:&quot;</span><span class="p">,</span> <span class="s2">&quot;net:&quot;</span><span class="p">,</span> <span class="s2">&quot;metric:&quot;</span><span class="p">,</span> <span class="s2">&quot;dom:&quot;</span><span class="p">,</span> <span class="s2">&quot;stack:&quot;</span><span class="p">,</span> <span class="s2">&quot;trace:&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="resolvable">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/reliability.html#ov.analysis.reliability.resolvable">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">resolvable</span><span class="p">(</span><span class="n">ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="n">EvidenceBundle</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;True if an evidence ref resolves to something concrete (artifact/finding/step/bundle).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ref</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">==</span> <span class="n">ref</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">ref</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">finding_id</span> <span class="o">==</span> <span class="n">ref</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">bundle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">ref</span> <span class="ow">in</span> <span class="n">bundle</span><span class="o">.</span><span class="n">marks</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                               <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">evidence_id</span> <span class="o">==</span> <span class="n">ref</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">bundle</span><span class="o">.</span><span class="n">facts</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">ref</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_PATTERNED_PREFIXES</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="lookup_evidence">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/reliability.html#ov.analysis.reliability.lookup_evidence">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">lookup_evidence</span><span class="p">(</span><span class="n">evidence_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve an evidence id back to its underlying data (just-in-time retrieval).</span>
+
+<span class="sd">    Returns a dict describing what the id points at, so a verification pass (or a</span>
+<span class="sd">    downstream agent) can confirm a finding against the original artifact/record.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">==</span> <span class="n">evidence_id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;artifact&quot;</span><span class="p">,</span> <span class="s2">&quot;artifact&quot;</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">finding_id</span> <span class="o">==</span> <span class="n">evidence_id</span> <span class="ow">or</span> <span class="n">evidence_id</span> <span class="o">==</span> <span class="sa">f</span><span class="s2">&quot;find:</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">finding_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;finding&quot;</span><span class="p">,</span> <span class="s2">&quot;finding&quot;</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">evidence_id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;unresolved&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">evidence_id</span><span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="ReliabilityReport">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/reliability.html#ov.analysis.reliability.ReliabilityReport">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ReliabilityReport</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Outcome of :func:`verify_findings`.&quot;&quot;&quot;</span>
+
+    <span class="n">kept</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">downgraded</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>  <span class="c1"># -&gt; undetermined</span>
+    <span class="n">notes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">all_findings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Kept + downgraded, in that order (nothing is silently dropped).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">kept</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">downgraded</span><span class="p">]</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_downgrade</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Finding</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;undetermined&quot;</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">needs_human_review</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">judgment</span> <span class="o">=</span> <span class="p">((</span><span class="n">f</span><span class="o">.</span><span class="n">judgment</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">judgment</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;[downgraded: </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2">]&quot;</span>
+    <span class="k">return</span> <span class="n">f</span>
+
+
+<div class="viewcode-block" id="verify_findings">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/reliability.html#ov.analysis.reliability.verify_findings">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">verify_findings</span><span class="p">(</span>
+    <span class="n">findings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">],</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">bundle</span><span class="p">:</span> <span class="n">EvidenceBundle</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReliabilityReport</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply cite-or-abstain + mark-membership; downgrade unsupported findings.</span>
+
+<span class="sd">    Deterministic findings (``source_layer == &quot;deterministic&quot;``) are facts and are</span>
+<span class="sd">    kept; LLM findings must cite resolvable evidence and reference only existing</span>
+<span class="sd">    marks. A finding that fails is downgraded to ``undetermined`` (kept, flagged),</span>
+<span class="sd">    never silently dropped.</span>
+
+<span class="sd">    Note: downgrading mutates the offending :class:`Finding` in place (the caller</span>
+<span class="sd">    hands its findings in to be gated), so the objects in ``report.downgraded`` are</span>
+<span class="sd">    the same instances, now marked ``undetermined`` + ``needs_human_review``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">report</span> <span class="o">=</span> <span class="n">ReliabilityReport</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">findings</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;undetermined&quot;</span><span class="p">:</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">source_layer</span> <span class="o">==</span> <span class="s2">&quot;deterministic&quot;</span><span class="p">:</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="c1"># LLM finding: cite-or-abstain</span>
+        <span class="n">resolvable_refs</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">evidence_refs</span> <span class="k">if</span> <span class="n">resolvable</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">bundle</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">resolvable_refs</span><span class="p">:</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_downgrade</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;no resolvable evidence (cite-or-abstain)&quot;</span><span class="p">))</span>
+            <span class="k">continue</span>
+        <span class="c1"># set-of-mark membership: any RN it mentions must exist in the bundle</span>
+        <span class="k">if</span> <span class="n">bundle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mentioned</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">_MARK_RE</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">judgment</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">))</span> <span class="o">|</span> <span class="p">{</span>
+                <span class="n">m</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">evidence_refs</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">_MARK_RE</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="n">unknown</span> <span class="o">=</span> <span class="n">mentioned</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">marks</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">unknown</span><span class="p">:</span>
+                <span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_downgrade</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;references unknown marks </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">unknown</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+                <span class="k">continue</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">report</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;verified </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">findings</span><span class="p">)</span><span class="si">}</span><span class="s2">: kept </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">kept</span><span class="p">)</span><span class="si">}</span><span class="s2">, downgraded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">report</span></div>
+
+
+
+<div class="viewcode-block" id="verification_questions">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/reliability.html#ov.analysis.reliability.verification_questions">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">verification_questions</span><span class="p">(</span><span class="n">finding</span><span class="p">:</span> <span class="n">Finding</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate factored Chain-of-Verification questions for a high-severity finding.</span>
+
+<span class="sd">    The host answers each *independently* (via :func:`lookup_evidence`), not</span>
+<span class="sd">    conditioned on the original claim -- that&#39;s what makes CoVe factored.</span>
+
+<span class="sd">    &gt;&gt;&gt; from ov.base import Finding</span>
+<span class="sd">    &gt;&gt;&gt; qs = verification_questions(Finding(type=&quot;ux_issue&quot;, signal=&quot;contrast.text&quot;,</span>
+<span class="sd">    ...     category=&quot;a11y&quot;, observed=&quot;contrast 2.1:1&quot;, evidence_refs=[&quot;art_1&quot;]))</span>
+<span class="sd">    &gt;&gt;&gt; len(qs) &gt;= 2</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;Does evidence </span><span class="si">{</span><span class="n">finding</span><span class="o">.</span><span class="n">evidence_refs</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;(none)&#39;</span><span class="si">}</span><span class="s2"> actually show: </span><span class="si">{</span><span class="n">finding</span><span class="o">.</span><span class="n">observed</span><span class="si">!r}</span><span class="s2">?&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;Is the signal &#39;</span><span class="si">{</span><span class="n">finding</span><span class="o">.</span><span class="n">signal</span><span class="si">}</span><span class="s2">&#39; the correct classification for that evidence?&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">finding</span><span class="o">.</span><span class="n">severity</span><span class="p">:</span>
+        <span class="n">qs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Does the evidence justify severity score </span><span class="si">{</span><span class="n">finding</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">?&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qs</span></div>
+
+
+
+<div class="viewcode-block" id="apply_verification">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/reliability.html#ov.analysis.reliability.apply_verification">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_verification</span><span class="p">(</span><span class="n">finding</span><span class="p">:</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">verdicts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Finding</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Downgrade a finding to ``undetermined`` if a majority of verifications fail.</span>
+
+<span class="sd">    ``verdicts`` are the host&#39;s independent answers (True = supported). This is the</span>
+<span class="sd">    deterministic application of the host&#39;s factored CoVe / NLI judgments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">verdicts</span> <span class="ow">and</span> <span class="nb">sum</span><span class="p">(</span><span class="n">verdicts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">verdicts</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_downgrade</span><span class="p">(</span><span class="n">finding</span><span class="p">,</span> <span class="s2">&quot;failed chain-of-verification&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">finding</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

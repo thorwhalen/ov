@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.analysis.evidence &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.analysis.reliability" href="reliability.html" />
+    <link rel="prev" title="ov.analysis.context" href="context.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">ov.analysis.context</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.analysis.evidence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.evidence.MODEL_CAPS"><code class="docutils literal notranslate"><span class="pre">MODEL_CAPS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.evidence.build_evidence_bundle"><code class="docutils literal notranslate"><span class="pre">build_evidence_bundle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.evidence.fit_to_cap"><code class="docutils literal notranslate"><span class="pre">fit_to_cap()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.evidence.image_token_cost"><code class="docutils literal notranslate"><span class="pre">image_token_cost()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.evidence.png_dimensions"><code class="docutils literal notranslate"><span class="pre">png_dimensions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.analysis.evidence</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/analysis/evidence.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.analysis.evidence">
+<span id="ov-analysis-evidence"></span><h1>ov.analysis.evidence<a class="headerlink" href="#module-ov.analysis.evidence" title="Link to this heading"></a></h1>
+<p>The evidence-bundle assembler (§8.1, D4) – deterministic, model-free.</p>
+<p>Builds the grounded bundle a vision LLM (the host) reasons over, so token cost and
+grounding are <em>computed</em>, not hoped for:</p>
+<ul class="simple">
+<li><p><strong>Set-of-Mark</strong> – each discussable region (a step’s affordances) gets a stable
+mark id (<code class="docutils literal notranslate"><span class="pre">R1</span></code> …) that is overlaid on the screenshot, appears in the facts,
+and is <em>required</em> in the model’s output. This turns “describe what you see” into
+“interpret marked region R3”.</p></li>
+<li><p><strong>Order</strong> – the bundle is <code class="docutils literal notranslate"><span class="pre">[role/system</span> <span class="pre">+</span> <span class="pre">cite-or-abstain]</span> <span class="pre">-&gt;</span> <span class="pre">[marked</span> <span class="pre">image(s)]</span>
+<span class="pre">-&gt;</span> <span class="pre">[facts</span> <span class="pre">keyed</span> <span class="pre">to</span> <span class="pre">ids]</span> <span class="pre">-&gt;</span> <span class="pre">[task</span> <span class="pre">last]</span></code>.</p></li>
+<li><p><strong>Token budget</strong> – projected as <code class="docutils literal notranslate"><span class="pre">Σ(w×h/750)</span></code> per image against the model cap
+(≈1568 px / 1568 tok standard; ≈2576 px / 4784 tok on Opus 4.7/4.8) <em>before</em> the
+call; images are downsampled to fit.</p></li>
+<li><p><strong>Omit raw bytes</strong> – facts are <em>derived summaries</em>, never raw HAR/DOM/bundle
+text; those stay reachable by <code class="docutils literal notranslate"><span class="pre">evidence_id</span></code> for just-in-time retrieval.</p></li>
+</ul>
+<p>The actual image overlay needs Pillow (the <code class="docutils literal notranslate"><span class="pre">evidence</span></code> extra); everything else
+(dimensions, budget, mark assignment, the bundle structure) is pure stdlib so the
+budget math and grounding are testable without it.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="ov.analysis.evidence.MODEL_CAPS">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.evidence.</span></span><span class="sig-name descname"><span class="pre">MODEL_CAPS</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'opus':</span> <span class="pre">(2576,</span> <span class="pre">4784),</span> <span class="pre">'standard':</span> <span class="pre">(1568,</span> <span class="pre">1568)}</span></span><a class="headerlink" href="#ov.analysis.evidence.MODEL_CAPS" title="Link to this definition"></a></dt>
+<dd><p>(long-edge pixels, token cap). Opus 4.7/4.8 are larger.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Per-model image caps</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.evidence.build_evidence_bundle">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.evidence.</span></span><span class="sig-name descname"><span class="pre">build_evidence_bundle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'opus'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Assess</span> <span class="pre">UX</span> <span class="pre">and</span> <span class="pre">architecture;</span> <span class="pre">cite</span> <span class="pre">marks/facts</span> <span class="pre">for</span> <span class="pre">every</span> <span class="pre">claim.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_marks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.EvidenceBundle" title="ov.base.EvidenceBundle"><span class="pre">EvidenceBundle</span></a></span></span><a class="reference internal" href="../../../_modules/ov/analysis/evidence.html#build_evidence_bundle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.evidence.build_evidence_bundle" title="Link to this definition"></a></dt>
+<dd><p>Assemble a grounded <a class="reference internal" href="../base.html#ov.base.EvidenceBundle" title="ov.base.EvidenceBundle"><code class="xref py py-class docutils literal notranslate"><span class="pre">EvidenceBundle</span></code></a> for a step (model-free).</p>
+<p>Marks are drawn from the step’s affordances (which carry bounding boxes);
+facts include those marked regions plus the deterministic findings touching the
+step. The token budget is computed against <code class="docutils literal notranslate"><span class="pre">model</span></code>’s cap. When Pillow is
+available and <code class="docutils literal notranslate"><span class="pre">overlay</span></code> is set, a numbered overlay screenshot (and crops for
+small regions) are rendered and stored; otherwise the original screenshot is
+referenced and a note is recorded.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.evidence.fit_to_cap">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.evidence.</span></span><span class="sig-name descname"><span class="pre">fit_to_cap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'opus'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/evidence.html#fit_to_cap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.evidence.fit_to_cap" title="Link to this definition"></a></dt>
+<dd><p>Project tokens and a downsample factor to fit a model’s image cap (pure).</p>
+<p>Honors BOTH constraints – the long-edge pixel cap <em>and</em> the token (area) cap
+– taking whichever is more restrictive, because a long-edge-only clamp can
+still blow the token budget (a 2576x2576 image is ~8853 tokens).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">fit_to_cap</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="s2">&quot;opus&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;downsampled&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;fitted&quot;</span><span class="p">][</span><span class="s2">&quot;tokens&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">4784</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fit_to_cap</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="s2">&quot;opus&quot;</span><span class="p">)[</span><span class="s2">&quot;downsampled&quot;</span><span class="p">]</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.evidence.image_token_cost">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.evidence.</span></span><span class="sig-name descname"><span class="pre">image_token_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/evidence.html#image_token_cost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.evidence.image_token_cost" title="Link to this definition"></a></dt>
+<dd><p>Anthropic image token estimate <code class="docutils literal notranslate"><span class="pre">ceil(w*h/750)</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">image_token_cost</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="go">1334</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.evidence.png_dimensions">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.evidence.</span></span><span class="sig-name descname"><span class="pre">png_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/evidence.html#png_dimensions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.evidence.png_dimensions" title="Link to this definition"></a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code> of a PNG from its IHDR header (stdlib only).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">px</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="s1">&#39;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">png_dimensions</span><span class="p">(</span><span class="n">px</span><span class="p">)</span>
+<span class="go">(1, 1)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="context.html" class="btn btn-neutral float-left" title="ov.analysis.context" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reliability.html" class="btn btn-neutral float-right" title="ov.analysis.reliability" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

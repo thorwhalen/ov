@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.analysis.reliability &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.analysis.run" href="run.html" />
+    <link rel="prev" title="ov.analysis.evidence" href="evidence.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.analysis.reliability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.reliability.ReliabilityReport"><code class="docutils literal notranslate"><span class="pre">ReliabilityReport</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.analysis.reliability.ReliabilityReport.all_findings"><code class="docutils literal notranslate"><span class="pre">ReliabilityReport.all_findings</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.reliability.apply_verification"><code class="docutils literal notranslate"><span class="pre">apply_verification()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.reliability.lookup_evidence"><code class="docutils literal notranslate"><span class="pre">lookup_evidence()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.reliability.resolvable"><code class="docutils literal notranslate"><span class="pre">resolvable()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.reliability.verification_questions"><code class="docutils literal notranslate"><span class="pre">verification_questions()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.reliability.verify_findings"><code class="docutils literal notranslate"><span class="pre">verify_findings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.analysis.reliability</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/analysis/reliability.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.analysis.reliability">
+<span id="ov-analysis-reliability"></span><h1>ov.analysis.reliability<a class="headerlink" href="#module-ov.analysis.reliability" title="Link to this heading"></a></h1>
+<p>Reliability passes over findings (§5.2, D4) – deterministic gates, model-free.</p>
+<p>These enforce the grounding discipline on findings (whether deterministic, or
+authored by the host LLM over an evidence bundle):</p>
+<ul class="simple">
+<li><p><strong>cite-or-abstain</strong> – every non-<code class="docutils literal notranslate"><span class="pre">undetermined</span></code> claim must cite at least one
+<em>resolvable</em> evidence ref; otherwise it is downgraded to <code class="docutils literal notranslate"><span class="pre">undetermined</span></code> (a
+first-class outcome, not an error).</p></li>
+<li><p><strong>set-of-mark membership</strong> – any mark id a finding references must exist in the
+bundle.</p></li>
+<li><p><strong>just-in-time retrieval</strong> – <a class="reference internal" href="#ov.analysis.reliability.lookup_evidence" title="ov.analysis.reliability.lookup_evidence"><code class="xref py py-func docutils literal notranslate"><span class="pre">lookup_evidence()</span></code></a> resolves an evidence id
+back to its artifact/finding/step so provenance is verifiable.</p></li>
+<li><p><strong>factored Chain-of-Verification scaffolding</strong> – <a class="reference internal" href="#ov.analysis.reliability.verification_questions" title="ov.analysis.reliability.verification_questions"><code class="xref py py-func docutils literal notranslate"><span class="pre">verification_questions()</span></code></a>
+generates the questions the <em>host</em> answers (independently, via evidence lookup)
+for high-severity findings; <a class="reference internal" href="#ov.analysis.reliability.apply_verification" title="ov.analysis.reliability.apply_verification"><code class="xref py py-func docutils literal notranslate"><span class="pre">apply_verification()</span></code></a> downgrades a finding whose
+verification fails. The judgment is the host’s; the gating here is deterministic.</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.analysis.reliability.ReliabilityReport">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.analysis.reliability.</span></span><span class="sig-name descname"><span class="pre">ReliabilityReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kept</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">downgraded</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ov/analysis/reliability.html#ReliabilityReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.reliability.ReliabilityReport" title="Link to this definition"></a></dt>
+<dd><p>Outcome of <a class="reference internal" href="#ov.analysis.reliability.verify_findings" title="ov.analysis.reliability.verify_findings"><code class="xref py py-func docutils literal notranslate"><span class="pre">verify_findings()</span></code></a>.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ov.analysis.reliability.ReliabilityReport.all_findings">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">all_findings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#ov.analysis.reliability.ReliabilityReport.all_findings" title="Link to this definition"></a></dt>
+<dd><p>Kept + downgraded, in that order (nothing is silently dropped).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.reliability.apply_verification">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.reliability.</span></span><span class="sig-name descname"><span class="pre">apply_verification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">verdicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a></span></span><a class="reference internal" href="../../../_modules/ov/analysis/reliability.html#apply_verification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.reliability.apply_verification" title="Link to this definition"></a></dt>
+<dd><p>Downgrade a finding to <code class="docutils literal notranslate"><span class="pre">undetermined</span></code> if a majority of verifications fail.</p>
+<p><code class="docutils literal notranslate"><span class="pre">verdicts</span></code> are the host’s independent answers (True = supported). This is the
+deterministic application of the host’s factored CoVe / NLI judgments.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.reliability.lookup_evidence">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.reliability.</span></span><span class="sig-name descname"><span class="pre">lookup_evidence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evidence_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/reliability.html#lookup_evidence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.reliability.lookup_evidence" title="Link to this definition"></a></dt>
+<dd><p>Resolve an evidence id back to its underlying data (just-in-time retrieval).</p>
+<p>Returns a dict describing what the id points at, so a verification pass (or a
+downstream agent) can confirm a finding against the original artifact/record.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.reliability.resolvable">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.reliability.</span></span><span class="sig-name descname"><span class="pre">resolvable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bundle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.EvidenceBundle" title="ov.base.EvidenceBundle"><span class="pre">EvidenceBundle</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/reliability.html#resolvable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.reliability.resolvable" title="Link to this definition"></a></dt>
+<dd><p>True if an evidence ref resolves to something concrete (artifact/finding/step/bundle).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.reliability.verification_questions">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.reliability.</span></span><span class="sig-name descname"><span class="pre">verification_questions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/reliability.html#verification_questions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.reliability.verification_questions" title="Link to this definition"></a></dt>
+<dd><p>Generate factored Chain-of-Verification questions for a high-severity finding.</p>
+<p>The host answers each <em>independently</em> (via <a class="reference internal" href="#ov.analysis.reliability.lookup_evidence" title="ov.analysis.reliability.lookup_evidence"><code class="xref py py-func docutils literal notranslate"><span class="pre">lookup_evidence()</span></code></a>), not
+conditioned on the original claim – that’s what makes CoVe factored.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Finding</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span> <span class="o">=</span> <span class="n">verification_questions</span><span class="p">(</span><span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;contrast.text&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="s2">&quot;contrast 2.1:1&quot;</span><span class="p">,</span> <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;art_1&quot;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">qs</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.reliability.verify_findings">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.reliability.</span></span><span class="sig-name descname"><span class="pre">verify_findings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">findings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">bundle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.EvidenceBundle" title="ov.base.EvidenceBundle"><span class="pre">EvidenceBundle</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ov.analysis.reliability.ReliabilityReport" title="ov.analysis.reliability.ReliabilityReport"><span class="pre">ReliabilityReport</span></a></span></span><a class="reference internal" href="../../../_modules/ov/analysis/reliability.html#verify_findings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.reliability.verify_findings" title="Link to this definition"></a></dt>
+<dd><p>Apply cite-or-abstain + mark-membership; downgrade unsupported findings.</p>
+<p>Deterministic findings (<code class="docutils literal notranslate"><span class="pre">source_layer</span> <span class="pre">==</span> <span class="pre">&quot;deterministic&quot;</span></code>) are facts and are
+kept; LLM findings must cite resolvable evidence and reference only existing
+marks. A finding that fails is downgraded to <code class="docutils literal notranslate"><span class="pre">undetermined</span></code> (kept, flagged),
+never silently dropped.</p>
+<p>Note: downgrading mutates the offending <code class="xref py py-class docutils literal notranslate"><span class="pre">Finding</span></code> in place (the caller
+hands its findings in to be gated), so the objects in <code class="docutils literal notranslate"><span class="pre">report.downgraded</span></code> are
+the same instances, now marked <code class="docutils literal notranslate"><span class="pre">undetermined</span></code> + <code class="docutils literal notranslate"><span class="pre">needs_human_review</span></code>.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="evidence.html" class="btn btn-neutral float-left" title="ov.analysis.evidence" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="run.html" class="btn btn-neutral float-right" title="ov.analysis.run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

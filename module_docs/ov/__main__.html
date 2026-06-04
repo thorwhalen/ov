@@ -53,6 +53,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ov.__main__</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.analyze"><code class="docutils literal notranslate"><span class="pre">analyze()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.check"><code class="docutils literal notranslate"><span class="pre">check()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.__main__.evidence"><code class="docutils literal notranslate"><span class="pre">evidence()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.observe"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.overview"><code class="docutils literal notranslate"><span class="pre">overview()</span></code></a></li>
@@ -71,6 +72,8 @@
 <li class="toctree-l1"><a class="reference internal" href="analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis/run.html">ov.analysis.run</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis/ux.html">ov.analysis.ux</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
@@ -157,6 +160,12 @@ Each command calls the very functions a skill or a normal caller would call.</p>
 <dt class="sig sig-object py" id="ov.__main__.check">
 <span class="sig-prename descclassname"><span class="pre">ov.__main__.</span></span><span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/__main__.html#check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.__main__.check" title="Link to this definition"></a></dt>
 <dd><p>Check system dependencies (Playwright browsers, Node, sidecar, CLIs).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.__main__.evidence">
+<span class="sig-prename descclassname"><span class="pre">ov.__main__.</span></span><span class="sig-name descname"><span class="pre">evidence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_id</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'opus'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/__main__.html#evidence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.__main__.evidence" title="Link to this definition"></a></dt>
+<dd><p>Build a grounded evidence bundle for a run (set-of-mark + token budget).</p>
 </dd></dl>
 
 <dl class="py function">
