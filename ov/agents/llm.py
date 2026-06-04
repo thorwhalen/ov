@@ -43,12 +43,18 @@ def default_model(role: str) -> str:
 
 
 def resolve_llm(llm: Any = None):
-    """Resolve ``llm`` to a ``callable(str) -> str`` (via coact), or ``None``.
+    """Resolve ``llm`` to a ``callable(str) -> str``, or ``None``.
 
-    Re-exported from :func:`coact.llm.resolve_llm` so ov callers have one import and
-    one injection convention (a callable, an ``aw`` ``StepConfig``, a model-name
-    string, or ``None`` to discover an ambient provider).
+    One injection convention: a callable (used as-is), an ``aw`` ``StepConfig``, a
+    model-name string, or ``None`` to discover an ambient provider. A plain callable
+    short-circuits (no optional dependency needed); the other forms defer to
+    :func:`coact.llm.resolve_llm`.
+
+    >>> resolve_llm(lambda p: "hi")("x")
+    'hi'
     """
+    if callable(llm):
+        return llm
     (coact_llm,) = require("coact.llm", feature="ov.agents LLM facade")
     return coact_llm.resolve_llm(llm)
 
