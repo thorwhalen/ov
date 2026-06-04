@@ -66,6 +66,25 @@ def overview(url, *, headed=False, mode="reconstruct", out_dir=None, store=None,
     yield str(_ov.overview(url, headed=headed, mode=mode, out_dir=out_dir, store=store, authorized=authorized))
 
 
+def evidence(run_id, *, step_id=None, model="opus", out_dir=None, store=None):
+    """Build a grounded evidence bundle for a run (set-of-mark + token budget)."""
+    from .analysis.evidence import build_evidence_bundle
+    from .capture.stores import resolve_store
+
+    s = resolve_store(store)
+    try:
+        run = s.load_run(run_id)
+    except (KeyError, ValueError) as e:
+        yield f"error: could not load run {run_id!r}: {e}"
+        yield "run `ov runs` to list available run ids"
+        return
+    bundle = build_evidence_bundle(run, s, step_id=step_id, model=model, out_dir=out_dir)
+    yield f"step: {bundle.step_id}"
+    yield f"marks: {len(bundle.marks)}  facts: {len(bundle.facts)}"
+    yield f"token_budget: {bundle.token_budget}"
+    yield f"marked_images: {bundle.marked_image_artifact_ids}"
+
+
 def check():
     """Check system dependencies (Playwright browsers, Node, sidecar, CLIs)."""
     rep = _check_requirements(verbose=False)
@@ -82,7 +101,7 @@ def runs(*, store=None):
 def main(argv=None):
     """Entry point for the ``ov`` console script."""
     parser = argh.ArghParser(prog="ov", description="OverView: web reconnaissance & analysis")
-    argh.add_commands(parser, [observe, analyze, report, synopsis, overview, check, runs])
+    argh.add_commands(parser, [observe, analyze, report, synopsis, overview, evidence, check, runs])
     parser.dispatch(argv=argv)
 
 
