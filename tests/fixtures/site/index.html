@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="TestGen 1.0">
+  <title>OV Test Site — Home</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    .low-contrast { color: #aaa; background: #fff; } /* intentionally weak for a11y tests */
+    nav a { margin-right: 1rem; }
+  </style>
+  <!-- Simulate a framework global so the fingerprint detector has a signal. -->
+  <script>window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = { ov: true };</script>
+</head>
+<body>
+  <header>
+    <h1>OV Test Site</h1>
+    <nav aria-label="Primary">
+      <a href="/page2.html">Page Two</a>
+      <a href="/spa.html">SPA Demo</a>
+      <a href="https://example.com/external">External</a>
+    </nav>
+  </header>
+  <main id="root">
+    <p>Welcome to the deterministic capture test site.</p>
+    <p class="low-contrast">This paragraph has intentionally low contrast.</p>
+    <img src="/pixel.png" alt="A 1x1 test pixel">
+    <img src="/pixel.png">
+    <form id="signup" action="/submit" method="post">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required>
+      <input type="text" placeholder="Unlabeled field">
+      <button type="submit">Sign up</button>
+    </form>
+    <button id="toggle" onclick="document.getElementById('panel').hidden = false">Show panel</button>
+    <section id="panel" hidden>Revealed content for SPA-state capture.</section>
+  </main>
+</body>
+</html>
