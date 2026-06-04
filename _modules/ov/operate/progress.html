@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.operate.progress &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../ov.html">ov</a></li>
+      <li class="breadcrumb-item active">ov.operate.progress</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ov.operate.progress</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;``progress(history) -&gt; ProgressSignal`` -- deterministic no-progress *facts*.</span>
+
+<span class="sd">This computes facts only; it never decides to stop. The host (policy layer)</span>
+<span class="sd">interprets the signal against its budgets and aborts on ``loop_suspected`` (§2.3:</span>
+<span class="sd">&quot;the package detects and reports no-progress; the host decides to abort&quot;).</span>
+
+<span class="sd">Signals (all model-free):</span>
+
+<span class="sd">* ``repeated_action`` -- the last step&#39;s ``(action.type, args_hash)`` recurred.</span>
+<span class="sd">* ``no_new_signal_steps`` -- trailing run of steps with an unchanged post-obs hash.</span>
+<span class="sd">* ``url_stasis`` / ``ax_stasis`` -- URL / AX state unchanged across the recent window.</span>
+<span class="sd">* ``repeated_error`` -- the last two steps failed identically.</span>
+<span class="sd">* ``loop_suspected`` -- rolled-up advisory when any threshold is crossed.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">JourneyStep</span><span class="p">,</span> <span class="n">ProgressSignal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..util</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_hash</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_args_hash</span><span class="p">(</span><span class="n">step</span><span class="p">:</span> <span class="n">JourneyStep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">step</span><span class="o">.</span><span class="n">action</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;noop&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">action</span>
+    <span class="k">return</span> <span class="n">stable_hash</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">ref</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">args</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="progress">
+<a class="viewcode-back" href="../../../module_docs/ov/operate/progress.html#ov.operate.progress">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">progress</span><span class="p">(</span><span class="n">history</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">JourneyStep</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">no_progress_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProgressSignal</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute loop/no-progress facts from the journey ``history`` so far.</span>
+
+<span class="sd">    &gt;&gt;&gt; from ov.base import JourneyStep, Action</span>
+<span class="sd">    &gt;&gt;&gt; s = JourneyStep(action=Action(type=&#39;click&#39;, ref=&#39;e1&#39;), post_obs_hash=&#39;h&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; sig = progress([s, s.model_copy(), s.model_copy()], no_progress_steps=3)</span>
+<span class="sd">    &gt;&gt;&gt; sig.no_new_signal_steps &gt;= 3 and sig.loop_suspected</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">history</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ProgressSignal</span><span class="p">()</span>
+
+    <span class="n">last</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># repeated_action: same (type, args) seen earlier in history</span>
+    <span class="n">last_h</span> <span class="o">=</span> <span class="n">_args_hash</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+    <span class="n">repeated_action</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">_args_hash</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="n">last_h</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">history</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># trailing run of unchanged post-observation hash</span>
+    <span class="n">no_new</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ref_hash</span> <span class="o">=</span> <span class="n">last</span><span class="o">.</span><span class="n">post_obs_hash</span>
+    <span class="k">if</span> <span class="n">ref_hash</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">post_obs_hash</span> <span class="o">==</span> <span class="n">ref_hash</span><span class="p">:</span>
+                <span class="n">no_new</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+
+    <span class="c1"># URL / AX stasis over the recent window</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="n">no_progress_steps</span><span class="p">:]</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">url</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;navigate&quot;</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">window</span>
+    <span class="p">}</span>
+    <span class="n">url_stasis</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">no_progress_steps</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span>
+    <span class="n">ax_hashes</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="o">.</span><span class="n">post_obs_hash</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">window</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">post_obs_hash</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+    <span class="n">ax_stasis</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">no_progress_steps</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">ax_hashes</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span>
+
+    <span class="n">repeated_error</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span>
+        <span class="ow">and</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span>
+        <span class="ow">and</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">loop_suspected</span> <span class="o">=</span> <span class="n">no_new</span> <span class="o">&gt;=</span> <span class="n">no_progress_steps</span> <span class="ow">or</span> <span class="p">(</span><span class="n">repeated_action</span> <span class="ow">and</span> <span class="n">ax_stasis</span><span class="p">)</span> <span class="ow">or</span> <span class="n">repeated_error</span>
+
+    <span class="k">return</span> <span class="n">ProgressSignal</span><span class="p">(</span>
+        <span class="n">repeated_action</span><span class="o">=</span><span class="n">repeated_action</span><span class="p">,</span>
+        <span class="n">no_new_signal_steps</span><span class="o">=</span><span class="n">no_new</span><span class="p">,</span>
+        <span class="n">url_stasis</span><span class="o">=</span><span class="n">url_stasis</span><span class="p">,</span>
+        <span class="n">ax_stasis</span><span class="o">=</span><span class="n">ax_stasis</span><span class="p">,</span>
+        <span class="n">repeated_error</span><span class="o">=</span><span class="n">repeated_error</span><span class="p">,</span>
+        <span class="n">loop_suspected</span><span class="o">=</span><span class="n">loop_suspected</span><span class="p">,</span>
+        <span class="n">detail</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;history_len&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="s2">&quot;last_outcome&quot;</span><span class="p">:</span> <span class="n">last</span><span class="o">.</span><span class="n">outcome</span><span class="p">},</span>
+    <span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

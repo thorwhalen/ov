@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.capture.session &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.capture.stores" href="stores.html" />
+    <link rel="prev" title="ov.capture.probes.websocket" href="probes/websocket.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.capture.session</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.capture.session.CaptureSession"><code class="docutils literal notranslate"><span class="pre">CaptureSession</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.session.CaptureSession.capture_step"><code class="docutils literal notranslate"><span class="pre">CaptureSession.capture_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.session.CaptureSession.close"><code class="docutils literal notranslate"><span class="pre">CaptureSession.close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.session.CaptureSession.finalize"><code class="docutils literal notranslate"><span class="pre">CaptureSession.finalize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.session.CaptureSession.navigate"><code class="docutils literal notranslate"><span class="pre">CaptureSession.navigate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.session.CaptureSession.open"><code class="docutils literal notranslate"><span class="pre">CaptureSession.open()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.session.CaptureSession.page"><code class="docutils literal notranslate"><span class="pre">CaptureSession.page</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.session.CaptureSession.snapshot_state"><code class="docutils literal notranslate"><span class="pre">CaptureSession.snapshot_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.session.CaptureSession.start"><code class="docutils literal notranslate"><span class="pre">CaptureSession.start()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.capture.session</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/capture/session.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.capture.session">
+<span id="ov-capture-session"></span><h1>ov.capture.session<a class="headerlink" href="#module-ov.capture.session" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">CaptureSession</span></code> – owns the browser and orchestrates the probes (§3.1).</p>
+<p>The session is the deterministic capture spine: it resolves and dependency-orders
+the enabled probes, attaches their listeners before navigation, snapshots state
+on demand (the <code class="docutils literal notranslate"><span class="pre">snapshot_state</span></code> primitive of §2.3), finalizes and flushes them
+at the end, stores the HAR, and persists the <a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureRun</span></code></a>.</p>
+<p>It exposes <code class="docutils literal notranslate"><span class="pre">page</span></code> so the <code class="docutils literal notranslate"><span class="pre">operate</span></code> primitives and the scripted driver can act
+on the same browser, and is a context manager for safe teardown.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.capture.session.CaptureSession">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.capture.session.</span></span><span class="sig-name descname"><span class="pre">CaptureSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../config.html#ov.config.OvConfig" title="ov.config.OvConfig"><span class="pre">OvConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="stores.html#ov.capture.stores.CaptureStore" title="ov.capture.stores.CaptureStore"><span class="pre">CaptureStore</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'reconstruct'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_har</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ov/capture/session.html#CaptureSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.session.CaptureSession" title="Link to this definition"></a></dt>
+<dd><p>Drive one target and record everything into the store (zero-config default).</p>
+<p>Typical use is via the <a class="reference internal" href="../../ov.html#ov.observe" title="ov.observe"><code class="xref py py-func docutils literal notranslate"><span class="pre">ov.observe()</span></code></a> facade, but the session is directly
+usable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">CaptureSession</span><span class="p">(</span><span class="n">target_url</span><span class="o">=</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>                 <span class="c1"># navigate to target_url + capture the load state</span>
+    <span class="n">run</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">run</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.session.CaptureSession.capture_step">
+<span class="sig-name descname"><span class="pre">capture_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.JourneyStep" title="ov.base.JourneyStep"><span class="pre">JourneyStep</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.JourneyStep" title="ov.base.JourneyStep"><span class="pre">JourneyStep</span></a></span></span><a class="reference internal" href="../../../_modules/ov/capture/session.html#CaptureSession.capture_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.session.CaptureSession.capture_step" title="Link to this definition"></a></dt>
+<dd><p>Run per-state probes for an externally-built step (used by the driver).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.session.CaptureSession.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/session.html#CaptureSession.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.session.CaptureSession.close" title="Link to this definition"></a></dt>
+<dd><p>Finalize if needed and tear down (idempotent).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.session.CaptureSession.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/session.html#CaptureSession.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.session.CaptureSession.finalize" title="Link to this definition"></a></dt>
+<dd><p>Flush every probe (page still alive), close the browser, store the HAR.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.session.CaptureSession.navigate">
+<span class="sig-name descname"><span class="pre">navigate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/session.html#CaptureSession.navigate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.session.CaptureSession.navigate" title="Link to this definition"></a></dt>
+<dd><p>Navigate the page to <code class="docutils literal notranslate"><span class="pre">url</span></code> (waits for the default load state).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.session.CaptureSession.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">intent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'load'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.JourneyStep" title="ov.base.JourneyStep"><span class="pre">JourneyStep</span></a></span></span><a class="reference internal" href="../../../_modules/ov/capture/session.html#CaptureSession.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.session.CaptureSession.open" title="Link to this definition"></a></dt>
+<dd><p>Navigate to the target (or <code class="docutils literal notranslate"><span class="pre">url</span></code>) and capture the initial state.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ov.capture.session.CaptureSession.page">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">page</span></span><a class="headerlink" href="#ov.capture.session.CaptureSession.page" title="Link to this definition"></a></dt>
+<dd><p>The active Playwright <code class="docutils literal notranslate"><span class="pre">Page</span></code> for <code class="docutils literal notranslate"><span class="pre">operate</span></code> primitives / the driver.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.session.CaptureSession.snapshot_state">
+<span class="sig-name descname"><span class="pre">snapshot_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">intent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'observe'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ax_snapshot'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.JourneyStep" title="ov.base.JourneyStep"><span class="pre">JourneyStep</span></a></span></span><a class="reference internal" href="../../../_modules/ov/capture/session.html#CaptureSession.snapshot_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.session.CaptureSession.snapshot_state" title="Link to this definition"></a></dt>
+<dd><p>Capture all probes for the current state and journal a <code class="xref py py-class docutils literal notranslate"><span class="pre">JourneyStep</span></code>.</p>
+<p>Bundles the §2.3 <code class="docutils literal notranslate"><span class="pre">snapshot_state</span></code> primitive: observe affordances, run
+per-state probes, and record one step keyed to the produced artifacts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.session.CaptureSession.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ov.capture.session.CaptureSession" title="ov.capture.session.CaptureSession"><span class="pre">CaptureSession</span></a></span></span><a class="reference internal" href="../../../_modules/ov/capture/session.html#CaptureSession.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.session.CaptureSession.start" title="Link to this definition"></a></dt>
+<dd><p>Launch the browser, attach CDP (Chromium), and attach all probes.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="probes/websocket.html" class="btn btn-neutral float-left" title="ov.capture.probes.websocket" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stores.html" class="btn btn-neutral float-right" title="ov.capture.stores" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

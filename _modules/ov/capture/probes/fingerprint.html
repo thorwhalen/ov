@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.capture.probes.fingerprint &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../ov.html">ov</a></li>
+          <li class="breadcrumb-item"><a href="../probes.html">ov.capture.probes</a></li>
+      <li class="breadcrumb-item active">ov.capture.probes.fingerprint</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ov.capture.probes.fingerprint</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Fingerprint probe: a built-in, license-clean technology detector.</span>
+
+<span class="sd">The spec flags ``wappalyzer-next`` and the ``enthec/webappanalyzer`` ruleset as</span>
+<span class="sd">GPL-3.0, incompatible with ``ov``&#39;s MIT license (§6.2). So rather than depend on</span>
+<span class="sd">them, this probe ships a small deterministic detector over the highest-signal,</span>
+<span class="sd">lowest-false-positive sources: framework state-injection globals</span>
+<span class="sd">(``__NEXT_DATA__``/``__NUXT__``/``__remixContext`` ...), devtools hooks, bundler</span>
+<span class="sd">signatures, the ``&lt;meta name=generator&gt;`` tag, ``ng-version``, and response</span>
+<span class="sd">headers. ``wappalyzer``/Retire.js remain available as *optional* external CLIs.</span>
+
+<span class="sd">Each detection is a :class:`~ov.base.TechFinding` carrying confidence + provenance</span>
+<span class="sd">and is appended to ``ctx.run.fingerprint`` so ``ov observe`` populates the run</span>
+<span class="sd">immediately; the raw signals are also stored as an artifact for re-analysis.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">...base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Artifact</span><span class="p">,</span> <span class="n">TechFinding</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">Probe</span><span class="p">,</span> <span class="n">ProbeContext</span><span class="p">,</span> <span class="n">register_probe</span>
+
+<span class="n">_SIGNAL_JS</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">() =&gt; {</span>
+<span class="s2">  const w = window;</span>
+<span class="s2">  const has = (k) =&gt; { try { return k in w; } catch (e) { return false; } };</span>
+<span class="s2">  const keys = Object.keys(w);</span>
+<span class="s2">  const q = (sel) =&gt; document.querySelector(sel);</span>
+<span class="s2">  const gen = q(&#39;meta[name=&quot;generator&quot;]&#39;);</span>
+<span class="s2">  const ngEl = q(&#39;[ng-version]&#39;);</span>
+<span class="s2">  return {</span>
+<span class="s2">    globals: {</span>
+<span class="s2">      __NEXT_DATA__: has(&#39;__NEXT_DATA__&#39;),</span>
+<span class="s2">      __NUXT__: has(&#39;__NUXT__&#39;),</span>
+<span class="s2">      __remixContext: has(&#39;__remixContext&#39;),</span>
+<span class="s2">      __gatsby: has(&#39;___gatsby&#39;) || has(&#39;__GATSBY_RESOLVED&#39;),</span>
+<span class="s2">      __sveltekit: keys.some(k =&gt; k.startsWith(&#39;__sveltekit&#39;)),</span>
+<span class="s2">      react_devtools: has(&#39;__REACT_DEVTOOLS_GLOBAL_HOOK__&#39;),</span>
+<span class="s2">      vue: has(&#39;__VUE_DEVTOOLS_GLOBAL_HOOK__&#39;) || has(&#39;__VUE__&#39;),</span>
+<span class="s2">      redux: has(&#39;__REDUX_DEVTOOLS_EXTENSION__&#39;),</span>
+<span class="s2">      jquery: has(&#39;jQuery&#39;),</span>
+<span class="s2">      angular: has(&#39;getAllAngularRootElements&#39;) || has(&#39;ng&#39;),</span>
+<span class="s2">      webpack: keys.some(k =&gt; k.startsWith(&#39;webpackChunk&#39;)) || has(&#39;__webpack_require__&#39;),</span>
+<span class="s2">    },</span>
+<span class="s2">    metaGenerator: gen ? gen.getAttribute(&#39;content&#39;) : null,</span>
+<span class="s2">    ngVersion: ngEl ? ngEl.getAttribute(&#39;ng-version&#39;) : null,</span>
+<span class="s2">    reactRoot: !!q(&#39;[data-reactroot], #__next, #root, #app&#39;),</span>
+<span class="s2">    scripts: Array.from(document.scripts).map(s =&gt; s.src).filter(Boolean).slice(0, 120),</span>
+<span class="s2">  };</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># global signal -&gt; (technology name, categories, confidence, implies)</span>
+<span class="n">_GLOBAL_RULES</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;__NEXT_DATA__&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Next.js&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;framework&quot;</span><span class="p">,</span> <span class="s2">&quot;ssr&quot;</span><span class="p">],</span> <span class="mi">95</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;React&quot;</span><span class="p">]),</span>
+    <span class="s2">&quot;__NUXT__&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Nuxt&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;framework&quot;</span><span class="p">,</span> <span class="s2">&quot;ssr&quot;</span><span class="p">],</span> <span class="mi">95</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Vue.js&quot;</span><span class="p">]),</span>
+    <span class="s2">&quot;__remixContext&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Remix&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;framework&quot;</span><span class="p">,</span> <span class="s2">&quot;ssr&quot;</span><span class="p">],</span> <span class="mi">95</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;React&quot;</span><span class="p">]),</span>
+    <span class="s2">&quot;__gatsby&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Gatsby&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;framework&quot;</span><span class="p">,</span> <span class="s2">&quot;ssg&quot;</span><span class="p">],</span> <span class="mi">90</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;React&quot;</span><span class="p">]),</span>
+    <span class="s2">&quot;__sveltekit&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;SvelteKit&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;framework&quot;</span><span class="p">],</span> <span class="mi">90</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Svelte&quot;</span><span class="p">]),</span>
+    <span class="s2">&quot;react_devtools&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;React&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;ui-framework&quot;</span><span class="p">],</span> <span class="mi">80</span><span class="p">,</span> <span class="p">[]),</span>
+    <span class="s2">&quot;vue&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Vue.js&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;ui-framework&quot;</span><span class="p">],</span> <span class="mi">80</span><span class="p">,</span> <span class="p">[]),</span>
+    <span class="s2">&quot;redux&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Redux&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;state-management&quot;</span><span class="p">],</span> <span class="mi">75</span><span class="p">,</span> <span class="p">[]),</span>
+    <span class="s2">&quot;jquery&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;jQuery&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;library&quot;</span><span class="p">],</span> <span class="mi">70</span><span class="p">,</span> <span class="p">[]),</span>
+    <span class="s2">&quot;angular&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Angular&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;framework&quot;</span><span class="p">],</span> <span class="mi">80</span><span class="p">,</span> <span class="p">[]),</span>
+    <span class="s2">&quot;webpack&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;webpack&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bundler&quot;</span><span class="p">],</span> <span class="mi">70</span><span class="p">,</span> <span class="p">[]),</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="detect_technologies">
+<a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/fingerprint.html#ov.capture.probes.fingerprint.detect_technologies">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_technologies</span><span class="p">(</span>
+    <span class="n">signals</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">TechFinding</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map captured fingerprint signals (+ headers) into scored :class:`TechFinding`s.</span>
+
+<span class="sd">    Reusable across modules (the arch analyzer enriches these with bundle/source</span>
+<span class="sd">    -map evidence). Prefers ``js``/``dom`` signals over loose header regex.</span>
+
+<span class="sd">    &gt;&gt;&gt; findings = detect_technologies({&quot;globals&quot;: {&quot;__NEXT_DATA__&quot;: True}})</span>
+<span class="sd">    &gt;&gt;&gt; sorted(f.name for f in findings)</span>
+<span class="sd">    [&#39;Next.js&#39;, &#39;React&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">findings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TechFinding</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_add</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cats</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">conf</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">prov</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;global&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">existing</span> <span class="o">=</span> <span class="n">findings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">existing</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">findings</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">TechFinding</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">cats</span><span class="p">),</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="n">conf</span><span class="p">,</span> <span class="n">provenance</span><span class="o">=</span><span class="p">[</span><span class="n">prov</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+        <span class="c1"># Accumulate evidence: keep every provenance, the max confidence, the</span>
+        <span class="c1"># first known version, and the union of categories.</span>
+        <span class="k">if</span> <span class="n">prov</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">existing</span><span class="o">.</span><span class="n">provenance</span><span class="p">:</span>
+            <span class="n">existing</span><span class="o">.</span><span class="n">provenance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prov</span><span class="p">)</span>
+        <span class="n">existing</span><span class="o">.</span><span class="n">confidence</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">existing</span><span class="o">.</span><span class="n">confidence</span><span class="p">,</span> <span class="n">conf</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">existing</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+            <span class="n">existing</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cats</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">existing</span><span class="o">.</span><span class="n">categories</span><span class="p">:</span>
+                <span class="n">existing</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">present</span> <span class="ow">in</span> <span class="p">(</span><span class="n">signals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;globals&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">present</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_GLOBAL_RULES</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">cats</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">implies</span> <span class="o">=</span> <span class="n">_GLOBAL_RULES</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">_add</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cats</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">prov</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;window.</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">implied</span> <span class="ow">in</span> <span class="n">implies</span><span class="p">:</span>
+                <span class="n">_add</span><span class="p">(</span><span class="n">implied</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;ui-framework&quot;</span><span class="p">],</span> <span class="n">conf</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="n">prov</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;implied-by:</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">signals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ngVersion&quot;</span><span class="p">):</span>
+        <span class="n">_add</span><span class="p">(</span><span class="s2">&quot;Angular&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;framework&quot;</span><span class="p">],</span> <span class="mi">95</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">signals</span><span class="p">[</span><span class="s2">&quot;ngVersion&quot;</span><span class="p">],</span> <span class="n">prov</span><span class="o">=</span><span class="s2">&quot;ng-version&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">signals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reactRoot&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;React&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">findings</span><span class="p">:</span>
+        <span class="n">_add</span><span class="p">(</span><span class="s2">&quot;React&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;ui-framework&quot;</span><span class="p">],</span> <span class="mi">55</span><span class="p">,</span> <span class="n">prov</span><span class="o">=</span><span class="s2">&quot;dom:react-root&quot;</span><span class="p">)</span>
+
+    <span class="n">gen</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;metaGenerator&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">gen</span><span class="p">:</span>
+        <span class="n">_add</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;cms-or-generator&quot;</span><span class="p">],</span> <span class="mi">70</span><span class="p">,</span> <span class="n">prov</span><span class="o">=</span><span class="s2">&quot;meta:generator&quot;</span><span class="p">)</span>
+
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">powered</span> <span class="o">=</span> <span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;x-powered-by&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;X-Powered-By&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">powered</span><span class="p">:</span>
+        <span class="n">_add</span><span class="p">(</span><span class="n">powered</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;server&quot;</span><span class="p">],</span> <span class="mi">60</span><span class="p">,</span> <span class="n">prov</span><span class="o">=</span><span class="s2">&quot;header:x-powered-by&quot;</span><span class="p">)</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;server&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Server&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">server</span><span class="p">:</span>
+        <span class="n">_add</span><span class="p">(</span><span class="n">server</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;server&quot;</span><span class="p">],</span> <span class="mi">50</span><span class="p">,</span> <span class="n">prov</span><span class="o">=</span><span class="s2">&quot;header:server&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">findings</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="o">.</span><span class="n">confidence</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="FingerprintProbe">
+<a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/fingerprint.html#ov.capture.probes.fingerprint.FingerprintProbe">[docs]</a>
+<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">&quot;fingerprint&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;fingerprint&quot;</span><span class="p">,))</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FingerprintProbe</span><span class="p">(</span><span class="n">Probe</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gather in-page signals + headers and populate ``run.fingerprint``.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;fingerprint&quot;</span>
+
+<div class="viewcode-block" id="FingerprintProbe.finalize">
+<a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/fingerprint.html#ov.capture.probes.fingerprint.FingerprintProbe.finalize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]:</span>
+        <span class="n">signals</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">page</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">signals</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">_SIGNAL_JS</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
+                <span class="n">signals</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_doc_headers</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+        <span class="n">findings</span> <span class="o">=</span> <span class="n">detect_technologies</span><span class="p">(</span><span class="n">signals</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">fingerprint</span> <span class="o">=</span> <span class="n">findings</span>
+
+        <span class="n">art</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;signals&quot;</span><span class="p">:</span> <span class="n">signals</span><span class="p">,</span> <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="n">headers</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;fingerprint&quot;</span><span class="p">,</span>
+            <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;technologies&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">findings</span><span class="p">]},</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">art</span><span class="p">]</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_main_doc_headers</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="n">records</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_records&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resource_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;document&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response_headers&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

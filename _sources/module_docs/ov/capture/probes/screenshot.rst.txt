@@ -1,0 +1,4 @@
+ov.capture.probes.screenshot
+============================
+.. automodule:: ov.capture.probes.screenshot
+   :members:

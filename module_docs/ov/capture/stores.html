@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.capture.stores &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.config" href="../config.html" />
+    <link rel="prev" title="ov.capture.session" href="session.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">ov.capture.session</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.capture.stores</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.capture.stores.CaptureStore"><code class="docutils literal notranslate"><span class="pre">CaptureStore</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.stores.CaptureStore.artifact_bytes"><code class="docutils literal notranslate"><span class="pre">CaptureStore.artifact_bytes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.stores.CaptureStore.load_analysis"><code class="docutils literal notranslate"><span class="pre">CaptureStore.load_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.stores.CaptureStore.load_run"><code class="docutils literal notranslate"><span class="pre">CaptureStore.load_run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.stores.CaptureStore.put_artifact"><code class="docutils literal notranslate"><span class="pre">CaptureStore.put_artifact()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.stores.CaptureStore.report_names"><code class="docutils literal notranslate"><span class="pre">CaptureStore.report_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.stores.CaptureStore.run_ids"><code class="docutils literal notranslate"><span class="pre">CaptureStore.run_ids()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.stores.CaptureStore.save_analysis"><code class="docutils literal notranslate"><span class="pre">CaptureStore.save_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.stores.CaptureStore.save_report"><code class="docutils literal notranslate"><span class="pre">CaptureStore.save_report()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.stores.CaptureStore.save_run"><code class="docutils literal notranslate"><span class="pre">CaptureStore.save_run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.capture.stores.resolve_store"><code class="docutils literal notranslate"><span class="pre">resolve_store()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.capture.stores</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/capture/stores.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.capture.stores">
+<span id="ov-capture-stores"></span><h1>ov.capture.stores<a class="headerlink" href="#module-ov.capture.stores" title="Link to this heading"></a></h1>
+<p>The capture store – a <code class="docutils literal notranslate"><span class="pre">MutableMapping</span></code> Mall over a run directory (§3.4).</p>
+<p>A single root holds many runs. Artifacts are <strong>content-addressed</strong> (keyed by a
+hash of their bytes) so identical assets dedupe across runs – which is exactly
+what makes own-target diffing cheap. <code class="docutils literal notranslate"><span class="pre">dol</span></code> provides the filesystem-backed
+mappings; this module is a thin facade that adds the <code class="docutils literal notranslate"><span class="pre">ov</span></code> semantics (typed
+runs, artifact put/get, report + analysis storage) on top.</p>
+<p>Layout under <code class="docutils literal notranslate"><span class="pre">root</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">runs</span><span class="o">/&lt;</span><span class="n">run_id</span><span class="o">&gt;.</span><span class="n">json</span>          <span class="c1"># CaptureRun, JSON</span>
+<span class="n">artifacts</span><span class="o">/&lt;</span><span class="nb">hash</span><span class="o">&gt;.&lt;</span><span class="n">ext</span><span class="o">&gt;</span>      <span class="c1"># content-addressed bytes (shared across runs)</span>
+<span class="n">reports</span><span class="o">/&lt;</span><span class="n">run_id</span><span class="o">&gt;/&lt;</span><span class="n">name</span><span class="o">&gt;</span>     <span class="c1"># rendered Markdown</span>
+<span class="n">analyses</span><span class="o">/&lt;</span><span class="n">analysis_id</span><span class="o">&gt;.</span><span class="n">json</span> <span class="c1"># analysis JSON</span>
+</pre></div>
+</div>
+<p>The Mall exposes four <code class="docutils literal notranslate"><span class="pre">MutableMapping</span></code> attributes (<code class="docutils literal notranslate"><span class="pre">runs</span></code>, <code class="docutils literal notranslate"><span class="pre">artifacts</span></code>,
+<code class="docutils literal notranslate"><span class="pre">reports</span></code>, <code class="docutils literal notranslate"><span class="pre">analyses</span></code>) for callers who want raw access, plus convenience
+methods that speak the SSOT models.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.capture.stores.</span></span><span class="sig-name descname"><span class="pre">CaptureStore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore" title="Link to this definition"></a></dt>
+<dd><p>A store of stores for one or many capture runs (XDG-aligned root by default).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span> <span class="o">=</span> <span class="n">CaptureStore</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">art</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;&lt;html&gt;hi&lt;/html&gt;&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;dom&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span><span class="o">.</span><span class="n">artifact_bytes</span><span class="p">(</span><span class="n">art</span><span class="p">)</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;&lt;html&gt;hi&lt;/html&gt;&quot;</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaptureRun</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">CaptureRun</span><span class="p">(</span><span class="n">target_url</span><span class="o">=</span><span class="s2">&quot;http://x&quot;</span><span class="p">,</span> <span class="n">artifacts</span><span class="o">=</span><span class="p">[</span><span class="n">art</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span><span class="o">.</span><span class="n">save_run</span><span class="p">(</span><span class="n">run</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">store</span><span class="o">.</span><span class="n">load_run</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">)</span><span class="o">.</span><span class="n">target_url</span>
+<span class="go">&#39;http://x&#39;</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore.artifact_bytes">
+<span class="sig-name descname"><span class="pre">artifact_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">artifact_or_uri</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.Artifact" title="ov.base.Artifact"><span class="pre">Artifact</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore.artifact_bytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore.artifact_bytes" title="Link to this definition"></a></dt>
+<dd><p>Return the raw bytes for an <code class="xref py py-class docutils literal notranslate"><span class="pre">Artifact</span></code> (or a raw <code class="docutils literal notranslate"><span class="pre">uri</span></code> string).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore.load_analysis">
+<span class="sig-name descname"><span class="pre">load_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore.load_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore.load_analysis" title="Link to this definition"></a></dt>
+<dd><p>Load an analysis JSON blob by id.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore.load_run">
+<span class="sig-name descname"><span class="pre">load_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore.load_run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore.load_run" title="Link to this definition"></a></dt>
+<dd><p>Load a <code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureRun</span></code> by id (accepts bare id or <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;.json</span></code>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore.put_artifact">
+<span class="sig-name descname"><span class="pre">put_artifact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.Artifact" title="ov.base.Artifact"><span class="pre">Artifact</span></a></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore.put_artifact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore.put_artifact" title="Link to this definition"></a></dt>
+<dd><p>Store <code class="docutils literal notranslate"><span class="pre">data</span></code> content-addressed and return its <code class="xref py py-class docutils literal notranslate"><span class="pre">Artifact</span></code> record.</p>
+<p>Identical bytes produce the same <code class="docutils literal notranslate"><span class="pre">uri</span></code>, so re-storing is a no-op write
+and cross-run assets dedupe automatically.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore.report_names">
+<span class="sig-name descname"><span class="pre">report_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore.report_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore.report_names" title="Link to this definition"></a></dt>
+<dd><p>List report keys belonging to <code class="docutils literal notranslate"><span class="pre">run_id</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore.run_ids">
+<span class="sig-name descname"><span class="pre">run_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore.run_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore.run_ids" title="Link to this definition"></a></dt>
+<dd><p>List stored run ids (without the <code class="docutils literal notranslate"><span class="pre">.json</span></code> suffix).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore.save_analysis">
+<span class="sig-name descname"><span class="pre">save_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore.save_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore.save_analysis" title="Link to this definition"></a></dt>
+<dd><p>Persist an analysis JSON blob by id.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore.save_report">
+<span class="sig-name descname"><span class="pre">save_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markdown</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore.save_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore.save_report" title="Link to this definition"></a></dt>
+<dd><p>Store a rendered Markdown report; return its store key.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.stores.CaptureStore.save_run">
+<span class="sig-name descname"><span class="pre">save_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#CaptureStore.save_run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.CaptureStore.save_run" title="Link to this definition"></a></dt>
+<dd><p>Persist a <code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureRun</span></code> as JSON under its <code class="docutils literal notranslate"><span class="pre">run_id</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.capture.stores.resolve_store">
+<span class="sig-prename descclassname"><span class="pre">ov.capture.stores.</span></span><span class="sig-name descname"><span class="pre">resolve_store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ov.capture.stores.CaptureStore" title="ov.capture.stores.CaptureStore"><span class="pre">CaptureStore</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ov.capture.stores.CaptureStore" title="ov.capture.stores.CaptureStore"><span class="pre">CaptureStore</span></a></span></span><a class="reference internal" href="../../../_modules/ov/capture/stores.html#resolve_store"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.stores.resolve_store" title="Link to this definition"></a></dt>
+<dd><p>Coerce <code class="docutils literal notranslate"><span class="pre">store</span></code> (a CaptureStore, a path, or <code class="docutils literal notranslate"><span class="pre">None</span></code>) into a CaptureStore.</p>
+<p>The dependency-injection seam: callers pass whatever they have and get a
+usable store, defaulting to the XDG root.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="session.html" class="btn btn-neutral float-left" title="ov.capture.session" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../config.html" class="btn btn-neutral float-right" title="ov.config" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

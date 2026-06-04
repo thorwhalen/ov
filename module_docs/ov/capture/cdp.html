@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.capture.cdp &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.capture.probes" href="probes.html" />
+    <link rel="prev" title="ov.capture.browser" href="browser.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.capture.cdp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.capture.cdp.CdpSession"><code class="docutils literal notranslate"><span class="pre">CdpSession</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.cdp.CdpSession.capture_sse"><code class="docutils literal notranslate"><span class="pre">CdpSession.capture_sse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.cdp.CdpSession.enable_network"><code class="docutils literal notranslate"><span class="pre">CdpSession.enable_network()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.cdp.CdpSession.get_certificate"><code class="docutils literal notranslate"><span class="pre">CdpSession.get_certificate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.cdp.CdpSession.get_full_ax_tree"><code class="docutils literal notranslate"><span class="pre">CdpSession.get_full_ax_tree()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.cdp.CdpSession.get_performance_metrics"><code class="docutils literal notranslate"><span class="pre">CdpSession.get_performance_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.cdp.CdpSession.get_response_body"><code class="docutils literal notranslate"><span class="pre">CdpSession.get_response_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.cdp.CdpSession.on"><code class="docutils literal notranslate"><span class="pre">CdpSession.on()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.capture.cdp.CdpSession.send"><code class="docutils literal notranslate"><span class="pre">CdpSession.send()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.capture.cdp.flatten_ax_node"><code class="docutils literal notranslate"><span class="pre">flatten_ax_node()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.capture.cdp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/capture/cdp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.capture.cdp">
+<span id="ov-capture-cdp"></span><h1>ov.capture.cdp<a class="headerlink" href="#module-ov.capture.cdp" title="Link to this heading"></a></h1>
+<p>The CDP escape-hatch plugin (Chromium-only) – the ~20% Playwright can’t reach.</p>
+<p>Per D1, attach a CDP session to the same page and use it for: the full
+accessibility tree (<code class="docutils literal notranslate"><span class="pre">Accessibility.getFullAXTree</span></code>), Server-Sent-Event frames
+(<code class="docutils literal notranslate"><span class="pre">Network.eventSourceMessageReceived</span></code>, which <code class="docutils literal notranslate"><span class="pre">page.route</span></code> cannot reliably
+intercept), runtime counters (<code class="docutils literal notranslate"><span class="pre">Performance.getMetrics</span></code>), and the TLS
+certificate. <code class="docutils literal notranslate"><span class="pre">response.body()</span></code> eviction recovery via <code class="docutils literal notranslate"><span class="pre">Network.getResponseBody</span></code>
+is also exposed but not relied on by the default network probe.</p>
+<p>Critical gotcha encoded here: in an AX node, <code class="docutils literal notranslate"><span class="pre">role</span></code>/<code class="docutils literal notranslate"><span class="pre">name</span></code>/<code class="docutils literal notranslate"><span class="pre">value</span></code> are
+<code class="docutils literal notranslate"><span class="pre">AXValue</span></code> <em>objects</em>, so the accessible name lives at <code class="docutils literal notranslate"><span class="pre">node[&quot;name&quot;][&quot;value&quot;]</span></code>;
+and <code class="docutils literal notranslate"><span class="pre">getFullAXTree</span></code> does <strong>not</strong> cross-origin-recurse, so frames are handled
+one at a time. CDP is Chromium-only – an accepted constraint for the capture tail.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.capture.cdp.CdpSession">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.capture.cdp.</span></span><span class="sig-name descname"><span class="pre">CdpSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#CdpSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.CdpSession" title="Link to this definition"></a></dt>
+<dd><p>A thin, friendly wrapper over a Playwright <code class="docutils literal notranslate"><span class="pre">CDPSession</span></code> (Chromium).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.cdp.CdpSession.capture_sse">
+<span class="sig-name descname"><span class="pre">capture_sse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sink</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#CdpSession.capture_sse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.CdpSession.capture_sse" title="Link to this definition"></a></dt>
+<dd><p>Append every SSE frame to <code class="docutils literal notranslate"><span class="pre">sink</span></code> (<code class="docutils literal notranslate"><span class="pre">Network.eventSourceMessageReceived</span></code>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.cdp.CdpSession.enable_network">
+<span class="sig-name descname"><span class="pre">enable_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#CdpSession.enable_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.CdpSession.enable_network" title="Link to this definition"></a></dt>
+<dd><p>Enable the <code class="docutils literal notranslate"><span class="pre">Network</span></code> domain once (required for SSE + body recovery).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.cdp.CdpSession.get_certificate">
+<span class="sig-name descname"><span class="pre">get_certificate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#CdpSession.get_certificate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.CdpSession.get_certificate" title="Link to this definition"></a></dt>
+<dd><p>Return the TLS certificate info for <code class="docutils literal notranslate"><span class="pre">origin</span></code> (<code class="docutils literal notranslate"><span class="pre">Network.getCertificate</span></code>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.cdp.CdpSession.get_full_ax_tree">
+<span class="sig-name descname"><span class="pre">get_full_ax_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#CdpSession.get_full_ax_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.CdpSession.get_full_ax_tree" title="Link to this definition"></a></dt>
+<dd><p>Return the full AX tree as flattened nodes (recorded as evidence).</p>
+<p><code class="docutils literal notranslate"><span class="pre">getFullAXTree</span></code> does not recurse cross-origin frames; pass <code class="docutils literal notranslate"><span class="pre">frame_id</span></code>
+to fetch a specific frame’s tree.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.cdp.CdpSession.get_performance_metrics">
+<span class="sig-name descname"><span class="pre">get_performance_metrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#CdpSession.get_performance_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.CdpSession.get_performance_metrics" title="Link to this definition"></a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">Performance.getMetrics</span></code> as a <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">-&gt;</span> <span class="pre">value</span></code> mapping.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.cdp.CdpSession.get_response_body">
+<span class="sig-name descname"><span class="pre">get_response_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#CdpSession.get_response_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.CdpSession.get_response_body" title="Link to this definition"></a></dt>
+<dd><p>Recover a response body by CDP <code class="docutils literal notranslate"><span class="pre">requestId</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">(body,</span> <span class="pre">base64Encoded)</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.cdp.CdpSession.on">
+<span class="sig-name descname"><span class="pre">on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#CdpSession.on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.CdpSession.on" title="Link to this definition"></a></dt>
+<dd><p>Subscribe to a raw CDP event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.capture.cdp.CdpSession.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#CdpSession.send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.CdpSession.send" title="Link to this definition"></a></dt>
+<dd><p>Send a raw CDP command (the underlying escape hatch).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.capture.cdp.flatten_ax_node">
+<span class="sig-prename descclassname"><span class="pre">ov.capture.cdp.</span></span><span class="sig-name descname"><span class="pre">flatten_ax_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/capture/cdp.html#flatten_ax_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.capture.cdp.flatten_ax_node" title="Link to this definition"></a></dt>
+<dd><p>Flatten a raw CDP AX node into <code class="docutils literal notranslate"><span class="pre">{role,</span> <span class="pre">name,</span> <span class="pre">value,</span> <span class="pre">...}</span></code> plain values.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="browser.html" class="btn btn-neutral float-left" title="ov.capture.browser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="probes.html" class="btn btn-neutral float-right" title="ov.capture.probes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.operate &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ov.operate.act" href="operate/act.html" />
+    <link rel="prev" title="ov.config" href="config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">ov.config</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.operate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.act"><code class="docutils literal notranslate"><span class="pre">act()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.journal"><code class="docutils literal notranslate"><span class="pre">journal()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.make_step"><code class="docutils literal notranslate"><span class="pre">make_step()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.observe"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.perceive"><code class="docutils literal notranslate"><span class="pre">perceive()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.progress"><code class="docutils literal notranslate"><span class="pre">progress()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.operate</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/ov/operate.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.operate">
+<span id="ov-operate"></span><h1>ov.operate<a class="headerlink" href="#module-ov.operate" title="Link to this heading"></a></h1>
+<p>The operate layer – deterministic, LLM-free tool primitives (the “hands”).</p>
+<p>This is the package-owned <em>tool plane</em> from §2.3. It composes as
+<code class="docutils literal notranslate"><span class="pre">journal(progress(act(observe())))</span></code> and contains no model and no policy: it
+perceives affordances, executes actions, records the journey, and reports
+loop/no-progress <em>facts</em>. The decision of <em>what to do next</em> and <em>when to stop</em>
+belongs to the policy plane – the host (Claude Code) via the <code class="docutils literal notranslate"><span class="pre">ov-operate</span></code>
+skill, or, later, an in-package agent.</p>
+<p>Primitives (each is individually callable and testable):</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="operate/observe.html#ov.operate.observe.observe" title="ov.operate.observe.observe"><code class="xref py py-func docutils literal notranslate"><span class="pre">observe()</span></code></a> – <code class="docutils literal notranslate"><span class="pre">observe(page,</span> <span class="pre">strategy)</span> <span class="pre">-&gt;</span> <span class="pre">Observation</span></code></p></li>
+<li><p><a class="reference internal" href="operate/act.html#ov.operate.act.act" title="ov.operate.act.act"><code class="xref py py-func docutils literal notranslate"><span class="pre">act()</span></code></a> – <code class="docutils literal notranslate"><span class="pre">act(page,</span> <span class="pre">action)</span> <span class="pre">-&gt;</span> <span class="pre">ActionResult</span></code> (returns a fresh Observation)</p></li>
+<li><p><a class="reference internal" href="operate/journal.html#ov.operate.journal.journal" title="ov.operate.journal.journal"><code class="xref py py-func docutils literal notranslate"><span class="pre">journal()</span></code></a> – append a structured per-step record</p></li>
+<li><p><a class="reference internal" href="operate/progress.html#ov.operate.progress.progress" title="ov.operate.progress.progress"><code class="xref py py-func docutils literal notranslate"><span class="pre">progress()</span></code></a> – loop/no-progress facts (never decides to stop)</p></li>
+<li><p>perception strategies – <a class="reference internal" href="operate/perception.html#ov.operate.perception.PERCEPTION_REGISTRY" title="ov.operate.perception.PERCEPTION_REGISTRY"><code class="xref py py-data docutils literal notranslate"><span class="pre">PERCEPTION_REGISTRY</span></code></a></p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.act">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.</span></span><span class="sig-name descname"><span class="pre">act</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="base.html#ov.base.Action" title="ov.base.Action"><span class="pre">Action</span></a></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">perception</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ax_snapshot'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polite_rate_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="base.html#ov.base.ActionResult" title="ov.base.ActionResult"><span class="pre">ActionResult</span></a></span></span><a class="reference internal" href="../../_modules/ov/operate/act.html#act"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.act" title="Link to this definition"></a></dt>
+<dd><p>Execute <code class="docutils literal notranslate"><span class="pre">action</span></code> against <code class="docutils literal notranslate"><span class="pre">page</span></code> and return the result + a fresh Observation.</p>
+<p>On failure, <code class="docutils literal notranslate"><span class="pre">ok=False</span></code> and <code class="docutils literal notranslate"><span class="pre">error</span></code> carries the message; a fresh
+Observation is still attached so the host can recover (re-observe, scroll,
+disambiguate).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.journal">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.</span></span><span class="sig-name descname"><span class="pre">journal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="base.html#ov.base.JourneyStep" title="ov.base.JourneyStep"><span class="pre">JourneyStep</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="base.html#ov.base.JourneyStep" title="ov.base.JourneyStep"><span class="pre">JourneyStep</span></a></span></span><a class="reference internal" href="../../_modules/ov/operate/journal.html#journal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.journal" title="Link to this definition"></a></dt>
+<dd><p>Append <code class="docutils literal notranslate"><span class="pre">step</span></code> to <code class="docutils literal notranslate"><span class="pre">run.steps</span></code> and return it.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.make_step">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.</span></span><span class="sig-name descname"><span class="pre">make_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">intent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="base.html#ov.base.Action" title="ov.base.Action"><span class="pre">Action</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="base.html#ov.base.ActionResult" title="ov.base.ActionResult"><span class="pre">ActionResult</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artifact_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">network_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">console_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="base.html#ov.base.JourneyStep" title="ov.base.JourneyStep"><span class="pre">JourneyStep</span></a></span></span><a class="reference internal" href="../../_modules/ov/operate/journal.html#make_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.make_step" title="Link to this definition"></a></dt>
+<dd><p>Build a <code class="xref py py-class docutils literal notranslate"><span class="pre">JourneyStep</span></code> from an action’s before/after observations.</p>
+<p><code class="docutils literal notranslate"><span class="pre">outcome</span></code> is derived: <code class="docutils literal notranslate"><span class="pre">error</span></code> on a failed action, <code class="docutils literal notranslate"><span class="pre">noop</span></code> when the
+post-observation hash equals the pre-observation hash (nothing changed),
+else <code class="docutils literal notranslate"><span class="pre">ok</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.observe">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.</span></span><span class="sig-name descname"><span class="pre">observe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ax_snapshot'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a></span></span><a class="reference internal" href="../../_modules/ov/operate/observe.html#observe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.observe" title="Link to this definition"></a></dt>
+<dd><p>Perceive the current page state with <code class="docutils literal notranslate"><span class="pre">strategy</span></code> and return an Observation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.operate.perception</span><span class="w"> </span><span class="kn">import</span> <span class="n">PERCEPTION_REGISTRY</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;ax_snapshot&quot;</span> <span class="ow">in</span> <span class="n">PERCEPTION_REGISTRY</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.perceive">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.</span></span><span class="sig-name descname"><span class="pre">perceive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ax_snapshot'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a></span></span><a class="reference internal" href="../../_modules/ov/operate/perception.html#perceive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.perceive" title="Link to this definition"></a></dt>
+<dd><p>Dispatch to the named perception strategy (defaults to <code class="docutils literal notranslate"><span class="pre">ax_snapshot</span></code>).</p>
+<p>Raises <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> with the known strategies when <code class="docutils literal notranslate"><span class="pre">strategy</span></code> is unknown –
+an informative error per the project’s principles.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.progress">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.</span></span><span class="sig-name descname"><span class="pre">progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">history</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="base.html#ov.base.JourneyStep" title="ov.base.JourneyStep"><span class="pre">JourneyStep</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_progress_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="base.html#ov.base.ProgressSignal" title="ov.base.ProgressSignal"><span class="pre">ProgressSignal</span></a></span></span><a class="reference internal" href="../../_modules/ov/operate/progress.html#progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.progress" title="Link to this definition"></a></dt>
+<dd><p>Compute loop/no-progress facts from the journey <code class="docutils literal notranslate"><span class="pre">history</span></code> so far.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">JourneyStep</span><span class="p">,</span> <span class="n">Action</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">JourneyStep</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">Action</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="s1">&#39;e1&#39;</span><span class="p">),</span> <span class="n">post_obs_hash</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sig</span> <span class="o">=</span> <span class="n">progress</span><span class="p">([</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(),</span> <span class="n">s</span><span class="o">.</span><span class="n">model_copy</span><span class="p">()],</span> <span class="n">no_progress_steps</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sig</span><span class="o">.</span><span class="n">no_new_signal_steps</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">sig</span><span class="o">.</span><span class="n">loop_suspected</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="config.html" class="btn btn-neutral float-left" title="ov.config" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="operate/act.html" class="btn btn-neutral float-right" title="ov.operate.act" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.operate.perception &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.operate.progress" href="progress.html" />
+    <link rel="prev" title="ov.operate.observe" href="observe.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.operate.perception</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.perception.PERCEPTION_REGISTRY"><code class="docutils literal notranslate"><span class="pre">PERCEPTION_REGISTRY</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.perception.REF_ATTR"><code class="docutils literal notranslate"><span class="pre">REF_ATTR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.perception.perceive"><code class="docutils literal notranslate"><span class="pre">perceive()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.perception.perceive_ax_snapshot"><code class="docutils literal notranslate"><span class="pre">perceive_ax_snapshot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.perception.perceive_hybrid"><code class="docutils literal notranslate"><span class="pre">perceive_hybrid()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.perception.perceive_screenshot"><code class="docutils literal notranslate"><span class="pre">perceive_screenshot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.operate.perception.register_perception"><code class="docutils literal notranslate"><span class="pre">register_perception()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.operate.perception</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/operate/perception.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.operate.perception">
+<span id="ov-operate-perception"></span><h1>ov.operate.perception<a class="headerlink" href="#module-ov.operate.perception" title="Link to this heading"></a></h1>
+<p>Perception strategies – pluggable ways to turn a page into an <code class="docutils literal notranslate"><span class="pre">Observation</span></code>.</p>
+<p>A perception strategy returns a uniform <a class="reference internal" href="../base.html#ov.base.Observation" title="ov.base.Observation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Observation</span></code></a> so the rest
+of the operate layer (and the host’s policy) stays declarative about <em>what</em> an
+observation is, not <em>how</em> it was grounded. Three strategies ship:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ax_snapshot</span></code> – affordances from an accessibility-relevant DOM walk plus the
+concise ARIA snapshot text (cheap, deterministic, the default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">screenshot</span></code> – the same affordances with bounding boxes, intended to pair
+with a screenshot artifact (for canvas/exotic renderers).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hybrid</span></code> – AX-grounded affordances, robust when the AX layer is thin.</p></li>
+</ul>
+<p>Affordances are extracted by stamping a stable <code class="docutils literal notranslate"><span class="pre">data-ov-ref</span></code> attribute on each
+interactive element, so <a class="reference internal" href="act.html#ov.operate.act.act" title="ov.operate.act.act"><code class="xref py py-func docutils literal notranslate"><span class="pre">act()</span></code></a> can target it deterministically
+(<code class="docutils literal notranslate"><span class="pre">getByRole</span></code>-stable, survives CSS churn) – the require-description-and-ref
+safety pattern from Playwright-MCP.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="ov.operate.perception.PERCEPTION_REGISTRY">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.perception.</span></span><span class="sig-name descname"><span class="pre">PERCEPTION_REGISTRY</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ax_snapshot':</span> <span class="pre">&lt;function</span> <span class="pre">perceive_ax_snapshot&gt;,</span> <span class="pre">'hybrid':</span> <span class="pre">&lt;function</span> <span class="pre">perceive_hybrid&gt;,</span> <span class="pre">'screenshot':</span> <span class="pre">&lt;function</span> <span class="pre">perceive_screenshot&gt;}</span></span><a class="headerlink" href="#ov.operate.perception.PERCEPTION_REGISTRY" title="Link to this definition"></a></dt>
+<dd><p>name -&gt; <code class="docutils literal notranslate"><span class="pre">perceiver(page)</span> <span class="pre">-&gt;</span> <span class="pre">Observation</span></code></p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ov.operate.perception.REF_ATTR">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.perception.</span></span><span class="sig-name descname"><span class="pre">REF_ATTR</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'data-ov-ref'</span></span><a class="headerlink" href="#ov.operate.perception.REF_ATTR" title="Link to this definition"></a></dt>
+<dd><p>The attribute stamped on interactive elements to create stable refs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.perception.perceive">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.perception.</span></span><span class="sig-name descname"><span class="pre">perceive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ax_snapshot'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a></span></span><a class="reference internal" href="../../../_modules/ov/operate/perception.html#perceive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.perception.perceive" title="Link to this definition"></a></dt>
+<dd><p>Dispatch to the named perception strategy (defaults to <code class="docutils literal notranslate"><span class="pre">ax_snapshot</span></code>).</p>
+<p>Raises <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> with the known strategies when <code class="docutils literal notranslate"><span class="pre">strategy</span></code> is unknown –
+an informative error per the project’s principles.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.perception.perceive_ax_snapshot">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.perception.</span></span><span class="sig-name descname"><span class="pre">perceive_ax_snapshot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a></span></span><a class="reference internal" href="../../../_modules/ov/operate/perception.html#perceive_ax_snapshot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.perception.perceive_ax_snapshot" title="Link to this definition"></a></dt>
+<dd><p>Affordances + concise ARIA snapshot text (the cheap, deterministic default).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.perception.perceive_hybrid">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.perception.</span></span><span class="sig-name descname"><span class="pre">perceive_hybrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a></span></span><a class="reference internal" href="../../../_modules/ov/operate/perception.html#perceive_hybrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.perception.perceive_hybrid" title="Link to this definition"></a></dt>
+<dd><p>AX-grounded affordances + ARIA snapshot; the robust default when AX is thin.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.perception.perceive_screenshot">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.perception.</span></span><span class="sig-name descname"><span class="pre">perceive_screenshot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a></span></span><a class="reference internal" href="../../../_modules/ov/operate/perception.html#perceive_screenshot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.perception.perceive_screenshot" title="Link to this definition"></a></dt>
+<dd><p>Affordances with bounding boxes (pairs with a screenshot artifact).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.operate.perception.register_perception">
+<span class="sig-prename descclassname"><span class="pre">ov.operate.perception.</span></span><span class="sig-name descname"><span class="pre">register_perception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ov/operate/perception.html#register_perception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.operate.perception.register_perception" title="Link to this definition"></a></dt>
+<dd><p>Decorator registering a perceiver under <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="observe.html" class="btn btn-neutral float-left" title="ov.operate.observe" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="progress.html" class="btn btn-neutral float-right" title="ov.operate.progress" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

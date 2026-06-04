@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.util &mdash; ov 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="ov.reporting" href="reporting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">ov.reporting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.util</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.util.Requirement"><code class="docutils literal notranslate"><span class="pre">Requirement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.util.RequirementReport"><code class="docutils literal notranslate"><span class="pre">RequirementReport</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.util.RequirementReport.missing"><code class="docutils literal notranslate"><span class="pre">RequirementReport.missing</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.util.RequirementReport.ok"><code class="docutils literal notranslate"><span class="pre">RequirementReport.ok</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ov.util.RequirementReport.render"><code class="docutils literal notranslate"><span class="pre">RequirementReport.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.util.check_requirements"><code class="docutils literal notranslate"><span class="pre">check_requirements()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.util.content_hash"><code class="docutils literal notranslate"><span class="pre">content_hash()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.util.redact_mapping"><code class="docutils literal notranslate"><span class="pre">redact_mapping()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.util.redact_value"><code class="docutils literal notranslate"><span class="pre">redact_value()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.util.sidecar_dir"><code class="docutils literal notranslate"><span class="pre">sidecar_dir()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.util.stable_hash"><code class="docutils literal notranslate"><span class="pre">stable_hash()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.util</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/ov/util.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.util">
+<span id="ov-util"></span><h1>ov.util<a class="headerlink" href="#module-ov.util" title="Link to this heading"></a></h1>
+<p>Internal helpers: content-addressing, hashing, redaction, and requirements.</p>
+<p>Nothing here knows about Playwright or analysis specifics – these are the
+small, reusable primitives the rest of the package leans on. The most
+user-facing item is <a class="reference internal" href="#ov.util.check_requirements" title="ov.util.check_requirements"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_requirements()</span></code></a>, which detects missing system
+dependencies (Playwright browsers, Node, the sidecar, optional CLIs) and prints
+the exact commands to install them, per the spec’s <code class="docutils literal notranslate"><span class="pre">check_requirements</span></code>
+mandate (§9).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.util.Requirement">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">Requirement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">present</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">install_hint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/util.html#Requirement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.Requirement" title="Link to this definition"></a></dt>
+<dd><p>One checked system dependency.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.util.RequirementReport">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">RequirementReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">requirements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ov.util.Requirement" title="ov.util.Requirement"><span class="pre">Requirement</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/util.html#RequirementReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.RequirementReport" title="Link to this definition"></a></dt>
+<dd><p>The result of <a class="reference internal" href="#ov.util.check_requirements" title="ov.util.check_requirements"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_requirements()</span></code></a> – iterable, with a tidy summary.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ov.util.RequirementReport.missing">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">missing</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ov.util.Requirement" title="ov.util.Requirement"><span class="pre">Requirement</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#ov.util.RequirementReport.missing" title="Link to this definition"></a></dt>
+<dd><p>Requirements that are absent (optional or not).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ov.util.RequirementReport.ok">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ok</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#ov.util.RequirementReport.ok" title="Link to this definition"></a></dt>
+<dd><p>True when every <em>non-optional</em> requirement is present.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.util.RequirementReport.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ov/util.html#RequirementReport.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.RequirementReport.render" title="Link to this definition"></a></dt>
+<dd><p>Human-readable multi-line summary with install hints for what’s missing.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.util.check_requirements">
+<span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">check_requirements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ov.util.RequirementReport" title="ov.util.RequirementReport"><span class="pre">RequirementReport</span></a></span></span><a class="reference internal" href="../../_modules/ov/util.html#check_requirements"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.check_requirements" title="Link to this definition"></a></dt>
+<dd><p>Detect missing system dependencies and print exact install commands.</p>
+<p><code class="docutils literal notranslate"><span class="pre">components</span></code> filters which groups to check (<code class="docutils literal notranslate"><span class="pre">&quot;browser&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;node&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;sidecar&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;clis&quot;</span></code>); <code class="docutils literal notranslate"><span class="pre">None</span></code> checks all. The deterministic analysis
+core needs none of these – they gate <em>capture</em> and the <em>arch sidecar</em>, so
+every requirement here is reported as optional unless capture is requested.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rep</span> <span class="o">=</span> <span class="n">check_requirements</span><span class="p">(</span><span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;clis&quot;</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">RequirementReport</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.util.content_hash">
+<span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">content_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ov/util.html#content_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.content_hash" title="Link to this definition"></a></dt>
+<dd><p>Return a short, stable SHA-256 hex digest for content-addressing.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">content_hash</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="go">&#39;2cf24dba5fb0a30e&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">content_hash</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">content_hash</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.util.redact_mapping">
+<span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">redact_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">redact</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ov/util.html#redact_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.redact_mapping" title="Link to this definition"></a></dt>
+<dd><p>Return a copy of <code class="docutils literal notranslate"><span class="pre">mapping</span></code> with values redacted when <code class="docutils literal notranslate"><span class="pre">redact</span></code> is true.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.util.redact_value">
+<span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">redact_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ov/util.html#redact_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.redact_value" title="Link to this definition"></a></dt>
+<dd><p>Replace a value with a length-tagged placeholder (keeps shape, drops content).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">redact_value</span><span class="p">(</span><span class="s2">&quot;super-secret-token&quot;</span><span class="p">)</span>
+<span class="go">&#39;&lt;redacted:18&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">redact_value</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">&#39;&lt;redacted&gt;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.util.sidecar_dir">
+<span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">sidecar_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="../../_modules/ov/util.html#sidecar_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.sidecar_dir" title="Link to this definition"></a></dt>
+<dd><p>Return the path to the Node sidecar directory (<code class="docutils literal notranslate"><span class="pre">OV_SIDECAR_DIR</span></code> override).</p>
+<p>Defaults to <code class="docutils literal notranslate"><span class="pre">&lt;repo_root&gt;/sidecar</span></code> (sibling of the <code class="docutils literal notranslate"><span class="pre">ov</span></code> package). Packaging
+the sidecar for installed use is a later concern; for now it lives in the
+source tree.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.util.stable_hash">
+<span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">stable_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ov/util.html#stable_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.stable_hash" title="Link to this definition"></a></dt>
+<dd><p>Hash an arbitrary JSON-able object deterministically (sorted keys).</p>
+<p>Used for <code class="docutils literal notranslate"><span class="pre">obs_hash</span></code> and <code class="docutils literal notranslate"><span class="pre">args_hash</span></code> so progress detection is reproducible.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stable_hash</span><span class="p">({</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span> <span class="o">==</span> <span class="n">stable_hash</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="reporting.html" class="btn btn-neutral float-left" title="ov.reporting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
