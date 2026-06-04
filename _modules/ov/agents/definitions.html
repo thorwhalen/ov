@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.agents.definitions &mdash; ov 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../ov.html">ov</a></li>
+      <li class="breadcrumb-item active">ov.agents.definitions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ov.agents.definitions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;SSOT: which ``ov`` skills become which agents (role, lens, model routing).</span>
+
+<span class="sd">The *extras* a skill needs to become an agent — model, tool allowlist, return</span>
+<span class="sd">contract, MCP exposure — live in each skill&#39;s additive ``coact:`` frontmatter block</span>
+<span class="sd">(coact reads them during ``COMPLETE``). This module records only the ov-side mapping</span>
+<span class="sd">coact cannot infer: which skill plays which **role** in the study pipeline and, for</span>
+<span class="sd">analysts, which analysis **lens** it carries.</span>
+
+<span class="sd">Everything here is *data*. Add an agent by adding a row — no dispatcher to edit</span>
+<span class="sd">(open-closed). This mirrors ``ov``&#39;s other registries (probes / analyzers / report</span>
+<span class="sd">sections): a capability is a registered piece of data, never a branch in a switch.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+
+<div class="viewcode-block" id="AgentSpec">
+<a class="viewcode-back" href="../../../module_docs/ov/agents/definitions.html#ov.agents.AgentSpec">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AgentSpec</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;One ``ov`` agent: its name, role, source skill, optional lens, default model.</span>
+
+<span class="sd">    &gt;&gt;&gt; AgentSpec(&quot;ov-analyze-ux&quot;, &quot;analyst&quot;, &quot;ov-analyze-ux&quot;, &quot;ux&quot;).lens</span>
+<span class="sd">    &#39;ux&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">role</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># &quot;operator&quot; | &quot;analyst&quot; | &quot;orchestrator&quot;</span>
+    <span class="n">skill</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">lens</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># analysts only: &quot;ux&quot; | &quot;arch&quot;</span>
+    <span class="n">default_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sonnet&quot;</span>  <span class="c1"># fallback when the skill carries no coact: model</span></div>
+
+
+
+<span class="c1">#: The ``ov`` agent registry (role key -&gt; spec) — the headline of Phase 4.</span>
+<span class="c1">#: Model defaults follow the spec&#39;s §10 cost gate (Opus for design/planning</span>
+<span class="c1">#: judgment, Sonnet for grounded UX narrative, Haiku for the throughput-bound driver).</span>
+<span class="n">OV_AGENTS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AgentSpec</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;operator&quot;</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span><span class="s2">&quot;ov-operate&quot;</span><span class="p">,</span> <span class="s2">&quot;operator&quot;</span><span class="p">,</span> <span class="s2">&quot;ov-operate&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;haiku&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;ux-analyst&quot;</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span><span class="s2">&quot;ov-analyze-ux&quot;</span><span class="p">,</span> <span class="s2">&quot;analyst&quot;</span><span class="p">,</span> <span class="s2">&quot;ov-analyze-ux&quot;</span><span class="p">,</span> <span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="s2">&quot;sonnet&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;arch-analyst&quot;</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span>
+        <span class="s2">&quot;ov-analyze-arch&quot;</span><span class="p">,</span> <span class="s2">&quot;analyst&quot;</span><span class="p">,</span> <span class="s2">&quot;ov-analyze-arch&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;opus&quot;</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;orchestrator&quot;</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span><span class="s2">&quot;study-web-app&quot;</span><span class="p">,</span> <span class="s2">&quot;orchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;study-web-app&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;opus&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="agents_for_role">
+<a class="viewcode-back" href="../../../module_docs/ov/agents/definitions.html#ov.agents.agents_for_role">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">agents_for_role</span><span class="p">(</span><span class="n">role</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">AgentSpec</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;All specs with ``role`` (e.g. both analysts).</span>
+
+<span class="sd">    &gt;&gt;&gt; [s.lens for s in agents_for_role(&quot;analyst&quot;)]</span>
+<span class="sd">    [&#39;ux&#39;, &#39;arch&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">spec</span> <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">OV_AGENTS</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">role</span> <span class="o">==</span> <span class="n">role</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="analyst_specs">
+<a class="viewcode-back" href="../../../module_docs/ov/agents/definitions.html#ov.agents.analyst_specs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">analyst_specs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">AgentSpec</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The UX + Arch analyst specs, in pipeline order (UX then Arch).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">agents_for_role</span><span class="p">(</span><span class="s2">&quot;analyst&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

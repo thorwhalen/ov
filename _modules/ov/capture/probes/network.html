@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.capture.probes.network &mdash; ov 0.1.0 documentation</title>
+  <title>ov.capture.probes.network &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -245,8 +255,12 @@
                 <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">req</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
                 <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">,</span>
                 <span class="s2">&quot;resource_type&quot;</span><span class="p">:</span> <span class="n">req</span><span class="o">.</span><span class="n">resource_type</span><span class="p">,</span>
-                <span class="s2">&quot;request_headers&quot;</span><span class="p">:</span> <span class="n">_scrub_headers</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">redact</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">redact_values</span><span class="p">),</span>
-                <span class="s2">&quot;response_headers&quot;</span><span class="p">:</span> <span class="n">_scrub_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">redact</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">redact_values</span><span class="p">),</span>
+                <span class="s2">&quot;request_headers&quot;</span><span class="p">:</span> <span class="n">_scrub_headers</span><span class="p">(</span>
+                    <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">redact</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">redact_values</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;response_headers&quot;</span><span class="p">:</span> <span class="n">_scrub_headers</span><span class="p">(</span>
+                    <span class="n">headers</span><span class="p">,</span> <span class="n">redact</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">redact_values</span>
+                <span class="p">),</span>
                 <span class="s2">&quot;step_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_id</span><span class="p">(),</span>
                 <span class="s2">&quot;body_artifact_id&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="s2">&quot;body_evicted&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
@@ -273,7 +287,9 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001 - never let a probe crash the run</span>
             <span class="k">pass</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_capture_request_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">rec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_capture_request_body</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">rec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Record the request body&#39;s *shape* (JSON only) for API schema synthesis.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">post</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">post_data</span>
@@ -285,7 +301,9 @@
             <span class="n">parsed</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
             <span class="k">return</span>  <span class="c1"># form-encoded / multipart / non-JSON: no shape to record</span>
-        <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;request_body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_shape_only</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span> <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">redact_values</span> <span class="k">else</span> <span class="n">parsed</span>
+        <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;request_body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_shape_only</span><span class="p">(</span><span class="n">parsed</span><span class="p">)</span> <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">redact_values</span> <span class="k">else</span> <span class="n">parsed</span>
+        <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_on_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>

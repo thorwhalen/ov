@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.operate.driver &mdash; ov 0.1.0 documentation</title>
+  <title>ov.operate.driver &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -186,7 +196,9 @@
             <span class="n">action</span><span class="p">,</span>
             <span class="n">polite_rate_s</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">polite_rate_s</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">step</span> <span class="o">=</span> <span class="n">make_step</span><span class="p">(</span><span class="n">intent</span><span class="o">=</span><span class="n">INTENT_REPLAY</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span> <span class="n">pre_observation</span><span class="o">=</span><span class="n">pre</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="n">make_step</span><span class="p">(</span>
+            <span class="n">intent</span><span class="o">=</span><span class="n">INTENT_REPLAY</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span> <span class="n">pre_observation</span><span class="o">=</span><span class="n">pre</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span>
+        <span class="p">)</span>
         <span class="n">session</span><span class="o">.</span><span class="n">capture_step</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
@@ -224,12 +236,16 @@
         <span class="n">action</span> <span class="o">=</span> <span class="n">Action</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;navigate&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;crawl to </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">pre</span> <span class="o">=</span> <span class="n">observe</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">page</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">act</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">page</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">polite_rate_s</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">polite_rate_s</span><span class="p">)</span>
-        <span class="n">step</span> <span class="o">=</span> <span class="n">make_step</span><span class="p">(</span><span class="n">intent</span><span class="o">=</span><span class="n">INTENT_ENUMERATE</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span> <span class="n">pre_observation</span><span class="o">=</span><span class="n">pre</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="n">make_step</span><span class="p">(</span>
+            <span class="n">intent</span><span class="o">=</span><span class="n">INTENT_ENUMERATE</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span> <span class="n">pre_observation</span><span class="o">=</span><span class="n">pre</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span>
+        <span class="p">)</span>
         <span class="n">session</span><span class="o">.</span><span class="n">capture_step</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
 
-        <span class="n">sig</span> <span class="o">=</span> <span class="n">progress</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">,</span> <span class="n">no_progress_steps</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_progress_steps</span><span class="p">)</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">progress</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">,</span> <span class="n">no_progress_steps</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">no_progress_steps</span>
+        <span class="p">)</span>
         <span class="k">if</span> <span class="n">sig</span><span class="o">.</span><span class="n">loop_suspected</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">max_steps</span><span class="p">:</span>
             <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;crawl stopped: </span><span class="si">{</span><span class="s1">&#39;loop_suspected&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">sig</span><span class="o">.</span><span class="n">loop_suspected</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;max_steps&#39;</span><span class="si">}</span><span class="s2">&quot;</span>

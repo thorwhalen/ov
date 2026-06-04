@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.arch.api &mdash; ov 0.1.0 documentation</title>
+  <title>ov.analysis.arch.api &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -153,9 +163,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..context</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnalysisContext</span><span class="p">,</span> <span class="n">AnalyzerOutput</span>
 
 <span class="n">_API_RESOURCE_TYPES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;xhr&quot;</span><span class="p">,</span> <span class="s2">&quot;fetch&quot;</span><span class="p">}</span>
-<span class="n">_UUID_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[0-9a-fA-F]</span><span class="si">{8}</span><span class="s2">-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s2">-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s2">-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s2">-[0-9a-fA-F]</span><span class="si">{12}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">_UUID_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;^[0-9a-fA-F]</span><span class="si">{8}</span><span class="s2">-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s2">-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s2">-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s2">-[0-9a-fA-F]</span><span class="si">{12}</span><span class="s2">$&quot;</span>
+<span class="p">)</span>
 <span class="n">_HEX_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[0-9a-fA-F]{12,}$&quot;</span><span class="p">)</span>
-<span class="n">_VERB_SEGMENT_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(get|set|create|update|delete|fetch|list|add|remove)[A-Z]&quot;</span><span class="p">)</span>
+<span class="n">_VERB_SEGMENT_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;^(get|set|create|update|delete|fetch|list|add|remove)[A-Z]&quot;</span>
+<span class="p">)</span>
 
 
 <div class="viewcode-block" id="normalize_path">
@@ -193,12 +207,19 @@
 <span class="sd">    &#39;rest&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;/graphql&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
-        <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_body</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;query&quot;</span> <span class="ow">in</span> <span class="n">request_body</span> <span class="ow">or</span> <span class="s2">&quot;mutation&quot;</span> <span class="ow">in</span> <span class="n">request_body</span><span class="p">)</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_body</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;query&quot;</span> <span class="ow">in</span> <span class="n">request_body</span> <span class="ow">or</span> <span class="s2">&quot;mutation&quot;</span> <span class="ow">in</span> <span class="n">request_body</span><span class="p">)</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;graphql&quot;</span>
     <span class="n">last</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">is_jsonrpc</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_body</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;jsonrpc&quot;</span> <span class="ow">in</span> <span class="n">request_body</span> <span class="ow">and</span> <span class="s2">&quot;method&quot;</span> <span class="ow">in</span> <span class="n">request_body</span>
-    <span class="k">if</span> <span class="n">is_jsonrpc</span> <span class="ow">or</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">_VERB_SEGMENT_RE</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">last</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">last</span><span class="p">)):</span>
+    <span class="n">is_jsonrpc</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_body</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="s2">&quot;jsonrpc&quot;</span> <span class="ow">in</span> <span class="n">request_body</span>
+        <span class="ow">and</span> <span class="s2">&quot;method&quot;</span> <span class="ow">in</span> <span class="n">request_body</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">is_jsonrpc</span> <span class="ow">or</span> <span class="p">(</span>
+        <span class="n">method</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">_VERB_SEGMENT_RE</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">last</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">last</span><span class="p">)</span>
+    <span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;rpc&quot;</span>
     <span class="k">return</span> <span class="s2">&quot;rest&quot;</span></div>
 
@@ -230,7 +251,9 @@
 
 <div class="viewcode-block" id="analyze_api">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.analyze_api">[docs]</a>
-<span class="nd">@register_analyzer</span><span class="p">(</span><span class="s2">&quot;api_surface&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;endpoints&quot;</span><span class="p">,))</span>
+<span class="nd">@register_analyzer</span><span class="p">(</span>
+    <span class="s2">&quot;api_surface&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;endpoints&quot;</span><span class="p">,)</span>
+<span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_api</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Synthesize the API surface from captured XHR/fetch traffic.&quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
@@ -247,9 +270,17 @@
             <span class="n">template</span> <span class="o">=</span> <span class="n">normalize_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">groups</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span>
                 <span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">template</span><span class="p">),</span>
-                <span class="p">{</span><span class="s2">&quot;req_builder&quot;</span><span class="p">:</span> <span class="n">SchemaBuilder</span><span class="p">(),</span> <span class="s2">&quot;resp_builder&quot;</span><span class="p">:</span> <span class="n">SchemaBuilder</span><span class="p">(),</span>
-                 <span class="s2">&quot;samples&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;statuses&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(),</span> <span class="s2">&quot;auth&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;rest&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;has_req&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;has_resp&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;artifact&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;req_builder&quot;</span><span class="p">:</span> <span class="n">SchemaBuilder</span><span class="p">(),</span>
+                    <span class="s2">&quot;resp_builder&quot;</span><span class="p">:</span> <span class="n">SchemaBuilder</span><span class="p">(),</span>
+                    <span class="s2">&quot;samples&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="s2">&quot;statuses&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(),</span>
+                    <span class="s2">&quot;auth&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;rest&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;has_req&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="s2">&quot;has_resp&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="s2">&quot;artifact&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="p">},</span>
             <span class="p">)</span>
             <span class="n">g</span><span class="p">[</span><span class="s2">&quot;samples&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">g</span><span class="p">[</span><span class="s2">&quot;statuses&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">))</span>
@@ -277,16 +308,23 @@
                 <span class="n">path_template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span>
                 <span class="n">kind</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;kind&quot;</span><span class="p">],</span>
                 <span class="n">request_schema</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;req_builder&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_schema</span><span class="p">()</span> <span class="k">if</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;has_req&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">response_schema</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;resp_builder&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_schema</span><span class="p">()</span> <span class="k">if</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;has_resp&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">response_schema</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;resp_builder&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_schema</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;has_resp&quot;</span><span class="p">]</span>
+                <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">auth</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;auth&quot;</span><span class="p">],</span>
-                <span class="n">coverage</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;samples&quot;</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;samples&quot;</span><span class="p">],</span> <span class="s2">&quot;statuses&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;statuses&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">s</span><span class="p">)},</span>
+                <span class="n">coverage</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;samples&quot;</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;samples&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;statuses&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;statuses&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">s</span><span class="p">),</span>
+                <span class="p">},</span>
                 <span class="n">confidence</span><span class="o">=</span><span class="n">coverage</span><span class="p">,</span>
                 <span class="n">provenance</span><span class="o">=</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;artifact&quot;</span><span class="p">]]</span> <span class="k">if</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;artifact&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="p">[],</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;endpoints&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">endpoints</span><span class="p">),</span>
-                   <span class="s2">&quot;kinds&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">e</span><span class="o">.</span><span class="n">kind</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">endpoints</span><span class="p">})}</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;endpoints&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">endpoints</span><span class="p">),</span>
+        <span class="s2">&quot;kinds&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">e</span><span class="o">.</span><span class="n">kind</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">endpoints</span><span class="p">}),</span>
+    <span class="p">}</span>
     <span class="k">return</span> <span class="n">out</span></div>
 
 
@@ -300,7 +338,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_json_body</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">,</span> <span class="n">artifact</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">artifact</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="n">ct</span> <span class="o">=</span> <span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">content_type</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">content_type</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
     <span class="k">if</span> <span class="s2">&quot;json&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ct</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span>

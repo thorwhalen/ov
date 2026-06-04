@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; ov 0.1.0 documentation</title>
+  <title>&lt;no title&gt; &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/documentation_options.js?v=a58bc63e"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -49,6 +49,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -149,11 +159,95 @@
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.check"><code class="docutils literal notranslate"><span class="pre">check()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.evidence"><code class="docutils literal notranslate"><span class="pre">evidence()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.mcp"><code class="docutils literal notranslate"><span class="pre">mcp()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.observe"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.overview"><code class="docutils literal notranslate"><span class="pre">overview()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.report"><code class="docutils literal notranslate"><span class="pre">report()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.runs"><code class="docutils literal notranslate"><span class="pre">runs()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.synopsis"><code class="docutils literal notranslate"><span class="pre">synopsis()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents.html">ov.agents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.AgentSpec"><code class="docutils literal notranslate"><span class="pre">AgentSpec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.AnalystAgent"><code class="docutils literal notranslate"><span class="pre">AnalystAgent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.OperatorAgent"><code class="docutils literal notranslate"><span class="pre">OperatorAgent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.Orchestrator"><code class="docutils literal notranslate"><span class="pre">Orchestrator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.agents_for_role"><code class="docutils literal notranslate"><span class="pre">agents_for_role()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.analyst_specs"><code class="docutils literal notranslate"><span class="pre">analyst_specs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.arch_analyst"><code class="docutils literal notranslate"><span class="pre">arch_analyst()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.complete_agent"><code class="docutils literal notranslate"><span class="pre">complete_agent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.complete_all"><code class="docutils literal notranslate"><span class="pre">complete_all()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.default_model"><code class="docutils literal notranslate"><span class="pre">default_model()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.default_skills_dir"><code class="docutils literal notranslate"><span class="pre">default_skills_dir()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.materialize"><code class="docutils literal notranslate"><span class="pre">materialize()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.mcp_server"><code class="docutils literal notranslate"><span class="pre">mcp_server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.ov_tools"><code class="docutils literal notranslate"><span class="pre">ov_tools()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.realize_agent"><code class="docutils literal notranslate"><span class="pre">realize_agent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.resolve_llm"><code class="docutils literal notranslate"><span class="pre">resolve_llm()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.skill_path"><code class="docutils literal notranslate"><span class="pre">skill_path()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.structured"><code class="docutils literal notranslate"><span class="pre">structured()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.study"><code class="docutils literal notranslate"><span class="pre">study()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.ux_analyst"><code class="docutils literal notranslate"><span class="pre">ux_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_skills.html">ov.agents._skills</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/_skills.html#ov.agents._skills.AGENT_SKILLS"><code class="docutils literal notranslate"><span class="pre">AGENT_SKILLS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/_skills.html#ov.agents._skills.default_skills_dir"><code class="docutils literal notranslate"><span class="pre">default_skills_dir()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/_skills.html#ov.agents._skills.skill_path"><code class="docutils literal notranslate"><span class="pre">skill_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_util.html">ov.agents._util</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/_util.html#ov.agents._util.require"><code class="docutils literal notranslate"><span class="pre">require()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/analyst.html">ov.agents.analyst</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/analyst.html#ov.agents.analyst.AnalystAgent"><code class="docutils literal notranslate"><span class="pre">AnalystAgent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/analyst.html#ov.agents.analyst.Judge"><code class="docutils literal notranslate"><span class="pre">Judge</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/analyst.html#ov.agents.analyst.arch_analyst"><code class="docutils literal notranslate"><span class="pre">arch_analyst()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/analyst.html#ov.agents.analyst.ux_analyst"><code class="docutils literal notranslate"><span class="pre">ux_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/definitions.html">ov.agents.definitions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/definitions.html#ov.agents.definitions.AgentSpec"><code class="docutils literal notranslate"><span class="pre">AgentSpec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/definitions.html#ov.agents.definitions.OV_AGENTS"><code class="docutils literal notranslate"><span class="pre">OV_AGENTS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/definitions.html#ov.agents.definitions.agents_for_role"><code class="docutils literal notranslate"><span class="pre">agents_for_role()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/definitions.html#ov.agents.definitions.analyst_specs"><code class="docutils literal notranslate"><span class="pre">analyst_specs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/llm.html">ov.agents.llm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/llm.html#ov.agents.llm.DEFAULT_MODELS"><code class="docutils literal notranslate"><span class="pre">DEFAULT_MODELS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/llm.html#ov.agents.llm.default_model"><code class="docutils literal notranslate"><span class="pre">default_model()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/llm.html#ov.agents.llm.resolve_llm"><code class="docutils literal notranslate"><span class="pre">resolve_llm()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/llm.html#ov.agents.llm.structured"><code class="docutils literal notranslate"><span class="pre">structured()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/mcp.html">ov.agents.mcp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.capture_url"><code class="docutils literal notranslate"><span class="pre">capture_url()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.mcp_server"><code class="docutils literal notranslate"><span class="pre">mcp_server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.ov_tools"><code class="docutils literal notranslate"><span class="pre">ov_tools()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.study_url"><code class="docutils literal notranslate"><span class="pre">study_url()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/operator.html">ov.agents.operator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/operator.html#ov.agents.operator.Decider"><code class="docutils literal notranslate"><span class="pre">Decider</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/operator.html#ov.agents.operator.OperatorAgent"><code class="docutils literal notranslate"><span class="pre">OperatorAgent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/operator.html#ov.agents.operator.make_llm_decider"><code class="docutils literal notranslate"><span class="pre">make_llm_decider()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.Orchestrator"><code class="docutils literal notranslate"><span class="pre">Orchestrator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.OrchestratorResult"><code class="docutils literal notranslate"><span class="pre">OrchestratorResult</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.study"><code class="docutils literal notranslate"><span class="pre">study()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/realize.html">ov.agents.realize</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.complete_agent"><code class="docutils literal notranslate"><span class="pre">complete_agent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.complete_all"><code class="docutils literal notranslate"><span class="pre">complete_all()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.materialize"><code class="docutils literal notranslate"><span class="pre">materialize()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.realize_agent"><code class="docutils literal notranslate"><span class="pre">realize_agent()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis.html">ov.analysis</a><ul>

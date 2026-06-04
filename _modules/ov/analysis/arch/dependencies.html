@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.arch.dependencies &mdash; ov 0.1.0 documentation</title>
+  <title>ov.analysis.arch.dependencies &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -160,13 +170,20 @@
 
 <div class="viewcode-block" id="analyze_dependencies">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/dependencies.html#ov.analysis.arch.dependencies.analyze_dependencies">[docs]</a>
-<span class="nd">@register_analyzer</span><span class="p">(</span><span class="s2">&quot;dependencies&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;fingerprint&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,))</span>
+<span class="nd">@register_analyzer</span><span class="p">(</span>
+    <span class="s2">&quot;dependencies&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;fingerprint&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,)</span>
+<span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_dependencies</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Inventory dependencies and flag known-vulnerable versions (Retire.js, optional).&quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
     <span class="n">libraries</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">confidence</span><span class="p">,</span>
-         <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span> <span class="s2">&quot;provenance&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">provenance</span><span class="p">}</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+            <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">confidence</span><span class="p">,</span>
+            <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">categories</span><span class="p">,</span>
+            <span class="s2">&quot;provenance&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">provenance</span><span class="p">,</span>
+        <span class="p">}</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">fingerprint</span>
     <span class="p">]</span>
     <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;libraries&quot;</span><span class="p">:</span> <span class="n">libraries</span><span class="p">}</span>
@@ -196,9 +213,12 @@
                 <span class="n">category</span><span class="o">=</span><span class="s2">&quot;robustness&quot;</span><span class="p">,</span>
                 <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Vulnerable </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;component&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
                 <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span><span class="n">_sev_tier</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span>
-                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]]</span> <span class="ow">or</span> <span class="p">[</span><span class="s2">&quot;network&quot;</span><span class="p">],</span>
+                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="ow">or</span> <span class="p">[</span><span class="s2">&quot;network&quot;</span><span class="p">],</span>
                 <span class="n">observed</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;component&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: &quot;</span>
-                <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vulnerabilities&quot;</span><span class="p">,</span> <span class="p">[]))[:</span><span class="mi">300</span><span class="p">],</span>
+                <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vulnerabilities&quot;</span><span class="p">,</span> <span class="p">[])</span>
+                <span class="p">)[:</span><span class="mi">300</span><span class="p">],</span>
                 <span class="n">metric_detail</span><span class="o">=</span><span class="n">v</span><span class="p">,</span>
                 <span class="n">suggested_fix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;upgrade </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;component&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> to a patched version&quot;</span><span class="p">,</span>
                 <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
@@ -214,7 +234,12 @@
     <span class="n">sevs</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;severity&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vulnerabilities&quot;</span><span class="p">,</span> <span class="p">[])}</span>
     <span class="k">for</span> <span class="n">tier</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;critical&quot;</span><span class="p">,</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s2">&quot;low&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">tier</span> <span class="ow">in</span> <span class="n">sevs</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="s2">&quot;critical&quot;</span><span class="p">,</span> <span class="s2">&quot;high&quot;</span><span class="p">:</span> <span class="s2">&quot;serious&quot;</span><span class="p">,</span> <span class="s2">&quot;medium&quot;</span><span class="p">:</span> <span class="s2">&quot;moderate&quot;</span><span class="p">,</span> <span class="s2">&quot;low&quot;</span><span class="p">:</span> <span class="s2">&quot;minor&quot;</span><span class="p">}[</span><span class="n">tier</span><span class="p">]</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="s2">&quot;critical&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;high&quot;</span><span class="p">:</span> <span class="s2">&quot;serious&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;medium&quot;</span><span class="p">:</span> <span class="s2">&quot;moderate&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;low&quot;</span><span class="p">:</span> <span class="s2">&quot;minor&quot;</span><span class="p">,</span>
+            <span class="p">}[</span><span class="n">tier</span><span class="p">]</span>
     <span class="k">return</span> <span class="s2">&quot;moderate&quot;</span>
 
 
@@ -229,8 +254,18 @@
                 <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">td</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;bundle_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.js&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
             <span class="n">out_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">td</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;retire.json&quot;</span>
             <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-                <span class="p">[</span><span class="s2">&quot;retire&quot;</span><span class="p">,</span> <span class="s2">&quot;--path&quot;</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="s2">&quot;--outputformat&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="s2">&quot;--outputpath&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">out_path</span><span class="p">)],</span>
-                <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">[</span>
+                    <span class="s2">&quot;retire&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;--path&quot;</span><span class="p">,</span>
+                    <span class="n">td</span><span class="p">,</span>
+                    <span class="s2">&quot;--outputformat&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;json&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;--outputpath&quot;</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">out_path</span><span class="p">),</span>
+                <span class="p">],</span>
+                <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>
+                <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">out_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
                 <span class="k">return</span> <span class="p">[]</span>

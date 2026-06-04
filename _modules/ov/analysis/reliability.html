@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.reliability &mdash; ov 0.1.0 documentation</title>
+  <title>ov.analysis.reliability &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -174,8 +184,11 @@
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">finding_id</span> <span class="o">==</span> <span class="n">ref</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="n">bundle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">ref</span> <span class="ow">in</span> <span class="n">bundle</span><span class="o">.</span><span class="n">marks</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-                               <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">evidence_id</span> <span class="o">==</span> <span class="n">ref</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">bundle</span><span class="o">.</span><span class="n">facts</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">bundle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span>
+        <span class="n">ref</span> <span class="ow">in</span> <span class="n">bundle</span><span class="o">.</span><span class="n">marks</span>  <span class="c1"># a Set-of-Mark id (key, e.g. &quot;R1&quot;) — what the model is told to cite</span>
+        <span class="ow">or</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">bundle</span><span class="o">.</span><span class="n">marks</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>  <span class="c1"># the evidence id that mark resolves to</span>
+        <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">evidence_id</span> <span class="o">==</span> <span class="n">ref</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">bundle</span><span class="o">.</span><span class="n">facts</span><span class="p">)</span>
+    <span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="n">ref</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_PATTERNED_PREFIXES</span><span class="p">)</span></div>
 
@@ -256,7 +269,9 @@
         <span class="c1"># LLM finding: cite-or-abstain</span>
         <span class="n">resolvable_refs</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">evidence_refs</span> <span class="k">if</span> <span class="n">resolvable</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">bundle</span><span class="p">)]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">resolvable_refs</span><span class="p">:</span>
-            <span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_downgrade</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;no resolvable evidence (cite-or-abstain)&quot;</span><span class="p">))</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">_downgrade</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;no resolvable evidence (cite-or-abstain)&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
             <span class="k">continue</span>
         <span class="c1"># set-of-mark membership: any RN it mentions must exist in the bundle</span>
         <span class="k">if</span> <span class="n">bundle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -265,10 +280,14 @@
             <span class="p">}</span>
             <span class="n">unknown</span> <span class="o">=</span> <span class="n">mentioned</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">marks</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">unknown</span><span class="p">:</span>
-                <span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_downgrade</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;references unknown marks </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">unknown</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+                <span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">_downgrade</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;references unknown marks </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">unknown</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="p">)</span>
                 <span class="k">continue</span>
         <span class="n">report</span><span class="o">.</span><span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="n">report</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;verified </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">findings</span><span class="p">)</span><span class="si">}</span><span class="s2">: kept </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">kept</span><span class="p">)</span><span class="si">}</span><span class="s2">, downgraded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">report</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;verified </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">findings</span><span class="p">)</span><span class="si">}</span><span class="s2">: kept </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">kept</span><span class="p">)</span><span class="si">}</span><span class="s2">, downgraded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">report</span></div>
 
 

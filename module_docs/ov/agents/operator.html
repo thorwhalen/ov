@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.agents.operator &mdash; ov 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.agents.orchestrator" href="orchestrator.html" />
+    <link rel="prev" title="ov.agents.mcp" href="mcp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.agents.operator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.operator.Decider"><code class="docutils literal notranslate"><span class="pre">Decider</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.operator.OperatorAgent"><code class="docutils literal notranslate"><span class="pre">OperatorAgent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.agents.operator.OperatorAgent.execute"><code class="docutils literal notranslate"><span class="pre">OperatorAgent.execute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.operator.make_llm_decider"><code class="docutils literal notranslate"><span class="pre">make_llm_decider()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="realize.html">ov.agents.realize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.agents.operator</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/agents/operator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.agents.operator">
+<span id="ov-agents-operator"></span><h1>ov.agents.operator<a class="headerlink" href="#module-ov.agents.operator" title="Link to this heading"></a></h1>
+<p>The Operator agent — the model-bound perceive→decide→act→record loop.</p>
+<p>In Phases 1–3 the <em>host</em> plays the operator, following the <code class="docutils literal notranslate"><span class="pre">ov-operate</span></code> skill: it
+reads affordances, decides the next action, and records intent. Phase 4 packages that
+loop as a runnable agent. The deterministic “hands” (<code class="docutils literal notranslate"><span class="pre">observe</span></code> / <code class="docutils literal notranslate"><span class="pre">act</span></code> /
+<code class="docutils literal notranslate"><span class="pre">make_step</span></code> / <code class="docutils literal notranslate"><span class="pre">journal</span></code> / <code class="docutils literal notranslate"><span class="pre">progress</span></code>) are reused unchanged; the only thing the
+agent adds is the <strong>decide</strong> step — and that is <em>injected</em> (<code class="docutils literal notranslate"><span class="pre">decider</span></code>), so:</p>
+<ul class="simple">
+<li><p>the package never hard-depends on an LLM (the host, a script, or a model can all
+supply <code class="docutils literal notranslate"><span class="pre">decide</span></code>); and</p></li>
+<li><p>the loop is unit-testable with a trivial decider and fake <code class="docutils literal notranslate"><span class="pre">observe</span></code>/<code class="docutils literal notranslate"><span class="pre">act</span></code>
+callables — no browser, no API call.</p></li>
+</ul>
+<p>The agent satisfies the <code class="docutils literal notranslate"><span class="pre">aw.AgenticStep</span></code> protocol structurally
+(<code class="docutils literal notranslate"><span class="pre">execute(input_data,</span> <span class="pre">context)</span> <span class="pre">-&gt;</span> <span class="pre">(artifact,</span> <span class="pre">info)</span></code>), so it drops into an <code class="docutils literal notranslate"><span class="pre">aw</span></code>
+workflow (see <a class="reference internal" href="orchestrator.html#module-ov.agents.orchestrator" title="ov.agents.orchestrator"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ov.agents.orchestrator</span></code></a>). Its artifact is the populated
+<a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureRun</span></code></a>; the model-free <a class="reference internal" href="../operate/progress.html#module-ov.operate.progress" title="ov.operate.progress"><code class="xref py py-func docutils literal notranslate"><span class="pre">progress()</span></code></a> facts are
+the deterministic stop signal a budget-bound manager interprets.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="ov.agents.operator.Decider">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.operator.</span></span><span class="sig-name descname"><span class="pre">Decider</span></span><a class="headerlink" href="#ov.agents.operator.Decider" title="Link to this definition"></a></dt>
+<dd><p>A decider maps the current observation (+ goal + history) to the next action,
+or <code class="docutils literal notranslate"><span class="pre">None</span></code> to stop. The model’s only job in the loop.</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code>[[…], <a class="reference internal" href="../base.html#ov.base.Action" title="ov.base.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.agents.operator.OperatorAgent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.agents.operator.</span></span><span class="sig-name descname"><span class="pre">OperatorAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../base.html#ov.base.Action" title="ov.base.Action"><span class="pre">Action</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ax_snapshot'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polite_rate_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_progress_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observe_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../base.html#ov.base.Action" title="ov.base.Action"><span class="pre">Action</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'haiku'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'operator'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ov/agents/operator.html#OperatorAgent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.operator.OperatorAgent" title="Link to this definition"></a></dt>
+<dd><p>Drive a target toward a goal, recording every step (an <code class="docutils literal notranslate"><span class="pre">aw.AgenticStep</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>decider</strong> – <code class="docutils literal notranslate"><span class="pre">(observation,</span> <span class="pre">*,</span> <span class="pre">goal,</span> <span class="pre">history)</span> <span class="pre">-&gt;</span> <span class="pre">Action</span> <span class="pre">|</span> <span class="pre">None</span></code>. Returns the
+next action, or <code class="docutils literal notranslate"><span class="pre">None</span></code> to stop. Use <a class="reference internal" href="#ov.agents.operator.make_llm_decider" title="ov.agents.operator.make_llm_decider"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_llm_decider()</span></code></a> for a
+model-backed one, or any callable (host / script / test stub).</p></li>
+<li><p><strong>session</strong> – a <a class="reference internal" href="../capture/session.html#ov.capture.session.CaptureSession" title="ov.capture.session.CaptureSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureSession</span></code></a> (supplies <code class="docutils literal notranslate"><span class="pre">.page</span></code> +
+<code class="docutils literal notranslate"><span class="pre">.run</span></code>). Optional — <code class="docutils literal notranslate"><span class="pre">page</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code> may instead arrive via the
+<code class="docutils literal notranslate"><span class="pre">context</span></code> passed to <a class="reference internal" href="#ov.agents.operator.OperatorAgent.execute" title="ov.agents.operator.OperatorAgent.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a> (keys <code class="docutils literal notranslate"><span class="pre">&quot;page&quot;</span></code> / <code class="docutils literal notranslate"><span class="pre">&quot;run&quot;</span></code>).</p></li>
+<li><p><strong>max_steps</strong> – hard cap on actions (a budget; the deterministic loop signal is
+advisory, the cap is the backstop).</p></li>
+<li><p><strong>strategy</strong> – perception strategy for the default <code class="docutils literal notranslate"><span class="pre">observe</span></code> (<code class="docutils literal notranslate"><span class="pre">&quot;ax_snapshot&quot;</span></code>
+| <code class="docutils literal notranslate"><span class="pre">&quot;screenshot&quot;</span></code> | <code class="docutils literal notranslate"><span class="pre">&quot;hybrid&quot;</span></code>).</p></li>
+<li><p><strong>act_fn</strong> (<em>observe_fn /</em>) – injection seams for the hands (default to the real
+<a class="reference internal" href="../operate/observe.html#module-ov.operate.observe" title="ov.operate.observe"><code class="xref py py-func docutils literal notranslate"><span class="pre">observe()</span></code></a> / <a class="reference internal" href="../operate/act.html#module-ov.operate.act" title="ov.operate.act"><code class="xref py py-func docutils literal notranslate"><span class="pre">act()</span></code></a>); tests pass fakes.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.agents.operator.OperatorAgent.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MutableMapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/agents/operator.html#OperatorAgent.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.operator.OperatorAgent.execute" title="Link to this definition"></a></dt>
+<dd><p>Pursue <code class="docutils literal notranslate"><span class="pre">input_data</span></code> (the goal) and return <code class="docutils literal notranslate"><span class="pre">(CaptureRun,</span> <span class="pre">info)</span></code> (aw protocol).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.operator.make_llm_decider">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.operator.</span></span><span class="sig-name descname"><span class="pre">make_llm_decider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">instruction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../base.html#ov.base.Action" title="ov.base.Action"><span class="pre">Action</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/agents/operator.html#make_llm_decider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.operator.make_llm_decider" title="Link to this definition"></a></dt>
+<dd><p>A model-backed <a class="reference internal" href="#ov.agents.operator.Decider" title="ov.agents.operator.Decider"><code class="xref py py-data docutils literal notranslate"><span class="pre">Decider</span></code></a> that picks the next <a class="reference internal" href="../base.html#ov.base.Action" title="ov.base.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.</p>
+<p>Uses the injected <code class="docutils literal notranslate"><span class="pre">llm</span></code> through <a class="reference internal" href="llm.html#ov.agents.llm.structured" title="ov.agents.llm.structured"><code class="xref py py-func docutils literal notranslate"><span class="pre">ov.agents.llm.structured()</span></code></a> to choose an
+action conforming to <code class="docutils literal notranslate"><span class="pre">Action</span></code>’s schema. Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> (stop) when no LLM is
+resolvable, on a parse miss, or when the model signals a stop — so an operator
+built with this decider degrades safely to a no-op rather than crashing.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mcp.html" class="btn btn-neutral float-left" title="ov.agents.mcp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="orchestrator.html" class="btn btn-neutral float-right" title="ov.agents.orchestrator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

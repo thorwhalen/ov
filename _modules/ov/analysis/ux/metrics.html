@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.ux.metrics &mdash; ov 0.1.0 documentation</title>
+  <title>ov.analysis.ux.metrics &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -181,7 +191,10 @@
     <span class="n">fields</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;input, select, textarea&quot;</span><span class="p">)</span>
     <span class="n">count</span> <span class="o">=</span> <span class="n">required</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;input&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;text&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">_NON_FRICTION_TYPES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;input&quot;</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;text&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">_NON_FRICTION_TYPES</span>
+        <span class="p">):</span>
             <span class="k">continue</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="s2">&quot;required&quot;</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">attributes</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;aria-required&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span><span class="p">:</span>
@@ -191,7 +204,9 @@
 
 <div class="viewcode-block" id="analyze_metrics">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/ux/metrics.html#ov.analysis.ux.metrics.analyze_metrics">[docs]</a>
-<span class="nd">@register_analyzer</span><span class="p">(</span><span class="s2">&quot;journey_metrics&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,))</span>
+<span class="nd">@register_analyzer</span><span class="p">(</span>
+    <span class="s2">&quot;journey_metrics&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,)</span>
+<span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_metrics</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Emit form-friction + backtracking Findings and a journey summary.&quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
@@ -201,7 +216,9 @@
     <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">):</span>
         <span class="n">tree</span> <span class="o">=</span> <span class="n">HTMLParser</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">art</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">form</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;form&quot;</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">fid</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">form</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;form</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">form</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">form</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;form</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
             <span class="k">if</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">seen_forms</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">seen_forms</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
@@ -239,7 +256,8 @@
                 <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Journey revisited </span><span class="si">{</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;revisits&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> prior state(s)&quot;</span><span class="p">,</span>
                 <span class="n">heuristic</span><span class="o">=</span><span class="s2">&quot;nielsen-7&quot;</span><span class="p">,</span>
                 <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
-                    <span class="s2">&quot;moderate&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="n">summary</span><span class="p">[</span><span class="s2">&quot;revisits&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;moderate&quot;</span><span class="p">,</span>
+                    <span class="n">nodes</span><span class="o">=</span><span class="n">summary</span><span class="p">[</span><span class="s2">&quot;revisits&quot;</span><span class="p">],</span>
                     <span class="n">journey_fraction</span><span class="o">=</span><span class="n">summary</span><span class="p">[</span><span class="s2">&quot;revisits&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">summary</span><span class="p">[</span><span class="s2">&quot;steps&quot;</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span>
                 <span class="p">),</span>
                 <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">[:</span><span class="mi">1</span><span class="p">]]</span> <span class="ow">or</span> <span class="p">[</span><span class="s2">&quot;journey&quot;</span><span class="p">],</span>

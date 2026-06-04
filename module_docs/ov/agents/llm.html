@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.agents.llm &mdash; ov 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.agents.mcp" href="mcp.html" />
+    <link rel="prev" title="ov.agents.definitions" href="definitions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.agents.llm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.llm.DEFAULT_MODELS"><code class="docutils literal notranslate"><span class="pre">DEFAULT_MODELS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.llm.default_model"><code class="docutils literal notranslate"><span class="pre">default_model()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.llm.resolve_llm"><code class="docutils literal notranslate"><span class="pre">resolve_llm()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.llm.structured"><code class="docutils literal notranslate"><span class="pre">structured()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="realize.html">ov.agents.realize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.agents.llm</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/agents/llm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.agents.llm">
+<span id="ov-agents-llm"></span><h1>ov.agents.llm<a class="headerlink" href="#module-ov.agents.llm" title="Link to this heading"></a></h1>
+<p>Provider-agnostic LLM facade for the <code class="docutils literal notranslate"><span class="pre">ov</span></code> agent layer (thin, injected, optional).</p>
+<p><code class="docutils literal notranslate"><span class="pre">ov</span></code>’s deterministic core needs no model. The agent layer adds <em>bounded</em> model use
+— always <strong>dependency-injected</strong>, so there is no provider lock-in and the package
+imports fine with no LLM SDK present. This facade is a thin layer over
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">coact.llm</span></code> (itself glue over <code class="docutils literal notranslate"><span class="pre">skill.ai</span></code>), adding the two ov-specific things
+coact’s generic facade does not carry:</p>
+<ul class="simple">
+<li><p><strong>model routing</strong> — the per-role default models from the spec’s §10 cost gate:
+operator → Haiku (throughput, many steps), UX-analyst → Sonnet (grounded
+narrative judgment), Arch-analyst / orchestrator → Opus (design reasoning /
+planning);</p></li>
+<li><p>a <strong>multimodal</strong> <a class="reference internal" href="#ov.agents.llm.structured" title="ov.agents.llm.structured"><code class="xref py py-func docutils literal notranslate"><span class="pre">structured()</span></code></a> path — the UX analyst grounds judgment in
+<em>marked screenshots</em>, which coact’s text-only <code class="docutils literal notranslate"><span class="pre">structured</span></code> cannot carry. Inject
+any object exposing <code class="docutils literal notranslate"><span class="pre">structured(prompt,</span> <span class="pre">schema,</span> <span class="pre">*,</span> <span class="pre">images=...)</span></code> for full control
+(real vision client); otherwise this degrades to coact’s portable text-only path,
+which is still grounded because the evidence bundle’s <em>facts</em> are textual
+summaries of each marked region (§8.1).</p></li>
+</ul>
+<dl class="py data">
+<dt class="sig sig-object py" id="ov.agents.llm.DEFAULT_MODELS">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.llm.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_MODELS</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'arch':</span> <span class="pre">'opus',</span> <span class="pre">'operator':</span> <span class="pre">'haiku',</span> <span class="pre">'orchestrator':</span> <span class="pre">'opus',</span> <span class="pre">'ux':</span> <span class="pre">'sonnet'}</span></span><a class="headerlink" href="#ov.agents.llm.DEFAULT_MODELS" title="Link to this definition"></a></dt>
+<dd><p>Per-role default model selectors (host SDK literals), from the §10 cost gate.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.llm.default_model">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.llm.</span></span><span class="sig-name descname"><span class="pre">default_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/ov/agents/llm.html#default_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.llm.default_model" title="Link to this definition"></a></dt>
+<dd><p>The default model selector for a role (falls back to <code class="docutils literal notranslate"><span class="pre">&quot;sonnet&quot;</span></code>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">default_model</span><span class="p">(</span><span class="s2">&quot;operator&quot;</span><span class="p">),</span> <span class="n">default_model</span><span class="p">(</span><span class="s2">&quot;arch&quot;</span><span class="p">),</span> <span class="n">default_model</span><span class="p">(</span><span class="s2">&quot;???&quot;</span><span class="p">)</span>
+<span class="go">(&#39;haiku&#39;, &#39;opus&#39;, &#39;sonnet&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.llm.resolve_llm">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.llm.</span></span><span class="sig-name descname"><span class="pre">resolve_llm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ov/agents/llm.html#resolve_llm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.llm.resolve_llm" title="Link to this definition"></a></dt>
+<dd><p>Resolve <code class="docutils literal notranslate"><span class="pre">llm</span></code> to a <code class="docutils literal notranslate"><span class="pre">callable(str)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>One injection convention: a callable (used as-is), an <code class="docutils literal notranslate"><span class="pre">aw</span></code> <code class="docutils literal notranslate"><span class="pre">StepConfig</span></code>, a
+model-name string, or <code class="docutils literal notranslate"><span class="pre">None</span></code> to discover an ambient provider. A plain callable
+short-circuits (no optional dependency needed); the other forms defer to
+<code class="xref py py-func docutils literal notranslate"><span class="pre">coact.llm.resolve_llm()</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">resolve_llm</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="s2">&quot;hi&quot;</span><span class="p">)(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="go">&#39;hi&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.llm.structured">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.llm.</span></span><span class="sig-name descname"><span class="pre">structured</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/agents/llm.html#structured"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.llm.structured" title="Link to this definition"></a></dt>
+<dd><p>Best-effort schema-conforming dict from an LLM, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unavailable.</p>
+<p>Resolution order honours dependency injection:</p>
+<ol class="arabic simple">
+<li><p>if <code class="docutils literal notranslate"><span class="pre">llm</span></code> exposes a <code class="docutils literal notranslate"><span class="pre">structured</span></code> method, it is used as-is — this is the
+multimodal path (the method may accept <code class="docutils literal notranslate"><span class="pre">images=</span></code>); a real vision client
+plugs in here;</p></li>
+<li><p>otherwise fall through to coact’s portable text-only <code class="docutils literal notranslate"><span class="pre">structured</span></code> (any
+<code class="docutils literal notranslate"><span class="pre">images</span></code> are dropped — the bundle’s textual facts still ground the claims);</p></li>
+<li><p>if no LLM is resolvable at all, return <code class="docutils literal notranslate"><span class="pre">None</span></code> so callers fall back to a
+deterministic-only path (no crash, no provider lock-in).</p></li>
+</ol>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="definitions.html" class="btn btn-neutral float-left" title="ov.agents.definitions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mcp.html" class="btn btn-neutral float-right" title="ov.agents.mcp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

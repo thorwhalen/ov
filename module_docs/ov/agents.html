@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.agents &mdash; ov 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ov.agents._skills" href="agents/_skills.html" />
+    <link rel="prev" title="ov.__main__" href="__main__.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__main__.html">ov.__main__</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.agents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.AgentSpec"><code class="docutils literal notranslate"><span class="pre">AgentSpec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.AnalystAgent"><code class="docutils literal notranslate"><span class="pre">AnalystAgent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.agents.AnalystAgent.execute"><code class="docutils literal notranslate"><span class="pre">AnalystAgent.execute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.OperatorAgent"><code class="docutils literal notranslate"><span class="pre">OperatorAgent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.agents.OperatorAgent.execute"><code class="docutils literal notranslate"><span class="pre">OperatorAgent.execute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.Orchestrator"><code class="docutils literal notranslate"><span class="pre">Orchestrator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.agents.Orchestrator.run"><code class="docutils literal notranslate"><span class="pre">Orchestrator.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.agents_for_role"><code class="docutils literal notranslate"><span class="pre">agents_for_role()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.analyst_specs"><code class="docutils literal notranslate"><span class="pre">analyst_specs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.arch_analyst"><code class="docutils literal notranslate"><span class="pre">arch_analyst()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.complete_agent"><code class="docutils literal notranslate"><span class="pre">complete_agent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.complete_all"><code class="docutils literal notranslate"><span class="pre">complete_all()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.default_model"><code class="docutils literal notranslate"><span class="pre">default_model()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.default_skills_dir"><code class="docutils literal notranslate"><span class="pre">default_skills_dir()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.materialize"><code class="docutils literal notranslate"><span class="pre">materialize()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.mcp_server"><code class="docutils literal notranslate"><span class="pre">mcp_server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.ov_tools"><code class="docutils literal notranslate"><span class="pre">ov_tools()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.realize_agent"><code class="docutils literal notranslate"><span class="pre">realize_agent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.resolve_llm"><code class="docutils literal notranslate"><span class="pre">resolve_llm()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.skill_path"><code class="docutils literal notranslate"><span class="pre">skill_path()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.structured"><code class="docutils literal notranslate"><span class="pre">structured()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.study"><code class="docutils literal notranslate"><span class="pre">study()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.ux_analyst"><code class="docutils literal notranslate"><span class="pre">ux_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/realize.html">ov.agents.realize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.agents</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/ov/agents.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.agents">
+<span id="ov-agents"></span><h1>ov.agents<a class="headerlink" href="#module-ov.agents" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">ov.agents</span></code> — the optional in-package agent layer (Phase 4 productization).</p>
+<p>This is the <em>mechanical lift</em> the spec promised (§7, D4): the Phase-1–3 deterministic
+core + the <code class="docutils literal notranslate"><span class="pre">.claude/skills/</span></code> policy are re-hosted as <strong>runnable agents</strong>, with no
+rewrite. The lift is done by <a class="reference external" href="https://github.com/thorwhalen/coact">coact</a>
+(<code class="docutils literal notranslate"><span class="pre">COMPLETE</span></code> a skill into an agent definition, <code class="docutils literal notranslate"><span class="pre">REALIZE</span></code> it onto a backend); this
+package is the thin ov-specific glue that coact intentionally leaves out — the
+operator’s live-browser <strong>loop</strong>, the analyst’s <strong>multimodal</strong> evidence-bundle call,
+and the orchestration <strong>topology</strong>.</p>
+<p>Three things to know:</p>
+<ul>
+<li><p><strong>Host stays the manager (the cheap default).</strong> <a class="reference internal" href="#ov.agents.materialize" title="ov.agents.materialize"><code class="xref py py-func docutils literal notranslate"><span class="pre">materialize()</span></code></a> writes
+<code class="docutils literal notranslate"><span class="pre">.claude/agents/</span></code> so Claude Code runs ov’s agents as subagents — zero LLM, no
+fan-out. In-package SDK agents (<a class="reference internal" href="#ov.agents.OperatorAgent" title="ov.agents.OperatorAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OperatorAgent</span></code></a>, <a class="reference internal" href="#ov.agents.AnalystAgent" title="ov.agents.AnalystAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnalystAgent</span></code></a>,
+<a class="reference internal" href="#ov.agents.study" title="ov.agents.study"><code class="xref py py-func docutils literal notranslate"><span class="pre">study()</span></code></a>) are opt-in; <a class="reference internal" href="#ov.agents.estimate" title="ov.agents.estimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">estimate()</span></code></a> surfaces the ~15× fan-out cost gate.</p></li>
+<li><p><strong>Reuse, don’t rewrite.</strong> Capture, the analyzers, the evidence-bundle assembler,
+the reliability passes and the synopsis map-reduce are used unchanged.</p></li>
+<li><p><strong>Injected, optional, model-free-by-default.</strong> Every LLM is dependency-injected;
+<code class="docutils literal notranslate"><span class="pre">coact</span></code>/<code class="docutils literal notranslate"><span class="pre">aw</span></code>/<code class="docutils literal notranslate"><span class="pre">py2mcp</span></code> are the <code class="docutils literal notranslate"><span class="pre">ov[agents]</span></code> extra, gated with a friendly
+error — importing this package needs none of them.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">OV_AGENTS</span><span class="p">,</span> <span class="n">default_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">OV_AGENTS</span><span class="p">)</span>
+<span class="go">[&#39;arch-analyst&#39;, &#39;operator&#39;, &#39;orchestrator&#39;, &#39;ux-analyst&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">default_model</span><span class="p">(</span><span class="s2">&quot;operator&quot;</span><span class="p">)</span>
+<span class="go">&#39;haiku&#39;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.agents.AgentSpec">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">AgentSpec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'sonnet'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/agents/definitions.html#AgentSpec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.AgentSpec" title="Link to this definition"></a></dt>
+<dd><p>One <code class="docutils literal notranslate"><span class="pre">ov</span></code> agent: its name, role, source skill, optional lens, default model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">AgentSpec</span><span class="p">(</span><span class="s2">&quot;ov-analyze-ux&quot;</span><span class="p">,</span> <span class="s2">&quot;analyst&quot;</span><span class="p">,</span> <span class="s2">&quot;ov-analyze-ux&quot;</span><span class="p">,</span> <span class="s2">&quot;ux&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lens</span>
+<span class="go">&#39;ux&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.agents.AnalystAgent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">AnalystAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">judge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_marks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/agents/analyst.html#AnalystAgent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.AnalystAgent" title="Link to this definition"></a></dt>
+<dd><p>Interpret a captured run’s evidence bundle into grounded findings (UX or Arch).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lens</strong> – <code class="docutils literal notranslate"><span class="pre">&quot;ux&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;arch&quot;</span></code> — selects default model + finding defaults.</p></li>
+<li><p><strong>llm</strong> – the injected LLM (a callable, an object exposing <code class="docutils literal notranslate"><span class="pre">structured</span></code> for the
+multimodal path, an <code class="docutils literal notranslate"><span class="pre">aw</span></code> <code class="docutils literal notranslate"><span class="pre">StepConfig</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code>). Ignored if a
+<code class="docutils literal notranslate"><span class="pre">judge</span></code> is given.</p></li>
+<li><p><strong>judge</strong> – <code class="docutils literal notranslate"><span class="pre">(bundle,</span> <span class="pre">*,</span> <span class="pre">run,</span> <span class="pre">store)</span> <span class="pre">-&gt;</span> <span class="pre">list[Finding</span> <span class="pre">|</span> <span class="pre">dict]</span></code>. Override the whole
+LLM step (tests, alternative providers). Defaults to <code class="xref py py-meth docutils literal notranslate"><span class="pre">_default_judge()</span></code>.</p></li>
+<li><p><strong>model</strong> – model selector for the image-budget + info (defaults from the lens).</p></li>
+<li><p><strong>max_marks</strong> – cap on Set-of-Mark regions in the bundle.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.agents.AnalystAgent.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MutableMapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ov/agents/analyst.html#AnalystAgent.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.AnalystAgent.execute" title="Link to this definition"></a></dt>
+<dd><p>Analyze a run (or a prebuilt bundle) → <code class="docutils literal notranslate"><span class="pre">(verified_findings,</span> <span class="pre">info)</span></code> (aw protocol).</p>
+<p><code class="docutils literal notranslate"><span class="pre">input_data</span></code> may be a <a class="reference internal" href="base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureRun</span></code></a>, an
+<a class="reference internal" href="base.html#ov.base.EvidenceBundle" title="ov.base.EvidenceBundle"><code class="xref py py-class docutils literal notranslate"><span class="pre">EvidenceBundle</span></code></a>, or a mapping carrying <code class="docutils literal notranslate"><span class="pre">run</span></code> / <code class="docutils literal notranslate"><span class="pre">store</span></code> /
+<code class="docutils literal notranslate"><span class="pre">bundle</span></code>. The verified LLM findings are appended to <code class="docutils literal notranslate"><span class="pre">run.findings</span></code> (additive
+— <code class="docutils literal notranslate"><span class="pre">source_layer</span></code> keeps them distinct from deterministic facts) and returned.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.agents.OperatorAgent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">OperatorAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decider</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="base.html#ov.base.Action" title="ov.base.Action"><span class="pre">Action</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ax_snapshot'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polite_rate_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_progress_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observe_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="base.html#ov.base.Observation" title="ov.base.Observation"><span class="pre">Observation</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="base.html#ov.base.Action" title="ov.base.Action"><span class="pre">Action</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'haiku'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'operator'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/agents/operator.html#OperatorAgent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.OperatorAgent" title="Link to this definition"></a></dt>
+<dd><p>Drive a target toward a goal, recording every step (an <code class="docutils literal notranslate"><span class="pre">aw.AgenticStep</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>decider</strong> – <code class="docutils literal notranslate"><span class="pre">(observation,</span> <span class="pre">*,</span> <span class="pre">goal,</span> <span class="pre">history)</span> <span class="pre">-&gt;</span> <span class="pre">Action</span> <span class="pre">|</span> <span class="pre">None</span></code>. Returns the
+next action, or <code class="docutils literal notranslate"><span class="pre">None</span></code> to stop. Use <code class="xref py py-func docutils literal notranslate"><span class="pre">make_llm_decider()</span></code> for a
+model-backed one, or any callable (host / script / test stub).</p></li>
+<li><p><strong>session</strong> – a <a class="reference internal" href="capture/session.html#ov.capture.session.CaptureSession" title="ov.capture.session.CaptureSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureSession</span></code></a> (supplies <code class="docutils literal notranslate"><span class="pre">.page</span></code> +
+<code class="docutils literal notranslate"><span class="pre">.run</span></code>). Optional — <code class="docutils literal notranslate"><span class="pre">page</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code> may instead arrive via the
+<code class="docutils literal notranslate"><span class="pre">context</span></code> passed to <a class="reference internal" href="#ov.agents.OperatorAgent.execute" title="ov.agents.OperatorAgent.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a> (keys <code class="docutils literal notranslate"><span class="pre">&quot;page&quot;</span></code> / <code class="docutils literal notranslate"><span class="pre">&quot;run&quot;</span></code>).</p></li>
+<li><p><strong>max_steps</strong> – hard cap on actions (a budget; the deterministic loop signal is
+advisory, the cap is the backstop).</p></li>
+<li><p><strong>strategy</strong> – perception strategy for the default <code class="docutils literal notranslate"><span class="pre">observe</span></code> (<code class="docutils literal notranslate"><span class="pre">&quot;ax_snapshot&quot;</span></code>
+| <code class="docutils literal notranslate"><span class="pre">&quot;screenshot&quot;</span></code> | <code class="docutils literal notranslate"><span class="pre">&quot;hybrid&quot;</span></code>).</p></li>
+<li><p><strong>act_fn</strong> (<em>observe_fn /</em>) – injection seams for the hands (default to the real
+<a class="reference internal" href="operate/observe.html#module-ov.operate.observe" title="ov.operate.observe"><code class="xref py py-func docutils literal notranslate"><span class="pre">observe()</span></code></a> / <a class="reference internal" href="operate/act.html#module-ov.operate.act" title="ov.operate.act"><code class="xref py py-func docutils literal notranslate"><span class="pre">act()</span></code></a>); tests pass fakes.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.agents.OperatorAgent.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MutableMapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ov/agents/operator.html#OperatorAgent.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.OperatorAgent.execute" title="Link to this definition"></a></dt>
+<dd><p>Pursue <code class="docutils literal notranslate"><span class="pre">input_data</span></code> (the goal) and return <code class="docutils literal notranslate"><span class="pre">(CaptureRun,</span> <span class="pre">info)</span></code> (aw protocol).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.agents.Orchestrator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">Orchestrator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('ux'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'arch')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capture_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">_default_capture&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analyze_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">_default_analyze&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">_default_report&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synopsis_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">_default_synopsis&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capture_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/agents/orchestrator.html#Orchestrator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.Orchestrator" title="Link to this definition"></a></dt>
+<dd><p>Coordinate a full study, delegating each stage (never analyzing itself).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>llm</strong> – the injected model for the analyst agents. <code class="docutils literal notranslate"><span class="pre">None</span></code> → deterministic-only
+study (the host-is-manager default; analysts are skipped).</p></li>
+<li><p><strong>lenses</strong> – which analysis lenses to run (<code class="docutils literal notranslate"><span class="pre">&quot;ux&quot;</span></code> and/or <code class="docutils literal notranslate"><span class="pre">&quot;arch&quot;</span></code>).</p></li>
+<li><p><strong>out_dir</strong> – where reports + synopsis are written (<code class="docutils literal notranslate"><span class="pre">None</span></code> → the run’s store).</p></li>
+<li><p><strong>synopsis_fn</strong> (<em>capture_fn / analyze_fn / report_fn /</em>) – stage seams (default to the
+real <code class="docutils literal notranslate"><span class="pre">ov</span></code> facade). Inject fakes to unit-test the coordination.</p></li>
+<li><p><strong>capture_kwargs</strong> – extra kwargs forwarded to <code class="docutils literal notranslate"><span class="pre">capture_fn</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">mode</span></code>,
+<code class="docutils literal notranslate"><span class="pre">authorized</span></code>, <code class="docutils literal notranslate"><span class="pre">crawl_pages</span></code>, <code class="docutils literal notranslate"><span class="pre">journey</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.agents.Orchestrator.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="agents/orchestrator.html#ov.agents.orchestrator.OrchestratorResult" title="ov.agents.orchestrator.OrchestratorResult"><span class="pre">OrchestratorResult</span></a></span></span><a class="reference internal" href="../../_modules/ov/agents/orchestrator.html#Orchestrator.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.Orchestrator.run" title="Link to this definition"></a></dt>
+<dd><p>Run the full study for <code class="docutils literal notranslate"><span class="pre">url</span></code> and return an <code class="xref py py-class docutils literal notranslate"><span class="pre">OrchestratorResult</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.agents_for_role">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">agents_for_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="agents/definitions.html#ov.agents.definitions.AgentSpec" title="ov.agents.definitions.AgentSpec"><span class="pre">AgentSpec</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ov/agents/definitions.html#agents_for_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.agents_for_role" title="Link to this definition"></a></dt>
+<dd><p>All specs with <code class="docutils literal notranslate"><span class="pre">role</span></code> (e.g. both analysts).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">lens</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">agents_for_role</span><span class="p">(</span><span class="s2">&quot;analyst&quot;</span><span class="p">)]</span>
+<span class="go">[&#39;ux&#39;, &#39;arch&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.analyst_specs">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">analyst_specs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="agents/definitions.html#ov.agents.definitions.AgentSpec" title="ov.agents.definitions.AgentSpec"><span class="pre">AgentSpec</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ov/agents/definitions.html#analyst_specs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.analyst_specs" title="Link to this definition"></a></dt>
+<dd><p>The UX + Arch analyst specs, in pipeline order (UX then Arch).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.arch_analyst">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">arch_analyst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="agents/analyst.html#ov.agents.analyst.AnalystAgent" title="ov.agents.analyst.AnalystAgent"><span class="pre">AnalystAgent</span></a></span></span><a class="reference internal" href="../../_modules/ov/agents/analyst.html#arch_analyst"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.arch_analyst" title="Link to this definition"></a></dt>
+<dd><p>A software-architecture analyst (Opus-routed). <code class="docutils literal notranslate"><span class="pre">llm</span></code> is the injected model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arch_analyst</span><span class="p">()</span><span class="o">.</span><span class="n">model</span>
+<span class="go">&#39;opus&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.complete_agent">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">complete_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_or_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">skills_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../_modules/ov/agents/realize.html#complete_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.complete_agent" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">COMPLETE</span></code> one ov skill into a <code class="xref py py-class docutils literal notranslate"><span class="pre">coact.AgentDefinition</span></code> (the lift).</p>
+<p>Mechanical by default (no LLM): model, tools, return contract and MCP wiring come
+from the skill’s <code class="docutils literal notranslate"><span class="pre">coact:</span></code> block. Pass <code class="docutils literal notranslate"><span class="pre">llm=</span></code> only to let coact <em>draft</em> a
+persona — the deterministic template path is used otherwise.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.complete_all">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">complete_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skills_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ov/agents/realize.html#complete_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.complete_all" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">COMPLETE</span></code> every ov agent (or <code class="docutils literal notranslate"><span class="pre">roles</span></code>) → <code class="docutils literal notranslate"><span class="pre">{role:</span> <span class="pre">AgentDefinition}</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.default_model">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">default_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ov/agents/llm.html#default_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.default_model" title="Link to this definition"></a></dt>
+<dd><p>The default model selector for a role (falls back to <code class="docutils literal notranslate"><span class="pre">&quot;sonnet&quot;</span></code>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">default_model</span><span class="p">(</span><span class="s2">&quot;operator&quot;</span><span class="p">),</span> <span class="n">default_model</span><span class="p">(</span><span class="s2">&quot;arch&quot;</span><span class="p">),</span> <span class="n">default_model</span><span class="p">(</span><span class="s2">&quot;???&quot;</span><span class="p">)</span>
+<span class="go">(&#39;haiku&#39;, &#39;opus&#39;, &#39;sonnet&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.default_skills_dir">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">default_skills_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="../../_modules/ov/agents/_skills.html#default_skills_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.default_skills_dir" title="Link to this definition"></a></dt>
+<dd><p>Resolve the directory holding <code class="docutils literal notranslate"><span class="pre">ov</span></code>’s skills (env, then packaged, then repo).</p>
+<p>Returns the first layout that actually contains skills; if none is found, the
+packaged path is returned so callers get a clear, consistent miss to report.</p>
+<p>Deliberately <em>not</em> cached: it reads <code class="docutils literal notranslate"><span class="pre">OV_SKILLS_DIR</span></code> at call time (a few cheap
+<code class="docutils literal notranslate"><span class="pre">Path</span></code> checks), so an env change is always honoured. Resolution is invoked
+once per agent lift, not in a hot loop, so the cost is immaterial.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.estimate">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">roles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">skills_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../_modules/ov/agents/realize.html#estimate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.estimate" title="Link to this definition"></a></dt>
+<dd><p>The cost gate — coact’s fan-out estimate over the selected ov agents.</p>
+<p>Realizing an in-package fleet costs roughly an order of magnitude more tokens
+than the host path, and the premium is worst on <em>interdependent</em> work (ov’s
+analysts share the evidence bundle). Render this before spawning:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">estimate</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">estimate</span><span class="p">([</span><span class="s2">&quot;ux-analyst&quot;</span><span class="p">,</span> <span class="s2">&quot;arch-analyst&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.materialize">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">materialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'project'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skills_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../_modules/ov/agents/realize.html#materialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.materialize" title="Link to this definition"></a></dt>
+<dd><p>Realize ov’s agents on the <strong>host</strong> backend: write <code class="docutils literal notranslate"><span class="pre">.claude/agents/</span></code> + link skills.</p>
+<p>This is the cheap pit-of-success — it stands up <em>no</em> runtime. It emits one
+<code class="docutils literal notranslate"><span class="pre">&lt;name&gt;.md</span></code> per agent into <code class="docutils literal notranslate"><span class="pre">dest</span></code> (default: the project’s <code class="docutils literal notranslate"><span class="pre">.claude/agents/</span></code>)
+and symlinks each referenced skill into the sibling <code class="docutils literal notranslate"><span class="pre">.claude/skills/</span></code> so Claude
+Code discovers both, then verifies discovery. Returns coact’s <code class="docutils literal notranslate"><span class="pre">RealizedHost</span></code>
+(<code class="docutils literal notranslate"><span class="pre">.agents</span></code>, <code class="docutils literal notranslate"><span class="pre">.skills</span></code>, <code class="docutils literal notranslate"><span class="pre">.warnings</span></code>).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.mcp_server">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">mcp_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ov'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tools</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_trans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../_modules/ov/agents/mcp.html#mcp_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.mcp_server" title="Link to this definition"></a></dt>
+<dd><p>Build a FastMCP server exposing <code class="docutils literal notranslate"><span class="pre">ov</span></code> to foreign hosts (via <code class="docutils literal notranslate"><span class="pre">py2mcp</span></code>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">srv</span> <span class="o">=</span> <span class="n">mcp_server</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">srv</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>                               <span class="c1"># serve over stdio</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.ov_tools">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">ov_tools</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ov/agents/mcp.html#ov_tools"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.ov_tools" title="Link to this definition"></a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">ov</span></code> callables exposed as MCP tools (coarse, stateless, JSON-shaped).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.realize_agent">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">realize_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_or_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'host'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skills_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../_modules/ov/agents/realize.html#realize_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.realize_agent" title="Link to this definition"></a></dt>
+<dd><p>Realize a single ov agent on <code class="docutils literal notranslate"><span class="pre">backend</span></code> (<code class="docutils literal notranslate"><span class="pre">&quot;host&quot;</span></code> | <code class="docutils literal notranslate"><span class="pre">&quot;sdk&quot;</span></code> | <code class="docutils literal notranslate"><span class="pre">&quot;mcp&quot;</span></code>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">sdk</span></code> returns a <code class="docutils literal notranslate"><span class="pre">coact.RunnableAgent</span></code> (an <code class="docutils literal notranslate"><span class="pre">aw.AgenticStep</span></code>) for text-shaped
+agents; <code class="docutils literal notranslate"><span class="pre">mcp</span></code> exposes the skill’s declared <code class="docutils literal notranslate"><span class="pre">coact:</span> <span class="pre">mcp:</span></code> tools as a FastMCP
+server (foreign hosts). For ov’s live-browser / multimodal runtimes use
+<a class="reference internal" href="agents/operator.html#ov.agents.operator.OperatorAgent" title="ov.agents.operator.OperatorAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">OperatorAgent</span></code></a> / <a class="reference internal" href="agents/analyst.html#ov.agents.analyst.AnalystAgent" title="ov.agents.analyst.AnalystAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnalystAgent</span></code></a>
+instead — coact’s text-prompt <code class="docutils literal notranslate"><span class="pre">sdk</span></code> agent can’t drive a page or send images.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.resolve_llm">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">resolve_llm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/agents/llm.html#resolve_llm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.resolve_llm" title="Link to this definition"></a></dt>
+<dd><p>Resolve <code class="docutils literal notranslate"><span class="pre">llm</span></code> to a <code class="docutils literal notranslate"><span class="pre">callable(str)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>One injection convention: a callable (used as-is), an <code class="docutils literal notranslate"><span class="pre">aw</span></code> <code class="docutils literal notranslate"><span class="pre">StepConfig</span></code>, a
+model-name string, or <code class="docutils literal notranslate"><span class="pre">None</span></code> to discover an ambient provider. A plain callable
+short-circuits (no optional dependency needed); the other forms defer to
+<code class="xref py py-func docutils literal notranslate"><span class="pre">coact.llm.resolve_llm()</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">resolve_llm</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="s2">&quot;hi&quot;</span><span class="p">)(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="go">&#39;hi&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.skill_path">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">skill_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">skills_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="../../_modules/ov/agents/_skills.html#skill_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.skill_path" title="Link to this definition"></a></dt>
+<dd><p>Absolute path to skill <code class="docutils literal notranslate"><span class="pre">name</span></code>’s directory (the one holding <code class="docutils literal notranslate"><span class="pre">SKILL.md</span></code>).</p>
+<p>Raises <code class="xref py py-class docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> with an actionable hint when the skill is not
+discoverable, rather than letting coact fail later on a missing path.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.structured">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">structured</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ov/agents/llm.html#structured"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.structured" title="Link to this definition"></a></dt>
+<dd><p>Best-effort schema-conforming dict from an LLM, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unavailable.</p>
+<p>Resolution order honours dependency injection:</p>
+<ol class="arabic simple">
+<li><p>if <code class="docutils literal notranslate"><span class="pre">llm</span></code> exposes a <code class="docutils literal notranslate"><span class="pre">structured</span></code> method, it is used as-is — this is the
+multimodal path (the method may accept <code class="docutils literal notranslate"><span class="pre">images=</span></code>); a real vision client
+plugs in here;</p></li>
+<li><p>otherwise fall through to coact’s portable text-only <code class="docutils literal notranslate"><span class="pre">structured</span></code> (any
+<code class="docutils literal notranslate"><span class="pre">images</span></code> are dropped — the bundle’s textual facts still ground the claims);</p></li>
+<li><p>if no LLM is resolvable at all, return <code class="docutils literal notranslate"><span class="pre">None</span></code> so callers fall back to a
+deterministic-only path (no crash, no provider lock-in).</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.study">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">study</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('ux',</span> <span class="pre">'arch')</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="agents/orchestrator.html#ov.agents.orchestrator.OrchestratorResult" title="ov.agents.orchestrator.OrchestratorResult"><span class="pre">OrchestratorResult</span></a></span></span><a class="reference internal" href="../../_modules/ov/agents/orchestrator.html#study"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.study" title="Link to this definition"></a></dt>
+<dd><p>Run an end-to-end study of <code class="docutils literal notranslate"><span class="pre">url</span></code> (the in-package twin of the <code class="docutils literal notranslate"><span class="pre">study-web-app</span></code> skill).</p>
+<p>The pit-of-success one-liner: capture → analyze → (optional analyst judgment) →
+report → synopsis. With <code class="docutils literal notranslate"><span class="pre">llm=None</span></code> it is fully deterministic; pass an injected
+model to add grounded UX/Arch narrative. Forwards <code class="docutils literal notranslate"><span class="pre">mode</span></code> / <code class="docutils literal notranslate"><span class="pre">authorized</span></code> /
+<code class="docutils literal notranslate"><span class="pre">crawl_pages</span></code> / <code class="docutils literal notranslate"><span class="pre">out_dir</span></code> / stage seams via <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.ux_analyst">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.</span></span><span class="sig-name descname"><span class="pre">ux_analyst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="agents/analyst.html#ov.agents.analyst.AnalystAgent" title="ov.agents.analyst.AnalystAgent"><span class="pre">AnalystAgent</span></a></span></span><a class="reference internal" href="../../_modules/ov/agents/analyst.html#ux_analyst"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.ux_analyst" title="Link to this definition"></a></dt>
+<dd><p>A UX/accessibility analyst (Sonnet-routed). <code class="docutils literal notranslate"><span class="pre">llm</span></code> is the injected model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ux_analyst</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">lens</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span>
+<span class="go">(&#39;ux&#39;, &#39;sonnet&#39;, &#39;ux-analyst&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="__main__.html" class="btn btn-neutral float-left" title="ov.__main__" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="agents/_skills.html" class="btn btn-neutral float-right" title="ov.agents._skills" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

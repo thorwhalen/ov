@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.ux.contrast_focus &mdash; ov 0.1.0 documentation</title>
+  <title>ov.analysis.ux.contrast_focus &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -193,7 +203,9 @@
 
 <div class="viewcode-block" id="analyze_contrast_focus">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.analyze_contrast_focus">[docs]</a>
-<span class="nd">@register_analyzer</span><span class="p">(</span><span class="s2">&quot;contrast_focus&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a11y_styles&quot;</span><span class="p">,</span> <span class="s2">&quot;dom&quot;</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,))</span>
+<span class="nd">@register_analyzer</span><span class="p">(</span>
+    <span class="s2">&quot;contrast_focus&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a11y_styles&quot;</span><span class="p">,</span> <span class="s2">&quot;dom&quot;</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,)</span>
+<span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_contrast_focus</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Emit contrast Findings + statically-detectable focus Findings.&quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
@@ -213,8 +225,12 @@
                 <span class="n">key</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;selector&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">)</span>
                 <span class="n">prior</span> <span class="o">=</span> <span class="n">seen</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">prior</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="n">prior</span><span class="p">[</span><span class="s2">&quot;ratio&quot;</span><span class="p">]:</span>
-                    <span class="n">seen</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ratio&quot;</span><span class="p">:</span> <span class="n">ratio</span><span class="p">,</span> <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="n">threshold</span><span class="p">,</span>
-                                 <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+                    <span class="n">seen</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">&quot;ratio&quot;</span><span class="p">:</span> <span class="n">ratio</span><span class="p">,</span>
+                        <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="n">threshold</span><span class="p">,</span>
+                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                        <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="p">}</span>
                 <span class="n">seen</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;states&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="n">selector</span><span class="p">,</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">seen</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -227,7 +243,9 @@
                 <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;AA&quot;</span><span class="p">},</span>
                 <span class="n">engine_rule_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
-                    <span class="s2">&quot;serious&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">states_affected</span><span class="o">=</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;serious&quot;</span><span class="p">,</span>
+                    <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">states_affected</span><span class="o">=</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">],</span>
                     <span class="n">journey_fraction</span><span class="o">=</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">num_states</span><span class="p">,</span>
                 <span class="p">),</span>
                 <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;a11y_styles&quot;</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]],</span>
@@ -269,7 +287,9 @@
                         <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
                         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Positive tabindex disrupts natural focus order&quot;</span><span class="p">,</span>
                         <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">},</span>
-                        <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span><span class="s2">&quot;moderate&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_states</span><span class="p">),</span>
+                        <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
+                            <span class="s2">&quot;moderate&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_states</span>
+                        <span class="p">),</span>
                         <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">],</span>
                         <span class="n">observed</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;element </span><span class="si">{</span><span class="n">sel</span><span class="si">}</span><span class="s2"> uses a positive tabindex&quot;</span><span class="p">,</span>
                         <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="n">sel</span><span class="p">},</span>

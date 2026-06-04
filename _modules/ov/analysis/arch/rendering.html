@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.arch.rendering &mdash; ov 0.1.0 documentation</title>
+  <title>ov.analysis.arch.rendering &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -176,7 +186,9 @@
 
 <div class="viewcode-block" id="classify_rendering">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.classify_rendering">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">classify_rendering</span><span class="p">(</span><span class="n">raw_html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rendered_html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">globals_present</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">classify_rendering</span><span class="p">(</span>
+    <span class="n">raw_html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rendered_html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">globals_present</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Classify the rendering model from raw vs rendered HTML (pure, testable).</span>
 
 <span class="sd">    Returns ``(model, confidence_0_100, rationale)`` where model is one of</span>
@@ -190,7 +202,8 @@
     <span class="n">rendered_len</span> <span class="o">=</span> <span class="n">_visible_text_len</span><span class="p">(</span><span class="n">rendered_html</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="n">globals_present</span> <span class="o">=</span> <span class="n">globals_present</span> <span class="ow">or</span> <span class="p">{}</span>
     <span class="n">has_injection</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
-        <span class="n">globals_present</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;__NEXT_DATA__&quot;</span><span class="p">,</span> <span class="s2">&quot;__NUXT__&quot;</span><span class="p">,</span> <span class="s2">&quot;__remixContext&quot;</span><span class="p">,</span> <span class="s2">&quot;__gatsby&quot;</span><span class="p">)</span>
+        <span class="n">globals_present</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;__NEXT_DATA__&quot;</span><span class="p">,</span> <span class="s2">&quot;__NUXT__&quot;</span><span class="p">,</span> <span class="s2">&quot;__remixContext&quot;</span><span class="p">,</span> <span class="s2">&quot;__gatsby&quot;</span><span class="p">)</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">rendered_len</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -205,7 +218,9 @@
         <span class="n">rationale</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;server HTML matched the rendered DOM closely (divergence </span><span class="si">{</span><span class="n">divergence</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">model</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="s2">&quot;hybrid&quot;</span><span class="p">,</span> <span class="n">_CONF_HYBRID</span>
-        <span class="n">rationale</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;partial server markup, hydrated client-side (divergence </span><span class="si">{</span><span class="n">divergence</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">rationale</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;partial server markup, hydrated client-side (divergence </span><span class="si">{</span><span class="n">divergence</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">has_injection</span> <span class="ow">and</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ssr-or-ssg&quot;</span><span class="p">,</span> <span class="s2">&quot;hybrid&quot;</span><span class="p">):</span>
         <span class="n">conf</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">_CONF_MAX</span><span class="p">,</span> <span class="n">conf</span> <span class="o">+</span> <span class="n">_INJECTION_BOOST</span><span class="p">)</span>
@@ -231,19 +246,26 @@
 
 <div class="viewcode-block" id="analyze_rendering">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.analyze_rendering">[docs]</a>
-<span class="nd">@register_analyzer</span><span class="p">(</span><span class="s2">&quot;rendering&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="s2">&quot;network&quot;</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;rendering_model&quot;</span><span class="p">,))</span>
+<span class="nd">@register_analyzer</span><span class="p">(</span>
+    <span class="s2">&quot;rendering&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="s2">&quot;network&quot;</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;rendering_model&quot;</span><span class="p">,)</span>
+<span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_rendering</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set ``run.rendering_model`` and emit an arch_fact Finding.&quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
     <span class="n">dom_arts</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">)</span>
     <span class="n">raw_htmls</span> <span class="o">=</span> <span class="n">_document_bodies</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">dom_arts</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">raw_htmls</span><span class="p">:</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;rendering_model&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;missing document body or DOM&quot;</span><span class="p">}</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;rendering_model&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;missing document body or DOM&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
         <span class="k">return</span> <span class="n">out</span>
 
     <span class="n">fp</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">&quot;fingerprint&quot;</span><span class="p">)</span>
     <span class="n">globals_present</span> <span class="o">=</span> <span class="p">(</span><span class="n">fp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;signals&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;globals&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">fp</span> <span class="k">else</span> <span class="p">{})</span> <span class="ow">or</span> <span class="p">{}</span>
-    <span class="n">model</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">rationale</span> <span class="o">=</span> <span class="n">classify_rendering</span><span class="p">(</span><span class="n">raw_htmls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">dom_arts</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">globals_present</span><span class="p">)</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">rationale</span> <span class="o">=</span> <span class="n">classify_rendering</span><span class="p">(</span>
+        <span class="n">raw_htmls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">dom_arts</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">globals_present</span>
+    <span class="p">)</span>
     <span class="n">out</span><span class="o">.</span><span class="n">run_fields</span><span class="p">[</span><span class="s2">&quot;rendering_model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
     <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
         <span class="n">Finding</span><span class="p">(</span>

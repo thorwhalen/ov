@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.ux.a11y &mdash; ov 0.1.0 documentation</title>
+  <title>ov.analysis.ux.a11y &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -165,16 +175,41 @@
 
 <span class="c1"># signal -&gt; (wcag id, level, impact tier, human label, fix hint)</span>
 <span class="n">_PERENNIALS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;a11y.image-alt&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;1.1.1&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">,</span> <span class="s2">&quot;image missing alt attribute&quot;</span><span class="p">,</span>
-                       <span class="s2">&quot;add an alt attribute (alt=</span><span class="se">\&quot;\&quot;</span><span class="s2"> if decorative)&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;a11y.link-name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;2.4.4&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;serious&quot;</span><span class="p">,</span> <span class="s2">&quot;link has no discernible text&quot;</span><span class="p">,</span>
-                       <span class="s2">&quot;give the link text, an aria-label, or a titled child&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;a11y.button-name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4.1.2&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">,</span> <span class="s2">&quot;button has no accessible name&quot;</span><span class="p">,</span>
-                         <span class="s2">&quot;add text content or an aria-label to the button&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;a11y.form-label&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;1.3.1&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">,</span> <span class="s2">&quot;form control has no associated label&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;add a &lt;label for&gt;, aria-label, or aria-labelledby&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;a11y.html-lang&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;3.1.1&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;serious&quot;</span><span class="p">,</span> <span class="s2">&quot;document has no lang attribute&quot;</span><span class="p">,</span>
-                       <span class="s2">&quot;set &lt;html lang=...&gt; to the page language&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;a11y.image-alt&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">&quot;1.1.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;critical&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;image missing alt attribute&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;add an alt attribute (alt=&quot;&quot; if decorative)&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;a11y.link-name&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">&quot;2.4.4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;serious&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;link has no discernible text&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;give the link text, an aria-label, or a titled child&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;a11y.button-name&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">&quot;4.1.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;critical&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;button has no accessible name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;add text content or an aria-label to the button&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;a11y.form-label&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">&quot;1.3.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;critical&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;form control has no associated label&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;add a &lt;label for&gt;, aria-label, or aria-labelledby&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;a11y.html-lang&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">&quot;3.1.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;serious&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;document has no lang attribute&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;set &lt;html lang=...&gt; to the page language&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
 <span class="p">}</span>
 
 
@@ -286,7 +321,9 @@
     <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">dom_arts</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_scan_dom</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">art</span><span class="p">)):</span>
             <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;selector&quot;</span><span class="p">])</span>
-            <span class="n">rec</span> <span class="o">=</span> <span class="n">seen</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">{</span><span class="o">**</span><span class="n">v</span><span class="p">,</span> <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;artifact_id&quot;</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">})</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="n">seen</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span>
+                <span class="n">key</span><span class="p">,</span> <span class="p">{</span><span class="o">**</span><span class="n">v</span><span class="p">,</span> <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;artifact_id&quot;</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">}</span>
+            <span class="p">)</span>
             <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">selector</span><span class="p">),</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">seen</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -301,7 +338,9 @@
                 <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">wcag_id</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">level</span><span class="p">},</span>
                 <span class="n">engine_rule_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
-                    <span class="n">impact</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">states_affected</span><span class="o">=</span><span class="n">states</span><span class="p">,</span>
+                    <span class="n">impact</span><span class="p">,</span>
+                    <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">states_affected</span><span class="o">=</span><span class="n">states</span><span class="p">,</span>
                     <span class="n">journey_fraction</span><span class="o">=</span><span class="n">states</span> <span class="o">/</span> <span class="n">num_states</span><span class="p">,</span>
                 <span class="p">),</span>
                 <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;artifact_id&quot;</span><span class="p">]],</span>
@@ -338,7 +377,9 @@
                     <span class="n">signal</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;axe.</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
                     <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
                     <span class="n">title</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;axe violation&quot;</span><span class="p">)),</span>
-                    <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;wcag&quot;</span><span class="p">)]},</span>
+                    <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;wcag&quot;</span><span class="p">)]</span>
+                    <span class="p">},</span>
                     <span class="n">engine_rule_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;axe:</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
                     <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
                         <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;impact&quot;</span><span class="p">,</span> <span class="s2">&quot;moderate&quot;</span><span class="p">),</span>

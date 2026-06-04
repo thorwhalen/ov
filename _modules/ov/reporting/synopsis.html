@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.reporting.synopsis &mdash; ov 0.1.0 documentation</title>
+  <title>ov.reporting.synopsis &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -197,27 +207,33 @@
                 <span class="n">placed</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">break</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">placed</span><span class="p">:</span>
-            <span class="n">clusters</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;norm&quot;</span><span class="p">:</span> <span class="n">nf</span><span class="p">,</span> <span class="s2">&quot;refs&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="n">rf</span><span class="p">),</span> <span class="s2">&quot;rep&quot;</span><span class="p">:</span> <span class="n">f</span><span class="p">,</span> <span class="s2">&quot;members&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">f</span><span class="p">]})</span>
+            <span class="n">clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s2">&quot;norm&quot;</span><span class="p">:</span> <span class="n">nf</span><span class="p">,</span> <span class="s2">&quot;refs&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="n">rf</span><span class="p">),</span> <span class="s2">&quot;rep&quot;</span><span class="p">:</span> <span class="n">f</span><span class="p">,</span> <span class="s2">&quot;members&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">f</span><span class="p">]}</span>
+            <span class="p">)</span>
 
     <span class="n">records</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">:</span>
         <span class="n">rep</span><span class="p">:</span> <span class="n">Finding</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;rep&quot;</span><span class="p">]</span>
-        <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">finding_id</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
-            <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">signal</span><span class="p">,</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">category</span><span class="p">,</span>
-            <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">title</span> <span class="ow">or</span> <span class="n">rep</span><span class="o">.</span><span class="n">observed</span><span class="p">,</span>
-            <span class="s2">&quot;severity_tier&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">impact_tier</span> <span class="k">if</span> <span class="n">rep</span><span class="o">.</span><span class="n">severity</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s2">&quot;severity_score&quot;</span><span class="p">:</span> <span class="n">_sev_score</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span> <span class="k">if</span> <span class="n">rep</span><span class="o">.</span><span class="n">severity</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s2">&quot;evidence_refs&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;refs&quot;</span><span class="p">]),</span>
-            <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">confidence</span><span class="p">,</span>
-            <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">suggested_fix</span><span class="p">,</span>
-            <span class="s2">&quot;needs_human_review&quot;</span><span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">needs_human_review</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;members&quot;</span><span class="p">]),</span>
-            <span class="s2">&quot;occurrences&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;members&quot;</span><span class="p">]),</span>
-            <span class="s2">&quot;diff_status&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">diff_status</span><span class="p">,</span>
-        <span class="p">})</span>
-    <span class="n">records</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;severity_score&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;severity_score&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)))</span>
+        <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">finding_id</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                <span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">signal</span><span class="p">,</span>
+                <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">category</span><span class="p">,</span>
+                <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">title</span> <span class="ow">or</span> <span class="n">rep</span><span class="o">.</span><span class="n">observed</span><span class="p">,</span>
+                <span class="s2">&quot;severity_tier&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">impact_tier</span> <span class="k">if</span> <span class="n">rep</span><span class="o">.</span><span class="n">severity</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;severity_score&quot;</span><span class="p">:</span> <span class="n">_sev_score</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span> <span class="k">if</span> <span class="n">rep</span><span class="o">.</span><span class="n">severity</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;evidence_refs&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;refs&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">confidence</span><span class="p">,</span>
+                <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">suggested_fix</span><span class="p">,</span>
+                <span class="s2">&quot;needs_human_review&quot;</span><span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">needs_human_review</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;members&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;occurrences&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;members&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;diff_status&quot;</span><span class="p">:</span> <span class="n">rep</span><span class="o">.</span><span class="n">diff_status</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="n">records</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span>
+        <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;severity_score&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;severity_score&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">records</span></div>
 
 
@@ -238,10 +254,14 @@
         <span class="s2">&quot;target_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;own&quot;</span> <span class="k">if</span> <span class="n">run</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;review&quot;</span> <span class="k">else</span> <span class="s2">&quot;foreign&quot;</span><span class="p">,</span>
         <span class="s2">&quot;rendering_model&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">rendering_model</span><span class="p">,</span>
         <span class="s2">&quot;source_maps_present&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">source_maps_present</span><span class="p">,</span>
-        <span class="s2">&quot;technologies&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">confidence</span><span class="p">}</span>
-                          <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">],</span>
-        <span class="s2">&quot;api_endpoints&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">path_template</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">kind</span><span class="p">}</span>
-                          <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">api_surface</span><span class="p">],</span>
+        <span class="s2">&quot;technologies&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">confidence</span><span class="p">}</span>
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">fingerprint</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;api_endpoints&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">path_template</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">kind</span><span class="p">}</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">api_surface</span>
+        <span class="p">],</span>
         <span class="s2">&quot;severity_histogram&quot;</span><span class="p">:</span> <span class="n">histogram</span><span class="p">,</span>
         <span class="s2">&quot;findings&quot;</span><span class="p">:</span> <span class="n">records</span><span class="p">,</span>
     <span class="p">}</span></div>
@@ -296,7 +316,9 @@
     <span class="k">if</span> <span class="n">out</span><span class="p">:</span>
         <span class="n">out_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
         <span class="n">out_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="p">(</span><span class="n">out_dir</span> <span class="o">/</span> <span class="s2">&quot;synopsis.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">out_dir</span> <span class="o">/</span> <span class="s2">&quot;synopsis.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span>
+        <span class="p">)</span>
         <span class="n">md_path</span> <span class="o">=</span> <span class="n">out_dir</span> <span class="o">/</span> <span class="s2">&quot;SYNOPSIS.md&quot;</span>
         <span class="n">md_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">md</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">md_path</span><span class="p">)</span>

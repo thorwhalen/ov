@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.__main__ &mdash; ov 0.1.0 documentation</title>
+  <title>ov.__main__ &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -24,7 +24,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="ov.analysis" href="analysis.html" />
+    <link rel="next" title="ov.agents" href="agents.html" />
     <link rel="prev" title="ov" href="../ov.html" /> 
 </head>
 
@@ -55,6 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.check"><code class="docutils literal notranslate"><span class="pre">check()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.evidence"><code class="docutils literal notranslate"><span class="pre">evidence()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.__main__.mcp"><code class="docutils literal notranslate"><span class="pre">mcp()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.observe"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.overview"><code class="docutils literal notranslate"><span class="pre">overview()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.report"><code class="docutils literal notranslate"><span class="pre">report()</span></code></a></li>
@@ -62,6 +63,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#ov.__main__.synopsis"><code class="docutils literal notranslate"><span class="pre">synopsis()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -175,6 +186,12 @@ Each command calls the very functions a skill or a normal caller would call.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="ov.__main__.mcp">
+<span class="sig-prename descclassname"><span class="pre">ov.__main__.</span></span><span class="sig-name descname"><span class="pre">mcp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/__main__.html#mcp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.__main__.mcp" title="Link to this definition"></a></dt>
+<dd><p>Serve ov as an MCP server (stdio) for non-Claude-Code hosts (needs ov[agents]).</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ov.__main__.observe">
 <span class="sig-prename descclassname"><span class="pre">ov.__main__.</span></span><span class="sig-name descname"><span class="pre">observe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">headed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reconstruct'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crawl_pages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authorized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/__main__.html#observe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.__main__.observe" title="Link to this definition"></a></dt>
 <dd><p>Capture a target into the store and print a summary of the run.</p>
@@ -211,7 +228,7 @@ Each command calls the very functions a skill or a normal caller would call.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../ov.html" class="btn btn-neutral float-left" title="ov" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="analysis.html" class="btn btn-neutral float-right" title="ov.analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="agents.html" class="btn btn-neutral float-right" title="ov.agents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

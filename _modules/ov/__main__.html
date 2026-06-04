@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.__main__ &mdash; ov 0.1.0 documentation</title>
+  <title>ov.__main__ &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -151,7 +161,16 @@
 
 <div class="viewcode-block" id="observe">
 <a class="viewcode-back" href="../../module_docs/ov/__main__.html#ov.__main__.observe">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">observe</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">probes</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span> <span class="n">crawl_pages</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">authorized</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">observe</span><span class="p">(</span>
+    <span class="n">url</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">headed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">probes</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span>
+    <span class="n">crawl_pages</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">authorized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Capture a target into the store and print a summary of the run.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">run</span> <span class="o">=</span> <span class="n">_ov</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
@@ -208,9 +227,20 @@
 
 <div class="viewcode-block" id="overview">
 <a class="viewcode-back" href="../../module_docs/ov/__main__.html#ov.__main__.overview">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">overview</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">authorized</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">overview</span><span class="p">(</span>
+    <span class="n">url</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">authorized</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;observe -&gt; analyze -&gt; report -&gt; synopsis, the one-liner (Phase 2).&quot;&quot;&quot;</span>
-    <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span><span class="n">_ov</span><span class="o">.</span><span class="n">overview</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headed</span><span class="o">=</span><span class="n">headed</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">authorized</span><span class="o">=</span><span class="n">authorized</span><span class="p">))</span></div>
+    <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">_ov</span><span class="o">.</span><span class="n">overview</span><span class="p">(</span>
+            <span class="n">url</span><span class="p">,</span>
+            <span class="n">headed</span><span class="o">=</span><span class="n">headed</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+            <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span>
+            <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+            <span class="n">authorized</span><span class="o">=</span><span class="n">authorized</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
 
 
 
@@ -228,7 +258,9 @@
         <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;error: could not load run </span><span class="si">{</span><span class="n">run_id</span><span class="si">!r}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">yield</span> <span class="s2">&quot;run `ov runs` to list available run ids&quot;</span>
         <span class="k">return</span>
-    <span class="n">bundle</span> <span class="o">=</span> <span class="n">build_evidence_bundle</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">step_id</span><span class="o">=</span><span class="n">step_id</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">)</span>
+    <span class="n">bundle</span> <span class="o">=</span> <span class="n">build_evidence_bundle</span><span class="p">(</span>
+        <span class="n">run</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">step_id</span><span class="o">=</span><span class="n">step_id</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span>
+    <span class="p">)</span>
     <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;step: </span><span class="si">{</span><span class="n">bundle</span><span class="o">.</span><span class="n">step_id</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;marks: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">marks</span><span class="p">)</span><span class="si">}</span><span class="s2">  facts: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">facts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;token_budget: </span><span class="si">{</span><span class="n">bundle</span><span class="o">.</span><span class="n">token_budget</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -242,6 +274,16 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check system dependencies (Playwright browsers, Node, sidecar, CLIs).&quot;&quot;&quot;</span>
     <span class="n">rep</span> <span class="o">=</span> <span class="n">_check_requirements</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">rep</span><span class="o">.</span><span class="n">render</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="mcp">
+<a class="viewcode-back" href="../../module_docs/ov/__main__.html#ov.__main__.mcp">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mcp</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serve ov as an MCP server (stdio) for non-Claude-Code hosts (needs ov[agents]).&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.agents.mcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">_serve</span>
+
+    <span class="n">_serve</span><span class="p">()</span></div>
 
 
 
@@ -259,8 +301,13 @@
 <a class="viewcode-back" href="../../module_docs/ov/__main__.html#ov.__main__.main">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Entry point for the ``ov`` console script.&quot;&quot;&quot;</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argh</span><span class="o">.</span><span class="n">ArghParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;ov&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;OverView: web reconnaissance &amp; analysis&quot;</span><span class="p">)</span>
-    <span class="n">argh</span><span class="o">.</span><span class="n">add_commands</span><span class="p">(</span><span class="n">parser</span><span class="p">,</span> <span class="p">[</span><span class="n">observe</span><span class="p">,</span> <span class="n">analyze</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">synopsis</span><span class="p">,</span> <span class="n">overview</span><span class="p">,</span> <span class="n">evidence</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">runs</span><span class="p">])</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argh</span><span class="o">.</span><span class="n">ArghParser</span><span class="p">(</span>
+        <span class="n">prog</span><span class="o">=</span><span class="s2">&quot;ov&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;OverView: web reconnaissance &amp; analysis&quot;</span>
+    <span class="p">)</span>
+    <span class="n">argh</span><span class="o">.</span><span class="n">add_commands</span><span class="p">(</span>
+        <span class="n">parser</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">observe</span><span class="p">,</span> <span class="n">analyze</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">synopsis</span><span class="p">,</span> <span class="n">overview</span><span class="p">,</span> <span class="n">evidence</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">runs</span><span class="p">,</span> <span class="n">mcp</span><span class="p">],</span>
+    <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span></div>
 
 

@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.agents.analyst &mdash; ov 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.agents.definitions" href="definitions.html" />
+    <link rel="prev" title="ov.agents._util" href="_util.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_util.html">ov.agents._util</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.agents.analyst</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.analyst.AnalystAgent"><code class="docutils literal notranslate"><span class="pre">AnalystAgent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.agents.analyst.AnalystAgent.execute"><code class="docutils literal notranslate"><span class="pre">AnalystAgent.execute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.analyst.Judge"><code class="docutils literal notranslate"><span class="pre">Judge</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.analyst.arch_analyst"><code class="docutils literal notranslate"><span class="pre">arch_analyst()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.agents.analyst.ux_analyst"><code class="docutils literal notranslate"><span class="pre">ux_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="realize.html">ov.agents.realize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.agents.analyst</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/agents/analyst.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.agents.analyst">
+<span id="ov-agents-analyst"></span><h1>ov.agents.analyst<a class="headerlink" href="#module-ov.agents.analyst" title="Link to this heading"></a></h1>
+<p>The Analyst agents (UX + Arch) — grounded judgment over an evidence bundle.</p>
+<p>The hard architectural seam (§8.1, D4): <strong>analysts never touch the live browser.</strong>
+They consume a <em>deterministic, model-free</em> evidence bundle — marked screenshots +
+derived facts + a cite-or-abstain contract — and add narrative judgment on top. The
+package supplies three reused-unchanged pieces and the agent wires them:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../analysis/evidence.html#ov.analysis.evidence.build_evidence_bundle" title="ov.analysis.evidence.build_evidence_bundle"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_evidence_bundle()</span></code></a> assembles the bundle (Set-of-
+Mark regions, computed token budget);</p></li>
+<li><p>the injected <code class="docutils literal notranslate"><span class="pre">judge</span></code> (an LLM under the cite-or-abstain contract) returns
+candidate <code class="xref py py-class docutils literal notranslate"><span class="pre">Finding`s</span> <span class="pre">(``source_layer=&quot;llm&quot;`</span></code>);</p></li>
+<li><p><a class="reference internal" href="../analysis/reliability.html#ov.analysis.reliability.verify_findings" title="ov.analysis.reliability.verify_findings"><code class="xref py py-func docutils literal notranslate"><span class="pre">verify_findings()</span></code></a> gates them — any claim without a
+<em>resolvable</em> evidence ref (or referencing an unknown mark) is <strong>downgraded to
+``undetermined``</strong>, never silently dropped.</p></li>
+</ol>
+<p>So the model interprets; it never authors facts. The judge is injected (DI), so the
+agent is unit-testable with a stub that returns canned findings — no API call, no
+vision model. UX routes to Sonnet, Arch to Opus (§10). Satisfies <code class="docutils literal notranslate"><span class="pre">aw.AgenticStep</span></code>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.agents.analyst.AnalystAgent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.agents.analyst.</span></span><span class="sig-name descname"><span class="pre">AnalystAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">judge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_marks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ov/agents/analyst.html#AnalystAgent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.analyst.AnalystAgent" title="Link to this definition"></a></dt>
+<dd><p>Interpret a captured run’s evidence bundle into grounded findings (UX or Arch).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lens</strong> – <code class="docutils literal notranslate"><span class="pre">&quot;ux&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;arch&quot;</span></code> — selects default model + finding defaults.</p></li>
+<li><p><strong>llm</strong> – the injected LLM (a callable, an object exposing <code class="docutils literal notranslate"><span class="pre">structured</span></code> for the
+multimodal path, an <code class="docutils literal notranslate"><span class="pre">aw</span></code> <code class="docutils literal notranslate"><span class="pre">StepConfig</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code>). Ignored if a
+<code class="docutils literal notranslate"><span class="pre">judge</span></code> is given.</p></li>
+<li><p><strong>judge</strong> – <code class="docutils literal notranslate"><span class="pre">(bundle,</span> <span class="pre">*,</span> <span class="pre">run,</span> <span class="pre">store)</span> <span class="pre">-&gt;</span> <span class="pre">list[Finding</span> <span class="pre">|</span> <span class="pre">dict]</span></code>. Override the whole
+LLM step (tests, alternative providers). Defaults to <code class="xref py py-meth docutils literal notranslate"><span class="pre">_default_judge()</span></code>.</p></li>
+<li><p><strong>model</strong> – model selector for the image-budget + info (defaults from the lens).</p></li>
+<li><p><strong>max_marks</strong> – cap on Set-of-Mark regions in the bundle.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ov.agents.analyst.AnalystAgent.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MutableMapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/ov/agents/analyst.html#AnalystAgent.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.analyst.AnalystAgent.execute" title="Link to this definition"></a></dt>
+<dd><p>Analyze a run (or a prebuilt bundle) → <code class="docutils literal notranslate"><span class="pre">(verified_findings,</span> <span class="pre">info)</span></code> (aw protocol).</p>
+<p><code class="docutils literal notranslate"><span class="pre">input_data</span></code> may be a <a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureRun</span></code></a>, an
+<a class="reference internal" href="../base.html#ov.base.EvidenceBundle" title="ov.base.EvidenceBundle"><code class="xref py py-class docutils literal notranslate"><span class="pre">EvidenceBundle</span></code></a>, or a mapping carrying <code class="docutils literal notranslate"><span class="pre">run</span></code> / <code class="docutils literal notranslate"><span class="pre">store</span></code> /
+<code class="docutils literal notranslate"><span class="pre">bundle</span></code>. The verified LLM findings are appended to <code class="docutils literal notranslate"><span class="pre">run.findings</span></code> (additive
+— <code class="docutils literal notranslate"><span class="pre">source_layer</span></code> keeps them distinct from deterministic facts) and returned.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ov.agents.analyst.Judge">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.analyst.</span></span><span class="sig-name descname"><span class="pre">Judge</span></span><a class="headerlink" href="#ov.agents.analyst.Judge" title="Link to this definition"></a></dt>
+<dd><p>A judge maps an evidence bundle to candidate findings (dicts or Findings).</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code>[[…], <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.analyst.arch_analyst">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.analyst.</span></span><span class="sig-name descname"><span class="pre">arch_analyst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ov.agents.analyst.AnalystAgent" title="ov.agents.analyst.AnalystAgent"><span class="pre">AnalystAgent</span></a></span></span><a class="reference internal" href="../../../_modules/ov/agents/analyst.html#arch_analyst"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.analyst.arch_analyst" title="Link to this definition"></a></dt>
+<dd><p>A software-architecture analyst (Opus-routed). <code class="docutils literal notranslate"><span class="pre">llm</span></code> is the injected model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arch_analyst</span><span class="p">()</span><span class="o">.</span><span class="n">model</span>
+<span class="go">&#39;opus&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.agents.analyst.ux_analyst">
+<span class="sig-prename descclassname"><span class="pre">ov.agents.analyst.</span></span><span class="sig-name descname"><span class="pre">ux_analyst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ov.agents.analyst.AnalystAgent" title="ov.agents.analyst.AnalystAgent"><span class="pre">AnalystAgent</span></a></span></span><a class="reference internal" href="../../../_modules/ov/agents/analyst.html#ux_analyst"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.agents.analyst.ux_analyst" title="Link to this definition"></a></dt>
+<dd><p>A UX/accessibility analyst (Sonnet-routed). <code class="docutils literal notranslate"><span class="pre">llm</span></code> is the injected model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ux_analyst</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">lens</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span>
+<span class="go">(&#39;ux&#39;, &#39;sonnet&#39;, &#39;ux-analyst&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_util.html" class="btn btn-neutral float-left" title="ov.agents._util" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="definitions.html" class="btn btn-neutral float-right" title="ov.agents.definitions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

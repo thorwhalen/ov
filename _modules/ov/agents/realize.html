@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.agents.realize &mdash; ov 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../ov.html">ov</a></li>
+      <li class="breadcrumb-item active">ov.agents.realize</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ov.agents.realize</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;The mechanical lift — turn ``ov``&#39;s skills into agent definitions and realize them.</span>
+
+<span class="sd">This is the thin ov-specific facade over coact&#39;s two transforms (D4): ``COMPLETE``</span>
+<span class="sd">(a ``.claude/skills/`` skill → an :class:`coact.AgentDefinition`, reading the extras</span>
+<span class="sd">from the skill&#39;s ``coact:`` block) and ``REALIZE`` (a definition → a running agent on</span>
+<span class="sd">a chosen backend). Nothing here re-implements an agent loop or a persona; coact does</span>
+<span class="sd">the lift, ``ov`` just points it at the right skills and surfaces the cost gate.</span>
+
+<span class="sd">The cheapest backend is the default (``host``): :func:`materialize` writes</span>
+<span class="sd">``.claude/agents/*.md`` and links the skills so **Claude Code** runs ov&#39;s agents as</span>
+<span class="sd">subagents — no new runtime, no fan-out. Standing up an in-process fleet (``sdk``) or</span>
+<span class="sd">a foreign-host tool server (``mcp``) is opt-in; call :func:`estimate` first to see the</span>
+<span class="sd">~15× fan-out premium before you spawn one (the §3.5 cost gate).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">._skills</span><span class="w"> </span><span class="kn">import</span> <span class="n">skill_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._util</span><span class="w"> </span><span class="kn">import</span> <span class="n">require</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.definitions</span><span class="w"> </span><span class="kn">import</span> <span class="n">OV_AGENTS</span><span class="p">,</span> <span class="n">AgentSpec</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_resolve_spec</span><span class="p">(</span><span class="n">role_or_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentSpec</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve a role key (``&quot;ux-analyst&quot;``), an agent/skill name, to an :class:`AgentSpec`.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">role_or_name</span> <span class="ow">in</span> <span class="n">OV_AGENTS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">OV_AGENTS</span><span class="p">[</span><span class="n">role_or_name</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">OV_AGENTS</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">role_or_name</span> <span class="ow">in</span> <span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">spec</span><span class="o">.</span><span class="n">skill</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">spec</span>
+    <span class="n">known</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OV_AGENTS</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown ov agent </span><span class="si">{</span><span class="n">role_or_name</span><span class="si">!r}</span><span class="s2"> (known roles: </span><span class="si">{</span><span class="n">known</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_specs</span><span class="p">(</span><span class="n">roles</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">AgentSpec</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The specs for ``roles`` (default: all, in registry order).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">roles</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">OV_AGENTS</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_resolve_spec</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">roles</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="complete_agent">
+<a class="viewcode-back" href="../../../module_docs/ov/agents/realize.html#ov.agents.complete_agent">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">complete_agent</span><span class="p">(</span>
+    <span class="n">role_or_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">skills_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">policy</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">llm</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;``COMPLETE`` one ov skill into a :class:`coact.AgentDefinition` (the lift).</span>
+
+<span class="sd">    Mechanical by default (no LLM): model, tools, return contract and MCP wiring come</span>
+<span class="sd">    from the skill&#39;s ``coact:`` block. Pass ``llm=`` only to let coact *draft* a</span>
+<span class="sd">    persona — the deterministic template path is used otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">coact</span><span class="p">,)</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&quot;coact&quot;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s2">&quot;ov.agents.complete_agent&quot;</span><span class="p">)</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">_resolve_spec</span><span class="p">(</span><span class="n">role_or_name</span><span class="p">)</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">skill_path</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">skill</span><span class="p">,</span> <span class="n">skills_dir</span><span class="o">=</span><span class="n">skills_dir</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">coact</span><span class="o">.</span><span class="n">complete</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="complete_all">
+<a class="viewcode-back" href="../../../module_docs/ov/agents/realize.html#ov.agents.complete_all">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">complete_all</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">roles</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">skills_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">policy</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;``COMPLETE`` every ov agent (or ``roles``) → ``{role: AgentDefinition}``.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">role</span><span class="p">:</span> <span class="n">complete_agent</span><span class="p">(</span><span class="n">role</span><span class="p">,</span> <span class="n">skills_dir</span><span class="o">=</span><span class="n">skills_dir</span><span class="p">,</span> <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">(</span><span class="n">roles</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">(</span><span class="n">OV_AGENTS</span><span class="p">))</span>
+    <span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="materialize">
+<a class="viewcode-back" href="../../../module_docs/ov/agents/realize.html#ov.agents.materialize">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">materialize</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">roles</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">dest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">scope</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;project&quot;</span><span class="p">,</span>
+    <span class="n">project_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">link</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">skills_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">policy</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Realize ov&#39;s agents on the **host** backend: write ``.claude/agents/`` + link skills.</span>
+
+<span class="sd">    This is the cheap pit-of-success — it stands up *no* runtime. It emits one</span>
+<span class="sd">    ``&lt;name&gt;.md`` per agent into ``dest`` (default: the project&#39;s ``.claude/agents/``)</span>
+<span class="sd">    and symlinks each referenced skill into the sibling ``.claude/skills/`` so Claude</span>
+<span class="sd">    Code discovers both, then verifies discovery. Returns coact&#39;s ``RealizedHost``</span>
+<span class="sd">    (``.agents``, ``.skills``, ``.warnings``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">coact</span><span class="p">,)</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&quot;coact&quot;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s2">&quot;ov.agents.materialize&quot;</span><span class="p">)</span>
+    <span class="n">agents</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">complete_agent</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">skills_dir</span><span class="o">=</span><span class="n">skills_dir</span><span class="p">,</span> <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">_specs</span><span class="p">(</span><span class="n">roles</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">coact</span><span class="o">.</span><span class="n">realize</span><span class="p">(</span>
+        <span class="n">agents</span><span class="p">,</span>
+        <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;host&quot;</span><span class="p">,</span>
+        <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="n">dest</span><span class="p">,</span>
+        <span class="n">project_dir</span><span class="o">=</span><span class="n">project_dir</span><span class="p">,</span>
+        <span class="n">link</span><span class="o">=</span><span class="n">link</span><span class="p">,</span>
+        <span class="n">skills_source</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">skills_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">skills_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="realize_agent">
+<a class="viewcode-back" href="../../../module_docs/ov/agents/realize.html#ov.agents.realize_agent">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">realize_agent</span><span class="p">(</span>
+    <span class="n">role_or_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">backend</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
+    <span class="n">skills_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">policy</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Realize a single ov agent on ``backend`` (``&quot;host&quot;`` | ``&quot;sdk&quot;`` | ``&quot;mcp&quot;``).</span>
+
+<span class="sd">    ``sdk`` returns a ``coact.RunnableAgent`` (an ``aw.AgenticStep``) for text-shaped</span>
+<span class="sd">    agents; ``mcp`` exposes the skill&#39;s declared ``coact: mcp:`` tools as a FastMCP</span>
+<span class="sd">    server (foreign hosts). For ov&#39;s live-browser / multimodal runtimes use</span>
+<span class="sd">    :class:`~ov.agents.operator.OperatorAgent` / :class:`~ov.agents.analyst.AnalystAgent`</span>
+<span class="sd">    instead — coact&#39;s text-prompt ``sdk`` agent can&#39;t drive a page or send images.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">coact</span><span class="p">,)</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&quot;coact&quot;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s2">&quot;ov.agents.realize_agent&quot;</span><span class="p">)</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">_resolve_spec</span><span class="p">(</span><span class="n">role_or_name</span><span class="p">)</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">skill_path</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">skill</span><span class="p">,</span> <span class="n">skills_dir</span><span class="o">=</span><span class="n">skills_dir</span><span class="p">)</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">coact</span><span class="o">.</span><span class="n">complete</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">)</span> <span class="k">if</span> <span class="n">backend</span> <span class="o">!=</span> <span class="s2">&quot;mcp&quot;</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">coact</span><span class="o">.</span><span class="n">realize</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="estimate">
+<a class="viewcode-back" href="../../../module_docs/ov/agents/realize.html#ov.agents.estimate">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">estimate</span><span class="p">(</span>
+    <span class="n">roles</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">skills_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The cost gate — coact&#39;s fan-out estimate over the selected ov agents.</span>
+
+<span class="sd">    Realizing an in-package fleet costs roughly an order of magnitude more tokens</span>
+<span class="sd">    than the host path, and the premium is worst on *interdependent* work (ov&#39;s</span>
+<span class="sd">    analysts share the evidence bundle). Render this before spawning::</span>
+
+<span class="sd">        from ov.agents import estimate</span>
+<span class="sd">        print(estimate([&quot;ux-analyst&quot;, &quot;arch-analyst&quot;]).render())</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">coact</span><span class="p">,)</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&quot;coact&quot;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s2">&quot;ov.agents.estimate&quot;</span><span class="p">)</span>
+    <span class="n">agents</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">complete_agent</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">skills_dir</span><span class="o">=</span><span class="n">skills_dir</span><span class="p">)</span> <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">_specs</span><span class="p">(</span><span class="n">roles</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">coact</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

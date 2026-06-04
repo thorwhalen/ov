@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; ov 0.1.0 documentation</title>
+  <title>Index &mdash; ov 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/documentation_options.js?v=a58bc63e"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -48,6 +48,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov.html">ov</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis.html">ov.analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
@@ -176,10 +186,36 @@
 </li>
       <li><a href="module_docs/ov/base.html#ov.base.Affordance">Affordance (class in ov.base)</a>
 </li>
+      <li><a href="module_docs/ov/agents/_skills.html#ov.agents._skills.AGENT_SKILLS">AGENT_SKILLS (in module ov.agents._skills)</a>
+</li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.agents_for_role">agents_for_role() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/definitions.html#ov.agents.definitions.agents_for_role">(in module ov.agents.definitions)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.AgentSpec">AgentSpec (class in ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/definitions.html#ov.agents.definitions.AgentSpec">(class in ov.agents.definitions)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.ReliabilityReport.all_findings">all_findings (ov.analysis.reliability.ReliabilityReport property)</a>
 </li>
       <li><a href="module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext">AnalysisContext (class in ov.analysis.context)</a>
 </li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.analyst_specs">analyst_specs() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/definitions.html#ov.agents.definitions.analyst_specs">(in module ov.agents.definitions)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.AnalystAgent">AnalystAgent (class in ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/analyst.html#ov.agents.analyst.AnalystAgent">(class in ov.agents.analyst)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov.html#ov.analyze">analyze() (in module ov)</a>
 
       <ul>
@@ -194,14 +230,14 @@
 </li>
       <li><a href="module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.analyze_contrast_focus">analyze_contrast_focus() (in module ov.analysis.ux.contrast_focus)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/analysis/ux/cwv.html#ov.analysis.ux.cwv.analyze_cwv">analyze_cwv() (in module ov.analysis.ux.cwv)</a>
 </li>
       <li><a href="module_docs/ov/analysis/arch/dependencies.html#ov.analysis.arch.dependencies.analyze_dependencies">analyze_dependencies() (in module ov.analysis.arch.dependencies)</a>
 </li>
       <li><a href="module_docs/ov/analysis/arch/framework.html#ov.analysis.arch.framework.analyze_framework">analyze_framework() (in module ov.analysis.arch.framework)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/analysis/ux/heuristics.html#ov.analysis.ux.heuristics.analyze_heuristics">analyze_heuristics() (in module ov.analysis.ux.heuristics)</a>
 </li>
       <li><a href="module_docs/ov/analysis/ux/metrics.html#ov.analysis.ux.metrics.analyze_metrics">analyze_metrics() (in module ov.analysis.ux.metrics)</a>
@@ -212,6 +248,12 @@
 </li>
       <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.apply_verification">apply_verification() (in module ov.analysis.reliability)</a>
 </li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.arch_analyst">arch_analyst() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/analyst.html#ov.agents.analyst.arch_analyst">(in module ov.agents.analyst)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/analysis/arch/pipeline.html#ov.analysis.arch.pipeline.ARCH_STAGES">ARCH_STAGES (in module ov.analysis.arch.pipeline)</a>
 </li>
       <li><a href="module_docs/ov/base.html#ov.base.Artifact">Artifact (class in ov.base)</a>
@@ -292,6 +334,8 @@
 </li>
       <li><a href="module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.capture_step">capture_step() (ov.capture.session.CaptureSession method)</a>
 </li>
+      <li><a href="module_docs/ov/agents/mcp.html#ov.agents.mcp.capture_url">capture_url() (in module ov.agents.mcp)</a>
+</li>
       <li><a href="module_docs/ov.html#ov.CaptureRun">CaptureRun (class in ov)</a>
 
       <ul>
@@ -306,10 +350,10 @@
 </li>
       <li><a href="module_docs/ov/capture/cdp.html#ov.capture.cdp.CdpSession">CdpSession (class in ov.capture.cdp)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/__main__.html#ov.__main__.check">check() (in module ov.__main__)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov.html#ov.check_requirements">check_requirements() (in module ov)</a>
 
       <ul>
@@ -326,6 +370,18 @@
         <li><a href="module_docs/ov/capture/browser.html#ov.capture.browser.BrowserSession.close">(ov.capture.browser.BrowserSession method)</a>
 </li>
         <li><a href="module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.close">(ov.capture.session.CaptureSession method)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.complete_agent">complete_agent() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/realize.html#ov.agents.realize.complete_agent">(in module ov.agents.realize)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.complete_all">complete_all() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/realize.html#ov.agents.realize.complete_all">(in module ov.agents.realize)</a>
 </li>
       </ul></li>
       <li><a href="module_docs/ov/capture/probes/console.html#ov.capture.probes.console.ConsoleProbe">ConsoleProbe (class in ov.capture.probes.console)</a>
@@ -348,12 +404,28 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/agents/operator.html#ov.agents.operator.Decider">Decider (in module ov.agents.operator)</a>
+</li>
       <li><a href="module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.dedupe_findings">dedupe_findings() (in module ov.reporting.synopsis)</a>
 </li>
-      <li><a href="module_docs/ov/config.html#ov.config.default_store_root">default_store_root() (in module ov.config)</a>
+      <li><a href="module_docs/ov/agents.html#ov.agents.default_model">default_model() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/llm.html#ov.agents.llm.default_model">(in module ov.agents.llm)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents/llm.html#ov.agents.llm.DEFAULT_MODELS">DEFAULT_MODELS (in module ov.agents.llm)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/agents.html#ov.agents.default_skills_dir">default_skills_dir() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/_skills.html#ov.agents._skills.default_skills_dir">(in module ov.agents._skills)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/config.html#ov.config.default_store_root">default_store_root() (in module ov.config)</a>
+</li>
       <li><a href="module_docs/ov/analysis/arch/bundles.html#ov.analysis.arch.bundles.detect_source_maps">detect_source_maps() (in module ov.analysis.arch.bundles)</a>
 </li>
       <li><a href="module_docs/ov/capture/probes/fingerprint.html#ov.capture.probes.fingerprint.detect_technologies">detect_technologies() (in module ov.capture.probes.fingerprint)</a>
@@ -370,14 +442,30 @@
 </li>
       <li><a href="module_docs/ov/base.html#ov.base.Endpoint">Endpoint (class in ov.base)</a>
 </li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.estimate">estimate() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/realize.html#ov.agents.realize.estimate">(in module ov.agents.realize)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/base.html#ov.base.Evidence">Evidence (class in ov.base)</a>
+</li>
+      <li><a href="module_docs/ov/__main__.html#ov.__main__.evidence">evidence() (in module ov.__main__)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/ov/__main__.html#ov.__main__.evidence">evidence() (in module ov.__main__)</a>
-</li>
       <li><a href="module_docs/ov/base.html#ov.base.EvidenceBundle">EvidenceBundle (class in ov.base)</a>
 </li>
+      <li><a href="module_docs/ov/agents/analyst.html#ov.agents.analyst.AnalystAgent.execute">execute() (ov.agents.analyst.AnalystAgent method)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents.html#ov.agents.AnalystAgent.execute">(ov.agents.AnalystAgent method)</a>
+</li>
+        <li><a href="module_docs/ov/agents/operator.html#ov.agents.operator.OperatorAgent.execute">(ov.agents.operator.OperatorAgent method)</a>
+</li>
+        <li><a href="module_docs/ov/agents.html#ov.agents.OperatorAgent.execute">(ov.agents.OperatorAgent method)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/analysis/arch/sidecar.html#ov.analysis.arch.sidecar.Sidecar.extract_literals">extract_literals() (ov.analysis.arch.sidecar.Sidecar method)</a>
 </li>
   </ul></td>
@@ -486,6 +574,8 @@
 </li>
       <li><a href="module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext.jsons">jsons() (ov.analysis.context.AnalysisContext method)</a>
 </li>
+      <li><a href="module_docs/ov/agents/analyst.html#ov.agents.analyst.Judge">Judge (in module ov.agents.analyst)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -515,6 +605,12 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/__main__.html#ov.__main__.main">main() (in module ov.__main__)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/mcp.html#ov.agents.mcp.main">(in module ov.agents.mcp)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents/operator.html#ov.agents.operator.make_llm_decider">make_llm_decider() (in module ov.agents.operator)</a>
 </li>
       <li><a href="module_docs/ov/analysis/ux/severity.html#ov.analysis.ux.severity.make_severity">make_severity() (in module ov.analysis.ux.severity)</a>
 </li>
@@ -522,6 +618,20 @@
 
       <ul>
         <li><a href="module_docs/ov/operate/journal.html#ov.operate.journal.make_step">(in module ov.operate.journal)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.materialize">materialize() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/realize.html#ov.agents.realize.materialize">(in module ov.agents.realize)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/__main__.html#ov.__main__.mcp">mcp() (in module ov.__main__)</a>
+</li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.mcp_server">mcp_server() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/mcp.html#ov.agents.mcp.mcp_server">(in module ov.agents.mcp)</a>
 </li>
       </ul></li>
       <li><a href="module_docs/ov/analysis/run.html#ov.analysis.run.merge_output">merge_output() (in module ov.analysis.run)</a>
@@ -571,6 +681,26 @@
         <li><a href="module_docs/ov.html#module-ov">ov</a>
 </li>
         <li><a href="module_docs/ov/__main__.html#module-ov.__main__">ov.__main__</a>
+</li>
+        <li><a href="module_docs/ov/agents.html#module-ov.agents">ov.agents</a>
+</li>
+        <li><a href="module_docs/ov/agents/_skills.html#module-ov.agents._skills">ov.agents._skills</a>
+</li>
+        <li><a href="module_docs/ov/agents/_util.html#module-ov.agents._util">ov.agents._util</a>
+</li>
+        <li><a href="module_docs/ov/agents/analyst.html#module-ov.agents.analyst">ov.agents.analyst</a>
+</li>
+        <li><a href="module_docs/ov/agents/definitions.html#module-ov.agents.definitions">ov.agents.definitions</a>
+</li>
+        <li><a href="module_docs/ov/agents/llm.html#module-ov.agents.llm">ov.agents.llm</a>
+</li>
+        <li><a href="module_docs/ov/agents/mcp.html#module-ov.agents.mcp">ov.agents.mcp</a>
+</li>
+        <li><a href="module_docs/ov/agents/operator.html#module-ov.agents.operator">ov.agents.operator</a>
+</li>
+        <li><a href="module_docs/ov/agents/orchestrator.html#module-ov.agents.orchestrator">ov.agents.orchestrator</a>
+</li>
+        <li><a href="module_docs/ov/agents/realize.html#module-ov.agents.realize">ov.agents.realize</a>
 </li>
         <li><a href="module_docs/ov/analysis.html#module-ov.analysis">ov.analysis</a>
 </li>
@@ -731,6 +861,20 @@
 </li>
       <li><a href="module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.open">open() (ov.capture.session.CaptureSession method)</a>
 </li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.OperatorAgent">OperatorAgent (class in ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/operator.html#ov.agents.operator.OperatorAgent">(class in ov.agents.operator)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.Orchestrator">Orchestrator (class in ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.Orchestrator">(class in ov.agents.orchestrator)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.OrchestratorResult">OrchestratorResult (class in ov.agents.orchestrator)</a>
+</li>
       <li><a href="module_docs/ov/registry.html#ov.registry.Registry.ordered">ordered() (ov.registry.Registry method)</a>
 </li>
       <li>
@@ -745,6 +889,76 @@
 
       <ul>
         <li><a href="module_docs/ov/__main__.html#module-ov.__main__">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents
+
+      <ul>
+        <li><a href="module_docs/ov/agents.html#module-ov.agents">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents._skills
+
+      <ul>
+        <li><a href="module_docs/ov/agents/_skills.html#module-ov.agents._skills">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents._util
+
+      <ul>
+        <li><a href="module_docs/ov/agents/_util.html#module-ov.agents._util">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents.analyst
+
+      <ul>
+        <li><a href="module_docs/ov/agents/analyst.html#module-ov.agents.analyst">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents.definitions
+
+      <ul>
+        <li><a href="module_docs/ov/agents/definitions.html#module-ov.agents.definitions">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents.llm
+
+      <ul>
+        <li><a href="module_docs/ov/agents/llm.html#module-ov.agents.llm">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents.mcp
+
+      <ul>
+        <li><a href="module_docs/ov/agents/mcp.html#module-ov.agents.mcp">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents.operator
+
+      <ul>
+        <li><a href="module_docs/ov/agents/operator.html#module-ov.agents.operator">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents.orchestrator
+
+      <ul>
+        <li><a href="module_docs/ov/agents/orchestrator.html#module-ov.agents.orchestrator">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.agents.realize
+
+      <ul>
+        <li><a href="module_docs/ov/agents/realize.html#module-ov.agents.realize">module</a>
 </li>
       </ul></li>
       <li>
@@ -887,6 +1101,8 @@
         <li><a href="module_docs/ov/analysis/ux/severity.html#module-ov.analysis.ux.severity">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     ov.base
 
@@ -922,8 +1138,6 @@
         <li><a href="module_docs/ov/capture/probes.html#module-ov.capture.probes">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     ov.capture.probes.a11y
 
@@ -1134,6 +1348,14 @@
         <li><a href="module_docs/ov/util.html#module-ov.util">module</a>
 </li>
       </ul></li>
+      <li><a href="module_docs/ov/agents/definitions.html#ov.agents.definitions.OV_AGENTS">OV_AGENTS (in module ov.agents.definitions)</a>
+</li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.ov_tools">ov_tools() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/mcp.html#ov.agents.mcp.ov_tools">(in module ov.agents.mcp)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov.html#ov.OvConfig">OvConfig (class in ov)</a>
 
       <ul>
@@ -1200,6 +1422,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext.raw">raw() (ov.analysis.context.AnalysisContext method)</a>
 </li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.realize_agent">realize_agent() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/realize.html#ov.agents.realize.realize_agent">(in module ov.agents.realize)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/util.html#ov.util.redact_mapping">redact_mapping() (in module ov.util)</a>
 </li>
       <li><a href="module_docs/ov/util.html#ov.util.redact_value">redact_value() (in module ov.util)</a>
@@ -1224,12 +1452,12 @@
 </li>
       <li><a href="module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.render_synopsis_md">render_synopsis_md() (in module ov.reporting.synopsis)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.rendering_scored">rendering_scored() (in module ov.analysis.arch.rendering)</a>
 </li>
       <li><a href="module_docs/ov/operate/driver.html#ov.operate.driver.replay">replay() (in module ov.operate.driver)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov.html#ov.report">report() (in module ov)</a>
 
       <ul>
@@ -1238,14 +1466,28 @@
       </ul></li>
       <li><a href="module_docs/ov/capture/stores.html#ov.capture.stores.CaptureStore.report_names">report_names() (ov.capture.stores.CaptureStore method)</a>
 </li>
+      <li><a href="module_docs/ov/agents/_util.html#ov.agents._util.require">require() (in module ov.agents._util)</a>
+</li>
       <li><a href="module_docs/ov/util.html#ov.util.Requirement">Requirement (class in ov.util)</a>
 </li>
       <li><a href="module_docs/ov/util.html#ov.util.RequirementReport">RequirementReport (class in ov.util)</a>
 </li>
       <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.resolvable">resolvable() (in module ov.analysis.reliability)</a>
 </li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.resolve_llm">resolve_llm() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/llm.html#ov.agents.llm.resolve_llm">(in module ov.agents.llm)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/capture/stores.html#ov.capture.stores.resolve_store">resolve_store() (in module ov.capture.stores)</a>
 </li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.Orchestrator.run">run() (ov.agents.Orchestrator method)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.Orchestrator.run">(ov.agents.orchestrator.Orchestrator method)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/analysis/run.html#ov.analysis.run.run_analysis">run_analysis() (in module ov.analysis.run)</a>
 </li>
       <li><a href="module_docs/ov/analysis/arch/pipeline.html#ov.analysis.arch.pipeline.run_arch_pipeline">run_arch_pipeline() (in module ov.analysis.arch.pipeline)</a>
@@ -1282,14 +1524,20 @@
 </li>
       <li><a href="module_docs/ov/analysis/arch/sidecar.html#ov.analysis.arch.sidecar.SidecarUnavailable">SidecarUnavailable</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/agents.html#ov.agents.skill_path">skill_path() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/_skills.html#ov.agents._skills.skill_path">(in module ov.agents._skills)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/config.html#ov.config.OvConfig.snapshot">snapshot() (ov.config.OvConfig method)</a>
 
       <ul>
         <li><a href="module_docs/ov.html#ov.OvConfig.snapshot">(ov.OvConfig method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.snapshot_state">snapshot_state() (ov.capture.session.CaptureSession method)</a>
 </li>
       <li><a href="module_docs/ov/capture/probes/sse.html#ov.capture.probes.sse.SseProbe">SseProbe (class in ov.capture.probes.sse)</a>
@@ -1305,6 +1553,20 @@
       <li><a href="module_docs/ov/capture/browser.html#ov.capture.browser.BrowserSession.stop">stop() (ov.capture.browser.BrowserSession method)</a>
 </li>
       <li><a href="module_docs/ov/capture/probes/storage.html#ov.capture.probes.storage.StorageProbe">StorageProbe (class in ov.capture.probes.storage)</a>
+</li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.structured">structured() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/llm.html#ov.agents.llm.structured">(in module ov.agents.llm)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents.html#ov.agents.study">study() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.study">(in module ov.agents.orchestrator)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/agents/mcp.html#ov.agents.mcp.study_url">study_url() (in module ov.agents.mcp)</a>
 </li>
       <li><a href="module_docs/ov.html#ov.synopsis">synopsis() (in module ov)</a>
 
@@ -1334,10 +1596,16 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/analysis/arch/sidecar.html#ov.analysis.arch.sidecar.Sidecar.unpack_bundle">unpack_bundle() (ov.analysis.arch.sidecar.Sidecar method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/base.html#ov.base.utcnow">utcnow() (in module ov.base)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/agents.html#ov.agents.ux_analyst">ux_analyst() (in module ov.agents)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/agents/analyst.html#ov.agents.analyst.ux_analyst">(in module ov.agents.analyst)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/analysis/ux/severity.html#ov.analysis.ux.severity.UX_TIER_WEIGHT">UX_TIER_WEIGHT (in module ov.analysis.ux.severity)</a>
 </li>
   </ul></td>

@@ -4,6 +4,16 @@
 
    module_docs/ov
    module_docs/ov/__main__
+   module_docs/ov/agents
+   module_docs/ov/agents/_skills
+   module_docs/ov/agents/_util
+   module_docs/ov/agents/analyst
+   module_docs/ov/agents/definitions
+   module_docs/ov/agents/llm
+   module_docs/ov/agents/mcp
+   module_docs/ov/agents/operator
+   module_docs/ov/agents/orchestrator
+   module_docs/ov/agents/realize
    module_docs/ov/analysis
    module_docs/ov/analysis/arch
    module_docs/ov/analysis/arch/api
