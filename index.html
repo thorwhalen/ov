@@ -70,6 +70,7 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
@@ -149,8 +150,10 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov.html">ov</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.CaptureRun"><code class="docutils literal notranslate"><span class="pre">CaptureRun</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.OvConfig"><code class="docutils literal notranslate"><span class="pre">OvConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.RunDiff"><code class="docutils literal notranslate"><span class="pre">RunDiff</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.analyze"><code class="docutils literal notranslate"><span class="pre">analyze()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.check_requirements"><code class="docutils literal notranslate"><span class="pre">check_requirements()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.diff"><code class="docutils literal notranslate"><span class="pre">diff()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.observe"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.overview"><code class="docutils literal notranslate"><span class="pre">overview()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.report"><code class="docutils literal notranslate"><span class="pre">report()</span></code></a></li>
@@ -160,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/__main__.html">ov.__main__</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.analyze"><code class="docutils literal notranslate"><span class="pre">analyze()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.check"><code class="docutils literal notranslate"><span class="pre">check()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.diff"><code class="docutils literal notranslate"><span class="pre">diff()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.evidence"><code class="docutils literal notranslate"><span class="pre">evidence()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.mcp"><code class="docutils literal notranslate"><span class="pre">mcp()</span></code></a></li>
@@ -300,6 +304,15 @@
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/context.html#ov.analysis.context.AnalyzerOutput"><code class="docutils literal notranslate"><span class="pre">AnalyzerOutput</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/diff.html">ov.analysis.diff</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.build_diff"><code class="docutils literal notranslate"><span class="pre">build_diff()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.diff_analysis_id"><code class="docutils literal notranslate"><span class="pre">diff_analysis_id()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.diff_runs"><code class="docutils literal notranslate"><span class="pre">diff_runs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.find_baseline_run"><code class="docutils literal notranslate"><span class="pre">find_baseline_run()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.finding_key"><code class="docutils literal notranslate"><span class="pre">finding_key()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.load_diff"><code class="docutils literal notranslate"><span class="pre">load_diff()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.MODEL_CAPS"><code class="docutils literal notranslate"><span class="pre">MODEL_CAPS</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.build_evidence_bundle"><code class="docutils literal notranslate"><span class="pre">build_evidence_bundle()</span></code></a></li>
@@ -365,9 +378,11 @@
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Evidence"><code class="docutils literal notranslate"><span class="pre">Evidence</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.EvidenceBundle"><code class="docutils literal notranslate"><span class="pre">EvidenceBundle</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Finding"><code class="docutils literal notranslate"><span class="pre">Finding</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.FindingDelta"><code class="docutils literal notranslate"><span class="pre">FindingDelta</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.JourneyStep"><code class="docutils literal notranslate"><span class="pre">JourneyStep</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Observation"><code class="docutils literal notranslate"><span class="pre">Observation</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.ProgressSignal"><code class="docutils literal notranslate"><span class="pre">ProgressSignal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.RunDiff"><code class="docutils literal notranslate"><span class="pre">RunDiff</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Scored"><code class="docutils literal notranslate"><span class="pre">Scored</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Severity"><code class="docutils literal notranslate"><span class="pre">Severity</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.TechFinding"><code class="docutils literal notranslate"><span class="pre">TechFinding</span></code></a></li>

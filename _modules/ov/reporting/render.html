@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
@@ -169,11 +170,25 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_load_analyses</span><span class="p">(</span><span class="n">store</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assemble the per-section context: analyzer summaries + any review diff.</span>
+
+<span class="sd">    The render layer owns gathering everything a section might read. Analyzer</span>
+<span class="sd">    summaries land under their analyzer names; the own-target review diff (when</span>
+<span class="sd">    present) is injected under the reserved ``&quot;review_diff&quot;`` key so the review</span>
+<span class="sd">    section can render drift without needing store access (sections take only</span>
+<span class="sd">    ``(run, analyses)``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">..analysis.diff</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_diff</span>
+
+    <span class="n">analyses</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">blob</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">load_analysis</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;analysis_</span><span class="si">{</span><span class="n">run_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">blob</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">analyses</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">load_analysis</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;analysis_</span><span class="si">{</span><span class="n">run_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="p">{}))</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{}</span>
+        <span class="k">pass</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">load_diff</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="n">run_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">diff</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">analyses</span><span class="p">[</span><span class="s2">&quot;review_diff&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+    <span class="k">return</span> <span class="n">analyses</span>
 
 
 <div class="viewcode-block" id="render_reports">

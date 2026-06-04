@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
@@ -165,7 +166,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaptureRun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">RunDiff</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">OvConfig</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_requirements</span>
 
@@ -178,12 +179,14 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;observe&quot;</span><span class="p">,</span>
     <span class="s2">&quot;analyze&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;diff&quot;</span><span class="p">,</span>
     <span class="s2">&quot;report&quot;</span><span class="p">,</span>
     <span class="s2">&quot;synopsis&quot;</span><span class="p">,</span>
     <span class="s2">&quot;overview&quot;</span><span class="p">,</span>
     <span class="s2">&quot;check_requirements&quot;</span><span class="p">,</span>
     <span class="s2">&quot;OvConfig&quot;</span><span class="p">,</span>
     <span class="s2">&quot;CaptureRun&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RunDiff&quot;</span><span class="p">,</span>
     <span class="s2">&quot;__version__&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
@@ -271,6 +274,37 @@
             <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
         <span class="k">raise</span>
     <span class="k">return</span> <span class="n">run_analysis</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">lenses</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">lenses</span><span class="p">),</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="diff">
+<a class="viewcode-back" href="../module_docs/ov.html#ov.diff">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">diff</span><span class="p">(</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">baseline</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RunDiff</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Diff an analyzed run against a prior baseline run (own-target review mode).</span>
+
+<span class="sd">    The distinguishing capability of ``mode=&quot;review&quot;``: report what is *new*,</span>
+<span class="sd">    *changed*, or *resolved* versus a stored prior run of the same target</span>
+<span class="sd">    (regression/drift detection, §10). Fully deterministic -- no browser, no model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        run: an analyzed :class:`~ov.base.CaptureRun` or a run id.</span>
+<span class="sd">        baseline: a run/run-id to compare against, or ``None`` to auto-discover the</span>
+<span class="sd">            latest prior run of the same target.</span>
+<span class="sd">        store: a :class:`~ov.capture.stores.CaptureStore`, a path, or ``None``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A :class:`~ov.base.RunDiff`, or ``None`` if no baseline exists yet (the</span>
+<span class="sd">        first review run). Sets ``Finding.diff_status`` on the run in place and</span>
+<span class="sd">        persists a ``diff_&lt;run_id&gt;`` blob that the review report + synopsis read.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.analysis.diff</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_diff</span>
+
+    <span class="k">return</span> <span class="n">build_diff</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span></div>
 
 
 

@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
@@ -160,6 +161,9 @@
 <span class="sd">* **Analysis outputs** -- :class:`Evidence`, :class:`Severity`,</span>
 <span class="sd">  :class:`Finding`, :class:`EvidenceBundle`. The normalized currency of the</span>
 <span class="sd">  analysis lenses and the grounded LLM layer (D3 + D4).</span>
+<span class="sd">* **Review/regression outputs** -- :class:`FindingDelta`, :class:`RunDiff`. The</span>
+<span class="sd">  own-target *drift* between a run and a stored prior baseline (review mode,</span>
+<span class="sd">  §10); cheap by design because artifacts are content-addressed.</span>
 
 <span class="sd">Design notes</span>
 <span class="sd">------------</span>
@@ -176,7 +180,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">computed_field</span>
 
 <span class="c1"># --------------------------------------------------------------------------- #</span>
 <span class="c1"># Identity helpers</span>
@@ -517,6 +521,106 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the :class:`Artifact` with ``artifact_id`` or ``None``.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">artifacts</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">==</span> <span class="n">artifact_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span></div>
 </div>
+
+
+
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+<span class="c1"># Review / regression outputs -- own-target drift vs a stored prior run (§10)</span>
+<span class="c1"># --------------------------------------------------------------------------- #</span>
+
+
+<div class="viewcode-block" id="FindingDelta">
+<a class="viewcode-back" href="../../module_docs/ov/base.html#ov.FindingDelta">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FindingDelta</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;One finding&#39;s status between a run and its baseline (review-mode currency).</span>
+
+<span class="sd">    ``status`` is the per-finding cross-run verdict; ``direction`` rolls it into</span>
+<span class="sd">    the regression/improvement framing a downstream modification agent acts on.</span>
+<span class="sd">    A finding is matched across runs by a stable semantic ``key`` (see</span>
+<span class="sd">    :func:`ov.analysis.diff.finding_key`) -- never by its per-run ``finding_id``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># stable cross-run identity</span>
+    <span class="n">status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;changed&quot;</span><span class="p">,</span> <span class="s2">&quot;resolved&quot;</span><span class="p">,</span> <span class="s2">&quot;unchanged&quot;</span><span class="p">]</span>
+    <span class="n">direction</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;regression&quot;</span><span class="p">,</span> <span class="s2">&quot;improvement&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;neutral&quot;</span>
+    <span class="n">signal</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">finding_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># current finding id (None when resolved)</span>
+    <span class="n">baseline_finding_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># baseline finding id (None when new)</span>
+    <span class="n">severity_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">baseline_severity_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">severity_tier</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">detail</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># human-legible note on what changed</span></div>
+
+
+
+<div class="viewcode-block" id="RunDiff">
+<a class="viewcode-back" href="../../module_docs/ov/base.html#ov.RunDiff">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RunDiff</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Own-target regression: a run vs a stored prior baseline run (review mode, §10).</span>
+
+<span class="sd">    Produced by :func:`ov.analysis.diff.diff_runs` from two analyzed</span>
+<span class="sd">    :class:`CaptureRun`s of the same target. The :attr:`finding_deltas` list is</span>
+<span class="sd">    the SSOT; :attr:`counts`/:attr:`has_drift` are *derived* (``@computed_field``,</span>
+<span class="sd">    so they serialize) and :attr:`regressions`/:attr:`improvements` are views over</span>
+<span class="sd">    the deltas -- nothing is stored twice.</span>
+
+<span class="sd">    &gt;&gt;&gt; d = RunDiff(run_id=&quot;run_b&quot;, baseline_run_id=&quot;run_a&quot;, finding_deltas=[</span>
+<span class="sd">    ...     FindingDelta(key=&quot;k1&quot;, status=&quot;new&quot;, direction=&quot;regression&quot;),</span>
+<span class="sd">    ...     FindingDelta(key=&quot;k2&quot;, status=&quot;resolved&quot;, direction=&quot;improvement&quot;),</span>
+<span class="sd">    ... ])</span>
+<span class="sd">    &gt;&gt;&gt; d.counts[&quot;new&quot;], d.counts[&quot;resolved&quot;], d.has_drift</span>
+<span class="sd">    (1, 1, True)</span>
+<span class="sd">    &gt;&gt;&gt; [r.key for r in d.regressions], [i.key for i in d.improvements]</span>
+<span class="sd">    ([&#39;k1&#39;], [&#39;k2&#39;])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># the current run</span>
+    <span class="n">baseline_run_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">target_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">created_at</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">utcnow</span><span class="p">)</span>
+    <span class="n">finding_deltas</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">FindingDelta</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">tech_added</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">tech_removed</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">endpoints_added</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">endpoints_removed</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">rendering_model_change</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># {&quot;from&quot;: ..., &quot;to&quot;: ...}</span>
+    <span class="n">source_maps_change</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">notes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="nd">@computed_field</span>  <span class="c1"># type: ignore[prop-decorator]</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">counts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Per-status tallies derived from the deltas (the headline of a diff).&quot;&quot;&quot;</span>
+        <span class="n">tally</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;new&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;changed&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;resolved&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;unchanged&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span><span class="p">:</span>
+            <span class="n">tally</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">status</span><span class="p">]</span> <span class="o">=</span> <span class="n">tally</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">tally</span>
+
+    <span class="nd">@computed_field</span>  <span class="c1"># type: ignore[prop-decorator]</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_drift</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;``True`` if anything changed across runs (findings, stack, API, or model).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span>
+            <span class="nb">any</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;unchanged&quot;</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">tech_added</span>
+            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">tech_removed</span>
+            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">endpoints_added</span>
+            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">endpoints_removed</span>
+            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">rendering_model_change</span>
+            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_maps_change</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">regressions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FindingDelta</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deltas that got worse or are newly present (a downstream fix list).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;regression&quot;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">improvements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FindingDelta</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deltas that were resolved or got better since the baseline.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;improvement&quot;</span><span class="p">]</span></div>
 
 </pre></div>
 

@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
@@ -298,10 +299,12 @@
 </li>
       <li><a href="module_docs/ov/capture/browser.html#ov.capture.browser.BrowserSession">BrowserSession (class in ov.capture.browser)</a>
 </li>
-      <li><a href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.build_evidence_bundle">build_evidence_bundle() (in module ov.analysis.evidence)</a>
+      <li><a href="module_docs/ov/analysis/diff.html#ov.analysis.diff.build_diff">build_diff() (in module ov.analysis.diff)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.build_evidence_bundle">build_evidence_bundle() (in module ov.analysis.evidence)</a>
+</li>
       <li><a href="module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.build_synopsis">build_synopsis() (in module ov.reporting.synopsis)</a>
 </li>
       <li><a href="module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.build_synopsis_doc">build_synopsis_doc() (in module ov.reporting.synopsis)</a>
@@ -352,14 +355,14 @@
 </li>
       <li><a href="module_docs/ov/__main__.html#ov.__main__.check">check() (in module ov.__main__)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov.html#ov.check_requirements">check_requirements() (in module ov)</a>
 
       <ul>
         <li><a href="module_docs/ov/util.html#ov.util.check_requirements">(in module ov.util)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.classify_endpoint">classify_endpoint() (in module ov.analysis.arch.api)</a>
 </li>
       <li><a href="module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.classify_rendering">classify_rendering() (in module ov.analysis.arch.rendering)</a>
@@ -394,6 +397,12 @@
 </li>
       <li><a href="module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.contrast_ratio">contrast_ratio() (in module ov.analysis.ux.contrast_focus)</a>
 </li>
+      <li><a href="module_docs/ov/base.html#ov.base.RunDiff.counts">counts (ov.base.RunDiff property)</a>
+
+      <ul>
+        <li><a href="module_docs/ov.html#ov.RunDiff.counts">(ov.RunDiff property)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/operate/driver.html#ov.operate.driver.crawl">crawl() (in module ov.operate.driver)</a>
 </li>
       <li><a href="module_docs/ov/analysis/ux/cwv.html#ov.analysis.ux.cwv.cwv_from_perf">cwv_from_perf() (in module ov.analysis.ux.cwv)</a>
@@ -416,19 +425,29 @@
       </ul></li>
       <li><a href="module_docs/ov/agents/llm.html#ov.agents.llm.DEFAULT_MODELS">DEFAULT_MODELS (in module ov.agents.llm)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/agents.html#ov.agents.default_skills_dir">default_skills_dir() (in module ov.agents)</a>
 
       <ul>
         <li><a href="module_docs/ov/agents/_skills.html#ov.agents._skills.default_skills_dir">(in module ov.agents._skills)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/config.html#ov.config.default_store_root">default_store_root() (in module ov.config)</a>
 </li>
       <li><a href="module_docs/ov/analysis/arch/bundles.html#ov.analysis.arch.bundles.detect_source_maps">detect_source_maps() (in module ov.analysis.arch.bundles)</a>
 </li>
       <li><a href="module_docs/ov/capture/probes/fingerprint.html#ov.capture.probes.fingerprint.detect_technologies">detect_technologies() (in module ov.capture.probes.fingerprint)</a>
+</li>
+      <li><a href="module_docs/ov.html#ov.diff">diff() (in module ov)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/__main__.html#ov.__main__.diff">(in module ov.__main__)</a>
+</li>
+      </ul></li>
+      <li><a href="module_docs/ov/analysis/diff.html#ov.analysis.diff.diff_analysis_id">diff_analysis_id() (in module ov.analysis.diff)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/diff.html#ov.analysis.diff.diff_runs">diff_runs() (in module ov.analysis.diff)</a>
 </li>
       <li><a href="module_docs/ov/capture/probes/dom.html#ov.capture.probes.dom.DomProbe">DomProbe (class in ov.capture.probes.dom)</a>
 </li>
@@ -496,7 +515,13 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/analysis/diff.html#ov.analysis.diff.find_baseline_run">find_baseline_run() (in module ov.analysis.diff)</a>
+</li>
       <li><a href="module_docs/ov/base.html#ov.base.Finding">Finding (class in ov.base)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/diff.html#ov.analysis.diff.finding_key">finding_key() (in module ov.analysis.diff)</a>
+</li>
+      <li><a href="module_docs/ov/base.html#ov.base.FindingDelta">FindingDelta (class in ov.base)</a>
 </li>
       <li><a href="module_docs/ov/capture/probes/fingerprint.html#ov.capture.probes.fingerprint.FingerprintProbe">FingerprintProbe (class in ov.capture.probes.fingerprint)</a>
 </li>
@@ -537,6 +562,14 @@
       <li><a href="module_docs/ov/capture/browser.html#ov.capture.browser.BrowserSession.har_bytes">har_bytes (ov.capture.browser.BrowserSession property)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/base.html#ov.base.RunDiff.has_drift">has_drift (ov.base.RunDiff property)</a>
+
+      <ul>
+        <li><a href="module_docs/ov.html#ov.RunDiff.has_drift">(ov.RunDiff property)</a>
+</li>
+      </ul></li>
+  </ul></td>
 </tr></table>
 
 <h2 id="I">I</h2>
@@ -544,10 +577,16 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.image_token_cost">image_token_cost() (in module ov.analysis.evidence)</a>
 </li>
-      <li><a href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.infer_auth">infer_auth() (in module ov.analysis.arch.api)</a>
+      <li><a href="module_docs/ov/base.html#ov.base.RunDiff.improvements">improvements (ov.base.RunDiff property)</a>
+
+      <ul>
+        <li><a href="module_docs/ov.html#ov.RunDiff.improvements">(ov.RunDiff property)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.infer_auth">infer_auth() (in module ov.analysis.arch.api)</a>
+</li>
       <li><a href="module_docs/ov/operate/strategies.html#ov.operate.strategies.is_same_origin">is_same_origin() (in module ov.operate.strategies)</a>
 </li>
       <li><a href="module_docs/ov/registry.html#ov.registry.Registry.items">items (ov.registry.Registry property)</a>
@@ -588,11 +627,13 @@
 </li>
       <li><a href="module_docs/ov/analysis.html#ov.analysis.load_builtin_analyzers">load_builtin_analyzers() (in module ov.analysis)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/capture/probes.html#ov.capture.probes.load_builtin_probes">load_builtin_probes() (in module ov.capture.probes)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/reporting.html#ov.reporting.load_builtin_sections">load_builtin_sections() (in module ov.reporting)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/diff.html#ov.analysis.diff.load_diff">load_diff() (in module ov.analysis.diff)</a>
 </li>
       <li><a href="module_docs/ov/capture/stores.html#ov.capture.stores.CaptureStore.load_run">load_run() (ov.capture.stores.CaptureStore method)</a>
 </li>
@@ -659,11 +700,15 @@
 </li>
         <li><a href="module_docs/ov/base.html#ov.base.Finding.model_config">(ov.base.Finding attribute)</a>
 </li>
+        <li><a href="module_docs/ov/base.html#ov.base.FindingDelta.model_config">(ov.base.FindingDelta attribute)</a>
+</li>
         <li><a href="module_docs/ov/base.html#ov.base.JourneyStep.model_config">(ov.base.JourneyStep attribute)</a>
 </li>
         <li><a href="module_docs/ov/base.html#ov.base.Observation.model_config">(ov.base.Observation attribute)</a>
 </li>
         <li><a href="module_docs/ov/base.html#ov.base.ProgressSignal.model_config">(ov.base.ProgressSignal attribute)</a>
+</li>
+        <li><a href="module_docs/ov/base.html#ov.base.RunDiff.model_config">(ov.base.RunDiff attribute)</a>
 </li>
         <li><a href="module_docs/ov/base.html#ov.base.Scored.model_config">(ov.base.Scored attribute)</a>
 </li>
@@ -672,6 +717,8 @@
         <li><a href="module_docs/ov/base.html#ov.base.TechFinding.model_config">(ov.base.TechFinding attribute)</a>
 </li>
         <li><a href="module_docs/ov.html#ov.CaptureRun.model_config">(ov.CaptureRun attribute)</a>
+</li>
+        <li><a href="module_docs/ov.html#ov.RunDiff.model_config">(ov.RunDiff attribute)</a>
 </li>
       </ul></li>
       <li>
@@ -721,6 +768,8 @@
         <li><a href="module_docs/ov/analysis/arch/sidecar.html#module-ov.analysis.arch.sidecar">ov.analysis.arch.sidecar</a>
 </li>
         <li><a href="module_docs/ov/analysis/context.html#module-ov.analysis.context">ov.analysis.context</a>
+</li>
+        <li><a href="module_docs/ov/analysis/diff.html#module-ov.analysis.diff">ov.analysis.diff</a>
 </li>
         <li><a href="module_docs/ov/analysis/evidence.html#module-ov.analysis.evidence">ov.analysis.evidence</a>
 </li>
@@ -1032,6 +1081,13 @@
 </li>
       </ul></li>
       <li>
+    ov.analysis.diff
+
+      <ul>
+        <li><a href="module_docs/ov/analysis/diff.html#module-ov.analysis.diff">module</a>
+</li>
+      </ul></li>
+      <li>
     ov.analysis.evidence
 
       <ul>
@@ -1094,6 +1150,8 @@
         <li><a href="module_docs/ov/analysis/ux/metrics.html#module-ov.analysis.ux.metrics">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     ov.analysis.ux.severity
 
@@ -1101,8 +1159,6 @@
         <li><a href="module_docs/ov/analysis/ux/severity.html#module-ov.analysis.ux.severity">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     ov.base
 
@@ -1442,6 +1498,12 @@
 </li>
       <li><a href="module_docs/ov/registry.html#ov.registry.Registry">Registry (class in ov.registry)</a>
 </li>
+      <li><a href="module_docs/ov/base.html#ov.base.RunDiff.regressions">regressions (ov.base.RunDiff property)</a>
+
+      <ul>
+        <li><a href="module_docs/ov.html#ov.RunDiff.regressions">(ov.RunDiff property)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.relative_luminance">relative_luminance() (in module ov.analysis.ux.contrast_focus)</a>
 </li>
       <li><a href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.ReliabilityReport">ReliabilityReport (class in ov.analysis.reliability)</a>
@@ -1496,6 +1558,12 @@
 </li>
       <li><a href="module_docs/ov/reporting/overview.html#ov.reporting.overview.run_overview">run_overview() (in module ov.reporting.overview)</a>
 </li>
+      <li><a href="module_docs/ov.html#ov.RunDiff">RunDiff (class in ov)</a>
+
+      <ul>
+        <li><a href="module_docs/ov/base.html#ov.base.RunDiff">(class in ov.base)</a>
+</li>
+      </ul></li>
       <li><a href="module_docs/ov/__main__.html#ov.__main__.runs">runs() (in module ov.__main__)</a>
 </li>
   </ul></td>

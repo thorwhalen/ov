@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
@@ -207,6 +208,41 @@
 
 
 
+<div class="viewcode-block" id="diff">
+<a class="viewcode-back" href="../../module_docs/ov/__main__.html#ov.__main__.diff">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">diff</span><span class="p">(</span><span class="n">run_id</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Diff an analyzed run against a prior baseline run (own-target review mode).&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.analysis.diff</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_diff</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.capture.stores</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_store</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">resolve_store</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">load_run</span><span class="p">(</span><span class="n">run_id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;error: could not load run </span><span class="si">{</span><span class="n">run_id</span><span class="si">!r}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">yield</span> <span class="s2">&quot;run `ov runs` to list available run ids&quot;</span>
+        <span class="k">return</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">build_diff</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="s2">&quot;no prior baseline run found for this target; nothing to diff&quot;</span>
+        <span class="k">return</span>
+    <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;baseline: </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">baseline_run_id</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">counts</span>
+    <span class="k">yield</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;findings: </span><span class="si">{</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;new&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> new · </span><span class="si">{</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;changed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> changed · &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;resolved&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> resolved · </span><span class="si">{</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;unchanged&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> unchanged&quot;</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">tech_added</span> <span class="ow">or</span> <span class="n">d</span><span class="o">.</span><span class="n">tech_removed</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;tech: +</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">tech_added</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;[]&#39;</span><span class="si">}</span><span class="s2"> -</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">tech_removed</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;[]&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">endpoints_added</span> <span class="ow">or</span> <span class="n">d</span><span class="o">.</span><span class="n">endpoints_removed</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;endpoints: +</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">endpoints_added</span><span class="p">)</span><span class="si">}</span><span class="s2"> -</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">endpoints_removed</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">rendering_model_change</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;rendering model: </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">rendering_model_change</span><span class="p">[</span><span class="s1">&#39;from&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">rendering_model_change</span><span class="p">[</span><span class="s1">&#39;to&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">source_maps_change</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;source maps: </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">source_maps_change</span><span class="p">[</span><span class="s1">&#39;from&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">source_maps_change</span><span class="p">[</span><span class="s1">&#39;to&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+
 <div class="viewcode-block" id="report">
 <a class="viewcode-back" href="../../module_docs/ov/__main__.html#ov.__main__.report">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="n">run_id</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sections</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -228,9 +264,16 @@
 <div class="viewcode-block" id="overview">
 <a class="viewcode-back" href="../../module_docs/ov/__main__.html#ov.__main__.overview">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">overview</span><span class="p">(</span>
-    <span class="n">url</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">headed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">authorized</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">url</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">headed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span>
+    <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">authorized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">baseline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;observe -&gt; analyze -&gt; report -&gt; synopsis, the one-liner (Phase 2).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;observe -&gt; analyze -&gt; [diff in review mode] -&gt; report -&gt; synopsis (Phase 2).&quot;&quot;&quot;</span>
     <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span>
         <span class="n">_ov</span><span class="o">.</span><span class="n">overview</span><span class="p">(</span>
             <span class="n">url</span><span class="p">,</span>
@@ -239,6 +282,7 @@
             <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span>
             <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
             <span class="n">authorized</span><span class="o">=</span><span class="n">authorized</span><span class="p">,</span>
+            <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">)</span></div>
 
@@ -306,7 +350,18 @@
     <span class="p">)</span>
     <span class="n">argh</span><span class="o">.</span><span class="n">add_commands</span><span class="p">(</span>
         <span class="n">parser</span><span class="p">,</span>
-        <span class="p">[</span><span class="n">observe</span><span class="p">,</span> <span class="n">analyze</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">synopsis</span><span class="p">,</span> <span class="n">overview</span><span class="p">,</span> <span class="n">evidence</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">runs</span><span class="p">,</span> <span class="n">mcp</span><span class="p">],</span>
+        <span class="p">[</span>
+            <span class="n">observe</span><span class="p">,</span>
+            <span class="n">analyze</span><span class="p">,</span>
+            <span class="n">diff</span><span class="p">,</span>
+            <span class="n">report</span><span class="p">,</span>
+            <span class="n">synopsis</span><span class="p">,</span>
+            <span class="n">overview</span><span class="p">,</span>
+            <span class="n">evidence</span><span class="p">,</span>
+            <span class="n">check</span><span class="p">,</span>
+            <span class="n">runs</span><span class="p">,</span>
+            <span class="n">mcp</span><span class="p">,</span>
+        <span class="p">],</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span></div>
 

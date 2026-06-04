@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
@@ -238,16 +239,53 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_regression_summary</span><span class="p">(</span><span class="n">diff</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Distill a :class:`~ov.base.RunDiff` dict into the synopsis regression block.</span>
+
+<span class="sd">    Regression-oriented for a downstream creation/modification agent: it leads</span>
+<span class="sd">    with what got *worse or newly appeared* (the fix list) and what *improved*,</span>
+<span class="sd">    plus non-finding drift (stack / API / rendering / source maps).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">deltas</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;finding_deltas&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">by_direction</span><span class="p">(</span><span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">deltas</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;direction&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">direction</span><span class="p">),</span>
+            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="o">-</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;severity_score&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;baseline_run_id&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;baseline_run_id&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;has_drift&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;has_drift&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;counts&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;counts&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+        <span class="s2">&quot;regressions&quot;</span><span class="p">:</span> <span class="n">by_direction</span><span class="p">(</span><span class="s2">&quot;regression&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;improvements&quot;</span><span class="p">:</span> <span class="n">by_direction</span><span class="p">(</span><span class="s2">&quot;improvement&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;tech_added&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tech_added&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+        <span class="s2">&quot;tech_removed&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tech_removed&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+        <span class="s2">&quot;endpoints_added&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;endpoints_added&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+        <span class="s2">&quot;endpoints_removed&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;endpoints_removed&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+        <span class="s2">&quot;rendering_model_change&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rendering_model_change&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;source_maps_change&quot;</span><span class="p">:</span> <span class="n">diff</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source_maps_change&quot;</span><span class="p">),</span>
+    <span class="p">}</span>
+
+
 <div class="viewcode-block" id="build_synopsis_doc">
 <a class="viewcode-back" href="../../../module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.build_synopsis_doc">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">build_synopsis_doc</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the ``synopsis.json`` SSOT document from a run&#39;s findings (pure).&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_synopsis_doc</span><span class="p">(</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">diff</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the ``synopsis.json`` SSOT document from a run&#39;s findings (pure).</span>
+
+<span class="sd">    When ``diff`` (a serialized :class:`~ov.base.RunDiff`) is given -- review mode</span>
+<span class="sd">    with a baseline -- a ``regression`` block is appended so the synopsis tells a</span>
+<span class="sd">    downstream agent what changed since the prior run, not just the current state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">records</span> <span class="o">=</span> <span class="n">dedupe_findings</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="p">)</span>
     <span class="n">histogram</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
         <span class="n">tier</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;severity_tier&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">&quot;n/a&quot;</span><span class="p">)</span>
         <span class="n">histogram</span><span class="p">[</span><span class="n">tier</span><span class="p">]</span> <span class="o">=</span> <span class="n">histogram</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tier</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="p">{</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;run_id&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span>
         <span class="s2">&quot;target_url&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">target_url</span><span class="p">,</span>
         <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
@@ -264,7 +302,10 @@
         <span class="p">],</span>
         <span class="s2">&quot;severity_histogram&quot;</span><span class="p">:</span> <span class="n">histogram</span><span class="p">,</span>
         <span class="s2">&quot;findings&quot;</span><span class="p">:</span> <span class="n">records</span><span class="p">,</span>
-    <span class="p">}</span></div>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">diff</span><span class="p">:</span>
+        <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;regression&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_regression_summary</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">doc</span></div>
 
 
 
@@ -293,8 +334,67 @@
             <span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> | `</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;signal&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">` | </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;summary&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> | &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;evidence_refs&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> ref(s) | </span><span class="si">{</span><span class="s1">&#39;yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;needs_human_review&#39;</span><span class="p">]</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2"> |&quot;</span>
         <span class="p">)</span>
+    <span class="n">lines</span> <span class="o">+=</span> <span class="n">_render_regression_md</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;regression&quot;</span><span class="p">))</span>
     <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
 
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_render_regression_md</span><span class="p">(</span><span class="n">reg</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Markdown lines for the synopsis regression block (review mode w/ baseline).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">reg</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;## Regression vs baseline&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;- **Baseline**: `</span><span class="si">{</span><span class="n">reg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;baseline_run_id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">` · drift: </span><span class="si">{</span><span class="n">reg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;has_drift&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;- **Counts**: </span><span class="si">{</span><span class="n">reg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;counts&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">reg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;regressions&quot;</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;### Regressions (worse / newly present)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;| Score | Signal | Summary |&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;|---|---|---|&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reg</span><span class="p">[</span><span class="s2">&quot;regressions&quot;</span><span class="p">]:</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;severity_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;severity_score&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="k">else</span> <span class="s2">&quot;-&quot;</span>
+            <span class="p">)</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2"> | `</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;signal&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">` | </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> |&quot;</span>
+            <span class="p">)</span>
+    <span class="k">if</span> <span class="n">reg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;improvements&quot;</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;### Improvements (resolved / better)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;| Signal | Summary |&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;|---|---|&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reg</span><span class="p">[</span><span class="s2">&quot;improvements&quot;</span><span class="p">]:</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| `</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;signal&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">` | </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> |&quot;</span><span class="p">)</span>
+    <span class="n">drift</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s2">&quot;tech_added&quot;</span><span class="p">,</span> <span class="s2">&quot;tech +&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;tech_removed&quot;</span><span class="p">,</span> <span class="s2">&quot;tech −&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;endpoints_added&quot;</span><span class="p">,</span> <span class="s2">&quot;endpoints +&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;endpoints_removed&quot;</span><span class="p">,</span> <span class="s2">&quot;endpoints −&quot;</span><span class="p">),</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">reg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+            <span class="n">drift</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">reg</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">reg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rendering_model_change&quot;</span><span class="p">):</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="n">reg</span><span class="p">[</span><span class="s2">&quot;rendering_model_change&quot;</span><span class="p">]</span>
+        <span class="n">drift</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rendering </span><span class="si">{</span><span class="n">rc</span><span class="p">[</span><span class="s1">&#39;from&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">→</span><span class="si">{</span><span class="n">rc</span><span class="p">[</span><span class="s1">&#39;to&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">reg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source_maps_change&quot;</span><span class="p">):</span>
+        <span class="n">sc</span> <span class="o">=</span> <span class="n">reg</span><span class="p">[</span><span class="s2">&quot;source_maps_change&quot;</span><span class="p">]</span>
+        <span class="n">drift</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;source maps </span><span class="si">{</span><span class="n">sc</span><span class="p">[</span><span class="s1">&#39;from&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">→</span><span class="si">{</span><span class="n">sc</span><span class="p">[</span><span class="s1">&#39;to&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">drift</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;**Stack / API drift:** &quot;</span> <span class="o">+</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">drift</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">lines</span>
 
 
 <div class="viewcode-block" id="build_synopsis">
@@ -305,9 +405,12 @@
 <span class="sd">    ``run_or_id`` may be a :class:`CaptureRun` or a run id. The JSON is the SSOT;</span>
 <span class="sd">    the Markdown is derived. Both are written to the store (and ``out`` dir if given).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">..analysis.diff</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_diff</span>
+
     <span class="n">store</span> <span class="o">=</span> <span class="n">resolve_store</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
     <span class="n">run</span> <span class="o">=</span> <span class="n">run_or_id</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">run_or_id</span><span class="p">,</span> <span class="n">CaptureRun</span><span class="p">)</span> <span class="k">else</span> <span class="n">store</span><span class="o">.</span><span class="n">load_run</span><span class="p">(</span><span class="n">run_or_id</span><span class="p">)</span>
-    <span class="n">doc</span> <span class="o">=</span> <span class="n">build_synopsis_doc</span><span class="p">(</span><span class="n">run</span><span class="p">)</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">load_diff</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">build_synopsis_doc</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">diff</span><span class="o">=</span><span class="n">diff</span><span class="p">)</span>
     <span class="n">md</span> <span class="o">=</span> <span class="n">render_synopsis_md</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
 
     <span class="n">store</span><span class="o">.</span><span class="n">save_report</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span> <span class="s2">&quot;synopsis.json&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>

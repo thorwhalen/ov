@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
@@ -168,11 +169,19 @@
     <span class="n">out_dir</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">authorized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">lenses</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">),</span>
+    <span class="n">baseline</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">observe_kw</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the full deterministic pipeline and return the synopsis path/key.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the full deterministic pipeline and return the synopsis path/key.</span>
+
+<span class="sd">    In ``mode=&quot;review&quot;`` it inserts an own-target diff step between analysis and</span>
+<span class="sd">    reporting: the run is compared against a stored prior baseline (``baseline``,</span>
+<span class="sd">    or the latest prior run of the same target) so the review report and synopsis</span>
+<span class="sd">    carry regression/drift detail. A first review run (no baseline) is a no-op.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">ov</span>
 
+    <span class="kn">from</span><span class="w"> </span><span class="nn">..analysis.diff</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_diff</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">..analysis.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_analysis</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">.render</span><span class="w"> </span><span class="kn">import</span> <span class="n">render_reports</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">.synopsis</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_synopsis</span>
@@ -188,6 +197,8 @@
         <span class="o">**</span><span class="n">observe_kw</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">run_analysis</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">lenses</span><span class="o">=</span><span class="n">lenses</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;review&quot;</span><span class="p">:</span>
+        <span class="n">build_diff</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span>
     <span class="n">render_reports</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">build_synopsis</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span></div>
 

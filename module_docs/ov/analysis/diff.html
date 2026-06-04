@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.analysis.diff &mdash; ov 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ov.analysis.evidence" href="evidence.html" />
+    <link rel="prev" title="ov.analysis.context" href="context.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/realize.html">ov.agents.realize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="context.html">ov.analysis.context</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.analysis.diff</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.diff.build_diff"><code class="docutils literal notranslate"><span class="pre">build_diff()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.diff.diff_analysis_id"><code class="docutils literal notranslate"><span class="pre">diff_analysis_id()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.diff.diff_runs"><code class="docutils literal notranslate"><span class="pre">diff_runs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.diff.find_baseline_run"><code class="docutils literal notranslate"><span class="pre">find_baseline_run()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.diff.finding_key"><code class="docutils literal notranslate"><span class="pre">finding_key()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.diff.load_diff"><code class="docutils literal notranslate"><span class="pre">load_diff()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.analysis.diff</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/ov/analysis/diff.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.analysis.diff">
+<span id="ov-analysis-diff"></span><h1>ov.analysis.diff<a class="headerlink" href="#module-ov.analysis.diff" title="Link to this heading"></a></h1>
+<p>Own-target diffing: a run vs a stored prior baseline run (review mode, §10).</p>
+<p>Review mode’s distinguishing capability is <em>regression/drift detection</em>: compare
+an analyzed <a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureRun</span></code></a> against a stored prior run of the same
+target and report what is <strong>new</strong>, <strong>changed</strong>, or <strong>resolved</strong>. Because
+artifacts are content-addressed (identical bytes dedupe across runs), this
+comparison is cheap by design (spec §3.4).</p>
+<p>The matching unit is the <a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><code class="xref py py-class docutils literal notranslate"><span class="pre">Finding</span></code></a>. Finding ids are regenerated
+every run, so cross-run identity is derived from <em>stable semantic fields</em>
+(<a class="reference internal" href="#ov.analysis.diff.finding_key" title="ov.analysis.diff.finding_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">finding_key()</span></code></a>) – category, signal, engine/heuristic/WCAG identifiers, and
+a stable locator – explicitly excluding per-run ids (<code class="docutils literal notranslate"><span class="pre">finding_id</span></code>, <code class="docutils literal notranslate"><span class="pre">step_id</span></code>,
+<code class="docutils literal notranslate"><span class="pre">state_id</span></code>) that would make every finding look brand new.</p>
+<p>Two entry points:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ov.analysis.diff.diff_runs" title="ov.analysis.diff.diff_runs"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff_runs()</span></code></a> – <strong>pure</strong>: compare two in-memory runs, annotate the current
+run’s <code class="docutils literal notranslate"><span class="pre">Finding.diff_status</span></code> in place, and return a <a class="reference internal" href="../base.html#ov.base.RunDiff" title="ov.base.RunDiff"><code class="xref py py-class docutils literal notranslate"><span class="pre">RunDiff</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#ov.analysis.diff.build_diff" title="ov.analysis.diff.build_diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_diff()</span></code></a> – <strong>store-aware</strong>: resolve a baseline (explicit id/run or
+the latest prior run of the same target via <a class="reference internal" href="#ov.analysis.diff.find_baseline_run" title="ov.analysis.diff.find_baseline_run"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_baseline_run()</span></code></a>), run
+<a class="reference internal" href="#ov.analysis.diff.diff_runs" title="ov.analysis.diff.diff_runs"><code class="xref py py-func docutils literal notranslate"><span class="pre">diff_runs()</span></code></a>, and persist both the annotated run and a <code class="docutils literal notranslate"><span class="pre">diff_&lt;run_id&gt;</span></code>
+analysis blob so the review report section + the synopsis can read it.</p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.diff.build_diff">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.diff.</span></span><span class="sig-name descname"><span class="pre">build_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_or_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.RunDiff" title="ov.base.RunDiff"><span class="pre">RunDiff</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/diff.html#build_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.diff.build_diff" title="Link to this definition"></a></dt>
+<dd><p>Diff a run against a baseline (explicit or auto-discovered) and persist it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">baseline</span></code> may be a <a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">CaptureRun</span></code></a>, a run id, or <code class="docutils literal notranslate"><span class="pre">None</span></code> (in
+which case the latest prior run of the same target is used). Returns <code class="docutils literal notranslate"><span class="pre">None</span></code>
+when no baseline exists – e.g. the first review run – after appending a
+legible note to the run. Otherwise it annotates <code class="docutils literal notranslate"><span class="pre">Finding.diff_status</span></code> in
+place, persists the run + a <code class="docutils literal notranslate"><span class="pre">diff_&lt;run_id&gt;</span></code> analysis blob (which the review
+report section and synopsis read), and returns the <a class="reference internal" href="../base.html#ov.base.RunDiff" title="ov.base.RunDiff"><code class="xref py py-class docutils literal notranslate"><span class="pre">RunDiff</span></code></a>.</p>
+<p>The run is assumed already analyzed (call <a class="reference internal" href="../../ov.html#ov.analyze" title="ov.analyze"><code class="xref py py-func docutils literal notranslate"><span class="pre">ov.analyze()</span></code></a> first).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.diff.diff_analysis_id">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.diff.</span></span><span class="sig-name descname"><span class="pre">diff_analysis_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/diff.html#diff_analysis_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.diff.diff_analysis_id" title="Link to this definition"></a></dt>
+<dd><p>The store key under which a run’s <a class="reference internal" href="../base.html#ov.base.RunDiff" title="ov.base.RunDiff"><code class="xref py py-class docutils literal notranslate"><span class="pre">RunDiff</span></code></a> blob is saved.</p>
+<p>Single source of truth for the convention (<code class="docutils literal notranslate"><span class="pre">&quot;diff_&lt;run_id&gt;&quot;</span></code>) shared by the
+writer (<a class="reference internal" href="#ov.analysis.diff.build_diff" title="ov.analysis.diff.build_diff"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_diff()</span></code></a>) and the readers (report render + synopsis), so the
+key lives in exactly one place.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">diff_analysis_id</span><span class="p">(</span><span class="s2">&quot;run_abc&quot;</span><span class="p">)</span>
+<span class="go">&#39;diff_run_abc&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.diff.diff_runs">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.diff.</span></span><span class="sig-name descname"><span class="pre">diff_runs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.RunDiff" title="ov.base.RunDiff"><span class="pre">RunDiff</span></a></span></span><a class="reference internal" href="../../../_modules/ov/analysis/diff.html#diff_runs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.diff.diff_runs" title="Link to this definition"></a></dt>
+<dd><p>Compare two analyzed runs; annotate <code class="docutils literal notranslate"><span class="pre">current</span></code> in place; return the diff.</p>
+<p>Side effect (by design, per issue #14): each <code class="docutils literal notranslate"><span class="pre">current</span></code> finding’s
+<code class="docutils literal notranslate"><span class="pre">diff_status</span></code> is set to <code class="docutils literal notranslate"><span class="pre">&quot;new&quot;</span></code>/<code class="docutils literal notranslate"><span class="pre">&quot;changed&quot;</span></code> or cleared to <code class="docutils literal notranslate"><span class="pre">None</span></code> for
+unchanged ones. Resolved findings live only in the returned
+<a class="reference internal" href="../base.html#ov.base.RunDiff" title="ov.base.RunDiff"><code class="xref py py-class docutils literal notranslate"><span class="pre">RunDiff</span></code></a> (they are absent from <code class="docutils literal notranslate"><span class="pre">current</span></code>). The function is
+otherwise pure – no store, no browser, no model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">Severity</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mk</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">sig</span><span class="p">,</span> <span class="n">sc</span><span class="p">:</span> <span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="n">sig</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">title</span><span class="o">=</span><span class="n">sig</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="n">sig</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="n">severity</span><span class="o">=</span><span class="n">Severity</span><span class="p">(</span><span class="n">impact_tier</span><span class="o">=</span><span class="s2">&quot;serious&quot;</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">sc</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">base</span> <span class="o">=</span> <span class="n">CaptureRun</span><span class="p">(</span><span class="n">target_url</span><span class="o">=</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="n">findings</span><span class="o">=</span><span class="p">[</span><span class="n">mk</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="n">mk</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cur</span> <span class="o">=</span> <span class="n">CaptureRun</span><span class="p">(</span><span class="n">target_url</span><span class="o">=</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="n">findings</span><span class="o">=</span><span class="p">[</span><span class="n">mk</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="n">mk</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">diff_runs</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">counts</span>
+<span class="go">{&#39;new&#39;: 1, &#39;changed&#39;: 1, &#39;resolved&#39;: 1, &#39;unchanged&#39;: 0}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cur</span><span class="o">.</span><span class="n">findings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">diff_status</span><span class="p">,</span> <span class="n">cur</span><span class="o">.</span><span class="n">findings</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">diff_status</span>
+<span class="go">(&#39;changed&#39;, &#39;new&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;::&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">regressions</span><span class="p">)</span>
+<span class="go">[&#39;a&#39;, &#39;c&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.diff.find_baseline_run">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.diff.</span></span><span class="sig-name descname"><span class="pre">find_baseline_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/diff.html#find_baseline_run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.diff.find_baseline_run" title="Link to this definition"></a></dt>
+<dd><p>Return the latest stored run of the same target captured before <code class="docutils literal notranslate"><span class="pre">current</span></code>.</p>
+<p>Linear scan over stored runs – fine for the handful-of-runs case; a future
+run index could make this O(1) (see issue #13). Skips the current run, runs
+for a different <code class="docutils literal notranslate"><span class="pre">target_url</span></code>, and runs not strictly older than <code class="docutils literal notranslate"><span class="pre">current</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.diff.finding_key">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.diff.</span></span><span class="sig-name descname"><span class="pre">finding_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.Finding" title="ov.base.Finding"><span class="pre">Finding</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/diff.html#finding_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.diff.finding_key" title="Link to this definition"></a></dt>
+<dd><p>Return a stable cross-run identity for a finding (pure, model-free).</p>
+<p>Built from semantic fields that survive re-capture – category, signal, any
+engine/heuristic/WCAG rule id, a structural locator, and (only when no
+structural locator pins identity) a stable content discriminator. Never from
+per-run ids. Two findings describing the same issue in two runs share a key;
+two <em>distinct</em> findings of the same locator-less signal do not collapse.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Finding</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;contrast.text&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="s2">&quot;.btn&quot;</span><span class="p">,</span> <span class="s2">&quot;step_id&quot;</span><span class="p">:</span> <span class="s2">&quot;step_aaa&quot;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;contrast.text&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="s2">&quot;.btn&quot;</span><span class="p">,</span> <span class="s2">&quot;step_id&quot;</span><span class="p">:</span> <span class="s2">&quot;step_zzz&quot;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">finding_key</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">finding_key</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>   <span class="c1"># step_id differs but identity holds</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;risk&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;deps.known-vulnerability&quot;</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">category</span><span class="o">=</span><span class="s2">&quot;robustness&quot;</span><span class="p">,</span> <span class="n">metric_detail</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="s2">&quot;lodash&quot;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;risk&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;deps.known-vulnerability&quot;</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">category</span><span class="o">=</span><span class="s2">&quot;robustness&quot;</span><span class="p">,</span> <span class="n">metric_detail</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="s2">&quot;jquery&quot;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">finding_key</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">==</span> <span class="n">finding_key</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>   <span class="c1"># distinct libraries -&gt; distinct keys</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.diff.load_diff">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.diff.</span></span><span class="sig-name descname"><span class="pre">load_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/diff.html#load_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.diff.load_diff" title="Link to this definition"></a></dt>
+<dd><p>Load a run’s serialized <a class="reference internal" href="../base.html#ov.base.RunDiff" title="ov.base.RunDiff"><code class="xref py py-class docutils literal notranslate"><span class="pre">RunDiff</span></code></a> blob, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if absent.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="context.html" class="btn btn-neutral float-left" title="ov.analysis.context" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="evidence.html" class="btn btn-neutral float-right" title="ov.analysis.evidence" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

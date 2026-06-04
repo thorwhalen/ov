@@ -1,0 +1,582 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.analysis.diff &mdash; ov 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../ov.html">ov</a></li>
+          <li class="breadcrumb-item"><a href="../analysis.html">ov.analysis</a></li>
+      <li class="breadcrumb-item active">ov.analysis.diff</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ov.analysis.diff</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Own-target diffing: a run vs a stored prior baseline run (review mode, §10).</span>
+
+<span class="sd">Review mode&#39;s distinguishing capability is *regression/drift detection*: compare</span>
+<span class="sd">an analyzed :class:`~ov.base.CaptureRun` against a stored prior run of the same</span>
+<span class="sd">target and report what is **new**, **changed**, or **resolved**. Because</span>
+<span class="sd">artifacts are content-addressed (identical bytes dedupe across runs), this</span>
+<span class="sd">comparison is cheap by design (spec §3.4).</span>
+
+<span class="sd">The matching unit is the :class:`~ov.base.Finding`. Finding ids are regenerated</span>
+<span class="sd">every run, so cross-run identity is derived from *stable semantic fields*</span>
+<span class="sd">(:func:`finding_key`) -- category, signal, engine/heuristic/WCAG identifiers, and</span>
+<span class="sd">a stable locator -- explicitly excluding per-run ids (``finding_id``, ``step_id``,</span>
+<span class="sd">``state_id``) that would make every finding look brand new.</span>
+
+<span class="sd">Two entry points:</span>
+
+<span class="sd">* :func:`diff_runs` -- **pure**: compare two in-memory runs, annotate the current</span>
+<span class="sd">  run&#39;s ``Finding.diff_status`` in place, and return a :class:`~ov.base.RunDiff`.</span>
+<span class="sd">* :func:`build_diff` -- **store-aware**: resolve a baseline (explicit id/run or</span>
+<span class="sd">  the latest prior run of the same target via :func:`find_baseline_run`), run</span>
+<span class="sd">  :func:`diff_runs`, and persist both the annotated run and a ``diff_&lt;run_id&gt;``</span>
+<span class="sd">  analysis blob so the review report section + the synopsis can read it.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">FindingDelta</span><span class="p">,</span> <span class="n">RunDiff</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..capture.stores</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_store</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..util</span><span class="w"> </span><span class="kn">import</span> <span class="n">content_hash</span>
+
+<span class="c1"># Structural locators that pin a finding to a stable element/route across runs.</span>
+<span class="c1"># Per-run ids (``step_id``/``state_id``) are deliberately excluded -- including</span>
+<span class="c1"># them would make every finding look new. ``intent`` is behavioral, not</span>
+<span class="c1"># structural, so it is a weak fallback only (see ``_content_discriminator``).</span>
+<span class="n">_STRUCTURAL_LOCATORS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;selector&quot;</span><span class="p">,</span> <span class="s2">&quot;url_or_route&quot;</span><span class="p">,</span> <span class="s2">&quot;route&quot;</span><span class="p">,</span> <span class="s2">&quot;form&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_content_discriminator</span><span class="p">(</span><span class="n">finding</span><span class="p">:</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">loc</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A *stable* per-finding discriminator for locator-less, multi-instance signals.</span>
+
+<span class="sd">    Some analyzers emit many findings under one signal with no structural locator</span>
+<span class="sd">    -- e.g. one ``deps.known-vulnerability`` per vulnerable library, or one</span>
+<span class="sd">    ``heuristic.console-error`` per error message. Without a discriminator they</span>
+<span class="sd">    all collapse to one key and the diff silently under-reports new/resolved</span>
+<span class="sd">    deltas. We fold in the most stable identifying content available, preferring</span>
+<span class="sd">    fields that survive re-capture (a library *name*) over volatile ones (a</span>
+<span class="sd">    version string): ``metric_detail[&#39;component&#39;]`` → ``observed`` → ``intent`` →</span>
+<span class="sd">    ``title``. Used only when no structural locator is present, so it never</span>
+<span class="sd">    destabilizes well-located findings (whose ``observed`` may carry drifting</span>
+<span class="sd">    numbers like a contrast ratio).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">md</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">metric_detail</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">md</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;component&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;c:</span><span class="si">{</span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;component&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">finding</span><span class="o">.</span><span class="n">observed</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;o:</span><span class="si">{</span><span class="n">content_hash</span><span class="p">(</span><span class="n">finding</span><span class="o">.</span><span class="n">observed</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">loc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;intent&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;i:</span><span class="si">{</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;intent&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">finding</span><span class="o">.</span><span class="n">title</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;t:</span><span class="si">{</span><span class="n">content_hash</span><span class="p">(</span><span class="n">finding</span><span class="o">.</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="finding_key">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/diff.html#ov.analysis.diff.finding_key">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">finding_key</span><span class="p">(</span><span class="n">finding</span><span class="p">:</span> <span class="n">Finding</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a stable cross-run identity for a finding (pure, model-free).</span>
+
+<span class="sd">    Built from semantic fields that survive re-capture -- category, signal, any</span>
+<span class="sd">    engine/heuristic/WCAG rule id, a structural locator, and (only when no</span>
+<span class="sd">    structural locator pins identity) a stable content discriminator. Never from</span>
+<span class="sd">    per-run ids. Two findings describing the same issue in two runs share a key;</span>
+<span class="sd">    two *distinct* findings of the same locator-less signal do not collapse.</span>
+
+<span class="sd">    &gt;&gt;&gt; from ov.base import Finding</span>
+<span class="sd">    &gt;&gt;&gt; a = Finding(type=&quot;ux_issue&quot;, signal=&quot;contrast.text&quot;, category=&quot;a11y&quot;,</span>
+<span class="sd">    ...             location={&quot;selector&quot;: &quot;.btn&quot;, &quot;step_id&quot;: &quot;step_aaa&quot;})</span>
+<span class="sd">    &gt;&gt;&gt; b = Finding(type=&quot;ux_issue&quot;, signal=&quot;contrast.text&quot;, category=&quot;a11y&quot;,</span>
+<span class="sd">    ...             location={&quot;selector&quot;: &quot;.btn&quot;, &quot;step_id&quot;: &quot;step_zzz&quot;})</span>
+<span class="sd">    &gt;&gt;&gt; finding_key(a) == finding_key(b)   # step_id differs but identity holds</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; v1 = Finding(type=&quot;risk&quot;, signal=&quot;deps.known-vulnerability&quot;,</span>
+<span class="sd">    ...              category=&quot;robustness&quot;, metric_detail={&quot;component&quot;: &quot;lodash&quot;})</span>
+<span class="sd">    &gt;&gt;&gt; v2 = Finding(type=&quot;risk&quot;, signal=&quot;deps.known-vulnerability&quot;,</span>
+<span class="sd">    ...              category=&quot;robustness&quot;, metric_detail={&quot;component&quot;: &quot;jquery&quot;})</span>
+<span class="sd">    &gt;&gt;&gt; finding_key(v1) == finding_key(v2)   # distinct libraries -&gt; distinct keys</span>
+<span class="sd">    False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">loc</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">location</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">finding</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="n">finding</span><span class="o">.</span><span class="n">signal</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">finding</span><span class="o">.</span><span class="n">engine_rule_id</span><span class="p">:</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finding</span><span class="o">.</span><span class="n">engine_rule_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">finding</span><span class="o">.</span><span class="n">heuristic</span><span class="p">:</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finding</span><span class="o">.</span><span class="n">heuristic</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">finding</span><span class="o">.</span><span class="n">wcag_criterion</span> <span class="ow">and</span> <span class="n">finding</span><span class="o">.</span><span class="n">wcag_criterion</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">):</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;wcag:</span><span class="si">{</span><span class="n">finding</span><span class="o">.</span><span class="n">wcag_criterion</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">locator</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">_STRUCTURAL_LOCATORS</span> <span class="k">if</span> <span class="n">loc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)),</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">locator</span> <span class="ow">and</span> <span class="n">loc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;targets&quot;</span><span class="p">):</span>
+        <span class="n">locator</span> <span class="o">=</span> <span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">loc</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">])</span>
+    <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">locator</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">locator</span><span class="p">:</span>  <span class="c1"># disambiguate locator-less, multi-instance signals</span>
+        <span class="n">disc</span> <span class="o">=</span> <span class="n">_content_discriminator</span><span class="p">(</span><span class="n">finding</span><span class="p">,</span> <span class="n">loc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">disc</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">disc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;::&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_colliding_signals</span><span class="p">(</span><span class="n">findings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Signals whose findings share a :func:`finding_key` within one run (ambiguous).&quot;&quot;&quot;</span>
+    <span class="n">by_key</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">findings</span><span class="p">:</span>
+        <span class="n">by_key</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">finding_key</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="p">{</span><span class="n">f</span><span class="o">.</span><span class="n">signal</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">by_key</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">group</span><span class="p">}</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_severity_score</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Finding</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">score</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">severity</span> <span class="k">else</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_severity_tier</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Finding</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">severity</span><span class="o">.</span><span class="n">impact_tier</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">severity</span> <span class="k">else</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_change_signature</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Finding</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The tuple whose inequality across runs defines a ``changed`` finding.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_severity_score</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">_severity_tier</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">observed</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">confidence</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_change_detail</span><span class="p">(</span><span class="n">cur</span><span class="p">:</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Finding</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A short human-legible note on *what* changed between two matched findings.&quot;&quot;&quot;</span>
+    <span class="n">bits</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">cs</span><span class="p">,</span> <span class="n">bs</span> <span class="o">=</span> <span class="n">_severity_score</span><span class="p">(</span><span class="n">cur</span><span class="p">),</span> <span class="n">_severity_score</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cs</span> <span class="o">!=</span> <span class="n">bs</span><span class="p">:</span>
+        <span class="n">bits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;severity </span><span class="si">{</span><span class="n">bs</span><span class="si">}</span><span class="s2">→</span><span class="si">{</span><span class="n">cs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ct</span><span class="p">,</span> <span class="n">bt</span> <span class="o">=</span> <span class="n">_severity_tier</span><span class="p">(</span><span class="n">cur</span><span class="p">),</span> <span class="n">_severity_tier</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ct</span> <span class="o">!=</span> <span class="n">bt</span><span class="p">:</span>
+        <span class="n">bits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tier </span><span class="si">{</span><span class="n">bt</span><span class="si">}</span><span class="s2">→</span><span class="si">{</span><span class="n">ct</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">observed</span> <span class="o">!=</span> <span class="n">base</span><span class="o">.</span><span class="n">observed</span><span class="p">:</span>
+        <span class="n">bits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;observed signal changed&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">confidence</span> <span class="o">!=</span> <span class="n">base</span><span class="o">.</span><span class="n">confidence</span><span class="p">:</span>
+        <span class="n">bits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;confidence </span><span class="si">{</span><span class="n">base</span><span class="o">.</span><span class="n">confidence</span><span class="si">}</span><span class="s2">→</span><span class="si">{</span><span class="n">cur</span><span class="o">.</span><span class="n">confidence</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_direction</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cur_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">base_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Roll a per-finding status into regression/improvement/neutral.</span>
+
+<span class="sd">    A resolved finding is an improvement; a new finding that carries severity is a</span>
+<span class="sd">    regression; a changed finding follows its severity delta. Severity-less</span>
+<span class="sd">    findings (e.g. ``undetermined`` manual-review items) stay neutral.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;resolved&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;improvement&quot;</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;new&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;regression&quot;</span> <span class="k">if</span> <span class="p">(</span><span class="n">cur_score</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;neutral&quot;</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;changed&quot;</span><span class="p">:</span>
+        <span class="n">cur</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="n">cur_score</span> <span class="ow">or</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_score</span> <span class="ow">or</span> <span class="mf">0.0</span>
+        <span class="k">if</span> <span class="n">cur</span> <span class="o">&gt;</span> <span class="n">base</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;regression&quot;</span>
+        <span class="k">if</span> <span class="n">cur</span> <span class="o">&lt;</span> <span class="n">base</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;improvement&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;neutral&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_delta_for</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="n">Finding</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FindingDelta</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the :class:`FindingDelta` for a current finding (new/changed/unchanged).&quot;&quot;&quot;</span>
+    <span class="n">cs</span> <span class="o">=</span> <span class="n">_severity_score</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">bs</span> <span class="o">=</span> <span class="n">_severity_score</span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="k">if</span> <span class="n">base</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">detail</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;not present in baseline&quot;</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;new&quot;</span>
+        <span class="k">else</span> <span class="n">_change_detail</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;changed&quot;</span> <span class="ow">and</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">FindingDelta</span><span class="p">(</span>
+        <span class="n">key</span><span class="o">=</span><span class="n">finding_key</span><span class="p">(</span><span class="n">f</span><span class="p">),</span>
+        <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
+        <span class="n">direction</span><span class="o">=</span><span class="n">_direction</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">bs</span><span class="p">),</span>  <span class="c1"># type: ignore[arg-type]</span>
+        <span class="n">signal</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">signal</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">category</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">title</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="n">observed</span><span class="p">,</span>
+        <span class="n">finding_id</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">finding_id</span><span class="p">,</span>
+        <span class="n">baseline_finding_id</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">finding_id</span> <span class="k">if</span> <span class="n">base</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">severity_score</span><span class="o">=</span><span class="n">cs</span><span class="p">,</span>
+        <span class="n">baseline_severity_score</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span>
+        <span class="n">severity_tier</span><span class="o">=</span><span class="n">_severity_tier</span><span class="p">(</span><span class="n">f</span><span class="p">),</span>
+        <span class="n">detail</span><span class="o">=</span><span class="n">detail</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="diff_runs">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/diff.html#ov.analysis.diff.diff_runs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">diff_runs</span><span class="p">(</span><span class="n">current</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">baseline</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RunDiff</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compare two analyzed runs; annotate ``current`` in place; return the diff.</span>
+
+<span class="sd">    Side effect (by design, per issue #14): each ``current`` finding&#39;s</span>
+<span class="sd">    ``diff_status`` is set to ``&quot;new&quot;``/``&quot;changed&quot;`` or cleared to ``None`` for</span>
+<span class="sd">    unchanged ones. Resolved findings live only in the returned</span>
+<span class="sd">    :class:`~ov.base.RunDiff` (they are absent from ``current``). The function is</span>
+<span class="sd">    otherwise pure -- no store, no browser, no model.</span>
+
+<span class="sd">    &gt;&gt;&gt; from ov.base import CaptureRun, Finding, Severity</span>
+<span class="sd">    &gt;&gt;&gt; mk = lambda sig, sc: Finding(type=&quot;ux_issue&quot;, signal=sig, category=&quot;ux&quot;,</span>
+<span class="sd">    ...     title=sig, location={&quot;selector&quot;: &quot;#&quot; + sig},</span>
+<span class="sd">    ...     severity=Severity(impact_tier=&quot;serious&quot;, score=sc))</span>
+<span class="sd">    &gt;&gt;&gt; base = CaptureRun(target_url=&quot;u&quot;, findings=[mk(&quot;a&quot;, 2.0), mk(&quot;b&quot;, 3.0)])</span>
+<span class="sd">    &gt;&gt;&gt; cur = CaptureRun(target_url=&quot;u&quot;, findings=[mk(&quot;a&quot;, 5.0), mk(&quot;c&quot;, 1.0)])</span>
+<span class="sd">    &gt;&gt;&gt; d = diff_runs(cur, base)</span>
+<span class="sd">    &gt;&gt;&gt; d.counts</span>
+<span class="sd">    {&#39;new&#39;: 1, &#39;changed&#39;: 1, &#39;resolved&#39;: 1, &#39;unchanged&#39;: 0}</span>
+<span class="sd">    &gt;&gt;&gt; cur.findings[0].diff_status, cur.findings[1].diff_status</span>
+<span class="sd">    (&#39;changed&#39;, &#39;new&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; sorted(r.key.split(&quot;::&quot;)[1] for r in d.regressions)</span>
+<span class="sd">    [&#39;a&#39;, &#39;c&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">base_by_key</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Finding</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">baseline</span><span class="o">.</span><span class="n">findings</span><span class="p">:</span>
+        <span class="n">base_by_key</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">finding_key</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="n">deltas</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">FindingDelta</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">seen</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">findings</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">finding_key</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">base_by_key</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">diff_status</span> <span class="o">=</span> <span class="s2">&quot;new&quot;</span>
+            <span class="n">deltas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_delta_for</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">_change_signature</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">!=</span> <span class="n">_change_signature</span><span class="p">(</span><span class="n">base</span><span class="p">):</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">diff_status</span> <span class="o">=</span> <span class="s2">&quot;changed&quot;</span>
+            <span class="n">deltas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_delta_for</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;changed&quot;</span><span class="p">,</span> <span class="n">base</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">diff_status</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># unchanged findings carry no review annotation</span>
+            <span class="n">deltas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_delta_for</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;unchanged&quot;</span><span class="p">,</span> <span class="n">base</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">base_by_key</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">deltas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">FindingDelta</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
+                <span class="n">status</span><span class="o">=</span><span class="s2">&quot;resolved&quot;</span><span class="p">,</span>
+                <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;improvement&quot;</span><span class="p">,</span>
+                <span class="n">signal</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">signal</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">category</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">title</span> <span class="ow">or</span> <span class="n">base</span><span class="o">.</span><span class="n">observed</span><span class="p">,</span>
+                <span class="n">baseline_finding_id</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">finding_id</span><span class="p">,</span>
+                <span class="n">baseline_severity_score</span><span class="o">=</span><span class="n">_severity_score</span><span class="p">(</span><span class="n">base</span><span class="p">),</span>
+                <span class="n">severity_tier</span><span class="o">=</span><span class="n">_severity_tier</span><span class="p">(</span><span class="n">base</span><span class="p">),</span>
+                <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;present in baseline, gone now&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="n">notes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">baseline</span><span class="o">.</span><span class="n">findings</span><span class="p">:</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;baseline run had no analyzed findings; all current are &#39;new&#39;&quot;</span><span class="p">)</span>
+    <span class="c1"># Safety net: distinct findings sharing one key are matched ambiguously (and a</span>
+    <span class="c1"># colliding baseline twin is dropped). With the content discriminator this is</span>
+    <span class="c1"># rare, but surface it rather than under-report silently.</span>
+    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">run</span> <span class="ow">in</span> <span class="p">((</span><span class="s2">&quot;current&quot;</span><span class="p">,</span> <span class="n">current</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;baseline&quot;</span><span class="p">,</span> <span class="n">baseline</span><span class="p">)):</span>
+        <span class="n">collisions</span> <span class="o">=</span> <span class="n">_colliding_signals</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">collisions</span><span class="p">:</span>
+            <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> run has findings sharing a diff key &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(ambiguous match): </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">collisions</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">RunDiff</span><span class="p">(</span>
+        <span class="n">run_id</span><span class="o">=</span><span class="n">current</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span>
+        <span class="n">baseline_run_id</span><span class="o">=</span><span class="n">baseline</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span>
+        <span class="n">target_url</span><span class="o">=</span><span class="n">current</span><span class="o">.</span><span class="n">target_url</span><span class="p">,</span>
+        <span class="n">finding_deltas</span><span class="o">=</span><span class="n">deltas</span><span class="p">,</span>
+        <span class="n">tech_added</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">}</span>
+            <span class="o">-</span> <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">baseline</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">}</span>
+        <span class="p">),</span>
+        <span class="n">tech_removed</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">baseline</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">}</span>
+            <span class="o">-</span> <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">}</span>
+        <span class="p">),</span>
+        <span class="n">endpoints_added</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_endpoint_keys</span><span class="p">(</span><span class="n">current</span><span class="p">)</span> <span class="o">-</span> <span class="n">_endpoint_keys</span><span class="p">(</span><span class="n">baseline</span><span class="p">)),</span>
+        <span class="n">endpoints_removed</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_endpoint_keys</span><span class="p">(</span><span class="n">baseline</span><span class="p">)</span> <span class="o">-</span> <span class="n">_endpoint_keys</span><span class="p">(</span><span class="n">current</span><span class="p">)),</span>
+        <span class="n">rendering_model_change</span><span class="o">=</span><span class="n">_field_change</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="s2">&quot;rendering_model&quot;</span><span class="p">),</span>
+        <span class="n">source_maps_change</span><span class="o">=</span><span class="n">_field_change</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="s2">&quot;source_maps_present&quot;</span><span class="p">),</span>
+        <span class="n">notes</span><span class="o">=</span><span class="n">notes</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_endpoint_keys</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">method</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">path_template</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">api_surface</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_field_change</span><span class="p">(</span>
+    <span class="n">current</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">baseline</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">attr</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">cur_val</span><span class="p">,</span> <span class="n">base_val</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">attr</span><span class="p">),</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="n">base_val</span><span class="p">,</span> <span class="s2">&quot;to&quot;</span><span class="p">:</span> <span class="n">cur_val</span><span class="p">}</span> <span class="k">if</span> <span class="n">cur_val</span> <span class="o">!=</span> <span class="n">base_val</span> <span class="k">else</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="find_baseline_run">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/diff.html#ov.analysis.diff.find_baseline_run">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_baseline_run</span><span class="p">(</span><span class="n">store</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CaptureRun</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the latest stored run of the same target captured before ``current``.</span>
+
+<span class="sd">    Linear scan over stored runs -- fine for the handful-of-runs case; a future</span>
+<span class="sd">    run index could make this O(1) (see issue #13). Skips the current run, runs</span>
+<span class="sd">    for a different ``target_url``, and runs not strictly older than ``current``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">candidates</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">CaptureRun</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">run_id</span> <span class="ow">in</span> <span class="n">store</span><span class="o">.</span><span class="n">run_ids</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">run_id</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="n">run_id</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">prior</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">load_run</span><span class="p">(</span><span class="n">run_id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">prior</span><span class="o">.</span><span class="n">target_url</span> <span class="o">!=</span> <span class="n">current</span><span class="o">.</span><span class="n">target_url</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">prior</span><span class="o">.</span><span class="n">started_at</span> <span class="o">&gt;=</span> <span class="n">current</span><span class="o">.</span><span class="n">started_at</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">candidates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prior</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">candidates</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">started_at</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="diff_analysis_id">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/diff.html#ov.analysis.diff.diff_analysis_id">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">diff_analysis_id</span><span class="p">(</span><span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The store key under which a run&#39;s :class:`~ov.base.RunDiff` blob is saved.</span>
+
+<span class="sd">    Single source of truth for the convention (``&quot;diff_&lt;run_id&gt;&quot;``) shared by the</span>
+<span class="sd">    writer (:func:`build_diff`) and the readers (report render + synopsis), so the</span>
+<span class="sd">    key lives in exactly one place.</span>
+
+<span class="sd">    &gt;&gt;&gt; diff_analysis_id(&quot;run_abc&quot;)</span>
+<span class="sd">    &#39;diff_run_abc&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;diff_</span><span class="si">{</span><span class="n">run_id</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="load_diff">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/diff.html#ov.analysis.diff.load_diff">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_diff</span><span class="p">(</span><span class="n">store</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a run&#39;s serialized :class:`~ov.base.RunDiff` blob, or ``None`` if absent.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">store</span><span class="o">.</span><span class="n">load_analysis</span><span class="p">(</span><span class="n">diff_analysis_id</span><span class="p">(</span><span class="n">run_id</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="build_diff">
+<a class="viewcode-back" href="../../../module_docs/ov/analysis/diff.html#ov.analysis.diff.build_diff">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_diff</span><span class="p">(</span>
+    <span class="n">run_or_id</span><span class="p">:</span> <span class="n">CaptureRun</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">baseline</span><span class="p">:</span> <span class="n">CaptureRun</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">persist</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RunDiff</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Diff a run against a baseline (explicit or auto-discovered) and persist it.</span>
+
+<span class="sd">    ``baseline`` may be a :class:`~ov.base.CaptureRun`, a run id, or ``None`` (in</span>
+<span class="sd">    which case the latest prior run of the same target is used). Returns ``None``</span>
+<span class="sd">    when no baseline exists -- e.g. the first review run -- after appending a</span>
+<span class="sd">    legible note to the run. Otherwise it annotates ``Finding.diff_status`` in</span>
+<span class="sd">    place, persists the run + a ``diff_&lt;run_id&gt;`` analysis blob (which the review</span>
+<span class="sd">    report section and synopsis read), and returns the :class:`~ov.base.RunDiff`.</span>
+
+<span class="sd">    The run is assumed already analyzed (call :func:`ov.analyze` first).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">store</span> <span class="o">=</span> <span class="n">resolve_store</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">run_or_id</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">run_or_id</span><span class="p">,</span> <span class="n">CaptureRun</span><span class="p">)</span> <span class="k">else</span> <span class="n">store</span><span class="o">.</span><span class="n">load_run</span><span class="p">(</span><span class="n">run_or_id</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">CaptureRun</span><span class="p">):</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">CaptureRun</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">baseline</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">load_run</span><span class="p">(</span><span class="n">baseline</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">find_baseline_run</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="n">current</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">base</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">current</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;review diff: no prior baseline run found for this target&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">persist</span><span class="p">:</span>
+            <span class="n">store</span><span class="o">.</span><span class="n">save_run</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">diff_runs</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">persist</span><span class="p">:</span>
+        <span class="n">store</span><span class="o">.</span><span class="n">save_run</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>  <span class="c1"># persist the diff_status annotations</span>
+        <span class="n">store</span><span class="o">.</span><span class="n">save_analysis</span><span class="p">(</span>
+            <span class="n">diff_analysis_id</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">run_id</span><span class="p">),</span> <span class="n">diff</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">diff</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
