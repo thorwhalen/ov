@@ -4,6 +4,9 @@
 .claude/scheduled_tasks.lock
 .claude/settings.local.json
 
+# Node sidecar deps (installed via `npm install` in sidecar/; lockfile is committed)
+node_modules/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
