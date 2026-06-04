@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OV Test Site — SPA</title>
+</head>
+<body>
+  <h1 id="view">Home view</h1>
+  <button id="go-about" onclick="route('/about', 'About view')">About</button>
+  <button id="go-contact" onclick="route('/contact', 'Contact view')">Contact</button>
+  <script>
+    function route(path, label) {
+      history.pushState({}, '', path);
+      document.getElementById('view').textContent = label;
+    }
+  </script>
+</body>
+</html>
