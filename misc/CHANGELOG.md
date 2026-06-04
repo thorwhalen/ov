@@ -61,3 +61,24 @@ All notable changes to `ov` are documented here. The project is built in phases
 - **Deps**: `httpx`, `genson`, `selectolax` promoted to core.
 - **Tests**: deterministic analyzers + reporting tested on synthetic artifacts;
   full `overview` pipeline tested end-to-end (browser-gated).
+
+### Phase 3 — Host-agent skills + evidence bundle + reliability passes
+
+- **Evidence-bundle assembler** (`analysis/evidence.py`, model-free): set-of-mark
+  (stable `R1..` ids overlaid + required in output), images-before-text ordering,
+  deterministic token budget (`Σ(w×h/750)` honoring both the long-edge and token
+  caps, downsample-to-fit), full-vs-crop, derived facts (no raw bytes). Stdlib PNG
+  dimension reader so the budget math works without Pillow; Pillow overlay optional.
+- **Reliability passes** (`analysis/reliability.py`, deterministic gates):
+  cite-or-abstain (downgrade unsupported findings to `undetermined`, never drop),
+  evidence resolvability, set-of-mark membership, just-in-time `lookup_evidence`,
+  and factored Chain-of-Verification scaffolding (`verification_questions` /
+  `apply_verification`) the host fills in.
+- **Skill layer** (`.claude/skills/`, first-class deliverable): `study-web-app`
+  (main workflow + manager policy: authorization/mode, bounding, no-progress,
+  breadth-vs-depth, recovery) + `ov-capture`, `ov-operate`, `ov-analyze-ux`,
+  `ov-analyze-arch`, `ov-report`. Trigger-rich descriptions; explain-the-why;
+  reference the same tool functions the CLI calls.
+- **CLI**: `ov evidence <run_id>` builds a grounded bundle.
+- **Tests**: evidence/reliability on synthetic artifacts; structural skill tests
+  (frontmatter, cross-references, size).
