@@ -8,6 +8,25 @@ description: >-
   You (the host agent) are the manager: you plan the journey, call ov's deterministic
   tools, reason over the grounded evidence, and assemble the report. ov supplies the
   hands (drive) and eyes (observe + analyze); you supply the control loop.
+coact:
+  model: opus
+  tools: [Bash, Read, Grep, Glob]
+  memory: project
+  mcp:
+    - module: ov.agents.mcp
+      functions: [study_url]
+  returns:
+    json_schema:
+      type: object
+      properties:
+        synopsis_path: { type: string }
+        findings_count: { type: integer }
+        report_paths: { type: array, items: { type: string } }
+      required: [synopsis_path]
+    description: >-
+      The deduplicated synopsis (path + counts) plus rendered report paths, for a
+      downstream creation/modification agent. Pure coordinator — plans + delegates
+      to the operator and analyst agents, never analyzes (Opus-routed, §10).
 ---
 
 # Study a web app with `ov`

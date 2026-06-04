@@ -5,6 +5,17 @@ description: >-
   scored facts into a rebuild blueprint (reconstruct) or an architecture audit
   (review). Load this for the software-design lens: framework/rendering/state/routing
   detection, source-map recovery, API surface synthesis, dependency/CVE flags.
+coact:
+  model: opus
+  tools: [Read, Grep, Glob]
+  memory: project
+  consumes: evidence_bundle
+  returns:
+    schema_ref: ov.base:Finding
+    description: >-
+      Architecture facts + reconstruction-blueprint / audit findings (a list of
+      ov.base:Finding, source_layer="llm") grounded in captured artifacts. Design-
+      intent reasoning is judgment-heavy, so Opus-routed (cost gate, §10).
 ---
 
 # Software-architecture analysis

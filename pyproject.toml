@@ -36,8 +36,23 @@ Documentation = "https://thorwhalen.github.io/ov"
 evidence = ["pillow"]
 # Optional dataflow DAG backend for the registries (a minimal topo-sort is built in).
 dag = ["meshed"]
+# Phase 4 in-package agent layer (ov.agents): the coact-powered skill→agent lift,
+# the operator / analyst / orchestrator runtimes, and the py2mcp foreign-host server.
+# coact[sdk,mcp] pulls the Agent SDK + aw + py2mcp + fastmcp; the rest are listed
+# explicitly because ov.agents imports them directly.
+agents = ["coact[sdk,mcp]>=0.0.2", "aw", "py2mcp", "fastmcp"]
 dev = ["pytest>=7.0", "pytest-cov>=4.0", "ruff>=0.1.0"]
 docs = ["sphinx>=6.0", "sphinx-rtd-theme>=1.0"]
+
+# Ship the authored skills (SSOT in .claude/skills/) inside the wheel + sdist at
+# ov/data/skills/ so the productized agents (ov.agents) resolve them after a plain
+# `pip install ov` — not just from a source checkout. ov.agents._skills checks the
+# packaged location first, then the repo's .claude/skills/ for editable installs.
+[tool.hatch.build.targets.wheel.force-include]
+".claude/skills" = "ov/data/skills"
+
+[tool.hatch.build.targets.sdist.force-include]
+".claude/skills" = "ov/data/skills"
 
 [tool.ruff]
 line-length = 88

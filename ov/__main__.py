@@ -113,6 +113,13 @@ def check():
     yield rep.render()
 
 
+def mcp():
+    """Serve ov as an MCP server (stdio) for non-Claude-Code hosts (needs ov[agents])."""
+    from .agents.mcp import main as _serve
+
+    _serve()
+
+
 def runs(*, store=None):
     """List stored capture run ids."""
     s = CaptureStore(store)
@@ -126,7 +133,8 @@ def main(argv=None):
         prog="ov", description="OverView: web reconnaissance & analysis"
     )
     argh.add_commands(
-        parser, [observe, analyze, report, synopsis, overview, evidence, check, runs]
+        parser,
+        [observe, analyze, report, synopsis, overview, evidence, check, runs, mcp],
     )
     parser.dispatch(argv=argv)
 

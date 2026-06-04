@@ -5,6 +5,24 @@ description: >-
   execute the next action, log per-step intent, and detect no-progress. Load this when
   you (the host) are driving a journey: crawling, pursuing a goal (signup/checkout),
   or replaying a script, and need the perceive→decide→act→record loop.
+coact:
+  model: haiku
+  tools: [Bash, Read, Grep, Glob]
+  memory: project
+  consumes: goal
+  returns:
+    json_schema:
+      type: object
+      properties:
+        run_id: { type: string }
+        steps_taken: { type: integer }
+        stopped_reason: { type: string }
+        goal_achieved: { type: boolean }
+      required: [run_id, steps_taken, stopped_reason]
+    description: >-
+      Outcome of the drive — the journey is recorded into the CaptureRun; this is
+      the compact summary a manager consumes. Throughput-bound (many steps), so
+      Haiku-routed (cost gate, §10).
 ---
 
 # Driving a target with `ov.operate`
