@@ -91,14 +91,51 @@ def dedupe_findings(findings: list[Finding]) -> list[dict[str, Any]]:
     return records
 
 
-def build_synopsis_doc(run: CaptureRun) -> dict[str, Any]:
-    """Build the ``synopsis.json`` SSOT document from a run's findings (pure)."""
+def _regression_summary(diff: dict[str, Any]) -> dict[str, Any]:
+    """Distill a :class:`~ov.base.RunDiff` dict into the synopsis regression block.
+
+    Regression-oriented for a downstream creation/modification agent: it leads
+    with what got *worse or newly appeared* (the fix list) and what *improved*,
+    plus non-finding drift (stack / API / rendering / source maps).
+    """
+    deltas = diff.get("finding_deltas", [])
+
+    def by_direction(direction: str) -> list[dict[str, Any]]:
+        return sorted(
+            (d for d in deltas if d.get("direction") == direction),
+            key=lambda d: -(d.get("severity_score") or 0),
+        )
+
+    return {
+        "baseline_run_id": diff.get("baseline_run_id"),
+        "has_drift": diff.get("has_drift"),
+        "counts": diff.get("counts", {}),
+        "regressions": by_direction("regression"),
+        "improvements": by_direction("improvement"),
+        "tech_added": diff.get("tech_added", []),
+        "tech_removed": diff.get("tech_removed", []),
+        "endpoints_added": diff.get("endpoints_added", []),
+        "endpoints_removed": diff.get("endpoints_removed", []),
+        "rendering_model_change": diff.get("rendering_model_change"),
+        "source_maps_change": diff.get("source_maps_change"),
+    }
+
+
+def build_synopsis_doc(
+    run: CaptureRun, *, diff: dict[str, Any] | None = None
+) -> dict[str, Any]:
+    """Build the ``synopsis.json`` SSOT document from a run's findings (pure).
+
+    When ``diff`` (a serialized :class:`~ov.base.RunDiff`) is given -- review mode
+    with a baseline -- a ``regression`` block is appended so the synopsis tells a
+    downstream agent what changed since the prior run, not just the current state.
+    """
     records = dedupe_findings(run.findings)
     histogram: dict[str, int] = {}
     for r in records:
         tier = str(r["severity_tier"] or "n/a")
         histogram[tier] = histogram.get(tier, 0) + 1
-    return {
+    doc: dict[str, Any] = {
         "run_id": run.run_id,
         "target_url": run.target_url,
         "mode": run.mode,
@@ -116,6 +153,9 @@ def build_synopsis_doc(run: CaptureRun) -> dict[str, Any]:
         "severity_histogram": histogram,
         "findings": records,
     }
+    if diff:
+        doc["regression"] = _regression_summary(diff)
+    return doc
 
 
 def render_synopsis_md(doc: dict[str, Any]) -> str:
@@ -141,7 +181,66 @@ def render_synopsis_md(doc: dict[str, Any]) -> str:
             f"| {score} | {r['type']} | `{r['signal']}` | {r['summary']} | "
             f"{len(r['evidence_refs'])} ref(s) | {'yes' if r['needs_human_review'] else ''} |"
         )
+    lines += _render_regression_md(doc.get("regression"))
     return "\n".join(lines)
+
+
+def _render_regression_md(reg: dict[str, Any] | None) -> list[str]:
+    """Markdown lines for the synopsis regression block (review mode w/ baseline)."""
+    if not reg:
+        return []
+    lines = [
+        "",
+        "## Regression vs baseline",
+        "",
+        f"- **Baseline**: `{reg.get('baseline_run_id')}` · drift: {reg.get('has_drift')}",
+        f"- **Counts**: {reg.get('counts', {})}",
+    ]
+    if reg.get("regressions"):
+        lines += [
+            "",
+            "### Regressions (worse / newly present)",
+            "",
+            "| Score | Signal | Summary |",
+            "|---|---|---|",
+        ]
+        for r in reg["regressions"]:
+            score = (
+                f"{r['severity_score']:g}"
+                if r.get("severity_score") is not None
+                else "-"
+            )
+            lines.append(
+                f"| {score} | `{r.get('signal', '')}` | {r.get('title', '')} |"
+            )
+    if reg.get("improvements"):
+        lines += [
+            "",
+            "### Improvements (resolved / better)",
+            "",
+            "| Signal | Summary |",
+            "|---|---|",
+        ]
+        for r in reg["improvements"]:
+            lines.append(f"| `{r.get('signal', '')}` | {r.get('title', '')} |")
+    drift: list[str] = []
+    for key, label in (
+        ("tech_added", "tech +"),
+        ("tech_removed", "tech −"),
+        ("endpoints_added", "endpoints +"),
+        ("endpoints_removed", "endpoints −"),
+    ):
+        if reg.get(key):
+            drift.append(f"{label}: {', '.join(reg[key])}")
+    if reg.get("rendering_model_change"):
+        rc = reg["rendering_model_change"]
+        drift.append(f"rendering {rc['from']}→{rc['to']}")
+    if reg.get("source_maps_change"):
+        sc = reg["source_maps_change"]
+        drift.append(f"source maps {sc['from']}→{sc['to']}")
+    if drift:
+        lines += ["", "**Stack / API drift:** " + "; ".join(drift)]
+    return lines
 
 
 def build_synopsis(run_or_id: Any, *, out: Any = None, store: Any = None) -> str:
@@ -150,9 +249,12 @@ def build_synopsis(run_or_id: Any, *, out: Any = None, store: Any = None) -> str
     ``run_or_id`` may be a :class:`CaptureRun` or a run id. The JSON is the SSOT;
     the Markdown is derived. Both are written to the store (and ``out`` dir if given).
     """
+    from ..analysis.diff import load_diff
+
     store = resolve_store(store)
     run = run_or_id if isinstance(run_or_id, CaptureRun) else store.load_run(run_or_id)
-    doc = build_synopsis_doc(run)
+    diff = load_diff(store, run.run_id)
+    doc = build_synopsis_doc(run, diff=diff)
     md = render_synopsis_md(doc)
 
     store.save_report(run.run_id, "synopsis.json", json.dumps(doc, indent=2))

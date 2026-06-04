@@ -58,6 +58,38 @@ def analyze(run_id, *, lenses="ux,arch", store=None):
     yield f"analyses: {list(result)}"
 
 
+def diff(run_id, *, baseline=None, store=None):
+    """Diff an analyzed run against a prior baseline run (own-target review mode)."""
+    from .analysis.diff import build_diff
+    from .capture.stores import resolve_store
+
+    s = resolve_store(store)
+    try:
+        run = s.load_run(run_id)
+    except (KeyError, ValueError) as e:
+        yield f"error: could not load run {run_id!r}: {e}"
+        yield "run `ov runs` to list available run ids"
+        return
+    d = build_diff(run, baseline=baseline, store=s)
+    if d is None:
+        yield "no prior baseline run found for this target; nothing to diff"
+        return
+    yield f"baseline: {d.baseline_run_id}"
+    c = d.counts
+    yield (
+        f"findings: {c['new']} new · {c['changed']} changed · "
+        f"{c['resolved']} resolved · {c['unchanged']} unchanged"
+    )
+    if d.tech_added or d.tech_removed:
+        yield f"tech: +{d.tech_added or '[]'} -{d.tech_removed or '[]'}"
+    if d.endpoints_added or d.endpoints_removed:
+        yield f"endpoints: +{len(d.endpoints_added)} -{len(d.endpoints_removed)}"
+    if d.rendering_model_change:
+        yield f"rendering model: {d.rendering_model_change['from']} -> {d.rendering_model_change['to']}"
+    if d.source_maps_change:
+        yield f"source maps: {d.source_maps_change['from']} -> {d.source_maps_change['to']}"
+
+
 def report(run_id, *, sections="default", out_dir=None, store=None):
     """Render Markdown report sections for a stored run (Phase 2)."""
     paths = _ov.report(run_id, sections=sections, out_dir=out_dir, store=store)
@@ -71,9 +103,16 @@ def synopsis(run_id, *, out=None, store=None):
 
 
 def overview(
-    url, *, headed=False, mode="reconstruct", out_dir=None, store=None, authorized=False
+    url,
+    *,
+    headed=False,
+    mode="reconstruct",
+    out_dir=None,
+    store=None,
+    authorized=False,
+    baseline=None,
 ):
-    """observe -> analyze -> report -> synopsis, the one-liner (Phase 2)."""
+    """observe -> analyze -> [diff in review mode] -> report -> synopsis (Phase 2)."""
     yield str(
         _ov.overview(
             url,
@@ -82,6 +121,7 @@ def overview(
             out_dir=out_dir,
             store=store,
             authorized=authorized,
+            baseline=baseline,
         )
     )
 
@@ -134,7 +174,18 @@ def main(argv=None):
     )
     argh.add_commands(
         parser,
-        [observe, analyze, report, synopsis, overview, evidence, check, runs, mcp],
+        [
+            observe,
+            analyze,
+            diff,
+            report,
+            synopsis,
+            overview,
+            evidence,
+            check,
+            runs,
+            mcp,
+        ],
     )
     parser.dispatch(argv=argv)
 

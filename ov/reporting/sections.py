@@ -176,6 +176,88 @@ def reconstruction_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+_DIRECTION_GLYPH = {"regression": "▲", "improvement": "▼", "neutral": "·"}
+
+
+def _delta_rows(deltas: list[dict[str, Any]], status: str) -> str:
+    """Render the deltas of one status as a severity-sorted Markdown table."""
+    rows = ["| Dir | Severity | Signal | Title | Detail |", "|---|---|---|---|---|"]
+    items = sorted(
+        (d for d in deltas if d.get("status") == status),
+        key=lambda d: -(d.get("severity_score") or 0),
+    )
+    for d in items:
+        score = (
+            f"{d['severity_score']:g}" if d.get("severity_score") is not None else "-"
+        )
+        glyph = _DIRECTION_GLYPH.get(d.get("direction", "neutral"), "")
+        rows.append(
+            f"| {glyph} | {score} | `{d.get('signal', '')}` | "
+            f"{d.get('title', '')} | {d.get('detail') or ''} |"
+        )
+    return "\n".join(rows) if len(rows) > 2 else "_none_"
+
+
+def _stack_drift_line(diff: dict[str, Any]) -> str | None:
+    """One-line summary of non-finding drift (tech / API / rendering / source maps)."""
+    bits: list[str] = []
+    if diff.get("tech_added"):
+        bits.append(f"tech added: {', '.join(diff['tech_added'])}")
+    if diff.get("tech_removed"):
+        bits.append(f"tech removed: {', '.join(diff['tech_removed'])}")
+    if diff.get("endpoints_added"):
+        bits.append(f"endpoints added: {', '.join(diff['endpoints_added'])}")
+    if diff.get("endpoints_removed"):
+        bits.append(f"endpoints removed: {', '.join(diff['endpoints_removed'])}")
+    if diff.get("rendering_model_change"):
+        rc = diff["rendering_model_change"]
+        bits.append(f"rendering model {rc['from']}→{rc['to']}")
+    if diff.get("source_maps_change"):
+        sc = diff["source_maps_change"]
+        bits.append(f"source maps {sc['from']}→{sc['to']}")
+    return "**Stack / API drift:** " + "; ".join(bits) if bits else None
+
+
+def _render_diff_md(diff: dict[str, Any] | None) -> list[str]:
+    """Markdown lines for the own-target drift block (review mode)."""
+    if not diff:
+        return [
+            "## Drift vs. prior run",
+            "",
+            "_No baseline run found — capture a prior run of this target in review "
+            "mode (`ov observe <url> --mode review`) to enable own-target "
+            "regression diffing._",
+        ]
+    deltas = diff.get("finding_deltas", [])
+    counts = diff.get("counts", {})
+    lines = [
+        "## Drift vs. prior run",
+        "",
+        f"- **Baseline run**: `{diff.get('baseline_run_id')}`",
+        f"- **Findings**: {counts.get('new', 0)} new · {counts.get('changed', 0)} "
+        f"changed · {counts.get('resolved', 0)} resolved · "
+        f"{counts.get('unchanged', 0)} unchanged",
+        "",
+    ]
+    drift = _stack_drift_line(diff)
+    if drift:
+        lines += [drift, ""]
+    lines += [
+        "### New findings",
+        "",
+        _delta_rows(deltas, "new"),
+        "",
+        "### Changed findings",
+        "",
+        _delta_rows(deltas, "changed"),
+        "",
+        "### Resolved findings",
+        "",
+        _delta_rows(deltas, "resolved"),
+    ]
+    return lines
+
+
 @register_section("40_review_audit", order=40, modes=("review",))
 def review_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
     risks = [f for f in run.findings if f.type == "risk" or f.category == "robustness"]
@@ -186,9 +268,8 @@ def review_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
         "",
         _findings_table(risks) if risks else "_no risks flagged deterministically_",
         "",
-        "_Drift vs. a prior run is available in review mode when a baseline exists "
-        "(diffing is a Phase-4 depth item)._",
     ]
+    lines += _render_diff_md(analyses.get("review_diff"))
     return "\n".join(lines)
 
 

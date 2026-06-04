@@ -17,6 +17,9 @@ The tree has four families:
 * **Analysis outputs** -- :class:`Evidence`, :class:`Severity`,
   :class:`Finding`, :class:`EvidenceBundle`. The normalized currency of the
   analysis lenses and the grounded LLM layer (D3 + D4).
+* **Review/regression outputs** -- :class:`FindingDelta`, :class:`RunDiff`. The
+  own-target *drift* between a run and a stored prior baseline (review mode,
+  §10); cheap by design because artifacts are content-addressed.
 
 Design notes
 ------------
@@ -33,7 +36,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, computed_field
 
 # --------------------------------------------------------------------------- #
 # Identity helpers
@@ -321,3 +324,97 @@ class CaptureRun(BaseModel):
     def artifact_by_id(self, artifact_id: str) -> Artifact | None:
         """Return the :class:`Artifact` with ``artifact_id`` or ``None``."""
         return next((a for a in self.artifacts if a.artifact_id == artifact_id), None)
+
+
+# --------------------------------------------------------------------------- #
+# Review / regression outputs -- own-target drift vs a stored prior run (§10)
+# --------------------------------------------------------------------------- #
+
+
+class FindingDelta(BaseModel):
+    """One finding's status between a run and its baseline (review-mode currency).
+
+    ``status`` is the per-finding cross-run verdict; ``direction`` rolls it into
+    the regression/improvement framing a downstream modification agent acts on.
+    A finding is matched across runs by a stable semantic ``key`` (see
+    :func:`ov.analysis.diff.finding_key`) -- never by its per-run ``finding_id``.
+    """
+
+    key: str  # stable cross-run identity
+    status: Literal["new", "changed", "resolved", "unchanged"]
+    direction: Literal["regression", "improvement", "neutral"] = "neutral"
+    signal: str = ""
+    category: str = ""
+    title: str = ""
+    finding_id: str | None = None  # current finding id (None when resolved)
+    baseline_finding_id: str | None = None  # baseline finding id (None when new)
+    severity_score: float | None = None
+    baseline_severity_score: float | None = None
+    severity_tier: str | None = None
+    detail: str | None = None  # human-legible note on what changed
+
+
+class RunDiff(BaseModel):
+    """Own-target regression: a run vs a stored prior baseline run (review mode, §10).
+
+    Produced by :func:`ov.analysis.diff.diff_runs` from two analyzed
+    :class:`CaptureRun`s of the same target. The :attr:`finding_deltas` list is
+    the SSOT; :attr:`counts`/:attr:`has_drift` are *derived* (``@computed_field``,
+    so they serialize) and :attr:`regressions`/:attr:`improvements` are views over
+    the deltas -- nothing is stored twice.
+
+    >>> d = RunDiff(run_id="run_b", baseline_run_id="run_a", finding_deltas=[
+    ...     FindingDelta(key="k1", status="new", direction="regression"),
+    ...     FindingDelta(key="k2", status="resolved", direction="improvement"),
+    ... ])
+    >>> d.counts["new"], d.counts["resolved"], d.has_drift
+    (1, 1, True)
+    >>> [r.key for r in d.regressions], [i.key for i in d.improvements]
+    (['k1'], ['k2'])
+    """
+
+    run_id: str  # the current run
+    baseline_run_id: str
+    target_url: str = ""
+    created_at: datetime = Field(default_factory=utcnow)
+    finding_deltas: list[FindingDelta] = Field(default_factory=list)
+    tech_added: list[str] = Field(default_factory=list)
+    tech_removed: list[str] = Field(default_factory=list)
+    endpoints_added: list[str] = Field(default_factory=list)
+    endpoints_removed: list[str] = Field(default_factory=list)
+    rendering_model_change: dict[str, Any] | None = None  # {"from": ..., "to": ...}
+    source_maps_change: dict[str, Any] | None = None
+    notes: list[str] = Field(default_factory=list)
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def counts(self) -> dict[str, int]:
+        """Per-status tallies derived from the deltas (the headline of a diff)."""
+        tally = {"new": 0, "changed": 0, "resolved": 0, "unchanged": 0}
+        for d in self.finding_deltas:
+            tally[d.status] = tally.get(d.status, 0) + 1
+        return tally
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def has_drift(self) -> bool:
+        """``True`` if anything changed across runs (findings, stack, API, or model)."""
+        return bool(
+            any(d.status != "unchanged" for d in self.finding_deltas)
+            or self.tech_added
+            or self.tech_removed
+            or self.endpoints_added
+            or self.endpoints_removed
+            or self.rendering_model_change
+            or self.source_maps_change
+        )
+
+    @property
+    def regressions(self) -> list[FindingDelta]:
+        """Deltas that got worse or are newly present (a downstream fix list)."""
+        return [d for d in self.finding_deltas if d.direction == "regression"]
+
+    @property
+    def improvements(self) -> list[FindingDelta]:
+        """Deltas that were resolved or got better since the baseline."""
+        return [d for d in self.finding_deltas if d.direction == "improvement"]
