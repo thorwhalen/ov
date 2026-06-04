@@ -64,7 +64,11 @@ class Probe:
 def load_builtin_probes() -> None:
     """Import the builtin probe modules so their ``@register_probe`` runs.
 
-    Called by the session; safe to call repeatedly (imports are cached).
+    Safe to call repeatedly (imports are cached). It is also invoked once at the
+    bottom of this module so that simply importing :mod:`ov.capture.probes`
+    yields a fully-populated :data:`PROBE_REGISTRY` -- no caller (the session, a
+    test, a skill) ever observes a half-registered registry depending on import
+    order. The probe modules pull in no heavy/browser dependencies at import.
     """
     from . import (  # noqa: F401
         assets,
@@ -79,3 +83,7 @@ def load_builtin_probes() -> None:
         storage,
         websocket,
     )
+
+
+# Eagerly register the builtins on first import of this package (see above).
+load_builtin_probes()
