@@ -20,7 +20,14 @@ from .context import AnalysisContext, AnalyzerOutput
 
 
 def merge_output(run: CaptureRun, out: AnalyzerOutput) -> None:
-    """Merge one analyzer's output into the run (findings, endpoints, tech, fields)."""
+    """Merge one analyzer's output into the run (findings, endpoints, tech, fields).
+
+    Tech dedupes by name: confidence takes the max, provenance and categories
+    union (so a package seen both as a recovered dependency and by framework/bundler
+    signature keeps *both* category identities), and a missing version is filled
+    from any analyzer that supplies one (source-map versions are the top provenance
+    rank, so they must not be lost to an earlier versionless detection).
+    """
     run.findings.extend(out.findings)
     run.api_surface.extend(out.endpoints)
     by_name = {t.name: t for t in run.fingerprint}
@@ -34,6 +41,11 @@ def merge_output(run: CaptureRun, out: AnalyzerOutput) -> None:
             for p in t.provenance:
                 if p not in existing.provenance:
                     existing.provenance.append(p)
+            for c in t.categories:
+                if c not in existing.categories:
+                    existing.categories.append(c)
+            if existing.version is None and t.version is not None:
+                existing.version = t.version
     for field, value in out.run_fields.items():
         setattr(run, field, value)
 

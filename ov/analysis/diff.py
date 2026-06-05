@@ -29,6 +29,7 @@ from typing import Any
 from ..base import CaptureRun, Finding, FindingDelta, RunDiff
 from ..capture.stores import resolve_store
 from ..util import content_hash
+from .arch.sourcemaps import is_recovered_dependency
 
 # Structural locators that pin a finding to a stable element/route across runs.
 # Per-run ids (``step_id``/``state_id``) are deliberately excluded -- including
@@ -271,20 +272,25 @@ def diff_runs(current: CaptureRun, baseline: CaptureRun) -> RunDiff:
         baseline_run_id=baseline.run_id,
         target_url=current.target_url,
         finding_deltas=deltas,
-        tech_added=sorted(
-            {t.name for t in current.fingerprint}
-            - {t.name for t in baseline.fingerprint}
-        ),
-        tech_removed=sorted(
-            {t.name for t in baseline.fingerprint}
-            - {t.name for t in current.fingerprint}
-        ),
+        tech_added=sorted(_stack_names(current) - _stack_names(baseline)),
+        tech_removed=sorted(_stack_names(baseline) - _stack_names(current)),
         endpoints_added=sorted(_endpoint_keys(current) - _endpoint_keys(baseline)),
         endpoints_removed=sorted(_endpoint_keys(baseline) - _endpoint_keys(current)),
         rendering_model_change=_field_change(current, baseline, "rendering_model"),
         source_maps_change=_field_change(current, baseline, "source_maps_present"),
         notes=notes,
     )
+
+
+def _stack_names(run: CaptureRun) -> set[str]:
+    """Framework-level tech names, excluding the recovered-dependency SBOM.
+
+    Keeps stack drift (``tech_added``/``tech_removed``) framework-level: the first
+    review run where source maps become recoverable would otherwise flood the
+    regression block with hundreds of ``node_modules`` package names. SBOM-level
+    drift is a deferred, separate concern (it would need new RunDiff fields).
+    """
+    return {t.name for t in run.fingerprint if not is_recovered_dependency(t)}
 
 
 def _endpoint_keys(run: CaptureRun) -> set[str]:

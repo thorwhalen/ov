@@ -15,6 +15,7 @@ import re
 from pathlib import Path
 from typing import Any
 
+from ..analysis.arch.sourcemaps import is_recovered_dependency
 from ..base import CaptureRun, Finding
 from ..capture.stores import resolve_store
 
@@ -145,6 +146,7 @@ def build_synopsis_doc(
         "technologies": [
             {"name": t.name, "version": t.version, "confidence": t.confidence}
             for t in run.fingerprint
+            if not is_recovered_dependency(t)
         ],
         "api_endpoints": [
             {"method": e.method, "path": e.path_template, "kind": e.kind}

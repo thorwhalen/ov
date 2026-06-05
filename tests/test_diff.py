@@ -634,3 +634,20 @@ def test_run_overview_reconstruct_skips_diff(tmp_store, monkeypatch):
     assert (
         load_diff(tmp_store, captured["run"].run_id) is None
     )  # no diff in reconstruct
+
+
+def test_tech_diff_excludes_recovered_dependency_sbom():
+    baseline = CaptureRun(
+        target_url="u",
+        fingerprint=[TechFinding(name="React", categories=["ui-framework"])],
+    )
+    current = CaptureRun(
+        target_url="u",
+        fingerprint=[
+            TechFinding(name="React", categories=["ui-framework"]),
+            TechFinding(name="lodash", categories=["dependency"], provenance=["sourcemap"]),
+            TechFinding(name="axios", categories=["dependency"], provenance=["sourcemap"]),
+        ],
+    )
+    # Recovered-dep SBOM churn must NOT flood review-mode stack drift.
+    assert diff_runs(current, baseline).tech_added == []
