@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ov.analysis.arch.sourcemaps &mdash; ov 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="ov.analysis.context" href="../context.html" />
+    <link rel="prev" title="ov.analysis.arch.sidecar" href="sidecar.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            ov
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../ov.html">ov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../__main__.html">ov.__main__</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents.html">ov.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/_skills.html">ov.agents._skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/_util.html">ov.agents._util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/analyst.html">ov.agents.analyst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/definitions.html">ov.agents.definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/llm.html">ov.agents.llm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/mcp.html">ov.agents.mcp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/operator.html">ov.agents.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/orchestrator.html">ov.agents.orchestrator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/realize.html">ov.agents.realize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">ov.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arch.html">ov.analysis.arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">ov.analysis.arch.api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">ov.analysis.arch.bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">ov.analysis.arch.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="framework.html">ov.analysis.arch.framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">ov.analysis.arch.pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rendering.html">ov.analysis.arch.rendering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ov.analysis.arch.sourcemaps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.MapRecovery"><code class="docutils literal notranslate"><span class="pre">MapRecovery</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.MapRecovery.recovered_count"><code class="docutils literal notranslate"><span class="pre">MapRecovery.recovered_count</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.RecoveredFile"><code class="docutils literal notranslate"><span class="pre">RecoveredFile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.extract_inline_map"><code class="docutils literal notranslate"><span class="pre">extract_inline_map()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.is_recovered_dependency"><code class="docutils literal notranslate"><span class="pre">is_recovered_dependency()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.node_modules_packages"><code class="docutils literal notranslate"><span class="pre">node_modules_packages()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.parse_source_map"><code class="docutils literal notranslate"><span class="pre">parse_source_map()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.recover_from_map"><code class="docutils literal notranslate"><span class="pre">recover_from_map()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.sanitize_source_path"><code class="docutils literal notranslate"><span class="pre">sanitize_source_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../context.html">ov.analysis.context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../diff.html">ov.analysis.diff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evidence.html">ov.analysis.evidence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reliability.html">ov.analysis.reliability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run.html">ov.analysis.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux.html">ov.analysis.ux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/a11y.html">ov.analysis.ux.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/cwv.html">ov.analysis.ux.cwv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/metrics.html">ov.analysis.ux.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ux/severity.html">ov.analysis.ux.severity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../base.html">ov.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture.html">ov.capture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/browser.html">ov.capture.browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/cdp.html">ov.capture.cdp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes.html">ov.capture.probes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/assets.html">ov.capture.probes.assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/console.html">ov.capture.probes.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/dom.html">ov.capture.probes.dom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/network.html">ov.capture.probes.network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/perf.html">ov.capture.probes.perf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/sse.html">ov.capture.probes.sse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/storage.html">ov.capture.probes.storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/session.html">ov.capture.session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../capture/stores.html">ov.capture.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">ov.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate.html">ov.operate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/act.html">ov.operate.act</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/driver.html">ov.operate.driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/journal.html">ov.operate.journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/observe.html">ov.operate.observe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/perception.html">ov.operate.perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/progress.html">ov.operate.progress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operate/strategies.html">ov.operate.strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../registry.html">ov.registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting.html">ov.reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/overview.html">ov.reporting.overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/render.html">ov.reporting.render</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/sections.html">ov.reporting.sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reporting/synopsis.html">ov.reporting.synopsis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../util.html">ov.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">ov</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ov.analysis.arch.sourcemaps</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/module_docs/ov/analysis/arch/sourcemaps.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-ov.analysis.arch.sourcemaps">
+<span id="ov-analysis-arch-sourcemaps"></span><h1>ov.analysis.arch.sourcemaps<a class="headerlink" href="#module-ov.analysis.arch.sourcemaps" title="Link to this heading"></a></h1>
+<p>Pure source-map recovery: original file tree + <code class="docutils literal notranslate"><span class="pre">node_modules</span></code> versions (D2).</p>
+<p>Source maps are the decisive, <em>bimodal</em> reconstruction lever. When a deployed
+bundle ships a Source Map v3 document (<code class="docutils literal notranslate"><span class="pre">//#</span> <span class="pre">sourceMappingURL=...</span></code> or a sibling
+<code class="docutils literal notranslate"><span class="pre">.js.map</span></code>), the original file tree and source text are recoverable by a plain
+JSON parse: the <code class="docutils literal notranslate"><span class="pre">sourcesContent</span></code> array holds the verbatim sources, indexed in
+parallel with <code class="docutils literal notranslate"><span class="pre">sources</span></code>. No VLQ <code class="docutils literal notranslate"><span class="pre">mappings</span></code> decoding and <strong>no Node</strong> are needed
+for source recovery – that machinery only matters for stack-trace <em>position</em>
+mapping. Keeping recovery pure-Python keeps the deterministic core testable,
+cheap, and ungated by an optional sidecar (the spec’s “source-map sidecar depth”
+is satisfied here in-process; the sidecar remains for the no-maps webcrack path).</p>
+<p>This module is model-free and side-effect-free: it parses bytes already captured
+into the store and returns plain, transient data. Persisting recovered files as
+artifacts and emitting findings/tech is the analyzer’s job
+(<a class="reference internal" href="bundles.html#module-ov.analysis.arch.bundles" title="ov.analysis.arch.bundles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ov.analysis.arch.bundles</span></code></a>).</p>
+<p>Security: <code class="docutils literal notranslate"><span class="pre">sources</span></code> paths come from an untrusted producer, so every path is
+sanitized (scheme prefixes stripped, traversal contained) before it is used as a
+relative path – escaping entries are skipped and counted, never resolved above a
+root. The path-sanitization approach is adapted from rarecoil’s MIT-licensed
+<code class="docutils literal notranslate"><span class="pre">unwebpack-sourcemap</span></code> <code class="docutils literal notranslate"><span class="pre">PathSanitiser</span></code>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.analysis.arch.sourcemaps.MapRecovery">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sourcemaps.</span></span><span class="sig-name descname"><span class="pre">MapRecovery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ov.analysis.arch.sourcemaps.RecoveredFile" title="ov.analysis.arch.sourcemaps.RecoveredFile"><span class="pre">RecoveredFile</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources_total</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">had_sources_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipped_unsafe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sourcemaps.html#MapRecovery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sourcemaps.MapRecovery" title="Link to this definition"></a></dt>
+<dd><p>Result of recovering one source map (transient internal data, not SSOT).</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ov.analysis.arch.sourcemaps.MapRecovery.recovered_count">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">recovered_count</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#ov.analysis.arch.sourcemaps.MapRecovery.recovered_count" title="Link to this definition"></a></dt>
+<dd><p>Number of files with content actually recovered.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ov.analysis.arch.sourcemaps.RecoveredFile">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sourcemaps.</span></span><span class="sig-name descname"><span class="pre">RecoveredFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sourcemaps.html#RecoveredFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sourcemaps.RecoveredFile" title="Link to this definition"></a></dt>
+<dd><p>One original file recovered from a source map (transient; never serialized).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.arch.sourcemaps.extract_inline_map">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sourcemaps.</span></span><span class="sig-name descname"><span class="pre">extract_inline_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">js_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sourcemaps.html#extract_inline_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sourcemaps.extract_inline_map" title="Link to this definition"></a></dt>
+<dd><p>Return the decoded JSON of an inline <code class="docutils literal notranslate"><span class="pre">sourceMappingURL=data:...</span></code> map, else <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>Handles <code class="docutils literal notranslate"><span class="pre">;base64,</span></code> and URL-encoded data URIs. External (<code class="docutils literal notranslate"><span class="pre">.map</span></code> URL) markers
+return <code class="docutils literal notranslate"><span class="pre">None</span></code> – those are fetched by the capture probe, not decoded here.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">base64</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">payload</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;sources&quot;</span><span class="p">:</span> <span class="p">[]})</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">js</span> <span class="o">=</span> <span class="s2">&quot;a=1</span><span class="se">\n</span><span class="s2">//# sourceMappingURL=data:application/json;base64,&quot;</span> <span class="o">+</span> <span class="n">payload</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">extract_inline_map</span><span class="p">(</span><span class="n">js</span><span class="p">))[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extract_inline_map</span><span class="p">(</span><span class="s2">&quot;a=1</span><span class="se">\n</span><span class="s2">//# sourceMappingURL=app.js.map&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.arch.sourcemaps.is_recovered_dependency">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sourcemaps.</span></span><span class="sig-name descname"><span class="pre">is_recovered_dependency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tech</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sourcemaps.html#is_recovered_dependency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sourcemaps.is_recovered_dependency" title="Link to this definition"></a></dt>
+<dd><p>True for a <code class="docutils literal notranslate"><span class="pre">node_modules</span></code> package recovered from a source map (SBOM, not stack).</p>
+<p>Single source of truth for separating the recovered-dependency SBOM from
+framework-level technologies wherever <code class="docutils literal notranslate"><span class="pre">run.fingerprint</span></code> is summarized (the
+overview header, the architecture stack table, the synopsis, review-mode
+tech-diff). A tech that is ALSO a framework/bundler – e.g. <code class="docutils literal notranslate"><span class="pre">webpack</span></code>
+detected both as a recovered dependency and by signature – carries an extra
+category (so the set is not exactly <code class="docutils literal notranslate"><span class="pre">{&quot;dependency&quot;}</span></code>) and is NOT treated as a
+pure recovered dependency, keeping it in the headline stack.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.arch.sourcemaps.node_modules_packages">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sourcemaps.</span></span><span class="sig-name descname"><span class="pre">node_modules_packages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ov.analysis.arch.sourcemaps.RecoveredFile" title="ov.analysis.arch.sourcemaps.RecoveredFile"><span class="pre">RecoveredFile</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sourcemaps.html#node_modules_packages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sourcemaps.node_modules_packages" title="Link to this definition"></a></dt>
+<dd><p>Infer sorted <code class="docutils literal notranslate"><span class="pre">(package,</span> <span class="pre">version|None)</span></code> pairs from recovered <code class="docutils literal notranslate"><span class="pre">node_modules</span></code> paths.</p>
+<p>Version sources, in precedence order: a pnpm <code class="docutils literal notranslate"><span class="pre">.pnpm/&lt;pkg&gt;&#64;&lt;ver&gt;/</span></code> path
+segment, then a recovered <code class="docutils literal notranslate"><span class="pre">package.json</span></code> <code class="docutils literal notranslate"><span class="pre">version</span></code> field. Otherwise the
+version is unknown (<code class="docutils literal notranslate"><span class="pre">None</span></code>). Scoped packages (<code class="docutils literal notranslate"><span class="pre">&#64;scope/name</span></code>) are handled.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fs</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>  <span class="n">RecoveredFile</span><span class="p">(</span><span class="s2">&quot;node_modules/lodash/lodash.js&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">),</span>
+<span class="gp">... </span>  <span class="n">RecoveredFile</span><span class="p">(</span><span class="s2">&quot;node_modules/@scope/ui/index.js&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">),</span>
+<span class="gp">... </span>  <span class="n">RecoveredFile</span><span class="p">(</span><span class="s2">&quot;node_modules/.pnpm/axios@1.6.2/node_modules/axios/i.js&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">node_modules_packages</span><span class="p">(</span><span class="n">fs</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;lodash&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;axios&quot;</span><span class="p">],</span> <span class="s2">&quot;@scope/ui&quot;</span> <span class="ow">in</span> <span class="n">d</span>
+<span class="go">(True, &#39;1.6.2&#39;, True)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.arch.sourcemaps.parse_source_map">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sourcemaps.</span></span><span class="sig-name descname"><span class="pre">parse_source_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sourcemaps.html#parse_source_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sourcemaps.parse_source_map" title="Link to this definition"></a></dt>
+<dd><p>Parse a <code class="docutils literal notranslate"><span class="pre">.map</span></code> body into a Source Map v3 dict, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it is not one.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_source_map</span><span class="p">(</span><span class="s1">&#39;{&quot;version&quot;:3,&quot;sources&quot;:[&quot;a.js&quot;]}&#39;</span><span class="p">)[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_source_map</span><span class="p">(</span><span class="s2">&quot;not json&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_source_map</span><span class="p">(</span><span class="s1">&#39;{&quot;version&quot;:3}&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.arch.sourcemaps.recover_from_map">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sourcemaps.</span></span><span class="sig-name descname"><span class="pre">recover_from_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ov.analysis.arch.sourcemaps.MapRecovery" title="ov.analysis.arch.sourcemaps.MapRecovery"><span class="pre">MapRecovery</span></a></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sourcemaps.html#recover_from_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sourcemaps.recover_from_map" title="Link to this definition"></a></dt>
+<dd><p>Recover original files from one source-map body (pure; no I/O, no Node).</p>
+<p>Only <code class="docutils literal notranslate"><span class="pre">sources</span></code> with non-empty <code class="docutils literal notranslate"><span class="pre">sourcesContent</span></code> are recoverable; entries
+whose path escapes the root are skipped and counted in <code class="docutils literal notranslate"><span class="pre">skipped_unsafe</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;{&quot;version&quot;:3,&quot;sources&quot;:[&quot;webpack:///src/a.js&quot;,&quot;webpack:///../evil&quot;],&#39;</span>
+<span class="gp">... </span>     <span class="s1">&#39;&quot;sourcesContent&quot;:[&quot;console.log(1)&quot;,&quot;x&quot;]}&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">recover_from_map</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">path</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">files</span><span class="p">],</span> <span class="n">r</span><span class="o">.</span><span class="n">skipped_unsafe</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">had_sources_content</span>
+<span class="go">([&#39;src/a.js&#39;], 1, True)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ov.analysis.arch.sourcemaps.sanitize_source_path">
+<span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.sourcemaps.</span></span><span class="sig-name descname"><span class="pre">sanitize_source_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/sourcemaps.html#sanitize_source_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.sourcemaps.sanitize_source_path" title="Link to this definition"></a></dt>
+<dd><p>Turn an untrusted <code class="docutils literal notranslate"><span class="pre">sources</span></code> entry into a safe root-relative path (or <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
+<p>Applies <code class="docutils literal notranslate"><span class="pre">sourceRoot</span></code>, drops query/fragment and any <code class="docutils literal notranslate"><span class="pre">scheme://</span></code> prefix, then
+<em>contains</em> traversal: a path that would escape the virtual root (a leading
+<code class="docutils literal notranslate"><span class="pre">..</span></code> after normalization) or is absolute is rejected.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sanitize_source_path</span><span class="p">(</span><span class="s2">&quot;webpack:///src/App.tsx&quot;</span><span class="p">)</span>
+<span class="go">&#39;src/App.tsx&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sanitize_source_path</span><span class="p">(</span><span class="s2">&quot;../../etc/passwd&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sanitize_source_path</span><span class="p">(</span><span class="s2">&quot;webpack:///./a/../b.js&quot;</span><span class="p">)</span>
+<span class="go">&#39;b.js&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sanitize_source_path</span><span class="p">(</span><span class="s2">&quot;a.js&quot;</span><span class="p">,</span> <span class="n">source_root</span><span class="o">=</span><span class="s2">&quot;webpack:///src/&quot;</span><span class="p">)</span>
+<span class="go">&#39;src/a.js&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sidecar.html" class="btn btn-neutral float-left" title="ov.analysis.arch.sidecar" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../context.html" class="btn btn-neutral float-right" title="ov.analysis.context" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -70,6 +70,7 @@
 <li class="toctree-l1"><a class="reference internal" href="arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch/sourcemaps.html">ov.analysis.arch.sourcemaps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="context.html">ov.analysis.context</a></li>
 <li class="toctree-l1"><a class="reference internal" href="diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evidence.html">ov.analysis.evidence</a></li>
@@ -160,6 +161,11 @@ clears prior analysis output before re-running so a run can be re-analyzed.</p>
 <dt class="sig sig-object py" id="ov.analysis.run.merge_output">
 <span class="sig-prename descclassname"><span class="pre">ov.analysis.run.</span></span><span class="sig-name descname"><span class="pre">merge_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../base.html#ov.base.CaptureRun" title="ov.base.CaptureRun"><span class="pre">CaptureRun</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="context.html#ov.analysis.context.AnalyzerOutput" title="ov.analysis.context.AnalyzerOutput"><span class="pre">AnalyzerOutput</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/ov/analysis/run.html#merge_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.run.merge_output" title="Link to this definition"></a></dt>
 <dd><p>Merge one analyzer’s output into the run (findings, endpoints, tech, fields).</p>
+<p>Tech dedupes by name: confidence takes the max, provenance and categories
+union (so a package seen both as a recovered dependency and by framework/bundler
+signature keeps <em>both</em> category identities), and a missing version is filled
+from any analyzer that supplies one (source-map versions are the top provenance
+rank, so they must not be lost to an earlier versionless detection).</p>
 </dd></dl>
 
 <dl class="py function">

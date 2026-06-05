@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sourcemaps.html">ov.analysis.arch.sourcemaps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
@@ -167,7 +168,14 @@
 <div class="viewcode-block" id="merge_output">
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/run.html#ov.analysis.run.merge_output">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">merge_output</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="n">AnalyzerOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Merge one analyzer&#39;s output into the run (findings, endpoints, tech, fields).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Merge one analyzer&#39;s output into the run (findings, endpoints, tech, fields).</span>
+
+<span class="sd">    Tech dedupes by name: confidence takes the max, provenance and categories</span>
+<span class="sd">    union (so a package seen both as a recovered dependency and by framework/bundler</span>
+<span class="sd">    signature keeps *both* category identities), and a missing version is filled</span>
+<span class="sd">    from any analyzer that supplies one (source-map versions are the top provenance</span>
+<span class="sd">    rank, so they must not be lost to an earlier versionless detection).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="p">)</span>
     <span class="n">run</span><span class="o">.</span><span class="n">api_surface</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">endpoints</span><span class="p">)</span>
     <span class="n">by_name</span> <span class="o">=</span> <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">}</span>
@@ -181,6 +189,11 @@
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">provenance</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">existing</span><span class="o">.</span><span class="n">provenance</span><span class="p">:</span>
                     <span class="n">existing</span><span class="o">.</span><span class="n">provenance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">categories</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">existing</span><span class="o">.</span><span class="n">categories</span><span class="p">:</span>
+                    <span class="n">existing</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">existing</span><span class="o">.</span><span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">version</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">existing</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">version</span>
     <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">run_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 

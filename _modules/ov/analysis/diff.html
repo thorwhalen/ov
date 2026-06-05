@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sourcemaps.html">ov.analysis.arch.sourcemaps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
@@ -174,6 +175,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">FindingDelta</span><span class="p">,</span> <span class="n">RunDiff</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..capture.stores</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_store</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..util</span><span class="w"> </span><span class="kn">import</span> <span class="n">content_hash</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.arch.sourcemaps</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_recovered_dependency</span>
 
 <span class="c1"># Structural locators that pin a finding to a stable element/route across runs.</span>
 <span class="c1"># Per-run ids (``step_id``/``state_id``) are deliberately excluded -- including</span>
@@ -421,14 +423,8 @@
         <span class="n">baseline_run_id</span><span class="o">=</span><span class="n">baseline</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span>
         <span class="n">target_url</span><span class="o">=</span><span class="n">current</span><span class="o">.</span><span class="n">target_url</span><span class="p">,</span>
         <span class="n">finding_deltas</span><span class="o">=</span><span class="n">deltas</span><span class="p">,</span>
-        <span class="n">tech_added</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span>
-            <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">}</span>
-            <span class="o">-</span> <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">baseline</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">}</span>
-        <span class="p">),</span>
-        <span class="n">tech_removed</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span>
-            <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">baseline</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">}</span>
-            <span class="o">-</span> <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">current</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">}</span>
-        <span class="p">),</span>
+        <span class="n">tech_added</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_stack_names</span><span class="p">(</span><span class="n">current</span><span class="p">)</span> <span class="o">-</span> <span class="n">_stack_names</span><span class="p">(</span><span class="n">baseline</span><span class="p">)),</span>
+        <span class="n">tech_removed</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_stack_names</span><span class="p">(</span><span class="n">baseline</span><span class="p">)</span> <span class="o">-</span> <span class="n">_stack_names</span><span class="p">(</span><span class="n">current</span><span class="p">)),</span>
         <span class="n">endpoints_added</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_endpoint_keys</span><span class="p">(</span><span class="n">current</span><span class="p">)</span> <span class="o">-</span> <span class="n">_endpoint_keys</span><span class="p">(</span><span class="n">baseline</span><span class="p">)),</span>
         <span class="n">endpoints_removed</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_endpoint_keys</span><span class="p">(</span><span class="n">baseline</span><span class="p">)</span> <span class="o">-</span> <span class="n">_endpoint_keys</span><span class="p">(</span><span class="n">current</span><span class="p">)),</span>
         <span class="n">rendering_model_change</span><span class="o">=</span><span class="n">_field_change</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="s2">&quot;rendering_model&quot;</span><span class="p">),</span>
@@ -436,6 +432,17 @@
         <span class="n">notes</span><span class="o">=</span><span class="n">notes</span><span class="p">,</span>
     <span class="p">)</span></div>
 
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_stack_names</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Framework-level tech names, excluding the recovered-dependency SBOM.</span>
+
+<span class="sd">    Keeps stack drift (``tech_added``/``tech_removed``) framework-level: the first</span>
+<span class="sd">    review run where source maps become recoverable would otherwise flood the</span>
+<span class="sd">    regression block with hundreds of ``node_modules`` package names. SBOM-level</span>
+<span class="sd">    drift is a deferred, separate concern (it would need new RunDiff fields).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">fingerprint</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_recovered_dependency</span><span class="p">(</span><span class="n">t</span><span class="p">)}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_endpoint_keys</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>

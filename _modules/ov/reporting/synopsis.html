@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/arch/sourcemaps.html">ov.analysis.arch.sourcemaps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
@@ -160,6 +161,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">..analysis.arch.sourcemaps</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_recovered_dependency</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">Finding</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">..capture.stores</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_store</span>
 
@@ -295,6 +297,7 @@
         <span class="s2">&quot;technologies&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">confidence</span><span class="p">}</span>
             <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">fingerprint</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_recovered_dependency</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="p">],</span>
         <span class="s2">&quot;api_endpoints&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">path_template</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">kind</span><span class="p">}</span>

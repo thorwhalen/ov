@@ -23,6 +23,7 @@
    module_docs/ov/analysis/arch/pipeline
    module_docs/ov/analysis/arch/rendering
    module_docs/ov/analysis/arch/sidecar
+   module_docs/ov/analysis/arch/sourcemaps
    module_docs/ov/analysis/context
    module_docs/ov/analysis/diff
    module_docs/ov/analysis/evidence

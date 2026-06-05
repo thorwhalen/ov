@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html">ov.analysis.arch.sourcemaps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
@@ -485,6 +486,8 @@
         <li><a href="module_docs/ov/agents.html#ov.agents.OperatorAgent.execute">(ov.agents.OperatorAgent method)</a>
 </li>
       </ul></li>
+      <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.extract_inline_map">extract_inline_map() (in module ov.analysis.arch.sourcemaps)</a>
+</li>
       <li><a href="module_docs/ov/analysis/arch/sidecar.html#ov.analysis.arch.sidecar.Sidecar.extract_literals">extract_literals() (ov.analysis.arch.sidecar.Sidecar method)</a>
 </li>
   </ul></td>
@@ -587,6 +590,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.infer_auth">infer_auth() (in module ov.analysis.arch.api)</a>
 </li>
+      <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.is_recovered_dependency">is_recovered_dependency() (in module ov.analysis.arch.sourcemaps)</a>
+</li>
       <li><a href="module_docs/ov/operate/strategies.html#ov.operate.strategies.is_same_origin">is_same_origin() (in module ov.operate.strategies)</a>
 </li>
       <li><a href="module_docs/ov/registry.html#ov.registry.Registry.items">items (ov.registry.Registry property)</a>
@@ -661,6 +666,8 @@
         <li><a href="module_docs/ov/operate/journal.html#ov.operate.journal.make_step">(in module ov.operate.journal)</a>
 </li>
       </ul></li>
+      <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.MapRecovery">MapRecovery (class in ov.analysis.arch.sourcemaps)</a>
+</li>
       <li><a href="module_docs/ov/agents.html#ov.agents.materialize">materialize() (in module ov.agents)</a>
 
       <ul>
@@ -766,6 +773,8 @@
         <li><a href="module_docs/ov/analysis/arch/rendering.html#module-ov.analysis.arch.rendering">ov.analysis.arch.rendering</a>
 </li>
         <li><a href="module_docs/ov/analysis/arch/sidecar.html#module-ov.analysis.arch.sidecar">ov.analysis.arch.sidecar</a>
+</li>
+        <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#module-ov.analysis.arch.sourcemaps">ov.analysis.arch.sourcemaps</a>
 </li>
         <li><a href="module_docs/ov/analysis/context.html#module-ov.analysis.context">ov.analysis.context</a>
 </li>
@@ -883,6 +892,8 @@
       <li><a href="module_docs/ov/capture/probes/network.html#ov.capture.probes.network.NetworkProbe">NetworkProbe (class in ov.capture.probes.network)</a>
 </li>
       <li><a href="module_docs/ov/base.html#ov.base.new_id">new_id() (in module ov.base)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.node_modules_packages">node_modules_packages() (in module ov.analysis.arch.sourcemaps)</a>
 </li>
       <li><a href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.normalize_path">normalize_path() (in module ov.analysis.arch.api)</a>
 </li>
@@ -1071,6 +1082,13 @@
 
       <ul>
         <li><a href="module_docs/ov/analysis/arch/sidecar.html#module-ov.analysis.arch.sidecar">module</a>
+</li>
+      </ul></li>
+      <li>
+    ov.analysis.arch.sourcemaps
+
+      <ul>
+        <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#module-ov.analysis.arch.sourcemaps">module</a>
 </li>
       </ul></li>
       <li>
@@ -1436,6 +1454,8 @@
         <li><a href="module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.page">(ov.capture.session.CaptureSession property)</a>
 </li>
       </ul></li>
+      <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.parse_source_map">parse_source_map() (in module ov.analysis.arch.sourcemaps)</a>
+</li>
       <li><a href="module_docs/ov/operate.html#ov.operate.perceive">perceive() (in module ov.operate)</a>
 
       <ul>
@@ -1448,10 +1468,10 @@
 </li>
       <li><a href="module_docs/ov/operate/perception.html#ov.operate.perception.perceive_screenshot">perceive_screenshot() (in module ov.operate.perception)</a>
 </li>
-      <li><a href="module_docs/ov/operate/perception.html#ov.operate.perception.PERCEPTION_REGISTRY">PERCEPTION_REGISTRY (in module ov.operate.perception)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/operate/perception.html#ov.operate.perception.PERCEPTION_REGISTRY">PERCEPTION_REGISTRY (in module ov.operate.perception)</a>
+</li>
       <li><a href="module_docs/ov/capture/probes/perf.html#ov.capture.probes.perf.PerfProbe">PerfProbe (class in ov.capture.probes.perf)</a>
 </li>
       <li><a href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.png_dimensions">png_dimensions() (in module ov.analysis.evidence)</a>
@@ -1484,6 +1504,12 @@
         <li><a href="module_docs/ov/agents/realize.html#ov.agents.realize.realize_agent">(in module ov.agents.realize)</a>
 </li>
       </ul></li>
+      <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.recover_from_map">recover_from_map() (in module ov.analysis.arch.sourcemaps)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.MapRecovery.recovered_count">recovered_count (ov.analysis.arch.sourcemaps.MapRecovery property)</a>
+</li>
+      <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.RecoveredFile">RecoveredFile (class in ov.analysis.arch.sourcemaps)</a>
+</li>
       <li><a href="module_docs/ov/util.html#ov.util.redact_mapping">redact_mapping() (in module ov.util)</a>
 </li>
       <li><a href="module_docs/ov/util.html#ov.util.redact_value">redact_value() (in module ov.util)</a>
@@ -1514,12 +1540,12 @@
 </li>
       <li><a href="module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.render_synopsis_md">render_synopsis_md() (in module ov.reporting.synopsis)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.rendering_scored">rendering_scored() (in module ov.analysis.arch.rendering)</a>
 </li>
       <li><a href="module_docs/ov/operate/driver.html#ov.operate.driver.replay">replay() (in module ov.operate.driver)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/ov.html#ov.report">report() (in module ov)</a>
 
       <ul>
@@ -1572,6 +1598,8 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.sanitize_source_path">sanitize_source_path() (in module ov.analysis.arch.sourcemaps)</a>
+</li>
       <li><a href="module_docs/ov/capture/stores.html#ov.capture.stores.CaptureStore.save_analysis">save_analysis() (ov.capture.stores.CaptureStore method)</a>
 </li>
       <li><a href="module_docs/ov/capture/stores.html#ov.capture.stores.CaptureStore.save_report">save_report() (ov.capture.stores.CaptureStore method)</a>
