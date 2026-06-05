@@ -48,9 +48,6 @@ docs = ["sphinx>=6.0", "sphinx-rtd-theme>=1.0"]
 # ov/data/skills/ so the productized agents (ov.agents) resolve them after a plain
 # `pip install ov` — not just from a source checkout. ov.agents._skills checks the
 # packaged location first, then the repo's .claude/skills/ for editable installs.
-[tool.hatch.build.targets.wheel.force-include]
-".claude/skills" = "ov/data/skills"
-
 [tool.hatch.build.targets.sdist.force-include]
 ".claude/skills" = "ov/data/skills"
 
