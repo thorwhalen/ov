@@ -22,7 +22,9 @@ _PIP_FOR = {
 }
 
 
-def require(*import_names: str, feature: str = "the ov agent layer") -> list[ModuleType]:
+def require(
+    *import_names: str, feature: str = "the ov agent layer"
+) -> list[ModuleType]:
     """Import and return the named modules, or raise a friendly install hint.
 
     Submodules are accepted (``"coact.llm"``); the pip target is keyed off the

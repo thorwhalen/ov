@@ -128,7 +128,9 @@ def realize_agent(
     (coact,) = require("coact", feature="ov.agents.realize_agent")
     spec = _resolve_spec(role_or_name)
     source = skill_path(spec.skill, skills_dir=skills_dir)
-    target = coact.complete(str(source), policy=policy) if backend != "mcp" else str(source)
+    target = (
+        coact.complete(str(source), policy=policy) if backend != "mcp" else str(source)
+    )
     return coact.realize(target, backend=backend, **kwargs)
 
 

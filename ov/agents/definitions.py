@@ -36,11 +36,15 @@ class AgentSpec:
 #: judgment, Sonnet for grounded UX narrative, Haiku for the throughput-bound driver).
 OV_AGENTS: dict[str, AgentSpec] = {
     "operator": AgentSpec("ov-operate", "operator", "ov-operate", None, "haiku"),
-    "ux-analyst": AgentSpec("ov-analyze-ux", "analyst", "ov-analyze-ux", "ux", "sonnet"),
+    "ux-analyst": AgentSpec(
+        "ov-analyze-ux", "analyst", "ov-analyze-ux", "ux", "sonnet"
+    ),
     "arch-analyst": AgentSpec(
         "ov-analyze-arch", "analyst", "ov-analyze-arch", "arch", "opus"
     ),
-    "orchestrator": AgentSpec("study-web-app", "orchestrator", "study-web-app", None, "opus"),
+    "orchestrator": AgentSpec(
+        "study-web-app", "orchestrator", "study-web-app", None, "opus"
+    ),
 }
 
 

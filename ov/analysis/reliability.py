@@ -38,10 +38,14 @@ def resolvable(ref: str, run: CaptureRun, bundle: EvidenceBundle | None = None) 
         return True
     if any(f.finding_id == ref for f in run.findings):
         return True
-    if bundle is not None and (
-        ref in bundle.marks  # a Set-of-Mark id (key, e.g. "R1") — what the model is told to cite
-        or ref in bundle.marks.values()  # the evidence id that mark resolves to
-        or any(e.evidence_id == ref for e in bundle.facts)
+    if (
+        bundle is not None
+        and (
+            ref
+            in bundle.marks  # a Set-of-Mark id (key, e.g. "R1") — what the model is told to cite
+            or ref in bundle.marks.values()  # the evidence id that mark resolves to
+            or any(e.evidence_id == ref for e in bundle.facts)
+        )
     ):
         return True
     return ref.startswith(_PATTERNED_PREFIXES)

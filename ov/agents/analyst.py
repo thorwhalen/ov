@@ -80,7 +80,10 @@ class AnalystAgent:
         run, store, bundle = self._resolve_inputs(input_data, context)
         if bundle is None:
             bundle = build_evidence_bundle(
-                run, store, model=self.model, max_marks=self.max_marks,
+                run,
+                store,
+                model=self.model,
+                max_marks=self.max_marks,
                 task=self.task or self._default_task(),
             )
 
@@ -102,7 +105,9 @@ class AnalystAgent:
             "run_id": run.run_id,
         }
         if context is not None:
-            context[self.name] = {k: info[k] for k in ("kept", "downgraded", "candidates")}
+            context[self.name] = {
+                k: info[k] for k in ("kept", "downgraded", "candidates")
+            }
         return report.all_findings, info
 
     # --- inputs ------------------------------------------------------------- #
@@ -118,13 +123,19 @@ class AnalystAgent:
             return input_data, ctx.get("store"), ctx.get("bundle")
         if isinstance(input_data, MutableMapping):
             run = input_data.get("run") or ctx.get("run") or CaptureRun()
-            return run, input_data.get("store") or ctx.get("store"), input_data.get("bundle")
+            return (
+                run,
+                input_data.get("store") or ctx.get("store"),
+                input_data.get("bundle"),
+            )
         run = ctx.get("run") or CaptureRun()
         return run, ctx.get("store"), ctx.get("bundle")
 
     # --- the default (LLM) judge ------------------------------------------- #
 
-    def _default_judge(self, bundle: EvidenceBundle, *, run: CaptureRun, store: Any) -> list:
+    def _default_judge(
+        self, bundle: EvidenceBundle, *, run: CaptureRun, store: Any
+    ) -> list:
         """Call the injected LLM under the cite-or-abstain contract; return raw findings.
 
         Returns ``[]`` (no findings) when no LLM is resolvable — the deterministic
@@ -143,24 +154,30 @@ class AnalystAgent:
         """An object schema wrapping a list of :class:`~ov.base.Finding` (for structured output)."""
         return {
             "type": "object",
-            "properties": {"findings": {"type": "array", "items": Finding.model_json_schema()}},
+            "properties": {
+                "findings": {"type": "array", "items": Finding.model_json_schema()}
+            },
             "required": ["findings"],
         }
 
     def _bundle_prompt(self, bundle: EvidenceBundle) -> str:
         """Render the bundle as text: contract + cited facts + task (images sent separately)."""
-        facts = "\n".join(
-            f"  - {ev.evidence_id}: {ev.summary}" + (f"  [{ev.meta.get('mark')}]" if ev.meta.get("mark") else "")
-            for ev in bundle.facts
-        ) or "  (no facts)"
+        facts = (
+            "\n".join(
+                f"  - {ev.evidence_id}: {ev.summary}"
+                + (f"  [{ev.meta.get('mark')}]" if ev.meta.get("mark") else "")
+                for ev in bundle.facts
+            )
+            or "  (no facts)"
+        )
         marks = ", ".join(bundle.marks) or "(none)"
         return (
             f"{bundle.contract}\n\n"
             f"Marked regions: {marks}\n"
             f"Facts you may cite (use these ids in evidence_refs):\n{facts}\n\n"
             f"Task: {bundle.task}\n\n"
-            "Return JSON {\"findings\": [...]}. Each finding MUST set source_layer="
-            "\"llm\", cite at least one fact/mark id in evidence_refs, and use type "
+            'Return JSON {"findings": [...]}. Each finding MUST set source_layer='
+            '"llm", cite at least one fact/mark id in evidence_refs, and use type '
             "'undetermined' when the evidence does not support a claim. Fields: type, "
             "signal, category, title, evidence_refs, judgment, suggested_fix."
         )
@@ -171,7 +188,10 @@ class AnalystAgent:
         if store is None:
             return []
         images = []
-        for artifact_id in (*bundle.marked_image_artifact_ids, *bundle.crop_artifact_ids):
+        for artifact_id in (
+            *bundle.marked_image_artifact_ids,
+            *bundle.crop_artifact_ids,
+        ):
             artifact = run.artifact_by_id(artifact_id)
             getter = getattr(store, "artifact_bytes", None)
             if artifact is not None and callable(getter):
@@ -206,17 +226,25 @@ class AnalystAgent:
                 data["signal"] = "llm.finding"
             data["source_layer"] = "llm"
             try:
-                out.append(Finding(**{k: v for k, v in data.items() if k in Finding.model_fields}))
+                out.append(
+                    Finding(
+                        **{k: v for k, v in data.items() if k in Finding.model_fields}
+                    )
+                )
             except Exception:  # noqa: BLE001 - a malformed candidate is dropped, not fatal
                 continue
         return out
 
     def _default_task(self) -> str:
         if self.lens == "ux":
-            return ("Assess usability & accessibility of the marked regions; cite a "
-                    "mark/fact id for every issue and give a grounded fix.")
-        return ("Identify architecture facts & reconstruction signals from the cited "
-                "evidence; cite a fact id for every claim.")
+            return (
+                "Assess usability & accessibility of the marked regions; cite a "
+                "mark/fact id for every issue and give a grounded fix."
+            )
+        return (
+            "Identify architecture facts & reconstruction signals from the cited "
+            "evidence; cite a fact id for every claim."
+        )
 
 
 def ux_analyst(llm: Any = None, **kwargs: Any) -> AnalystAgent:

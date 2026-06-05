@@ -71,7 +71,11 @@ class _CaptureStep:
     def execute(self, url: Any, context):
         run = _call(self.capture_fn, url, store=self.store, **self.kwargs)
         context["run"] = run
-        return run, {"success": True, "agent": self.name, "run_id": getattr(run, "run_id", None)}
+        return run, {
+            "success": True,
+            "agent": self.name,
+            "run_id": getattr(run, "run_id", None),
+        }
 
 
 @dataclass
@@ -113,7 +117,11 @@ class _ReportStep:
         run = context.get("run", run)
         paths = _call(self.report_fn, run, store=self.store, out_dir=self.out_dir)
         context["reports"] = list(paths or [])
-        return run, {"success": True, "agent": self.name, "n_reports": len(context["reports"])}
+        return run, {
+            "success": True,
+            "agent": self.name,
+            "n_reports": len(context["reports"]),
+        }
 
 
 @dataclass
@@ -207,7 +215,10 @@ class Orchestrator:
         the report and the synopsis all read/write the *same* artifact store.
         """
         steps: list[tuple[str, Any]] = [
-            ("capture", _CaptureStep(self.capture_fn, dict(self.capture_kwargs), store)),
+            (
+                "capture",
+                _CaptureStep(self.capture_fn, dict(self.capture_kwargs), store),
+            ),
             ("analyze", _AnalyzeStep(self.analyze_fn, tuple(self.lenses), store)),
         ]
         if self.llm is not None:
@@ -236,7 +247,9 @@ class Orchestrator:
         )
 
 
-def study(url: str, *, llm: Any = None, lenses: Iterable[str] = ("ux", "arch"), **kwargs: Any) -> OrchestratorResult:
+def study(
+    url: str, *, llm: Any = None, lenses: Iterable[str] = ("ux", "arch"), **kwargs: Any
+) -> OrchestratorResult:
     """Run an end-to-end study of ``url`` (the in-package twin of the ``study-web-app`` skill).
 
     The pit-of-success one-liner: capture → analyze → (optional analyst judgment) →

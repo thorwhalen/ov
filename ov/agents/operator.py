@@ -70,9 +70,13 @@ class OperatorAgent:
     def _act(self, page: Any, action: Action):
         if self.act_fn is not None:
             return self.act_fn(page, action)
-        return _act(page, action, perception=self.strategy, polite_rate_s=self.polite_rate_s)
+        return _act(
+            page, action, perception=self.strategy, polite_rate_s=self.polite_rate_s
+        )
 
-    def _page_and_run(self, context: Optional[MutableMapping]) -> tuple[Any, CaptureRun]:
+    def _page_and_run(
+        self, context: Optional[MutableMapping]
+    ) -> tuple[Any, CaptureRun]:
         """Resolve the live page + the run to journal into (session first, then context)."""
         if self.session is not None:
             return self.session.page, self.session.run
@@ -126,7 +130,9 @@ class OperatorAgent:
             "run_id": run.run_id,
         }
         if context is not None:
-            context["operator"] = {k: info[k] for k in ("run_id", "steps_taken", "stopped_reason")}
+            context["operator"] = {
+                k: info[k] for k in ("run_id", "steps_taken", "stopped_reason")
+            }
         return run, info
 
 
@@ -144,15 +150,23 @@ def _affordance_lines(obs: Observation, *, limit: int = 30) -> str:
 
 
 def _operator_prompt(
-    obs: Observation, *, goal: str, history: list[JourneyStep], instruction: Optional[str]
+    obs: Observation,
+    *,
+    goal: str,
+    history: list[JourneyStep],
+    instruction: Optional[str],
 ) -> str:
     """Build the decide-step prompt: goal + current affordances + recent steps."""
     recent = "; ".join(
-        f"{s.intent}:{(s.action.type if s.action else '?')}->{s.outcome}" for s in history[-5:]
+        f"{s.intent}:{(s.action.type if s.action else '?')}->{s.outcome}"
+        for s in history[-5:]
     )
     return (
-        (instruction or "You are driving a web app toward a goal. Choose the SINGLE "
-         "next action, or stop when the goal is met or no action helps.")
+        (
+            instruction
+            or "You are driving a web app toward a goal. Choose the SINGLE "
+            "next action, or stop when the goal is met or no action helps."
+        )
         + f"\n\nGoal: {goal or '(explore/crawl)'}"
         + f"\nCurrent URL: {obs.url or '(unknown)'}"
         + f"\nAffordances (use the ref):\n{_affordance_lines(obs)}"
@@ -162,9 +176,7 @@ def _operator_prompt(
     )
 
 
-def make_llm_decider(
-    llm: Any = None, *, instruction: Optional[str] = None
-) -> Decider:
+def make_llm_decider(llm: Any = None, *, instruction: Optional[str] = None) -> Decider:
     """A model-backed :data:`Decider` that picks the next :class:`~ov.base.Action`.
 
     Uses the injected ``llm`` through :func:`ov.agents.llm.structured` to choose an
@@ -178,8 +190,12 @@ def make_llm_decider(
     schema = _Action.model_json_schema()
     fields = set(_Action.model_fields)
 
-    def decide(obs: Observation, *, goal: str, history: list[JourneyStep]) -> Optional[Action]:
-        prompt = _operator_prompt(obs, goal=goal, history=history, instruction=instruction)
+    def decide(
+        obs: Observation, *, goal: str, history: list[JourneyStep]
+    ) -> Optional[Action]:
+        prompt = _operator_prompt(
+            obs, goal=goal, history=history, instruction=instruction
+        )
         data = structured(prompt, schema, llm=llm)
         if not isinstance(data, dict) or not data.get("type"):
             return None
