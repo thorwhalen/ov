@@ -11,12 +11,14 @@ from __future__ import annotations
 
 from typing import Any
 
+from ..analysis.arch.sourcemaps import is_recovered_dependency as _is_recovered_dep
 from ..base import CaptureRun, Finding
 from . import register_section
 
 # Readability truncation limits (full data remains in the run / appendix).
 _TECH_LIMIT = 10  # technologies listed in the overview header
 _HEADLINE_LIMIT = 5  # headline findings in the overview
+_RECOVERED_DEP_LIMIT = 50  # recovered-dependency rows in the recovered-source section
 
 
 def _sev_score(f: Finding) -> float:
@@ -45,10 +47,16 @@ def _findings_table(findings: list[Finding], *, limit: int | None = None) -> str
 
 @register_section("00_overview", order=0, modes=("reconstruct", "review"))
 def overview_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
+    # Headline stack only -- the recovered-dependency SBOM has its own section and
+    # would otherwise flood this most-read line (and is unsorted in run order).
+    stack = sorted(
+        (t for t in run.fingerprint if not _is_recovered_dep(t)),
+        key=lambda t: -t.confidence,
+    )
     techs = (
         ", ".join(
             f"{t.name}" + (f" {t.version}" if t.version else "")
-            for t in run.fingerprint[:_TECH_LIMIT]
+            for t in stack[:_TECH_LIMIT]
         )
         or "_none detected_"
     )
@@ -111,7 +119,10 @@ def architecture_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
         "| Technology | Version | Categories | Confidence |",
         "|---|---|---|---|",
     ]
-    for t in sorted(run.fingerprint, key=lambda t: -t.confidence):
+    # Recovered node_modules deps (the SBOM) get their own section; keep the
+    # headline stack table framework-level rather than letting it drown in deps.
+    stack = [t for t in run.fingerprint if not _is_recovered_dep(t)]
+    for t in sorted(stack, key=lambda t: -t.confidence):
         tech_rows.append(
             f"| {t.name} | {t.version or '-'} | {', '.join(t.categories)} | {t.confidence} |"
         )
@@ -135,6 +146,56 @@ def architecture_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+@register_section("25_recovered_source", order=25, modes=("reconstruct", "review"))
+def recovered_source_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
+    sm = next((f for f in run.findings if f.signal == "arch.source_maps"), None)
+    md = (sm.metric_detail or {}) if sm else {}
+    file_count = md.get("recovered_files", 0)
+    if not file_count:
+        if run.source_maps_present is None:
+            note = "Source-map status unknown — architecture analysis did not run."
+        elif run.source_maps_present:
+            note = (
+                "Source maps were detected but no original source was recovered "
+                "(maps not captured, or `sourcesContent` absent — the capture-time "
+                "source-map probe fetches external `.js.map` files)."
+            )
+        else:
+            note = "No source maps present — original source is not recoverable."
+        return f"# Recovered source\n\n_{note}_"
+
+    recovered_deps = [t for t in run.fingerprint if _is_recovered_dep(t)]
+    versioned = sum(1 for t in recovered_deps if t.version)
+    lines = [
+        "# Recovered source",
+        "",
+        "_Original file tree + dependency versions recovered from the app's own "
+        "source maps (pure-Python, no Node)._",
+        "",
+        f"- **Files recovered**: {file_count}"
+        + (" (truncated)" if md.get("truncated") else ""),
+        f"- **`sourcesContent` present**: {'yes' if md.get('had_sources_content') else 'no'}",
+        f"- **Maps consumed**: {md.get('maps_consumed', 0)}",
+        f"- **Unsafe paths skipped**: {md.get('skipped_unsafe_paths', 0)}",
+        f"- **Dependencies recovered**: {len(recovered_deps)} ({versioned} with versions)"
+        + (" — capped" if md.get("packages_truncated") else ""),
+    ]
+    sample = md.get("file_tree_sample") or []
+    if sample:
+        lines += ["", "## File tree (sample)", ""]
+        lines += [f"- `{p}`" for p in sample]
+        if file_count > len(sample):
+            lines.append(f"- _… +{file_count - len(sample)} more_")
+    if recovered_deps:
+        rows = ["| Package | Version |", "|---|---|"]
+        for t in sorted(recovered_deps, key=lambda t: t.name)[:_RECOVERED_DEP_LIMIT]:
+            rows.append(f"| {t.name} | {t.version or '-'} |")
+        lines += ["", "## Recovered dependencies (SBOM)", "", "\n".join(rows)]
+        if len(recovered_deps) > _RECOVERED_DEP_LIMIT:
+            lines.append(f"\n_… +{len(recovered_deps) - _RECOVERED_DEP_LIMIT} more_")
+    return "\n".join(lines)
+
+
 @register_section("30_api_surface", order=30, modes=("reconstruct", "review"))
 def api_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
     if not run.api_surface:
@@ -151,6 +212,7 @@ def api_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
 @register_section("40_reconstruction_blueprint", order=40, modes=("reconstruct",))
 def reconstruction_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
     fw = analyses.get("framework", {})
+    recovered = analyses.get("bundles", {}).get("recovered_files", 0)
     ui = next(
         (
             t.name
@@ -168,6 +230,12 @@ def reconstruction_section(run: CaptureRun, analyses: dict[str, Any]) -> str:
         f"- **Rendering**: {run.rendering_model or 'unknown'} "
         f"({'recover original source via maps' if run.source_maps_present else 'maps absent — reconstruct from beautified bundles, identifiers lost'})",
         f"- **Build tooling**: {', '.join(fw.get('build_tools', [])) or 'undetermined'}",
+        f"- **Recovered source**: "
+        + (
+            f"{recovered} file(s) — see the Recovered source section"
+            if recovered
+            else "none recovered"
+        ),
         f"- **Routes to implement**: {', '.join(fw.get('routes', [])[:20]) or 'none discovered'}",
         f"- **API shape**: {len(run.api_surface)} endpoint(s) — see the API surface section",
         "",

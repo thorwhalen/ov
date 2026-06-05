@@ -116,3 +116,74 @@ def test_render_section_crash_is_isolated(tmp_store):
         assert "section failed" in tmp_store.reports[f"{run.run_id}/99_boom.md"]
     finally:
         REPORT_SECTION_REGISTRY._items.pop("99_boom", None)
+
+
+# --- recovered-source section (source-map recovery) ------------------------ #
+
+
+def _recovered_run():
+    return CaptureRun(
+        target_url="http://t.example",
+        source_maps_present=True,
+        fingerprint=[
+            TechFinding(name="React", categories=["ui-framework"], confidence=80),
+            TechFinding(name="axios", version="1.6.2", categories=["dependency"],
+                        provenance=["sourcemap"], confidence=95),
+            TechFinding(name="lodash", categories=["dependency"],
+                        provenance=["sourcemap"], confidence=85),
+        ],
+        findings=[Finding(
+            type="arch_fact", signal="arch.source_maps", category="architecture",
+            title="Source maps present",
+            metric_detail={"recovered_files": 2, "had_sources_content": True,
+                           "maps_consumed": 1, "skipped_unsafe_paths": 1,
+                           "file_tree_sample": ["src/App.tsx", "node_modules/axios/index.js"]},
+        )],
+    )
+
+
+def test_recovered_source_section_renders_sbom():
+    from ov.reporting.sections import recovered_source_section
+
+    md = recovered_source_section(_recovered_run(), {})
+    assert "# Recovered source" in md
+    assert "Files recovered**: 2" in md
+    assert "axios" in md and "1.6.2" in md  # SBOM row with version
+    assert "`src/App.tsx`" in md  # file-tree sample
+    assert "React" not in md  # non-recovered tech is not in this section
+
+
+def test_recovered_source_section_empty_when_absent():
+    from ov.reporting.sections import recovered_source_section
+
+    run = CaptureRun(target_url="http://t", source_maps_present=False)
+    assert "No source maps present" in recovered_source_section(run, {})
+
+
+def test_recovered_source_section_unknown_when_not_analyzed():
+    from ov.reporting.sections import recovered_source_section
+
+    run = CaptureRun(target_url="http://t")  # source_maps_present defaults to None
+    assert "unknown" in recovered_source_section(run, {}).lower()
+
+
+def test_architecture_section_excludes_recovered_deps_from_stack():
+    from ov.reporting.sections import architecture_section
+
+    md = architecture_section(_recovered_run(), {})
+    assert "React" in md  # framework-level tech stays in the stack table
+    assert "axios" not in md  # recovered deps belong in the recovered-source section
+
+
+def test_overview_header_excludes_recovered_deps():
+    from ov.reporting.sections import overview_section
+
+    md = overview_section(_recovered_run(), {})
+    assert "React" in md  # headline stack
+    assert "axios" not in md and "lodash" not in md  # SBOM stays out of the headline
+
+
+def test_synopsis_technologies_exclude_recovered_deps():
+    names = {t["name"] for t in build_synopsis_doc(_recovered_run())["technologies"]}
+    assert "React" in names
+    assert "axios" not in names and "lodash" not in names

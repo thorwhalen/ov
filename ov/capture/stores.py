@@ -50,6 +50,8 @@ _EXT_BY_KIND = {
     "console": "json",
     "sse": "json",
     "source_map": "map",
+    "recovered_source": "txt",  # one original file recovered from a source map
+    "recovered_source_manifest": "json",  # [{path, uri}] index of recovered files
 }
 
 

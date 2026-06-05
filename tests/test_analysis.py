@@ -301,3 +301,21 @@ def test_sidecar_unavailable_when_missing():
     from ov.analysis.arch.sidecar import Sidecar
 
     assert Sidecar(script="/nonexistent/server.js").available() is False
+
+
+def test_merge_output_fills_version_and_unions_categories():
+    from ov.analysis.context import AnalyzerOutput
+    from ov.analysis.run import merge_output
+    from ov.base import TechFinding
+
+    run = CaptureRun(target_url="http://t", fingerprint=[
+        TechFinding(name="webpack", categories=["bundler"], version=None,
+                    confidence=70, provenance=["window.webpack"])])
+    out = AnalyzerOutput(tech=[
+        TechFinding(name="webpack", categories=["dependency"], version="5.88.0",
+                    confidence=95, provenance=["sourcemap"])])
+    merge_output(run, out)
+    wp = next(t for t in run.fingerprint if t.name == "webpack")
+    assert wp.version == "5.88.0"  # recovered version fills the versionless detection
+    assert set(wp.categories) == {"bundler", "dependency"}  # union keeps bundler identity
+    assert wp.confidence == 95
