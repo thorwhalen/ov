@@ -1,0 +1,192 @@
+{
+  "cases": [
+    {
+      "argv": [],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov [-h] {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp} ...\n",
+      "tier": 1,
+      "usage": "usage: ov [-h] {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp} ..."
+    },
+    {
+      "argv": [
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov [-h] {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp} ...\n\nOverView: web reconnaissance & analysis\n\npositional arguments:\n  {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp}\n    observe             Capture a target into the store and print a summary of the run.\n    analyze             Run the deterministic analyzers over a stored run (Phase 2).\n    diff                Diff an analyzed run against a prior baseline run (own-target review\n                        mode).\n    report              Render Markdown report sections for a stored run (Phase 2).\n    synopsis            Aggregate a run's findings into a single synopsis (synopsis.json +\n                        SYNOPSIS.md).\n    overview            observe -> analyze -> [diff in review mode] -> report -> synopsis (Phase\n                        2).\n    evidence            Build a grounded evidence bundle for a run (set-of-mark + token budget).\n    check               Check system dependencies (Playwright browsers, Node, sidecar, CLIs).\n    runs                List stored capture run ids.\n    mcp                 Serve ov as an MCP server (stdio) for non-Claude-Code hosts (needs\n                        ov[agents]).\n\noptions:\n  -h, --help            show this help message and exit\n",
+      "tier": 3,
+      "usage": "usage: ov [-h] {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp} ..."
+    },
+    {
+      "argv": [
+        "-h"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov [-h] {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp} ...\n\nOverView: web reconnaissance & analysis\n\npositional arguments:\n  {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp}\n    observe             Capture a target into the store and print a summary of the run.\n    analyze             Run the deterministic analyzers over a stored run (Phase 2).\n    diff                Diff an analyzed run against a prior baseline run (own-target review\n                        mode).\n    report              Render Markdown report sections for a stored run (Phase 2).\n    synopsis            Aggregate a run's findings into a single synopsis (synopsis.json +\n                        SYNOPSIS.md).\n    overview            observe -> analyze -> [diff in review mode] -> report -> synopsis (Phase\n                        2).\n    evidence            Build a grounded evidence bundle for a run (set-of-mark + token budget).\n    check               Check system dependencies (Playwright browsers, Node, sidecar, CLIs).\n    runs                List stored capture run ids.\n    mcp                 Serve ov as an MCP server (stdio) for non-Claude-Code hosts (needs\n                        ov[agents]).\n\noptions:\n  -h, --help            show this help message and exit\n",
+      "tier": 3,
+      "usage": "usage: ov [-h] {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp} ..."
+    },
+    {
+      "argv": [
+        "observe",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov observe [-h] [--headed] [-p PROBES] [-m MODE] [-c CRAWL_PAGES] [-s STORE] [-a] url\n\nCapture a target into the store and print a summary of the run.\n\npositional arguments:\n  url                   -\n\noptions:\n  -h, --help            show this help message and exit\n  --headed              False\n  -p PROBES, --probes PROBES\n                        'default'\n  -m MODE, --mode MODE  'reconstruct'\n  -c CRAWL_PAGES, --crawl-pages CRAWL_PAGES\n                        1\n  -s STORE, --store STORE\n                        -\n  -a, --authorized      False\n",
+      "tier": 3,
+      "usage": "usage: ov observe [-h] [--headed] [-p PROBES] [-m MODE] [-c CRAWL_PAGES] [-s STORE] [-a] url"
+    },
+    {
+      "argv": [
+        "analyze",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov analyze [-h] [-l LENSES] [-s STORE] run-id\n\nRun the deterministic analyzers over a stored run (Phase 2).\n\npositional arguments:\n  run-id                -\n\noptions:\n  -h, --help            show this help message and exit\n  -l LENSES, --lenses LENSES\n                        'ux,arch'\n  -s STORE, --store STORE\n                        -\n",
+      "tier": 3,
+      "usage": "usage: ov analyze [-h] [-l LENSES] [-s STORE] run-id"
+    },
+    {
+      "argv": [
+        "diff",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov diff [-h] [-b BASELINE] [-s STORE] run-id\n\nDiff an analyzed run against a prior baseline run (own-target review mode).\n\npositional arguments:\n  run-id                -\n\noptions:\n  -h, --help            show this help message and exit\n  -b BASELINE, --baseline BASELINE\n                        -\n  -s STORE, --store STORE\n                        -\n",
+      "tier": 3,
+      "usage": "usage: ov diff [-h] [-b BASELINE] [-s STORE] run-id"
+    },
+    {
+      "argv": [
+        "report",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov report [-h] [--sections SECTIONS] [-o OUT_DIR] [--store STORE] run-id\n\nRender Markdown report sections for a stored run (Phase 2).\n\npositional arguments:\n  run-id                -\n\noptions:\n  -h, --help            show this help message and exit\n  --sections SECTIONS   'default'\n  -o OUT_DIR, --out-dir OUT_DIR\n                        -\n  --store STORE         -\n",
+      "tier": 3,
+      "usage": "usage: ov report [-h] [--sections SECTIONS] [-o OUT_DIR] [--store STORE] run-id"
+    },
+    {
+      "argv": [
+        "synopsis",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov synopsis [-h] [-o OUT] [-s STORE] run-id\n\nAggregate a run's findings into a single synopsis (synopsis.json + SYNOPSIS.md).\n\npositional arguments:\n  run-id                -\n\noptions:\n  -h, --help            show this help message and exit\n  -o OUT, --out OUT     -\n  -s STORE, --store STORE\n                        -\n",
+      "tier": 3,
+      "usage": "usage: ov synopsis [-h] [-o OUT] [-s STORE] run-id"
+    },
+    {
+      "argv": [
+        "overview",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov overview [-h] [--headed] [-m MODE] [-o OUT_DIR] [-s STORE] [-a] [-b BASELINE] url\n\nobserve -> analyze -> [diff in review mode] -> report -> synopsis (Phase 2).\n\npositional arguments:\n  url                   -\n\noptions:\n  -h, --help            show this help message and exit\n  --headed              False\n  -m MODE, --mode MODE  'reconstruct'\n  -o OUT_DIR, --out-dir OUT_DIR\n                        -\n  -s STORE, --store STORE\n                        -\n  -a, --authorized      False\n  -b BASELINE, --baseline BASELINE\n                        -\n",
+      "tier": 3,
+      "usage": "usage: ov overview [-h] [--headed] [-m MODE] [-o OUT_DIR] [-s STORE] [-a] [-b BASELINE] url"
+    },
+    {
+      "argv": [
+        "evidence",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov evidence [-h] [--step-id STEP_ID] [-m MODEL] [-o OUT_DIR] [--store STORE] run-id\n\nBuild a grounded evidence bundle for a run (set-of-mark + token budget).\n\npositional arguments:\n  run-id                -\n\noptions:\n  -h, --help            show this help message and exit\n  --step-id STEP_ID     -\n  -m MODEL, --model MODEL\n                        'opus'\n  -o OUT_DIR, --out-dir OUT_DIR\n                        -\n  --store STORE         -\n",
+      "tier": 3,
+      "usage": "usage: ov evidence [-h] [--step-id STEP_ID] [-m MODEL] [-o OUT_DIR] [--store STORE] run-id"
+    },
+    {
+      "argv": [
+        "check",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov check [-h]\n\nCheck system dependencies (Playwright browsers, Node, sidecar, CLIs).\n\noptions:\n  -h, --help  show this help message and exit\n",
+      "tier": 3,
+      "usage": "usage: ov check [-h]"
+    },
+    {
+      "argv": [
+        "runs",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov runs [-h] [-s STORE]\n\nList stored capture run ids.\n\noptions:\n  -h, --help            show this help message and exit\n  -s STORE, --store STORE\n                        -\n",
+      "tier": 3,
+      "usage": "usage: ov runs [-h] [-s STORE]"
+    },
+    {
+      "argv": [
+        "mcp",
+        "--help"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: ov mcp [-h]\n\nServe ov as an MCP server (stdio) for non-Claude-Code hosts (needs ov[agents]).\n\noptions:\n  -h, --help  show this help message and exit\n",
+      "tier": 3,
+      "usage": "usage: ov mcp [-h]"
+    },
+    {
+      "argv": [
+        "no-such-command"
+      ],
+      "returncode": 2,
+      "stderr": "usage: ov [-h] {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp} ...\nov: error: argument {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp}: invalid choice: 'no-such-command' (choose from observe, analyze, diff, report, synopsis, overview, evidence, check, runs, mcp)\n",
+      "stdout": "",
+      "tier": 1,
+      "usage": "usage: ov [-h] {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp} ... ov: error: argument {observe,analyze,diff,report,synopsis,overview,evidence,check,runs,mcp}: invalid choice: 'no-such-command' (choose from observe, analyze, diff, report, synopsis, overview, evidence, check, runs, mcp)"
+    },
+    {
+      "argv": [
+        "observe",
+        "--no-such-flag"
+      ],
+      "returncode": 2,
+      "stderr": "usage: ov observe [-h] [--headed] [-p PROBES] [-m MODE] [-c CRAWL_PAGES] [-s STORE] [-a] url\nov observe: error: the following arguments are required: url\n",
+      "stdout": "",
+      "tier": 1,
+      "usage": "usage: ov observe [-h] [--headed] [-p PROBES] [-m MODE] [-c CRAWL_PAGES] [-s STORE] [-a] url ov observe: error: the following arguments are required: url"
+    },
+    {
+      "argv": [
+        "observe"
+      ],
+      "returncode": 2,
+      "stderr": "usage: ov observe [-h] [--headed] [-p PROBES] [-m MODE] [-c CRAWL_PAGES] [-s STORE] [-a] url\nov observe: error: the following arguments are required: url\n",
+      "stdout": "",
+      "tier": 1,
+      "usage": "usage: ov observe [-h] [--headed] [-p PROBES] [-m MODE] [-c CRAWL_PAGES] [-s STORE] [-a] url ov observe: error: the following arguments are required: url"
+    }
+  ],
+  "cw_golden": 1,
+  "env": {
+    "COLUMNS": "100",
+    "NO_COLOR": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1",
+    "TERM": "dumb"
+  },
+  "newlines": "lf",
+  "note": "Recorded from the argh implementation (ov/__main__.py at main, before the cw migration) with cw.testing.characterize.",
+  "prog": [
+    "ov"
+  ],
+  "recorded_with": {
+    "implementation": "CPython",
+    "platform": "Darwin",
+    "python": "3.12.12"
+  }
+}

@@ -13,7 +13,7 @@ authors = [{ name = "Thor Whalen" }]
 dependencies = [
     "pydantic>=2",
     "dol",
-    "argh",
+    "cw>=0.1.1,<0.2",
     "playwright",
     "httpx",        # raw-fetch for the rendering-model (JS-disabled) diff
     "genson",       # per-endpoint JSON Schema merge across journey samples

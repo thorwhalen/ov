@@ -1,4 +1,4 @@
-"""Command-line interface -- ``argh`` dispatch over the same facade functions (§4).
+"""Command-line interface -- ``cw`` dispatch over the same facade functions (§4).
 
 This is the deterministic, scriptable face of the library (dispatch-to-interface):
 ``ov observe <url>``, ``ov analyze <run_id>``, ``ov report <run_id>``,
@@ -8,7 +8,7 @@ Each command calls the very functions a skill or a normal caller would call.
 
 from __future__ import annotations
 
-import argh
+import cw
 
 import ov as _ov
 from .capture.browser import BrowserNotAvailable
@@ -167,28 +167,34 @@ def runs(*, store=None):
         yield rid
 
 
+# The commands the CLI dispatches, in help order. Named so a test can assert
+# on the list itself rather than re-deriving it from the parser.
+COMMANDS = [
+    observe,
+    analyze,
+    diff,
+    report,
+    synopsis,
+    overview,
+    evidence,
+    check,
+    runs,
+    mcp,
+]
+
+
 def main(argv=None):
-    """Entry point for the ``ov`` console script."""
-    parser = argh.ArghParser(
-        prog="ov", description="OverView: web reconnaissance & analysis"
+    """Entry point for the ``ov`` console script.
+
+    Returns the exit code. ``cw.run`` returns it rather than exiting, so the
+    console-script shim (which does ``sys.exit(main())``) and the ``__main__``
+    guard below are what turn it into a process exit status.
+    """
+    parser = cw.mk_parser(
+        COMMANDS, prog="ov", description="OverView: web reconnaissance & analysis"
     )
-    argh.add_commands(
-        parser,
-        [
-            observe,
-            analyze,
-            diff,
-            report,
-            synopsis,
-            overview,
-            evidence,
-            check,
-            runs,
-            mcp,
-        ],
-    )
-    parser.dispatch(argv=argv)
+    return cw.run(parser, argv)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
