@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.agents.orchestrator &mdash; ov 0.1.1 documentation</title>
+  <title>ov.agents.orchestrator &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,7 +143,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.agents.orchestrator</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;The Orchestrator — a *pure coordinator* over the study pipeline (``aw`` workflow).</span>
+<span></span><span class="sd">"""The Orchestrator — a *pure coordinator* over the study pipeline (``aw`` workflow).</span>
 
 <span class="sd">The orchestrator plans and delegates; it does **not** analyze (plan quality degrades</span>
 <span class="sd">when the planner also does the work — §7). It sequences the study the ``study-web-app``</span>
@@ -151,7 +151,7 @@
 <span class="sd">report → synopsis — by chaining ``aw.AgenticStep``s through an :class:`aw.AgenticWorkflow`</span>
 <span class="sd">with the :class:`~ov.base.CaptureRun` as the shared SSOT in the workflow context.</span>
 
-<span class="sd">Two design properties carry the spec&#39;s intent:</span>
+<span class="sd">Two design properties carry the spec's intent:</span>
 
 <span class="sd">* **Host-is-the-manager stays the default.** With no ``llm`` injected the pipeline is</span>
 <span class="sd">  fully deterministic (capture + analyzers + report + synopsis) — the analyst agents</span>
@@ -160,7 +160,7 @@
 <span class="sd">  swappable callable defaulting to the real ``ov`` facade, so the coordination logic</span>
 <span class="sd">  is unit-testable with fakes — no browser, no model — while the defaults wire the</span>
 <span class="sd">  genuine end-to-end study.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -173,21 +173,21 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_call</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Call ``fn(*args, **kwargs)``, forwarding ``store`` only if ``fn`` accepts it.</span>
+<span class="w">    </span><span class="sd">"""Call ``fn(*args, **kwargs)``, forwarding ``store`` only if ``fn`` accepts it.</span>
 
 <span class="sd">    Lets the real ``ov`` facade stages receive the shared ``store`` (so the whole</span>
 <span class="sd">    pipeline reads/writes one store) while injected test/alternative stages that take</span>
 <span class="sd">    no ``store`` keyword still work unchanged.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span>
-        <span class="n">takes_store</span> <span class="o">=</span> <span class="s2">&quot;store&quot;</span> <span class="ow">in</span> <span class="n">params</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>
+        <span class="n">takes_store</span> <span class="o">=</span> <span class="s2">"store"</span> <span class="ow">in</span> <span class="n">params</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>
             <span class="n">p</span><span class="o">.</span><span class="n">kind</span> <span class="ow">is</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">VAR_KEYWORD</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
         <span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>  <span class="c1"># builtins / C funcs without a signature</span>
         <span class="n">takes_store</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">takes_store</span> <span class="ow">and</span> <span class="n">store</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;store&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">store</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">"store"</span><span class="p">]</span> <span class="o">=</span> <span class="n">store</span>
     <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
@@ -195,7 +195,7 @@
 <a class="viewcode-back" href="../../../module_docs/ov/agents/orchestrator.html#ov.agents.OrchestratorResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">OrchestratorResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;What a study produced: the run, the synopsis, report paths, and step metadata.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""What a study produced: the run, the synopsis, report paths, and step metadata."""</span>
 
     <span class="n">run</span><span class="p">:</span> <span class="n">Any</span>
     <span class="n">synopsis</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
@@ -214,12 +214,16 @@
     <span class="n">capture_fn</span><span class="p">:</span> <span class="n">Callable</span>
     <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span>
     <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;capture&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"capture"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
         <span class="n">run</span> <span class="o">=</span> <span class="n">_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capture_fn</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">context</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">run</span>
-        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;run_id&quot;</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">&quot;run_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)}</span>
+        <span class="n">context</span><span class="p">[</span><span class="s2">"run"</span><span class="p">]</span> <span class="o">=</span> <span class="n">run</span>
+        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"agent"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">"run_id"</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">"run_id"</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">}</span>
 
 
 <span class="nd">@dataclass</span>
@@ -227,13 +231,13 @@
     <span class="n">analyze_fn</span><span class="p">:</span> <span class="n">Callable</span>
     <span class="n">lenses</span><span class="p">:</span> <span class="nb">tuple</span>
     <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;analyze&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"analyze"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-        <span class="n">run</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"run"</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
         <span class="n">analyses</span> <span class="o">=</span> <span class="n">_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">analyze_fn</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="n">lenses</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lenses</span><span class="p">)</span>
-        <span class="n">context</span><span class="p">[</span><span class="s2">&quot;analyses&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">analyses</span>
-        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;lenses&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lenses</span><span class="p">)}</span>
+        <span class="n">context</span><span class="p">[</span><span class="s2">"analyses"</span><span class="p">]</span> <span class="o">=</span> <span class="n">analyses</span>
+        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="p">{</span><span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"agent"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"lenses"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lenses</span><span class="p">)}</span>
 
 
 <span class="nd">@dataclass</span>
@@ -245,7 +249,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyst</span><span class="o">.</span><span class="n">name</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-        <span class="n">run</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"run"</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyst</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="n">info</span>
 
@@ -255,13 +259,17 @@
     <span class="n">report_fn</span><span class="p">:</span> <span class="n">Callable</span>
     <span class="n">out_dir</span><span class="p">:</span> <span class="n">Any</span>
     <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;report&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"report"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-        <span class="n">run</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"run"</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
         <span class="n">paths</span> <span class="o">=</span> <span class="n">_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_fn</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">out_dir</span><span class="p">)</span>
-        <span class="n">context</span><span class="p">[</span><span class="s2">&quot;reports&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">paths</span> <span class="ow">or</span> <span class="p">[])</span>
-        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;n_reports&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;reports&quot;</span><span class="p">])}</span>
+        <span class="n">context</span><span class="p">[</span><span class="s2">"reports"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">paths</span> <span class="ow">or</span> <span class="p">[])</span>
+        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"agent"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">"n_reports"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s2">"reports"</span><span class="p">]),</span>
+        <span class="p">}</span>
 
 
 <span class="nd">@dataclass</span>
@@ -269,14 +277,14 @@
     <span class="n">synopsis_fn</span><span class="p">:</span> <span class="n">Callable</span>
     <span class="n">out_dir</span><span class="p">:</span> <span class="n">Any</span>
     <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;synopsis&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"synopsis"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-        <span class="n">run</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
-        <span class="n">source</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reports&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">run</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"run"</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reports"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">run</span>
         <span class="n">synopsis</span> <span class="o">=</span> <span class="n">_call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">synopsis_fn</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">out_dir</span><span class="p">)</span>
-        <span class="n">context</span><span class="p">[</span><span class="s2">&quot;synopsis&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">synopsis</span>
-        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">}</span>
+        <span class="n">context</span><span class="p">[</span><span class="s2">"synopsis"</span><span class="p">]</span> <span class="o">=</span> <span class="n">synopsis</span>
+        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="p">{</span><span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"agent"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">}</span>
 
 
 <span class="c1"># --------------------------------------------------------------------------- #</span>
@@ -312,21 +320,21 @@
 <a class="viewcode-back" href="../../../module_docs/ov/agents/orchestrator.html#ov.agents.Orchestrator">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Orchestrator</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Coordinate a full study, delegating each stage (never analyzing itself).</span>
+<span class="w">    </span><span class="sd">"""Coordinate a full study, delegating each stage (never analyzing itself).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        llm: the injected model for the analyst agents. ``None`` → deterministic-only</span>
 <span class="sd">            study (the host-is-manager default; analysts are skipped).</span>
-<span class="sd">        lenses: which analysis lenses to run (``&quot;ux&quot;`` and/or ``&quot;arch&quot;``).</span>
-<span class="sd">        out_dir: where reports + synopsis are written (``None`` → the run&#39;s store).</span>
+<span class="sd">        lenses: which analysis lenses to run (``"ux"`` and/or ``"arch"``).</span>
+<span class="sd">        out_dir: where reports + synopsis are written (``None`` → the run's store).</span>
 <span class="sd">        capture_fn / analyze_fn / report_fn / synopsis_fn: stage seams (default to the</span>
 <span class="sd">            real ``ov`` facade). Inject fakes to unit-test the coordination.</span>
 <span class="sd">        capture_kwargs: extra kwargs forwarded to ``capture_fn`` (e.g. ``mode``,</span>
 <span class="sd">            ``authorized``, ``crawl_pages``, ``journey``).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">llm</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">lenses</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">)</span>
+    <span class="n">lenses</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"ux"</span><span class="p">,</span> <span class="s2">"arch"</span><span class="p">)</span>
     <span class="n">out_dir</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">capture_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">_default_capture</span>
@@ -336,12 +344,12 @@
     <span class="n">capture_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_resolved_store</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The one concrete store the whole pipeline shares.</span>
+<span class="w">        </span><span class="sd">"""The one concrete store the whole pipeline shares.</span>
 
 <span class="sd">        An explicit ``store`` wins. Otherwise, on the *real* capture path resolve the</span>
 <span class="sd">        default store so the analyzers + analysts read the same artifacts capture</span>
 <span class="sd">        wrote; with injected (fake) stages it stays ``None`` (no filesystem touch).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capture_fn</span> <span class="ow">is</span> <span class="n">_default_capture</span><span class="p">:</span>
@@ -351,39 +359,42 @@
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_build_steps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assemble the ordered pipeline; analyst steps appear only when an llm is set.</span>
+<span class="w">        </span><span class="sd">"""Assemble the ordered pipeline; analyst steps appear only when an llm is set.</span>
 
 <span class="sd">        The one ``store`` is threaded through every stage so capture, the analyzers,</span>
 <span class="sd">        the report and the synopsis all read/write the *same* artifact store.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">steps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;capture&quot;</span><span class="p">,</span> <span class="n">_CaptureStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capture_fn</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capture_kwargs</span><span class="p">),</span> <span class="n">store</span><span class="p">)),</span>
-            <span class="p">(</span><span class="s2">&quot;analyze&quot;</span><span class="p">,</span> <span class="n">_AnalyzeStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">analyze_fn</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lenses</span><span class="p">),</span> <span class="n">store</span><span class="p">)),</span>
+            <span class="p">(</span>
+                <span class="s2">"capture"</span><span class="p">,</span>
+                <span class="n">_CaptureStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capture_fn</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capture_kwargs</span><span class="p">),</span> <span class="n">store</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="p">(</span><span class="s2">"analyze"</span><span class="p">,</span> <span class="n">_AnalyzeStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">analyze_fn</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lenses</span><span class="p">),</span> <span class="n">store</span><span class="p">)),</span>
         <span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">llm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s2">&quot;ux&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lenses</span><span class="p">:</span>
-                <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;ux-analyst&quot;</span><span class="p">,</span> <span class="n">_AnalystStep</span><span class="p">(</span><span class="n">ux_analyst</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">llm</span><span class="p">))))</span>
-            <span class="k">if</span> <span class="s2">&quot;arch&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lenses</span><span class="p">:</span>
-                <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;arch-analyst&quot;</span><span class="p">,</span> <span class="n">_AnalystStep</span><span class="p">(</span><span class="n">arch_analyst</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">llm</span><span class="p">))))</span>
-        <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;report&quot;</span><span class="p">,</span> <span class="n">_ReportStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">store</span><span class="p">)))</span>
-        <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;synopsis&quot;</span><span class="p">,</span> <span class="n">_SynopsisStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">synopsis_fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">store</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="s2">"ux"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lenses</span><span class="p">:</span>
+                <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"ux-analyst"</span><span class="p">,</span> <span class="n">_AnalystStep</span><span class="p">(</span><span class="n">ux_analyst</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">llm</span><span class="p">))))</span>
+            <span class="k">if</span> <span class="s2">"arch"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lenses</span><span class="p">:</span>
+                <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"arch-analyst"</span><span class="p">,</span> <span class="n">_AnalystStep</span><span class="p">(</span><span class="n">arch_analyst</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">llm</span><span class="p">))))</span>
+        <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"report"</span><span class="p">,</span> <span class="n">_ReportStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">report_fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">store</span><span class="p">)))</span>
+        <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"synopsis"</span><span class="p">,</span> <span class="n">_SynopsisStep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">synopsis_fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">store</span><span class="p">)))</span>
         <span class="k">return</span> <span class="n">steps</span>
 
 <div class="viewcode-block" id="Orchestrator.run">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/orchestrator.html#ov.agents.Orchestrator.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OrchestratorResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the full study for ``url`` and return an :class:`OrchestratorResult`.&quot;&quot;&quot;</span>
-        <span class="p">(</span><span class="n">aw</span><span class="p">,)</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&quot;aw&quot;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s2">&quot;ov.agents.Orchestrator&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Run the full study for ``url`` and return an :class:`OrchestratorResult`."""</span>
+        <span class="p">(</span><span class="n">aw</span><span class="p">,)</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">"aw"</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s2">"ov.agents.Orchestrator"</span><span class="p">)</span>
         <span class="n">store</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolved_store</span><span class="p">()</span>
-        <span class="n">context</span> <span class="o">=</span> <span class="n">aw</span><span class="o">.</span><span class="n">Context</span><span class="p">({</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">store</span><span class="p">})</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">aw</span><span class="o">.</span><span class="n">Context</span><span class="p">({</span><span class="s2">"url"</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="s2">"store"</span><span class="p">:</span> <span class="n">store</span><span class="p">})</span>
         <span class="n">workflow</span> <span class="o">=</span> <span class="n">aw</span><span class="o">.</span><span class="n">AgenticWorkflow</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_steps</span><span class="p">(</span><span class="n">store</span><span class="p">):</span>
             <span class="n">workflow</span><span class="o">.</span><span class="n">add_step</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
         <span class="n">run</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">OrchestratorResult</span><span class="p">(</span>
-            <span class="n">run</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">),</span>
-            <span class="n">synopsis</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;synopsis&quot;</span><span class="p">),</span>
-            <span class="n">reports</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reports&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+            <span class="n">run</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"run"</span><span class="p">,</span> <span class="n">run</span><span class="p">),</span>
+            <span class="n">synopsis</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"synopsis"</span><span class="p">),</span>
+            <span class="n">reports</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reports"</span><span class="p">,</span> <span class="p">[]),</span>
             <span class="n">workflow</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
         <span class="p">)</span></div>
 </div>
@@ -392,19 +403,21 @@
 
 <div class="viewcode-block" id="study">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/orchestrator.html#ov.agents.study">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">study</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">lenses</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OrchestratorResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run an end-to-end study of ``url`` (the in-package twin of the ``study-web-app`` skill).</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">study</span><span class="p">(</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">llm</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">lenses</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"ux"</span><span class="p">,</span> <span class="s2">"arch"</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OrchestratorResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Run an end-to-end study of ``url`` (the in-package twin of the ``study-web-app`` skill).</span>
 
 <span class="sd">    The pit-of-success one-liner: capture → analyze → (optional analyst judgment) →</span>
 <span class="sd">    report → synopsis. With ``llm=None`` it is fully deterministic; pass an injected</span>
 <span class="sd">    model to add grounded UX/Arch narrative. Forwards ``mode`` / ``authorized`` /</span>
 <span class="sd">    ``crawl_pages`` / ``out_dir`` / stage seams via ``**kwargs``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">field_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">Orchestrator</span><span class="o">.</span><span class="n">__dataclass_fields__</span><span class="p">}</span>  <span class="c1"># type: ignore[attr-defined]</span>
     <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">field_names</span><span class="p">}</span>
     <span class="n">capture_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field_names</span><span class="p">}</span>
     <span class="k">if</span> <span class="n">capture_kwargs</span><span class="p">:</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;capture_kwargs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">capture_kwargs</span><span class="p">)</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">"capture_kwargs"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">capture_kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Orchestrator</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">lenses</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">lenses</span><span class="p">),</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
 
 </pre></div>
@@ -416,7 +429,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

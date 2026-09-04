@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.agents.mcp &mdash; ov 0.1.1 documentation</title>
+  <title>ov.agents.mcp &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,24 +143,24 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.agents.mcp</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Expose ``ov`` to non-Claude-Code hosts as an MCP server (via ``py2mcp``).</span>
+<span></span><span class="sd">"""Expose ``ov`` to non-Claude-Code hosts as an MCP server (via ``py2mcp``).</span>
 
 <span class="sd">The host-agent path assumes Claude Code. For *any other* MCP client (a different</span>
-<span class="sd">agent runtime, an IDE, a foreign orchestrator) this module turns ``ov``&#39;s coarse,</span>
-<span class="sd">JSON-shaped facade into MCP tools — the spec&#39;s &quot;optional ``py2mcp`` MCP server for</span>
-<span class="sd">non-Claude-Code hosts&quot; (§9.6 / Phase 4). It deliberately exposes the *coarse* entry</span>
+<span class="sd">agent runtime, an IDE, a foreign orchestrator) this module turns ``ov``'s coarse,</span>
+<span class="sd">JSON-shaped facade into MCP tools — the spec's "optional ``py2mcp`` MCP server for</span>
+<span class="sd">non-Claude-Code hosts" (§9.6 / Phase 4). It deliberately exposes the *coarse* entry</span>
 <span class="sd">points (``study_url`` / ``capture_url``), not the page-stateful operate primitives:</span>
 <span class="sd">MCP tools are stateless calls, and ``ov.observe`` already owns its own browser</span>
 <span class="sd">session internally, so each tool is a clean one-shot.</span>
 
-<span class="sd">``py2mcp`` builds the tool schemas by introspecting these functions&#39; type hints and</span>
+<span class="sd">``py2mcp`` builds the tool schemas by introspecting these functions' type hints and</span>
 <span class="sd">docstrings, so they are kept small and well-typed on purpose. The same skill-declared</span>
 <span class="sd">path also works the coact-native way::</span>
 
-<span class="sd">    coact realize study-web-app --backend mcp   # reads the skill&#39;s `coact: mcp:` block</span>
+<span class="sd">    coact realize study-web-app --backend mcp   # reads the skill's `coact: mcp:` block</span>
 
 <span class="sd">Run the server directly with ``python -m ov.agents.mcp`` (or the ``ov mcp`` CLI).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -174,12 +174,12 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">study_url</span><span class="p">(</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"reconstruct"</span><span class="p">,</span>
     <span class="n">authorized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">crawl_pages</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">lenses</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ux,arch&quot;</span><span class="p">,</span>
+    <span class="n">lenses</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ux,arch"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Study a web app end-to-end (deterministic) and return its synopsis.</span>
+<span class="w">    </span><span class="sd">"""Study a web app end-to-end (deterministic) and return its synopsis.</span>
 
 <span class="sd">    Drives the target, runs the UX + architecture analyzers, and returns the</span>
 <span class="sd">    deduplicated ``synopsis.json`` document — the compact, evidence-referenced SSOT a</span>
@@ -187,21 +187,21 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        url: the target to study.</span>
-<span class="sd">        mode: ``&quot;reconstruct&quot;`` (foreign target) or ``&quot;review&quot;`` (own target).</span>
+<span class="sd">        mode: ``"reconstruct"`` (foreign target) or ``"review"`` (own target).</span>
 <span class="sd">        authorized: acknowledge authorization to study a foreign target.</span>
 <span class="sd">        crawl_pages: if &gt; 1, politely crawl that many same-origin pages.</span>
-<span class="sd">        lenses: comma-separated analysis lenses (``&quot;ux&quot;``, ``&quot;arch&quot;``).</span>
+<span class="sd">        lenses: comma-separated analysis lenses (``"ux"``, ``"arch"``).</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        The synopsis document (run id, deduplicated findings, severity histogram).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">ov</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">ov.reporting.synopsis</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_synopsis_doc</span>
 
     <span class="n">run</span> <span class="o">=</span> <span class="n">ov</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
         <span class="n">url</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">authorized</span><span class="o">=</span><span class="n">authorized</span><span class="p">,</span> <span class="n">crawl_pages</span><span class="o">=</span><span class="p">(</span><span class="n">crawl_pages</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">)</span>
-    <span class="n">ov</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">lenses</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">lenses</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+    <span class="n">ov</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">lenses</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">lenses</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
     <span class="k">return</span> <span class="n">build_synopsis_doc</span><span class="p">(</span><span class="n">run</span><span class="p">)</span></div>
 
 
@@ -211,11 +211,11 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">capture_url</span><span class="p">(</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"reconstruct"</span><span class="p">,</span>
     <span class="n">authorized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">crawl_pages</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Capture a web app (behavioral + static streams) and return a compact summary.</span>
+<span class="w">    </span><span class="sd">"""Capture a web app (behavioral + static streams) and return a compact summary.</span>
 
 <span class="sd">    Runs only the deterministic capture (no analysis). Use when you want the raw</span>
 <span class="sd">    captured facts (technologies, rendering model, step/artifact counts) without the</span>
@@ -223,13 +223,13 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        url: the target to capture.</span>
-<span class="sd">        mode: ``&quot;reconstruct&quot;`` or ``&quot;review&quot;``.</span>
+<span class="sd">        mode: ``"reconstruct"`` or ``"review"``.</span>
 <span class="sd">        authorized: acknowledge authorization to capture a foreign target.</span>
 <span class="sd">        crawl_pages: if &gt; 1, politely crawl that many same-origin pages.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A summary dict (run id, target, counts, detected technologies, rendering model).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">ov</span>
 
     <span class="n">run</span> <span class="o">=</span> <span class="n">ov</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span>
@@ -240,28 +240,28 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_run_summary</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A compact, JSON-safe summary of a :class:`~ov.base.CaptureRun` for MCP returns.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""A compact, JSON-safe summary of a :class:`~ov.base.CaptureRun` for MCP returns."""</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;run_id&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span>
-        <span class="s2">&quot;target_url&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">target_url</span><span class="p">,</span>
-        <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-        <span class="s2">&quot;rendering_model&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">rendering_model</span><span class="p">,</span>
-        <span class="s2">&quot;source_maps_present&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">source_maps_present</span><span class="p">,</span>
-        <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">),</span>
-        <span class="s2">&quot;artifacts&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="p">),</span>
-        <span class="s2">&quot;findings&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="p">),</span>
-        <span class="s2">&quot;technologies&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">confidence</span><span class="p">}</span>
+        <span class="s2">"run_id"</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span>
+        <span class="s2">"target_url"</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">target_url</span><span class="p">,</span>
+        <span class="s2">"mode"</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+        <span class="s2">"rendering_model"</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">rendering_model</span><span class="p">,</span>
+        <span class="s2">"source_maps_present"</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">source_maps_present</span><span class="p">,</span>
+        <span class="s2">"steps"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">),</span>
+        <span class="s2">"artifacts"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="p">),</span>
+        <span class="s2">"findings"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="p">),</span>
+        <span class="s2">"technologies"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"version"</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">confidence</span><span class="p">}</span>
             <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">fingerprint</span>
         <span class="p">],</span>
-        <span class="s2">&quot;api_endpoints&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">api_surface</span><span class="p">),</span>
+        <span class="s2">"api_endpoints"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">api_surface</span><span class="p">),</span>
     <span class="p">}</span>
 
 
 <div class="viewcode-block" id="ov_tools">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/mcp.html#ov.agents.ov_tools">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">ov_tools</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The ``ov`` callables exposed as MCP tools (coarse, stateless, JSON-shaped).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""The ``ov`` callables exposed as MCP tools (coarse, stateless, JSON-shaped)."""</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">study_url</span><span class="p">,</span> <span class="n">capture_url</span><span class="p">]</span></div>
 
 
@@ -270,16 +270,16 @@
 <a class="viewcode-back" href="../../../module_docs/ov/agents/mcp.html#ov.agents.mcp_server">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">mcp_server</span><span class="p">(</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ov&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ov"</span><span class="p">,</span>
     <span class="n">tools</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">input_trans</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">dict</span><span class="p">],</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a FastMCP server exposing ``ov`` to foreign hosts (via ``py2mcp``).</span>
+<span class="w">    </span><span class="sd">"""Build a FastMCP server exposing ``ov`` to foreign hosts (via ``py2mcp``).</span>
 
 <span class="sd">    &gt;&gt;&gt; srv = mcp_server()                      # doctest: +SKIP</span>
 <span class="sd">    &gt;&gt;&gt; srv.run()                               # serve over stdio   # doctest: +SKIP</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">py2mcp</span><span class="p">,</span> <span class="n">_fastmcp</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&quot;py2mcp&quot;</span><span class="p">,</span> <span class="s2">&quot;fastmcp&quot;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s2">&quot;ov.agents.mcp server&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">py2mcp</span><span class="p">,</span> <span class="n">_fastmcp</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">"py2mcp"</span><span class="p">,</span> <span class="s2">"fastmcp"</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s2">"ov.agents.mcp server"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">py2mcp</span><span class="o">.</span><span class="n">mk_mcp_server</span><span class="p">(</span><span class="n">tools</span> <span class="ow">or</span> <span class="n">ov_tools</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">input_trans</span><span class="o">=</span><span class="n">input_trans</span><span class="p">)</span></div>
 
 
@@ -287,12 +287,12 @@
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/mcp.html#ov.agents.main">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the ``ov`` MCP server over stdio (``python -m ov.agents.mcp`` / ``ov mcp``).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Run the ``ov`` MCP server over stdio (``python -m ov.agents.mcp`` / ``ov mcp``)."""</span>
     <span class="n">mcp_server</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></div>
 
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>  <span class="c1"># pragma: no cover - process entry point</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>  <span class="c1"># pragma: no cover - process entry point</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
@@ -303,7 +303,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.capture.probes &mdash; ov 0.1.1 documentation</title>
+  <title>ov.capture.probes &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,7 +143,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.capture.probes</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Probes -- the registerable units of *what intelligence to gather* (§2).</span>
+<span></span><span class="sd">"""Probes -- the registerable units of *what intelligence to gather* (§2).</span>
 
 <span class="sd">Each probe is an independent plugin that writes typed artifacts into the capture</span>
 <span class="sd">store. A probe is a small class implementing the :class:`Probe` lifecycle:</span>
@@ -154,10 +154,10 @@
 <span class="sd">  per-state probes: dom, screenshot, perf, storage, fingerprint).</span>
 <span class="sd">* :meth:`Probe.finalize` -- flush accumulated state into artifacts at run end.</span>
 
-<span class="sd">Probes are registered with :func:`register_probe` and ordered by the registry&#39;s</span>
+<span class="sd">Probes are registered with :func:`register_probe` and ordered by the registry's</span>
 <span class="sd">``requires``/``produces`` dependency declarations, so e.g. ``assets`` (which</span>
 <span class="sd">needs the network stream) runs after ``network``.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -168,7 +168,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">...config</span><span class="w"> </span><span class="kn">import</span> <span class="n">OvConfig</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">...registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Registry</span>
 
-<span class="n">PROBE_REGISTRY</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">(</span><span class="s2">&quot;probe&quot;</span><span class="p">)</span>
+<span class="n">PROBE_REGISTRY</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">(</span><span class="s2">"probe"</span><span class="p">)</span>
 <span class="n">register_probe</span> <span class="o">=</span> <span class="n">PROBE_REGISTRY</span><span class="o">.</span><span class="n">register</span>
 
 
@@ -176,11 +176,11 @@
 <a class="viewcode-back" href="../../../module_docs/ov/capture/probes.html#ov.capture.probes.ProbeContext">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ProbeContext</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Everything a probe needs, injected by the :class:`CaptureSession`.</span>
+<span class="w">    </span><span class="sd">"""Everything a probe needs, injected by the :class:`CaptureSession`.</span>
 
 <span class="sd">    ``extras`` is shared scratch (e.g. the accumulating network record list) so</span>
 <span class="sd">    streaming probes can hand data to per-state probes without globals.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">store</span><span class="p">:</span> <span class="n">Any</span>  <span class="c1"># CaptureStore (avoid import cycle)</span>
     <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span>
@@ -195,27 +195,27 @@
 <div class="viewcode-block" id="Probe">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/probes.html#ov.capture.probes.Probe">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Probe</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for probes; override only the lifecycle hooks you need.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Base class for probes; override only the lifecycle hooks you need."""</span>
 
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;probe&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"probe"</span>
 
 <div class="viewcode-block" id="Probe.attach">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/probes.html#ov.capture.probes.Probe.attach">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">attach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Subscribe listeners before navigation. Default: no-op.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">"""Subscribe listeners before navigation. Default: no-op."""</span></div>
 
 
 <div class="viewcode-block" id="Probe.capture">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/probes.html#ov.capture.probes.Probe.capture">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Snapshot current state into artifacts. Default: nothing.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Snapshot current state into artifacts. Default: nothing."""</span>
         <span class="k">return</span> <span class="p">[]</span></div>
 
 
 <div class="viewcode-block" id="Probe.finalize">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/probes.html#ov.capture.probes.Probe.finalize">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Flush accumulated state into artifacts at run end. Default: nothing.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Flush accumulated state into artifacts at run end. Default: nothing."""</span>
         <span class="k">return</span> <span class="p">[]</span></div>
 </div>
 
@@ -224,14 +224,14 @@
 <div class="viewcode-block" id="load_builtin_probes">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/probes.html#ov.capture.probes.load_builtin_probes">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_builtin_probes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Import the builtin probe modules so their ``@register_probe`` runs.</span>
+<span class="w">    </span><span class="sd">"""Import the builtin probe modules so their ``@register_probe`` runs.</span>
 
 <span class="sd">    Safe to call repeatedly (imports are cached). It is also invoked once at the</span>
 <span class="sd">    bottom of this module so that simply importing :mod:`ov.capture.probes`</span>
 <span class="sd">    yields a fully-populated :data:`PROBE_REGISTRY` -- no caller (the session, a</span>
 <span class="sd">    test, a skill) ever observes a half-registered registry depending on import</span>
 <span class="sd">    order. The probe modules pull in no heavy/browser dependencies at import.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>  <span class="c1"># noqa: F401</span>
         <span class="n">a11y</span><span class="p">,</span>
         <span class="n">assets</span><span class="p">,</span>
@@ -260,7 +260,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

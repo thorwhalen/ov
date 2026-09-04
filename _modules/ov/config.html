@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.config &mdash; ov 0.1.1 documentation</title>
+  <title>ov.config &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,18 +143,18 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.config</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Configuration -- the single source of truth for ``ov``&#39;s defaults.</span>
+<span></span><span class="sd">"""Configuration -- the single source of truth for ``ov``'s defaults.</span>
 
 <span class="sd">Everything is a keyword-only field on :class:`OvConfig` with a smart default, so</span>
 <span class="sd">``ov.observe(url)`` works with zero config while every knob stays reachable.</span>
 <span class="sd">Environment variables (``OV_*``) override the defaults; an explicit constructor</span>
 <span class="sd">argument overrides the environment.</span>
 
-<span class="sd">This module also encodes the **default-safety checklist** from the spec&#39;s</span>
+<span class="sd">This module also encodes the **default-safety checklist** from the spec's</span>
 <span class="sd">boundary note (§6): redaction is on, secret/PII capture is off, a polite rate is</span>
 <span class="sd">applied, ``robots.txt`` intent is respected by default, and a *foreign* target</span>
 <span class="sd">requires an explicit ``authorized=True`` acknowledgement.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -171,31 +171,31 @@
 <div class="viewcode-block" id="default_store_root">
 <a class="viewcode-back" href="../../module_docs/ov/config.html#ov.default_store_root">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">default_store_root</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the XDG-aligned default root for ``ov``&#39;s capture stores.</span>
+<span class="w">    </span><span class="sd">"""Return the XDG-aligned default root for ``ov``'s capture stores.</span>
 
 <span class="sd">    Honors ``OV_STORE_ROOT`` then ``XDG_DATA_HOME``, falling back to</span>
 <span class="sd">    ``~/.local/share/ov``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">explicit</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OV_STORE_ROOT&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">explicit</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OV_STORE_ROOT"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">explicit</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">explicit</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
-    <span class="n">xdg</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;XDG_DATA_HOME&quot;</span><span class="p">)</span>
-    <span class="n">base</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">xdg</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span> <span class="k">if</span> <span class="n">xdg</span> <span class="k">else</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;.local&quot;</span> <span class="o">/</span> <span class="s2">&quot;share&quot;</span>
-    <span class="k">return</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;ov&quot;</span></div>
+    <span class="n">xdg</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"XDG_DATA_HOME"</span><span class="p">)</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">xdg</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span> <span class="k">if</span> <span class="n">xdg</span> <span class="k">else</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">".local"</span> <span class="o">/</span> <span class="s2">"share"</span>
+    <span class="k">return</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">"ov"</span></div>
 
 
 
 <span class="c1"># Default probes for the zero-config capture spine (Phase 1). Heavier probes</span>
 <span class="c1"># (perf/storage/websocket/sse/sourcemaps) are opt-in via ``probes=...``.</span>
 <span class="n">DEFAULT_PROBES</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;navigation&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;network&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;dom&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;screenshot&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;console&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;fingerprint&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;assets&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;a11y&quot;</span><span class="p">,</span>  <span class="c1"># computed text styles (for contrast) + optional axe-core</span>
+    <span class="s2">"navigation"</span><span class="p">,</span>
+    <span class="s2">"network"</span><span class="p">,</span>
+    <span class="s2">"dom"</span><span class="p">,</span>
+    <span class="s2">"screenshot"</span><span class="p">,</span>
+    <span class="s2">"console"</span><span class="p">,</span>
+    <span class="s2">"fingerprint"</span><span class="p">,</span>
+    <span class="s2">"assets"</span><span class="p">,</span>
+    <span class="s2">"a11y"</span><span class="p">,</span>  <span class="c1"># computed text styles (for contrast) + optional axe-core</span>
 <span class="p">)</span>
 
 
@@ -203,7 +203,7 @@
     <span class="n">raw</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">raw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">default</span>
-    <span class="k">return</span> <span class="n">raw</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;yes&quot;</span><span class="p">,</span> <span class="s2">&quot;on&quot;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">raw</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"true"</span><span class="p">,</span> <span class="s2">"yes"</span><span class="p">,</span> <span class="s2">"on"</span><span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_env_float</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -226,19 +226,19 @@
 <a class="viewcode-back" href="../../module_docs/ov/config.html#ov.OvConfig">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">kw_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">OvConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolved settings for a capture/analysis run (keyword-only, env-overridable).</span>
+<span class="w">    </span><span class="sd">"""Resolved settings for a capture/analysis run (keyword-only, env-overridable).</span>
 
 <span class="sd">    Construct with :meth:`from_env` for the env-aware default, or pass explicit</span>
 <span class="sd">    fields to override. The instance is snapshotted into every</span>
 <span class="sd">    :class:`~ov.base.CaptureRun` (``settings_snapshot``) for provenance.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># --- where things live ---</span>
     <span class="n">store_root</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">default_store_root</span><span class="p">)</span>
 
     <span class="c1"># --- browser / driving ---</span>
     <span class="n">headed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">browser</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;chromium&quot;</span>  <span class="c1"># chromium gets the CDP tail; ff/webkit lose it</span>
+    <span class="n">browser</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"chromium"</span>  <span class="c1"># chromium gets the CDP tail; ff/webkit lose it</span>
     <span class="n">nav_timeout_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30_000</span>
     <span class="n">default_probes</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFAULT_PROBES</span>
 
@@ -247,15 +247,15 @@
     <span class="n">console_text_cap</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2_000</span>  <span class="c1"># max chars kept per console/pageerror entry</span>
     <span class="n">ws_frame_cap</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4_096</span>  <span class="c1"># max chars kept per captured WebSocket frame</span>
     <span class="n">capture_body_content_types</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;application/javascript&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;text/javascript&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;text/html&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;text/css&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;text/event-stream&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;application/graphql&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;application/xml&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;text/plain&quot;</span><span class="p">,</span>
+        <span class="s2">"application/json"</span><span class="p">,</span>
+        <span class="s2">"application/javascript"</span><span class="p">,</span>
+        <span class="s2">"text/javascript"</span><span class="p">,</span>
+        <span class="s2">"text/html"</span><span class="p">,</span>
+        <span class="s2">"text/css"</span><span class="p">,</span>
+        <span class="s2">"text/event-stream"</span><span class="p">,</span>
+        <span class="s2">"application/graphql"</span><span class="p">,</span>
+        <span class="s2">"application/xml"</span><span class="p">,</span>
+        <span class="s2">"text/plain"</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># --- operate budgets (the package reports; the host enforces) ---</span>
@@ -278,27 +278,27 @@
 <div class="viewcode-block" id="OvConfig.from_env">
 <a class="viewcode-back" href="../../module_docs/ov/config.html#ov.OvConfig.from_env">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_env</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OvConfig&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a config from ``OV_*`` env vars, with explicit ``overrides`` winning.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_env</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OvConfig"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Build a config from ``OV_*`` env vars, with explicit ``overrides`` winning.</span>
 
 <span class="sd">        &gt;&gt;&gt; isinstance(OvConfig.from_env().store_root, Path)</span>
 <span class="sd">        True</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">env_values</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">headed</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">&quot;OV_HEADED&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-            <span class="n">browser</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OV_BROWSER&quot;</span><span class="p">,</span> <span class="s2">&quot;chromium&quot;</span><span class="p">),</span>
-            <span class="n">nav_timeout_ms</span><span class="o">=</span><span class="n">_env_int</span><span class="p">(</span><span class="s2">&quot;OV_NAV_TIMEOUT_MS&quot;</span><span class="p">,</span> <span class="mi">30_000</span><span class="p">),</span>
-            <span class="n">max_body_bytes</span><span class="o">=</span><span class="n">_env_int</span><span class="p">(</span><span class="s2">&quot;OV_MAX_BODY_BYTES&quot;</span><span class="p">,</span> <span class="mi">2_000_000</span><span class="p">),</span>
-            <span class="n">max_steps</span><span class="o">=</span><span class="n">_env_int</span><span class="p">(</span><span class="s2">&quot;OV_MAX_STEPS&quot;</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
-            <span class="n">max_failures</span><span class="o">=</span><span class="n">_env_int</span><span class="p">(</span><span class="s2">&quot;OV_MAX_FAILURES&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
-            <span class="n">wall_clock_s</span><span class="o">=</span><span class="n">_env_float</span><span class="p">(</span><span class="s2">&quot;OV_WALL_CLOCK_S&quot;</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">),</span>
-            <span class="n">redact_values</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">&quot;OV_REDACT_VALUES&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-            <span class="n">capture_secrets</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">&quot;OV_CAPTURE_SECRETS&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-            <span class="n">respect_robots</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">&quot;OV_RESPECT_ROBOTS&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-            <span class="n">polite_rate_s</span><span class="o">=</span><span class="n">_env_float</span><span class="p">(</span><span class="s2">&quot;OV_POLITE_RATE_S&quot;</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
-            <span class="n">authorized</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">&quot;OV_AUTHORIZED&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-            <span class="n">use_proxy</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">&quot;OV_USE_PROXY&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-            <span class="n">stealth_profile</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OV_STEALTH_PROFILE&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">headed</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">"OV_HEADED"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+            <span class="n">browser</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OV_BROWSER"</span><span class="p">,</span> <span class="s2">"chromium"</span><span class="p">),</span>
+            <span class="n">nav_timeout_ms</span><span class="o">=</span><span class="n">_env_int</span><span class="p">(</span><span class="s2">"OV_NAV_TIMEOUT_MS"</span><span class="p">,</span> <span class="mi">30_000</span><span class="p">),</span>
+            <span class="n">max_body_bytes</span><span class="o">=</span><span class="n">_env_int</span><span class="p">(</span><span class="s2">"OV_MAX_BODY_BYTES"</span><span class="p">,</span> <span class="mi">2_000_000</span><span class="p">),</span>
+            <span class="n">max_steps</span><span class="o">=</span><span class="n">_env_int</span><span class="p">(</span><span class="s2">"OV_MAX_STEPS"</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
+            <span class="n">max_failures</span><span class="o">=</span><span class="n">_env_int</span><span class="p">(</span><span class="s2">"OV_MAX_FAILURES"</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+            <span class="n">wall_clock_s</span><span class="o">=</span><span class="n">_env_float</span><span class="p">(</span><span class="s2">"OV_WALL_CLOCK_S"</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">),</span>
+            <span class="n">redact_values</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">"OV_REDACT_VALUES"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+            <span class="n">capture_secrets</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">"OV_CAPTURE_SECRETS"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+            <span class="n">respect_robots</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">"OV_RESPECT_ROBOTS"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+            <span class="n">polite_rate_s</span><span class="o">=</span><span class="n">_env_float</span><span class="p">(</span><span class="s2">"OV_POLITE_RATE_S"</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+            <span class="n">authorized</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">"OV_AUTHORIZED"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+            <span class="n">use_proxy</span><span class="o">=</span><span class="n">_env_bool</span><span class="p">(</span><span class="s2">"OV_USE_PROXY"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+            <span class="n">stealth_profile</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OV_STEALTH_PROFILE"</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">env_values</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">overrides</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">env_values</span><span class="p">)</span></div>
@@ -307,7 +307,7 @@
 <div class="viewcode-block" id="OvConfig.snapshot">
 <a class="viewcode-back" href="../../module_docs/ov/config.html#ov.OvConfig.snapshot">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a JSON-serializable snapshot for ``CaptureRun.settings_snapshot``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return a JSON-serializable snapshot for ``CaptureRun.settings_snapshot``."""</span>
         <span class="n">out</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="n">val</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -328,7 +328,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

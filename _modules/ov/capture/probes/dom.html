@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.capture.probes.dom &mdash; ov 0.1.1 documentation</title>
+  <title>ov.capture.probes.dom &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,14 +144,14 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.capture.probes.dom</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;DOM probe: serialized DOM + ARIA snapshot (agent view) + full AX tree (evidence).</span>
+<span></span><span class="sd">"""DOM probe: serialized DOM + ARIA snapshot (agent view) + full AX tree (evidence).</span>
 
 <span class="sd">Two accessibility views, per the progressive-disclosure rule (§9): the concise</span>
-<span class="sd">**ARIA snapshot** (``locator.aria_snapshot`` -- ~200-400 tokens, the agent&#39;s</span>
+<span class="sd">**ARIA snapshot** (``locator.aria_snapshot`` -- ~200-400 tokens, the agent's</span>
 <span class="sd">view) and the full CDP **AX tree** (recorded as evidence). The serialized DOM</span>
 <span class="sd">(``page.content()``) is stored for the rendering-model diff and selector lookups.</span>
 <span class="sd">Runs per captured state so SPA/modal/revealed-menu states are each recorded.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -164,11 +164,11 @@
 
 <div class="viewcode-block" id="DomProbe">
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/dom.html#ov.capture.probes.dom.DomProbe">[docs]</a>
-<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="s2">&quot;ax_tree&quot;</span><span class="p">,</span> <span class="s2">&quot;aria_snapshot&quot;</span><span class="p">))</span>
+<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">,</span> <span class="s2">"ax_tree"</span><span class="p">,</span> <span class="s2">"aria_snapshot"</span><span class="p">))</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DomProbe</span><span class="p">(</span><span class="n">Probe</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Snapshot DOM + ARIA snapshot + full AX tree for the current state.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Snapshot DOM + ARIA snapshot + full AX tree for the current state."""</span>
 
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;dom&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">"dom"</span>
 
 <div class="viewcode-block" id="DomProbe.capture">
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/dom.html#ov.capture.probes.dom.DomProbe.capture">[docs]</a>
@@ -183,25 +183,25 @@
             <span class="n">html</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">()</span>
             <span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
-                    <span class="n">html</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-                    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span>
+                    <span class="n">html</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span>
+                    <span class="n">kind</span><span class="o">=</span><span class="s2">"dom"</span><span class="p">,</span>
                     <span class="n">step_id</span><span class="o">=</span><span class="n">step_id</span><span class="p">,</span>
-                    <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;text/html&quot;</span><span class="p">,</span>
-                    <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">},</span>
+                    <span class="n">content_type</span><span class="o">=</span><span class="s2">"text/html"</span><span class="p">,</span>
+                    <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"url"</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">},</span>
                 <span class="p">)</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
             <span class="k">pass</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">aria</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">aria_snapshot</span><span class="p">()</span>
+            <span class="n">aria</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"body"</span><span class="p">)</span><span class="o">.</span><span class="n">aria_snapshot</span><span class="p">()</span>
             <span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
-                    <span class="n">aria</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-                    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;aria_snapshot&quot;</span><span class="p">,</span>
+                    <span class="n">aria</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span>
+                    <span class="n">kind</span><span class="o">=</span><span class="s2">"aria_snapshot"</span><span class="p">,</span>
                     <span class="n">step_id</span><span class="o">=</span><span class="n">step_id</span><span class="p">,</span>
-                    <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;text/plain&quot;</span><span class="p">,</span>
-                    <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">},</span>
+                    <span class="n">content_type</span><span class="o">=</span><span class="s2">"text/plain"</span><span class="p">,</span>
+                    <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"url"</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">},</span>
                 <span class="p">)</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001 - aria snapshot is best-effort</span>
@@ -212,11 +212,11 @@
                 <span class="n">nodes</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">cdp</span><span class="o">.</span><span class="n">get_full_ax_tree</span><span class="p">()</span>
                 <span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                     <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
-                        <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-                        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;ax_tree&quot;</span><span class="p">,</span>
+                        <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span>
+                        <span class="n">kind</span><span class="o">=</span><span class="s2">"ax_tree"</span><span class="p">,</span>
                         <span class="n">step_id</span><span class="o">=</span><span class="n">step_id</span><span class="p">,</span>
-                        <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-                        <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)},</span>
+                        <span class="n">content_type</span><span class="o">=</span><span class="s2">"application/json"</span><span class="p">,</span>
+                        <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"url"</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="s2">"nodes"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)},</span>
                     <span class="p">)</span>
                 <span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
@@ -228,7 +228,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_frames_of</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>  <span class="c1"># reserved for per-frame AX recursion</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the page&#39;s frames (AX tree does not cross-origin-recurse).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return the page's frames (AX tree does not cross-origin-recurse)."""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">frames</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
@@ -242,7 +242,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

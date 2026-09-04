@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.registry &mdash; ov 0.1.1 documentation</title>
+  <title>ov.registry &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -177,17 +177,17 @@ here; a caller who wants <code class="docutils literal notranslate"><span class=
 <dt class="sig sig-object py" id="ov.registry.Registry">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ov.registry.</span></span><span class="sig-name descname"><span class="pre">Registry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/registry.html#Registry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.registry.Registry" title="Link to this definition"></a></dt>
 <dd><p>A named registry of <a class="reference internal" href="#ov.registry.RegisteredFn" title="ov.registry.RegisteredFn"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegisteredFn</span></code></a>, with dependency-ordered resolution.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">(</span><span class="s2">&quot;demo&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@reg</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@reg</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,))</span>
 <span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">a</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="s2">&quot;a&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@reg</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,))</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="s2">"a"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@reg</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,))</span>
 <span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">b</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="s2">&quot;b&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reg</span><span class="o">.</span><span class="n">ordered</span><span class="p">()]</span>   <span class="c1"># b depends on a&#39;s output kind &quot;x&quot;</span>
-<span class="go">[&#39;a&#39;, &#39;b&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fn</span><span class="p">()</span>
-<span class="go">&#39;a&#39;</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="s2">"b"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reg</span><span class="o">.</span><span class="n">ordered</span><span class="p">()]</span>   <span class="c1"># b depends on a's output kind "x"</span>
+<span class="go">['a', 'b']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span><span class="o">.</span><span class="n">fn</span><span class="p">()</span>
+<span class="go">'a'</span>
 </pre></div>
 </div>
 <dl class="py property">
@@ -232,7 +232,7 @@ available (captured upstream). Falls back to selection order on a cycle.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

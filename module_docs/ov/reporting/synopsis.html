@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.reporting.synopsis &mdash; ov 0.1.1 documentation</title>
+  <title>ov.reporting.synopsis &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -184,15 +184,15 @@ downstream agent what changed since the prior run, not just the current state.</
 refs or share a normalized summary. Each cluster yields one record holding the
 union of evidence refs, the max severity, and the highest-severity representative.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Finding</span><span class="p">,</span> <span class="n">Severity</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;contrast.text&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;low contrast&quot;</span><span class="p">,</span> <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span>
-<span class="gp">... </span>            <span class="n">severity</span><span class="o">=</span><span class="n">Severity</span><span class="p">(</span><span class="n">impact_tier</span><span class="o">=</span><span class="s2">&quot;serious&quot;</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">3.0</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;contrast.text&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;low contrast&quot;</span><span class="p">,</span> <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">],</span>
-<span class="gp">... </span>            <span class="n">severity</span><span class="o">=</span><span class="n">Severity</span><span class="p">(</span><span class="n">impact_tier</span><span class="o">=</span><span class="s2">&quot;serious&quot;</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">5.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"ux_issue"</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">"contrast.text"</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">title</span><span class="o">=</span><span class="s2">"low contrast"</span><span class="p">,</span> <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="n">severity</span><span class="o">=</span><span class="n">Severity</span><span class="p">(</span><span class="n">impact_tier</span><span class="o">=</span><span class="s2">"serious"</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">3.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"ux_issue"</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">"contrast.text"</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">title</span><span class="o">=</span><span class="s2">"low contrast"</span><span class="p">,</span> <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="s2">"y"</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="n">severity</span><span class="o">=</span><span class="n">Severity</span><span class="p">(</span><span class="n">impact_tier</span><span class="o">=</span><span class="s2">"serious"</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">5.0</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">recs</span> <span class="o">=</span> <span class="n">dedupe_findings</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">recs</span><span class="p">),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">recs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;evidence_refs&quot;</span><span class="p">]),</span> <span class="n">recs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;severity_score&quot;</span><span class="p">]</span>
-<span class="go">(1, [&#39;x&#39;, &#39;y&#39;], 5.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">recs</span><span class="p">),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">recs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"evidence_refs"</span><span class="p">]),</span> <span class="n">recs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"severity_score"</span><span class="p">]</span>
+<span class="go">(1, ['x', 'y'], 5.0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -216,7 +216,7 @@ union of evidence refs, the max severity, and the highest-severity representativ
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

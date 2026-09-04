@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.ux.a11y &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.ux.a11y &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,7 +144,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis.ux.a11y</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Accessibility analyzer: WebAIM perennials from the DOM + optional axe mapping.</span>
+<span></span><span class="sd">"""Accessibility analyzer: WebAIM perennials from the DOM + optional axe mapping.</span>
 
 <span class="sd">The deterministic baseline parses each captured DOM state (``selectolax``) and</span>
 <span class="sd">detects the WebAIM-Million perennials that are computable without a browser or a</span>
@@ -161,8 +161,8 @@
 <span class="sd">issues, so this analyzer always emits one ``undetermined`` finding routing the</span>
 <span class="sd">non-automatable ~60-70% (meaningful alt text, reading/focus-order logicality,</span>
 <span class="sd">in-context link text, screen-reader announcement quality, ARIA intent) to</span>
-<span class="sd">``needs_human_review`` -- never asserting &quot;no automated violations&quot; == accessible.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">``needs_human_review`` -- never asserting "no automated violations" == accessible.</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -177,40 +177,40 @@
 
 <span class="c1"># signal -&gt; (wcag id, level, impact tier, human label, fix hint)</span>
 <span class="n">_PERENNIALS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;a11y.image-alt&quot;</span><span class="p">:</span> <span class="p">(</span>
-        <span class="s2">&quot;1.1.1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;critical&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;image missing alt attribute&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;add an alt attribute (alt=&quot;&quot; if decorative)&#39;</span><span class="p">,</span>
+    <span class="s2">"a11y.image-alt"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"1.1.1"</span><span class="p">,</span>
+        <span class="s2">"A"</span><span class="p">,</span>
+        <span class="s2">"critical"</span><span class="p">,</span>
+        <span class="s2">"image missing alt attribute"</span><span class="p">,</span>
+        <span class="s1">'add an alt attribute (alt="" if decorative)'</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s2">&quot;a11y.link-name&quot;</span><span class="p">:</span> <span class="p">(</span>
-        <span class="s2">&quot;2.4.4&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;serious&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;link has no discernible text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;give the link text, an aria-label, or a titled child&quot;</span><span class="p">,</span>
+    <span class="s2">"a11y.link-name"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"2.4.4"</span><span class="p">,</span>
+        <span class="s2">"A"</span><span class="p">,</span>
+        <span class="s2">"serious"</span><span class="p">,</span>
+        <span class="s2">"link has no discernible text"</span><span class="p">,</span>
+        <span class="s2">"give the link text, an aria-label, or a titled child"</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s2">&quot;a11y.button-name&quot;</span><span class="p">:</span> <span class="p">(</span>
-        <span class="s2">&quot;4.1.2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;critical&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;button has no accessible name&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;add text content or an aria-label to the button&quot;</span><span class="p">,</span>
+    <span class="s2">"a11y.button-name"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"4.1.2"</span><span class="p">,</span>
+        <span class="s2">"A"</span><span class="p">,</span>
+        <span class="s2">"critical"</span><span class="p">,</span>
+        <span class="s2">"button has no accessible name"</span><span class="p">,</span>
+        <span class="s2">"add text content or an aria-label to the button"</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s2">&quot;a11y.form-label&quot;</span><span class="p">:</span> <span class="p">(</span>
-        <span class="s2">&quot;1.3.1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;critical&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;form control has no associated label&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;add a &lt;label for&gt;, aria-label, or aria-labelledby&quot;</span><span class="p">,</span>
+    <span class="s2">"a11y.form-label"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"1.3.1"</span><span class="p">,</span>
+        <span class="s2">"A"</span><span class="p">,</span>
+        <span class="s2">"critical"</span><span class="p">,</span>
+        <span class="s2">"form control has no associated label"</span><span class="p">,</span>
+        <span class="s2">"add a &lt;label for&gt;, aria-label, or aria-labelledby"</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s2">&quot;a11y.html-lang&quot;</span><span class="p">:</span> <span class="p">(</span>
-        <span class="s2">&quot;3.1.1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;serious&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;document has no lang attribute&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;set &lt;html lang=...&gt; to the page language&quot;</span><span class="p">,</span>
+    <span class="s2">"a11y.html-lang"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"3.1.1"</span><span class="p">,</span>
+        <span class="s2">"A"</span><span class="p">,</span>
+        <span class="s2">"serious"</span><span class="p">,</span>
+        <span class="s2">"document has no lang attribute"</span><span class="p">,</span>
+        <span class="s2">"set &lt;html lang=...&gt; to the page language"</span><span class="p">,</span>
     <span class="p">),</span>
 <span class="p">}</span>
 
@@ -218,37 +218,37 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_acc_name</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">attrs</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">attributes</span>
     <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
-        <span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;aria-label&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-        <span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-        <span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+        <span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"aria-label"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"title"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">),</span>
     <span class="p">]</span>
-    <span class="c1"># an image child&#39;s alt counts as the link/button name</span>
-    <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">):</span>
-        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alt&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parts</span> <span class="k">if</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="c1"># an image child's alt counts as the link/button name</span>
+    <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"img"</span><span class="p">):</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alt"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parts</span> <span class="k">if</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_selector</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">attrs</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">attributes</span>
-    <span class="k">if</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">if</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">[name=</span><span class="si">{</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">:nth-of-type(</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="k">if</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"#</span><span class="si">{</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">if</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">[name=</span><span class="si">{</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">]"</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">:nth-of-type(</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">)"</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_has_label</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">label_fors</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="n">attrs</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">attributes</span>
-    <span class="k">if</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;aria-label&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;aria-labelledby&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"aria-label"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"aria-labelledby"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"title"</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">label_fors</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span> <span class="ow">in</span> <span class="n">label_fors</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="c1"># wrapped in a &lt;label&gt;</span>
     <span class="n">parent</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span>
     <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">depth</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">"label"</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">parent</span>
         <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -256,54 +256,54 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_scan_dom</span><span class="p">(</span><span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return raw perennial violations found in one DOM state.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return raw perennial violations found in one DOM state."""</span>
     <span class="n">tree</span> <span class="o">=</span> <span class="n">HTMLParser</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
     <span class="n">out</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="n">html_node</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">html_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">html_node</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lang&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="s2">&quot;a11y.html-lang&quot;</span><span class="p">,</span> <span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="s2">&quot;html&quot;</span><span class="p">})</span>
+    <span class="n">html_node</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s2">"html"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">html_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">html_node</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lang"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"signal"</span><span class="p">:</span> <span class="s2">"a11y.html-lang"</span><span class="p">,</span> <span class="s2">"selector"</span><span class="p">:</span> <span class="s2">"html"</span><span class="p">})</span>
 
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">if</span> <span class="s2">&quot;alt&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">img</span><span class="o">.</span><span class="n">attributes</span><span class="p">:</span>  <span class="c1"># alt=&quot;&quot; is allowed (decorative)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="s2">&quot;a11y.image-alt&quot;</span><span class="p">,</span> <span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="n">_selector</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">i</span><span class="p">)})</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"img"</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">"alt"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">img</span><span class="o">.</span><span class="n">attributes</span><span class="p">:</span>  <span class="c1"># alt="" is allowed (decorative)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"signal"</span><span class="p">:</span> <span class="s2">"a11y.image-alt"</span><span class="p">,</span> <span class="s2">"selector"</span><span class="p">:</span> <span class="n">_selector</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">i</span><span class="p">)})</span>
 
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;a[href]&quot;</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"a[href]"</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_acc_name</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="s2">&quot;a11y.link-name&quot;</span><span class="p">,</span> <span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="n">_selector</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">)})</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"signal"</span><span class="p">:</span> <span class="s2">"a11y.link-name"</span><span class="p">,</span> <span class="s2">"selector"</span><span class="p">:</span> <span class="n">_selector</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">)})</span>
 
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"button"</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_acc_name</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="s2">&quot;a11y.button-name&quot;</span><span class="p">,</span> <span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="n">_selector</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">)})</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"signal"</span><span class="p">:</span> <span class="s2">"a11y.button-name"</span><span class="p">,</span> <span class="s2">"selector"</span><span class="p">:</span> <span class="n">_selector</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">)})</span>
 
-    <span class="n">label_fors</span> <span class="o">=</span> <span class="p">{</span><span class="n">lab</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;for&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">lab</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;label[for]&quot;</span><span class="p">)}</span>
+    <span class="n">label_fors</span> <span class="o">=</span> <span class="p">{</span><span class="n">lab</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"for"</span><span class="p">)</span> <span class="k">for</span> <span class="n">lab</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"label[for]"</span><span class="p">)}</span>
     <span class="n">label_fors</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">controls</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;input, select, textarea&quot;</span><span class="p">)</span>
-    <span class="n">skip_types</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;hidden&quot;</span><span class="p">,</span> <span class="s2">&quot;submit&quot;</span><span class="p">,</span> <span class="s2">&quot;button&quot;</span><span class="p">,</span> <span class="s2">&quot;reset&quot;</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">}</span>
+    <span class="n">controls</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"input, select, textarea"</span><span class="p">)</span>
+    <span class="n">skip_types</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"hidden"</span><span class="p">,</span> <span class="s2">"submit"</span><span class="p">,</span> <span class="s2">"button"</span><span class="p">,</span> <span class="s2">"reset"</span><span class="p">,</span> <span class="s2">"image"</span><span class="p">}</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">controls</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;input&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;text&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">skip_types</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">"input"</span> <span class="ow">and</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">"text"</span><span class="p">)</span> <span class="ow">in</span> <span class="n">skip_types</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_has_label</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">label_fors</span><span class="p">):</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;signal&quot;</span><span class="p">:</span> <span class="s2">&quot;a11y.form-label&quot;</span><span class="p">,</span> <span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="n">_selector</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">i</span><span class="p">)})</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"signal"</span><span class="p">:</span> <span class="s2">"a11y.form-label"</span><span class="p">,</span> <span class="s2">"selector"</span><span class="p">:</span> <span class="n">_selector</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">i</span><span class="p">)})</span>
 
     <span class="k">return</span> <span class="n">out</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_manual_review_finding</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Finding</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">Finding</span><span class="p">(</span>
-        <span class="n">finding_id</span><span class="o">=</span><span class="n">new_id</span><span class="p">(</span><span class="s2">&quot;find&quot;</span><span class="p">),</span>
-        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;undetermined&quot;</span><span class="p">,</span>
-        <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;a11y.manual-review-required&quot;</span><span class="p">,</span>
-        <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
-        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Automated a11y coverage is partial -- manual review required&quot;</span><span class="p">,</span>
+        <span class="n">finding_id</span><span class="o">=</span><span class="n">new_id</span><span class="p">(</span><span class="s2">"find"</span><span class="p">),</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">"undetermined"</span><span class="p">,</span>
+        <span class="n">signal</span><span class="o">=</span><span class="s2">"a11y.manual-review-required"</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">"Automated a11y coverage is partial -- manual review required"</span><span class="p">,</span>
         <span class="n">observed</span><span class="o">=</span><span class="p">(</span>
-            <span class="s2">&quot;Automated tooling detects only ~30-40</span><span class="si">% o</span><span class="s2">f WCAG issues. The &quot;</span>
-            <span class="s2">&quot;non-automatable majority (meaningful alt text, reading/focus-order &quot;</span>
-            <span class="s2">&quot;logicality, in-context link text, screen-reader announcement quality, &quot;</span>
-            <span class="s2">&quot;ARIA intent) is not asserted here and must be checked by a human / AT.&quot;</span>
+            <span class="s2">"Automated tooling detects only ~30-40</span><span class="si">% o</span><span class="s2">f WCAG issues. The "</span>
+            <span class="s2">"non-automatable majority (meaningful alt text, reading/focus-order "</span>
+            <span class="s2">"logicality, in-context link text, screen-reader announcement quality, "</span>
+            <span class="s2">"ARIA intent) is not asserted here and must be checked by a human / AT."</span>
         <span class="p">),</span>
         <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[],</span>  <span class="c1"># an honesty marker, not a cite-or-abstain claim</span>
-        <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+        <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
         <span class="n">confidence</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
         <span class="n">needs_human_review</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
@@ -311,10 +311,10 @@
 
 <div class="viewcode-block" id="analyze_a11y">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/ux/a11y.html#ov.analysis.ux.a11y.analyze_a11y">[docs]</a>
-<span class="nd">@register_analyzer</span><span class="p">(</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,))</span>
+<span class="nd">@register_analyzer</span><span class="p">(</span><span class="s2">"a11y"</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">"ux"</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"findings"</span><span class="p">,))</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_a11y</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Emit a11y Findings from DOM perennials (+ axe results if captured).&quot;&quot;&quot;</span>
-    <span class="n">dom_arts</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""Emit a11y Findings from DOM perennials (+ axe results if captured)."""</span>
+    <span class="n">dom_arts</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">)</span>
     <span class="n">num_states</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dom_arts</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
 
@@ -322,22 +322,22 @@
     <span class="n">seen</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">dom_arts</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_scan_dom</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">art</span><span class="p">)):</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;selector&quot;</span><span class="p">])</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s2">"selector"</span><span class="p">])</span>
             <span class="n">rec</span> <span class="o">=</span> <span class="n">seen</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span>
-                <span class="n">key</span><span class="p">,</span> <span class="p">{</span><span class="o">**</span><span class="n">v</span><span class="p">,</span> <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;artifact_id&quot;</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">}</span>
+                <span class="n">key</span><span class="p">,</span> <span class="p">{</span><span class="o">**</span><span class="n">v</span><span class="p">,</span> <span class="s2">"states"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"artifact_id"</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">}</span>
             <span class="p">)</span>
-            <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">rec</span><span class="p">[</span><span class="s2">"states"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">selector</span><span class="p">),</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">seen</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">wcag_id</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">impact</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">fix</span> <span class="o">=</span> <span class="n">_PERENNIALS</span><span class="p">[</span><span class="n">signal</span><span class="p">]</span>
-        <span class="n">states</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">]</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="s2">"states"</span><span class="p">]</span>
         <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">Finding</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">"ux_issue"</span><span class="p">,</span>
                 <span class="n">signal</span><span class="o">=</span><span class="n">signal</span><span class="p">,</span>
-                <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span>
                 <span class="n">title</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
-                <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">wcag_id</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">level</span><span class="p">},</span>
+                <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">wcag_id</span><span class="p">,</span> <span class="s2">"level"</span><span class="p">:</span> <span class="n">level</span><span class="p">},</span>
                 <span class="n">engine_rule_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
                     <span class="n">impact</span><span class="p">,</span>
@@ -345,11 +345,11 @@
                     <span class="n">states_affected</span><span class="o">=</span><span class="n">states</span><span class="p">,</span>
                     <span class="n">journey_fraction</span><span class="o">=</span><span class="n">states</span> <span class="o">/</span> <span class="n">num_states</span><span class="p">,</span>
                 <span class="p">),</span>
-                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;artifact_id&quot;</span><span class="p">]],</span>
-                <span class="n">observed</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">selector</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
-                <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="n">selector</span><span class="p">,</span> <span class="s2">&quot;states_affected&quot;</span><span class="p">:</span> <span class="n">states</span><span class="p">},</span>
+                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">rec</span><span class="p">[</span><span class="s2">"artifact_id"</span><span class="p">]],</span>
+                <span class="n">observed</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">selector</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span>
+                <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">"selector"</span><span class="p">:</span> <span class="n">selector</span><span class="p">,</span> <span class="s2">"states_affected"</span><span class="p">:</span> <span class="n">states</span><span class="p">},</span>
                 <span class="n">suggested_fix</span><span class="o">=</span><span class="n">fix</span><span class="p">,</span>
-                <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+                <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
                 <span class="n">confidence</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
                 <span class="n">needs_human_review</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="p">)</span>
@@ -358,41 +358,41 @@
     <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_map_axe</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">num_states</span><span class="p">))</span>
     <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_manual_review_finding</span><span class="p">())</span>
     <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;perennial_findings&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">),</span>
-        <span class="s2">&quot;states_scanned&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">dom_arts</span><span class="p">),</span>
-        <span class="s2">&quot;axe_present&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;axe&quot;</span><span class="p">)),</span>
+        <span class="s2">"perennial_findings"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">),</span>
+        <span class="s2">"states_scanned"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">dom_arts</span><span class="p">),</span>
+        <span class="s2">"axe_present"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"axe"</span><span class="p">)),</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">out</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_map_axe</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">,</span> <span class="n">num_states</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map optional captured axe-core violations to Findings (additive).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Map optional captured axe-core violations to Findings (additive)."""</span>
     <span class="n">findings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;axe&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"axe"</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">art</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;violations&quot;</span><span class="p">,</span> <span class="p">[]):</span>
-            <span class="n">nodes</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;nodes&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"violations"</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"nodes"</span><span class="p">,</span> <span class="p">[])</span>
             <span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">Finding</span><span class="p">(</span>
-                    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span>
-                    <span class="n">signal</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;axe.</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-                    <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
-                    <span class="n">title</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;axe violation&quot;</span><span class="p">)),</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="s2">"ux_issue"</span><span class="p">,</span>
+                    <span class="n">signal</span><span class="o">=</span><span class="sa">f</span><span class="s2">"axe.</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span><span class="w"> </span><span class="s1">'unknown'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+                    <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span>
+                    <span class="n">title</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"help"</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"axe violation"</span><span class="p">)),</span>
                     <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span>
-                        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;wcag&quot;</span><span class="p">)]</span>
+                        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tags"</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"wcag"</span><span class="p">)]</span>
                     <span class="p">},</span>
-                    <span class="n">engine_rule_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;axe:</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">engine_rule_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">"axe:</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
                     <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
-                        <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;impact&quot;</span><span class="p">,</span> <span class="s2">&quot;moderate&quot;</span><span class="p">),</span>
+                        <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"impact"</span><span class="p">,</span> <span class="s2">"moderate"</span><span class="p">),</span>
                         <span class="n">nodes</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
                         <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_states</span><span class="p">,</span>
                     <span class="p">),</span>
                     <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">],</span>
-                    <span class="n">observed</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-                    <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;targets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;target&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">][:</span><span class="mi">10</span><span class="p">]},</span>
-                    <span class="n">suggested_fix</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;helpUrl&quot;</span><span class="p">),</span>
-                    <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+                    <span class="n">observed</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span>
+                    <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">"targets"</span><span class="p">:</span> <span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"target"</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">][:</span><span class="mi">10</span><span class="p">]},</span>
+                    <span class="n">suggested_fix</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"helpUrl"</span><span class="p">),</span>
+                    <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
                     <span class="n">confidence</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="p">)</span>
@@ -406,7 +406,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

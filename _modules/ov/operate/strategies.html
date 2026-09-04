@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.operate.strategies &mdash; ov 0.1.1 documentation</title>
+  <title>ov.operate.strategies &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,13 +143,13 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.operate.strategies</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Journey-strategy helpers -- intent shaping for the three strategies (§2.3).</span>
+<span></span><span class="sd">"""Journey-strategy helpers -- intent shaping for the three strategies (§2.3).</span>
 
 <span class="sd">The three strategies reuse the same primitives, varying only the *intent* written</span>
 <span class="sd">to the journal: crawl-and-map (``enumerate``), goal-pursuit (``advance``), and</span>
 <span class="sd">guided-replay (``replay``). These helpers keep that vocabulary in one place and</span>
 <span class="sd">provide the deterministic target-selection a model-free driver needs.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -158,24 +158,24 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Affordance</span><span class="p">,</span> <span class="n">Observation</span>
 
 <span class="c1"># Intent labels -- the per-step intent recorded in the journal.</span>
-<span class="n">INTENT_ENUMERATE</span> <span class="o">=</span> <span class="s2">&quot;enumerate&quot;</span>
-<span class="n">INTENT_ADVANCE</span> <span class="o">=</span> <span class="s2">&quot;advance&quot;</span>
-<span class="n">INTENT_REPLAY</span> <span class="o">=</span> <span class="s2">&quot;replay&quot;</span>
+<span class="n">INTENT_ENUMERATE</span> <span class="o">=</span> <span class="s2">"enumerate"</span>
+<span class="n">INTENT_ADVANCE</span> <span class="o">=</span> <span class="s2">"advance"</span>
+<span class="n">INTENT_REPLAY</span> <span class="o">=</span> <span class="s2">"replay"</span>
 
 <span class="c1">#: Roles treated as navigable for crawl-and-map.</span>
-<span class="n">NAV_ROLES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;link&quot;</span><span class="p">,</span> <span class="s2">&quot;tab&quot;</span><span class="p">,</span> <span class="s2">&quot;menuitem&quot;</span><span class="p">})</span>
+<span class="n">NAV_ROLES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"link"</span><span class="p">,</span> <span class="s2">"tab"</span><span class="p">,</span> <span class="s2">"menuitem"</span><span class="p">})</span>
 
 
 <div class="viewcode-block" id="is_same_origin">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/strategies.html#ov.operate.strategies.is_same_origin">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_same_origin</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;True when ``url`` shares scheme+host(+port) with ``base_url``.</span>
+<span class="w">    </span><span class="sd">"""True when ``url`` shares scheme+host(+port) with ``base_url``.</span>
 
-<span class="sd">    &gt;&gt;&gt; is_same_origin(&quot;https://x.com/a&quot;, &quot;https://x.com/b&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; is_same_origin("https://x.com/a", "https://x.com/b")</span>
 <span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; is_same_origin(&quot;https://y.com/a&quot;, &quot;https://x.com/b&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; is_same_origin("https://y.com/a", "https://x.com/b")</span>
 <span class="sd">    False</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">),</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">base_url</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">netloc</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">netloc</span><span class="p">)</span></div>
 
@@ -184,7 +184,7 @@
 <div class="viewcode-block" id="navigable_affordances">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/strategies.html#ov.operate.strategies.navigable_affordances">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">navigable_affordances</span><span class="p">(</span><span class="n">observation</span><span class="p">:</span> <span class="n">Observation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Affordance</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return affordances suitable for breadth-first crawl (links/tabs/menuitems).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return affordances suitable for breadth-first crawl (links/tabs/menuitems)."""</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">observation</span><span class="o">.</span><span class="n">affordances</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">role</span> <span class="ow">in</span> <span class="n">NAV_ROLES</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="n">enabled</span><span class="p">]</span></div>
 
 
@@ -192,9 +192,9 @@
 <div class="viewcode-block" id="absolutize">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/strategies.html#ov.operate.strategies.absolutize">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">absolutize</span><span class="p">(</span><span class="n">href</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve ``href`` against ``base_url`` (drops fragments).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Resolve ``href`` against ``base_url`` (drops fragments)."""</span>
     <span class="n">resolved</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">href</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">resolved</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="n">resolved</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"#"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
 </pre></div>
 
@@ -205,7 +205,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

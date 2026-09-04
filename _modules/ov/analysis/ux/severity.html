@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.ux.severity &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.ux.severity &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,7 +144,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis.ux.severity</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Severity scoring: ``score = impact_tier x reach`` (D3 §1).</span>
+<span></span><span class="sd">"""Severity scoring: ``score = impact_tier x reach`` (D3 §1).</span>
 
 <span class="sd">The design goal is that a high-reach moderate issue outranks a rare critical one.</span>
 <span class="sd">``reach`` combines how many nodes/states an issue touches with the fraction of</span>
@@ -157,7 +157,7 @@
 <span class="sd">So a *serious* (3) issue on 12 nodes across 80% of journeys scores</span>
 <span class="sd">``3 * (12 * 0.8) = 28.8``, while a *critical* (4) issue on 1 node in 5% of</span>
 <span class="sd">journeys scores ``4 * (1 * 0.05) = 0.2`` -- exactly the prioritization D3 wants.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -165,20 +165,20 @@
 
 <span class="c1">#: axe-style accessibility impact tiers -&gt; numeric weight.</span>
 <span class="n">A11Y_TIER_WEIGHT</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;minor&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;moderate&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">&quot;serious&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"minor"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"moderate"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"serious"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"critical"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1">#: Nielsen UX severity tiers (0 cosmetic .. 4 catastrophe) -&gt; numeric weight.</span>
-<span class="n">UX_TIER_WEIGHT</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">UX_TIER_WEIGHT</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"0"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"3"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"4"</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
 
 
 <div class="viewcode-block" id="tier_weight">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/ux/severity.html#ov.analysis.ux.severity.tier_weight">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tier_weight</span><span class="p">(</span><span class="n">impact_tier</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map an a11y label or a UX ``&quot;0&quot;..&quot;4&quot;`` tier to its numeric weight (default 2).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Map an a11y label or a UX ``"0".."4"`` tier to its numeric weight (default 2)."""</span>
     <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">impact_tier</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">A11Y_TIER_WEIGHT</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">A11Y_TIER_WEIGHT</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
@@ -197,13 +197,13 @@
     <span class="n">states_affected</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">journey_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Severity</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a :class:`~ov.base.Severity` with the ``impact x reach`` score.</span>
+<span class="w">    </span><span class="sd">"""Build a :class:`~ov.base.Severity` with the ``impact x reach`` score.</span>
 
-<span class="sd">    &gt;&gt;&gt; make_severity(&quot;serious&quot;, nodes=12, journey_fraction=0.8).score</span>
+<span class="sd">    &gt;&gt;&gt; make_severity("serious", nodes=12, journey_fraction=0.8).score</span>
 <span class="sd">    28.8</span>
-<span class="sd">    &gt;&gt;&gt; round(make_severity(&quot;critical&quot;, nodes=1, journey_fraction=0.05).score, 2)</span>
+<span class="sd">    &gt;&gt;&gt; round(make_severity("critical", nodes=1, journey_fraction=0.05).score, 2)</span>
 <span class="sd">    0.2</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">journey_fraction</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="p">))</span>
     <span class="n">reach_magnitude</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">states_affected</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">reach_value</span> <span class="o">=</span> <span class="n">reach_magnitude</span> <span class="o">*</span> <span class="n">journey_fraction</span>
@@ -211,9 +211,9 @@
     <span class="k">return</span> <span class="n">Severity</span><span class="p">(</span>
         <span class="n">impact_tier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">impact_tier</span><span class="p">),</span>
         <span class="n">reach</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="n">nodes</span><span class="p">,</span>
-            <span class="s2">&quot;states_affected&quot;</span><span class="p">:</span> <span class="n">states_affected</span><span class="p">,</span>
-            <span class="s2">&quot;journey_fraction&quot;</span><span class="p">:</span> <span class="n">journey_fraction</span><span class="p">,</span>
+            <span class="s2">"nodes"</span><span class="p">:</span> <span class="n">nodes</span><span class="p">,</span>
+            <span class="s2">"states_affected"</span><span class="p">:</span> <span class="n">states_affected</span><span class="p">,</span>
+            <span class="s2">"journey_fraction"</span><span class="p">:</span> <span class="n">journey_fraction</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="n">score</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
     <span class="p">)</span></div>
@@ -227,7 +227,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

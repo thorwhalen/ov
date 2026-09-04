@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.arch.framework &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.arch.framework &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,14 +144,14 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis.arch.framework</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Framework / bundler / state-management / routing enrichment (D2 §5).</span>
+<span></span><span class="sd">"""Framework / bundler / state-management / routing enrichment (D2 §5).</span>
 
 <span class="sd">The ``fingerprint`` probe already detected frameworks from runtime globals; this</span>
 <span class="sd">analyzer enriches the picture from the *bundle text* (bundler + state-management</span>
 <span class="sd">signatures) and reconstructs a client routing map from ``&lt;a href&gt;`` links. New</span>
 <span class="sd">:class:`~ov.base.TechFinding`s are merged into ``run.fingerprint`` (dedup by name,</span>
 <span class="sd">max confidence); the routing map is surfaced for the architecture report.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -166,20 +166,20 @@
 
 <span class="c1"># signature substring -&gt; (name, categories, confidence)</span>
 <span class="n">_BUNDLER_SIGNATURES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;__webpack_require__&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;webpack&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bundler&quot;</span><span class="p">],</span> <span class="mi">85</span><span class="p">),</span>
-    <span class="s2">&quot;webpackChunk&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;webpack&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bundler&quot;</span><span class="p">],</span> <span class="mi">80</span><span class="p">),</span>
-    <span class="s2">&quot;import.meta.hot&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Vite&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bundler&quot;</span><span class="p">],</span> <span class="mi">80</span><span class="p">),</span>
-    <span class="s2">&quot;/@vite/client&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Vite&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bundler&quot;</span><span class="p">],</span> <span class="mi">90</span><span class="p">),</span>
-    <span class="s2">&quot;__turbopack&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Turbopack&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bundler&quot;</span><span class="p">],</span> <span class="mi">80</span><span class="p">),</span>
-    <span class="s2">&quot;__esm(&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;esbuild&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bundler&quot;</span><span class="p">],</span> <span class="mi">70</span><span class="p">),</span>
-    <span class="s2">&quot;__commonJS(&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;esbuild&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bundler&quot;</span><span class="p">],</span> <span class="mi">65</span><span class="p">),</span>
+    <span class="s2">"__webpack_require__"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"webpack"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"bundler"</span><span class="p">],</span> <span class="mi">85</span><span class="p">),</span>
+    <span class="s2">"webpackChunk"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"webpack"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"bundler"</span><span class="p">],</span> <span class="mi">80</span><span class="p">),</span>
+    <span class="s2">"import.meta.hot"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Vite"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"bundler"</span><span class="p">],</span> <span class="mi">80</span><span class="p">),</span>
+    <span class="s2">"/@vite/client"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Vite"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"bundler"</span><span class="p">],</span> <span class="mi">90</span><span class="p">),</span>
+    <span class="s2">"__turbopack"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Turbopack"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"bundler"</span><span class="p">],</span> <span class="mi">80</span><span class="p">),</span>
+    <span class="s2">"__esm("</span><span class="p">:</span> <span class="p">(</span><span class="s2">"esbuild"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"bundler"</span><span class="p">],</span> <span class="mi">70</span><span class="p">),</span>
+    <span class="s2">"__commonJS("</span><span class="p">:</span> <span class="p">(</span><span class="s2">"esbuild"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"bundler"</span><span class="p">],</span> <span class="mi">65</span><span class="p">),</span>
 <span class="p">}</span>
 <span class="n">_STATE_SIGNATURES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;zustand&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Zustand&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;state-management&quot;</span><span class="p">],</span> <span class="mi">70</span><span class="p">),</span>
-    <span class="s2">&quot;createStore&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Redux&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;state-management&quot;</span><span class="p">],</span> <span class="mi">55</span><span class="p">),</span>
-    <span class="s2">&quot;recoil&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Recoil&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;state-management&quot;</span><span class="p">],</span> <span class="mi">65</span><span class="p">),</span>
-    <span class="s2">&quot;pinia&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Pinia&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;state-management&quot;</span><span class="p">],</span> <span class="mi">70</span><span class="p">),</span>
-    <span class="s2">&quot;vuex&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;Vuex&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;state-management&quot;</span><span class="p">],</span> <span class="mi">70</span><span class="p">),</span>
+    <span class="s2">"zustand"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Zustand"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"state-management"</span><span class="p">],</span> <span class="mi">70</span><span class="p">),</span>
+    <span class="s2">"createStore"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Redux"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"state-management"</span><span class="p">],</span> <span class="mi">55</span><span class="p">),</span>
+    <span class="s2">"recoil"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Recoil"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"state-management"</span><span class="p">],</span> <span class="mi">65</span><span class="p">),</span>
+    <span class="s2">"pinia"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Pinia"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"state-management"</span><span class="p">],</span> <span class="mi">70</span><span class="p">),</span>
+    <span class="s2">"vuex"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Vuex"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"state-management"</span><span class="p">],</span> <span class="mi">70</span><span class="p">),</span>
 <span class="p">}</span>
 <span class="n">_MAX_SCAN_CHARS</span> <span class="o">=</span> <span class="mi">2_000_000</span>  <span class="c1"># cap total bundle text scanned</span>
 
@@ -187,10 +187,10 @@
 <div class="viewcode-block" id="analyze_framework">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/framework.html#ov.analysis.arch.framework.analyze_framework">[docs]</a>
 <span class="nd">@register_analyzer</span><span class="p">(</span>
-    <span class="s2">&quot;framework&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">,</span> <span class="s2">&quot;dom&quot;</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;tech&quot;</span><span class="p">,)</span>
+    <span class="s2">"framework"</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">"arch"</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">"network"</span><span class="p">,</span> <span class="s2">"dom"</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"tech"</span><span class="p">,)</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_framework</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect bundler + state-management from bundles; reconstruct the route map.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Detect bundler + state-management from bundles; reconstruct the route map."""</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
     <span class="n">blob</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -199,7 +199,7 @@
         <span class="n">total</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;=</span> <span class="n">_MAX_SCAN_CHARS</span><span class="p">:</span>
             <span class="k">break</span>
-    <span class="n">corpus</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blob</span><span class="p">)</span>
+    <span class="n">corpus</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blob</span><span class="p">)</span>
 
     <span class="n">detected</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TechFinding</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">sig</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cats</span><span class="p">,</span> <span class="n">conf</span><span class="p">)</span> <span class="ow">in</span> <span class="p">{</span><span class="o">**</span><span class="n">_BUNDLER_SIGNATURES</span><span class="p">,</span> <span class="o">**</span><span class="n">_STATE_SIGNATURES</span><span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -210,7 +210,7 @@
                     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
                     <span class="n">categories</span><span class="o">=</span><span class="n">cats</span><span class="p">,</span>
                     <span class="n">confidence</span><span class="o">=</span><span class="n">conf</span><span class="p">,</span>
-                    <span class="n">provenance</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;bundle-signature:</span><span class="si">{</span><span class="n">sig</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span>
+                    <span class="n">provenance</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"bundle-signature:</span><span class="si">{</span><span class="n">sig</span><span class="si">}</span><span class="s2">"</span><span class="p">],</span>
                 <span class="p">)</span>
     <span class="n">out</span><span class="o">.</span><span class="n">tech</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">detected</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
@@ -218,55 +218,55 @@
     <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">tech</span><span class="p">:</span>
         <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">Finding</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;arch_fact&quot;</span><span class="p">,</span>
-                <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;arch.build_tooling&quot;</span><span class="p">,</span>
-                <span class="n">category</span><span class="o">=</span><span class="s2">&quot;architecture&quot;</span><span class="p">,</span>
-                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Build tooling / state management: &quot;</span>
-                <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">detected</span><span class="p">)),</span>
-                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]]</span>
-                <span class="ow">or</span> <span class="p">[</span><span class="s2">&quot;network&quot;</span><span class="p">],</span>
-                <span class="n">observed</span><span class="o">=</span><span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">confidence</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">tech</span><span class="p">),</span>
-                <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">"arch_fact"</span><span class="p">,</span>
+                <span class="n">signal</span><span class="o">=</span><span class="s2">"arch.build_tooling"</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="s2">"architecture"</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="s2">"Build tooling / state management: "</span>
+                <span class="o">+</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">detected</span><span class="p">)),</span>
+                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"network"</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="ow">or</span> <span class="p">[</span><span class="s2">"network"</span><span class="p">],</span>
+                <span class="n">observed</span><span class="o">=</span><span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="n">confidence</span><span class="si">}</span><span class="s2">)"</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">tech</span><span class="p">),</span>
+                <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
                 <span class="n">confidence</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
     <span class="k">if</span> <span class="n">routes</span><span class="p">:</span>
         <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">Finding</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;arch_fact&quot;</span><span class="p">,</span>
-                <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;arch.routing_map&quot;</span><span class="p">,</span>
-                <span class="n">category</span><span class="o">=</span><span class="s2">&quot;architecture&quot;</span><span class="p">,</span>
-                <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">routes</span><span class="p">)</span><span class="si">}</span><span class="s2"> client route(s) discovered&quot;</span><span class="p">,</span>
-                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]]</span>
-                <span class="ow">or</span> <span class="p">[</span><span class="s2">&quot;dom&quot;</span><span class="p">],</span>
-                <span class="n">observed</span><span class="o">=</span><span class="s2">&quot;routes: &quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">routes</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]),</span>
-                <span class="n">metric_detail</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;routes&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">routes</span><span class="p">)},</span>
-                <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">"arch_fact"</span><span class="p">,</span>
+                <span class="n">signal</span><span class="o">=</span><span class="s2">"arch.routing_map"</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="s2">"architecture"</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">routes</span><span class="p">)</span><span class="si">}</span><span class="s2"> client route(s) discovered"</span><span class="p">,</span>
+                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="ow">or</span> <span class="p">[</span><span class="s2">"dom"</span><span class="p">],</span>
+                <span class="n">observed</span><span class="o">=</span><span class="s2">"routes: "</span> <span class="o">+</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">routes</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]),</span>
+                <span class="n">metric_detail</span><span class="o">=</span><span class="p">{</span><span class="s2">"routes"</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">routes</span><span class="p">)},</span>
+                <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
                 <span class="n">confidence</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
-    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;build_tools&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">detected</span><span class="p">),</span> <span class="s2">&quot;routes&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">routes</span><span class="p">)}</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"build_tools"</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">detected</span><span class="p">),</span> <span class="s2">"routes"</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">routes</span><span class="p">)}</span>
     <span class="k">return</span> <span class="n">out</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_route_map</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Collect same-origin client routes from ``&lt;a href&gt;`` across DOM states.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Collect same-origin client routes from ``&lt;a href&gt;`` across DOM states."""</span>
     <span class="n">routes</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">target_host</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">target_url</span><span class="p">)</span><span class="o">.</span><span class="n">netloc</span>
-    <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">HTMLParser</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">art</span><span class="p">))</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;a[href]&quot;</span><span class="p">):</span>
-            <span class="n">href</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">HTMLParser</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">art</span><span class="p">))</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"a[href]"</span><span class="p">):</span>
+            <span class="n">href</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span>
             <span class="k">if</span> <span class="p">(</span>
-                <span class="n">href</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
-                <span class="ow">or</span> <span class="n">href</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;javascript:&quot;</span><span class="p">)</span>
-                <span class="ow">or</span> <span class="n">href</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;mailto:&quot;</span><span class="p">)</span>
+                <span class="n">href</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"#"</span><span class="p">)</span>
+                <span class="ow">or</span> <span class="n">href</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"javascript:"</span><span class="p">)</span>
+                <span class="ow">or</span> <span class="n">href</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"mailto:"</span><span class="p">)</span>
             <span class="p">):</span>
                 <span class="k">continue</span>
             <span class="n">parsed</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">href</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">parsed</span><span class="o">.</span><span class="n">netloc</span> <span class="ow">and</span> <span class="n">parsed</span><span class="o">.</span><span class="n">netloc</span> <span class="o">!=</span> <span class="n">target_host</span><span class="p">:</span>
                 <span class="k">continue</span>  <span class="c1"># external link</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">parsed</span><span class="o">.</span><span class="n">path</span> <span class="ow">or</span> <span class="s2">&quot;/&quot;</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">parsed</span><span class="o">.</span><span class="n">path</span> <span class="ow">or</span> <span class="s2">"/"</span>
             <span class="k">if</span> <span class="n">path</span><span class="p">:</span>
                 <span class="n">routes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">routes</span>
@@ -279,7 +279,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

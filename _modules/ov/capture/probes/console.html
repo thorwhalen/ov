@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.capture.probes.console &mdash; ov 0.1.1 documentation</title>
+  <title>ov.capture.probes.console &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,12 +144,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.capture.probes.console</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Console probe: console messages, page errors, and unhandled rejections.</span>
+<span></span><span class="sd">"""Console probe: console messages, page errors, and unhandled rejections.</span>
 
 <span class="sd">Captured from Playwright ``console``/``pageerror`` events. Each entry carries the</span>
 <span class="sd">step it occurred in so the UX engine can attribute console-error-on-step (§5.1</span>
 <span class="sd">heuristic) and the robustness analysis can corroborate broken states.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -162,11 +162,11 @@
 
 <div class="viewcode-block" id="ConsoleProbe">
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/console.html#ov.capture.probes.console.ConsoleProbe">[docs]</a>
-<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">,))</span>
+<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">"console"</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"console"</span><span class="p">,))</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConsoleProbe</span><span class="p">(</span><span class="n">Probe</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Accumulate console + pageerror entries via events.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Accumulate console + pageerror entries via events."""</span>
 
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;console&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">"console"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -179,8 +179,8 @@
         <span class="n">page</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">page</span>
         <span class="k">if</span> <span class="n">page</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="n">page</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_console</span><span class="p">)</span>
-        <span class="n">page</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">&quot;pageerror&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_pageerror</span><span class="p">)</span></div>
+        <span class="n">page</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">"console"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_console</span><span class="p">)</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">"pageerror"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_pageerror</span><span class="p">)</span></div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_step_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -194,12 +194,12 @@
             <span class="n">loc</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">location</span> <span class="ow">or</span> <span class="p">{}</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;console&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
-                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cap</span><span class="p">()],</span>
-                    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">loc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="n">loc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lineNumber&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;step_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_id</span><span class="p">(),</span>
+                    <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"console"</span><span class="p">,</span>
+                    <span class="s2">"type"</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                    <span class="s2">"text"</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cap</span><span class="p">()],</span>
+                    <span class="s2">"url"</span><span class="p">:</span> <span class="n">loc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"url"</span><span class="p">),</span>
+                    <span class="s2">"line"</span><span class="p">:</span> <span class="n">loc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lineNumber"</span><span class="p">),</span>
+                    <span class="s2">"step_id"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_id</span><span class="p">(),</span>
                 <span class="p">}</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
@@ -209,10 +209,10 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;pageerror&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cap</span><span class="p">()],</span>
-                    <span class="s2">&quot;step_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_id</span><span class="p">(),</span>
+                    <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"pageerror"</span><span class="p">,</span>
+                    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"error"</span><span class="p">,</span>
+                    <span class="s2">"text"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cap</span><span class="p">()],</span>
+                    <span class="s2">"step_id"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_id</span><span class="p">(),</span>
                 <span class="p">}</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
@@ -222,10 +222,10 @@
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/console.html#ov.capture.probes.console.ConsoleProbe.finalize">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]:</span>
         <span class="n">art</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
-            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;console&quot;</span><span class="p">,</span>
-            <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)},</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">"console"</span><span class="p">,</span>
+            <span class="n">content_type</span><span class="o">=</span><span class="s2">"application/json"</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"count"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entries</span><span class="p">)},</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">art</span><span class="p">]</span></div>
 </div>
@@ -239,7 +239,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.agents._skills &mdash; ov 0.1.1 documentation</title>
+  <title>ov.agents._skills &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,9 +143,9 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.agents._skills</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Locate ``ov``&#39;s bundled skills — the SSOT for the skill→agent lift.</span>
+<span></span><span class="sd">"""Locate ``ov``'s bundled skills — the SSOT for the skill→agent lift.</span>
 
-<span class="sd">``ov``&#39;s skills are authored once, on disk, and are the single source of truth for</span>
+<span class="sd">``ov``'s skills are authored once, on disk, and are the single source of truth for</span>
 <span class="sd">both the host-agent path (Claude Code reads ``.claude/skills/``) and the</span>
 <span class="sd">productized agents (coact ``COMPLETE``-s those same files). To make the productized</span>
 <span class="sd">agents work whether ``ov`` was ``pip install``-ed *or* run from a clone, the skills</span>
@@ -154,11 +154,11 @@
 
 <span class="sd">1. an explicit ``OV_SKILLS_DIR`` env override;</span>
 <span class="sd">2. the packaged ``ov/data/skills/`` (an installed wheel);</span>
-<span class="sd">3. the repo&#39;s ``.claude/skills/`` (an editable / source checkout).</span>
+<span class="sd">3. the repo's ``.claude/skills/`` (an editable / source checkout).</span>
 
-<span class="sd">Point-don&#39;t-copy: callers pass the resolved *path* to coact, so the skill body is</span>
+<span class="sd">Point-don't-copy: callers pass the resolved *path* to coact, so the skill body is</span>
 <span class="sd">never duplicated into an agent definition.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -167,26 +167,26 @@
 
 <span class="c1">#: The skills that participate in the study pipeline (used to recognize a skills dir).</span>
 <span class="n">AGENT_SKILLS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;ov-capture&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ov-operate&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ov-analyze-ux&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ov-analyze-arch&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ov-report&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;study-web-app&quot;</span><span class="p">,</span>
+    <span class="s2">"ov-capture"</span><span class="p">,</span>
+    <span class="s2">"ov-operate"</span><span class="p">,</span>
+    <span class="s2">"ov-analyze-ux"</span><span class="p">,</span>
+    <span class="s2">"ov-analyze-arch"</span><span class="p">,</span>
+    <span class="s2">"ov-report"</span><span class="p">,</span>
+    <span class="s2">"study-web-app"</span><span class="p">,</span>
 <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_has_skills</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;True if ``directory`` looks like an ov skills dir (holds known ``&lt;name&gt;/SKILL.md``).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""True if ``directory`` looks like an ov skills dir (holds known ``&lt;name&gt;/SKILL.md``)."""</span>
     <span class="k">return</span> <span class="n">directory</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span>
-        <span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="n">name</span> <span class="o">/</span> <span class="s2">&quot;SKILL.md&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">AGENT_SKILLS</span>
+        <span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="n">name</span> <span class="o">/</span> <span class="s2">"SKILL.md"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">AGENT_SKILLS</span>
     <span class="p">)</span>
 
 
 <div class="viewcode-block" id="default_skills_dir">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/_skills.html#ov.agents.default_skills_dir">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">default_skills_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve the directory holding ``ov``&#39;s skills (env, then packaged, then repo).</span>
+<span class="w">    </span><span class="sd">"""Resolve the directory holding ``ov``'s skills (env, then packaged, then repo).</span>
 
 <span class="sd">    Returns the first layout that actually contains skills; if none is found, the</span>
 <span class="sd">    packaged path is returned so callers get a clear, consistent miss to report.</span>
@@ -194,17 +194,17 @@
 <span class="sd">    Deliberately *not* cached: it reads ``OV_SKILLS_DIR`` at call time (a few cheap</span>
 <span class="sd">    ``Path`` checks), so an env change is always honoured. Resolution is invoked</span>
 <span class="sd">    once per agent lift, not in a hot loop, so the cost is immaterial.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">env</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OV_SKILLS_DIR&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OV_SKILLS_DIR"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">env</span> <span class="ow">and</span> <span class="n">_has_skills</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">env</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 
-    <span class="n">packaged</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;data&quot;</span> <span class="o">/</span> <span class="s2">&quot;skills&quot;</span>
+    <span class="n">packaged</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"data"</span> <span class="o">/</span> <span class="s2">"skills"</span>
     <span class="k">if</span> <span class="n">_has_skills</span><span class="p">(</span><span class="n">packaged</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">packaged</span>
 
     <span class="k">for</span> <span class="n">parent</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
-        <span class="n">candidate</span> <span class="o">=</span> <span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;.claude&quot;</span> <span class="o">/</span> <span class="s2">&quot;skills&quot;</span>
+        <span class="n">candidate</span> <span class="o">=</span> <span class="n">parent</span> <span class="o">/</span> <span class="s2">".claude"</span> <span class="o">/</span> <span class="s2">"skills"</span>
         <span class="k">if</span> <span class="n">_has_skills</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">candidate</span>
 
@@ -215,17 +215,17 @@
 <div class="viewcode-block" id="skill_path">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/_skills.html#ov.agents.skill_path">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">skill_path</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">skills_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Absolute path to skill ``name``&#39;s directory (the one holding ``SKILL.md``).</span>
+<span class="w">    </span><span class="sd">"""Absolute path to skill ``name``'s directory (the one holding ``SKILL.md``).</span>
 
 <span class="sd">    Raises :class:`FileNotFoundError` with an actionable hint when the skill is not</span>
 <span class="sd">    discoverable, rather than letting coact fail later on a missing path.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">skills_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">skills_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">default_skills_dir</span><span class="p">()</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">directory</span> <span class="o">/</span> <span class="n">name</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;SKILL.md&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s2">"SKILL.md"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;skill </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> not found under </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2"> — set OV_SKILLS_DIR or pass &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;skills_dir= (known ov skills: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AGENT_SKILLS</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="sa">f</span><span class="s2">"skill </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> not found under </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2"> — set OV_SKILLS_DIR or pass "</span>
+            <span class="sa">f</span><span class="s2">"skills_dir= (known ov skills: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">AGENT_SKILLS</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">path</span></div>
 
@@ -238,7 +238,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

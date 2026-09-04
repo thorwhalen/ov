@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.operate.progress &mdash; ov 0.1.1 documentation</title>
+  <title>ov.operate.progress &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,20 +143,20 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.operate.progress</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;``progress(history) -&gt; ProgressSignal`` -- deterministic no-progress *facts*.</span>
+<span></span><span class="sd">"""``progress(history) -&gt; ProgressSignal`` -- deterministic no-progress *facts*.</span>
 
 <span class="sd">This computes facts only; it never decides to stop. The host (policy layer)</span>
 <span class="sd">interprets the signal against its budgets and aborts on ``loop_suspected`` (§2.3:</span>
-<span class="sd">&quot;the package detects and reports no-progress; the host decides to abort&quot;).</span>
+<span class="sd">"the package detects and reports no-progress; the host decides to abort").</span>
 
 <span class="sd">Signals (all model-free):</span>
 
-<span class="sd">* ``repeated_action`` -- the last step&#39;s ``(action.type, args_hash)`` recurred.</span>
+<span class="sd">* ``repeated_action`` -- the last step's ``(action.type, args_hash)`` recurred.</span>
 <span class="sd">* ``no_new_signal_steps`` -- trailing run of steps with an unchanged post-obs hash.</span>
 <span class="sd">* ``url_stasis`` / ``ax_stasis`` -- URL / AX state unchanged across the recent window.</span>
 <span class="sd">* ``repeated_error`` -- the last two steps failed identically.</span>
 <span class="sd">* ``loop_suspected`` -- rolled-up advisory when any threshold is crossed.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -166,7 +166,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_args_hash</span><span class="p">(</span><span class="n">step</span><span class="p">:</span> <span class="n">JourneyStep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">step</span><span class="o">.</span><span class="n">action</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;noop&quot;</span>
+        <span class="k">return</span> <span class="s2">"noop"</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">action</span>
     <span class="k">return</span> <span class="n">stable_hash</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">ref</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">args</span><span class="p">])</span>
 
@@ -176,14 +176,14 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">progress</span><span class="p">(</span>
     <span class="n">history</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">JourneyStep</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">no_progress_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProgressSignal</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute loop/no-progress facts from the journey ``history`` so far.</span>
+<span class="w">    </span><span class="sd">"""Compute loop/no-progress facts from the journey ``history`` so far.</span>
 
 <span class="sd">    &gt;&gt;&gt; from ov.base import JourneyStep, Action</span>
-<span class="sd">    &gt;&gt;&gt; s = JourneyStep(action=Action(type=&#39;click&#39;, ref=&#39;e1&#39;), post_obs_hash=&#39;h&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; s = JourneyStep(action=Action(type='click', ref='e1'), post_obs_hash='h')</span>
 <span class="sd">    &gt;&gt;&gt; sig = progress([s, s.model_copy(), s.model_copy()], no_progress_steps=3)</span>
 <span class="sd">    &gt;&gt;&gt; sig.no_new_signal_steps &gt;= 3 and sig.loop_suspected</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">history</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">ProgressSignal</span><span class="p">()</span>
 
@@ -206,7 +206,7 @@
     <span class="c1"># URL / AX stasis over the recent window</span>
     <span class="n">window</span> <span class="o">=</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="n">no_progress_steps</span><span class="p">:]</span>
     <span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">url</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;navigate&quot;</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">url</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"navigate"</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">window</span>
     <span class="p">}</span>
     <span class="n">url_stasis</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">no_progress_steps</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span>
@@ -215,8 +215,8 @@
 
     <span class="n">repeated_error</span> <span class="o">=</span> <span class="p">(</span>
         <span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span>
-        <span class="ow">and</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span>
-        <span class="ow">and</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span>
+        <span class="ow">and</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">"error"</span>
+        <span class="ow">and</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">"error"</span>
     <span class="p">)</span>
 
     <span class="n">loop_suspected</span> <span class="o">=</span> <span class="p">(</span>
@@ -230,7 +230,7 @@
         <span class="n">ax_stasis</span><span class="o">=</span><span class="n">ax_stasis</span><span class="p">,</span>
         <span class="n">repeated_error</span><span class="o">=</span><span class="n">repeated_error</span><span class="p">,</span>
         <span class="n">loop_suspected</span><span class="o">=</span><span class="n">loop_suspected</span><span class="p">,</span>
-        <span class="n">detail</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;history_len&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="s2">&quot;last_outcome&quot;</span><span class="p">:</span> <span class="n">last</span><span class="o">.</span><span class="n">outcome</span><span class="p">},</span>
+        <span class="n">detail</span><span class="o">=</span><span class="p">{</span><span class="s2">"history_len"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">),</span> <span class="s2">"last_outcome"</span><span class="p">:</span> <span class="n">last</span><span class="o">.</span><span class="n">outcome</span><span class="p">},</span>
     <span class="p">)</span></div>
 
 </pre></div>
@@ -242,7 +242,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

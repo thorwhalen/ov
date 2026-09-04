@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.ux.heuristics &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.ux.heuristics &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,7 +144,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis.ux.heuristics</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Heuristic analyzer: the automatable subset of Nielsen / cognitive-walkthrough (D3 §6).</span>
+<span></span><span class="sd">"""Heuristic analyzer: the automatable subset of Nielsen / cognitive-walkthrough (D3 §6).</span>
 
 <span class="sd">Each heuristic maps to a machine-observable signal computed from the journey</span>
 <span class="sd">trace + console + DOM:</span>
@@ -155,9 +155,9 @@
 <span class="sd">* **live-region presence (WCAG 4.1.3)** -- dynamic states but no ``aria-live`` /</span>
 <span class="sd">  ``role=status`` region to announce them.</span>
 
-<span class="sd">The Operator&#39;s per-step *intent* is the cognitive-walkthrough ground truth for</span>
-<span class="sd">&quot;expected action&quot;, so a noop on an intentful click is a meaningful signal.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The Operator's per-step *intent* is the cognitive-walkthrough ground truth for</span>
+<span class="sd">"expected action", so a noop on an intentful click is a meaningful signal.</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -174,21 +174,21 @@
 <div class="viewcode-block" id="analyze_heuristics">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/ux/heuristics.html#ov.analysis.ux.heuristics.analyze_heuristics">[docs]</a>
 <span class="nd">@register_analyzer</span><span class="p">(</span>
-    <span class="s2">&quot;heuristics&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;dom&quot;</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,)</span>
+    <span class="s2">"heuristics"</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">"ux"</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">"console"</span><span class="p">,</span> <span class="s2">"dom"</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"findings"</span><span class="p">,)</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_heuristics</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Emit Findings for console-on-step, missing feedback, and live-region absence.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Emit Findings for console-on-step, missing feedback, and live-region absence."""</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
     <span class="n">steps</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span>
     <span class="n">num_steps</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">steps</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># --- console errors grouped by step ---</span>
     <span class="n">errors_by_step</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">entries</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">entries</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">"console"</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">entries</span> <span class="ow">or</span> <span class="p">[]:</span>
-            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span> <span class="ow">or</span> <span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kind&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;pageerror&quot;</span><span class="p">:</span>
-                <span class="n">errors_by_step</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;step_id&quot;</span><span class="p">),</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)[:</span><span class="mi">160</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"error"</span> <span class="ow">or</span> <span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"pageerror"</span><span class="p">:</span>
+                <span class="n">errors_by_step</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"step_id"</span><span class="p">),</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)[:</span><span class="mi">160</span><span class="p">]</span>
                 <span class="p">)</span>
 
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">steps</span><span class="p">:</span>
@@ -197,19 +197,19 @@
             <span class="k">continue</span>
         <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">Finding</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span>
-                <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;heuristic.console-error&quot;</span><span class="p">,</span>
-                <span class="n">category</span><span class="o">=</span><span class="s2">&quot;robustness&quot;</span><span class="p">,</span>
-                <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Console error during step &#39;</span><span class="si">{</span><span class="n">step</span><span class="o">.</span><span class="n">intent</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
-                <span class="n">heuristic</span><span class="o">=</span><span class="s2">&quot;nielsen-5&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">"ux_issue"</span><span class="p">,</span>
+                <span class="n">signal</span><span class="o">=</span><span class="s2">"heuristic.console-error"</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="s2">"robustness"</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Console error during step '</span><span class="si">{</span><span class="n">step</span><span class="o">.</span><span class="n">intent</span><span class="si">}</span><span class="s2">'"</span><span class="p">,</span>
+                <span class="n">heuristic</span><span class="o">=</span><span class="s2">"nielsen-5"</span><span class="p">,</span>
                 <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
-                    <span class="s2">&quot;serious&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">msgs</span><span class="p">),</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_steps</span>
+                    <span class="s2">"serious"</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">msgs</span><span class="p">),</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_steps</span>
                 <span class="p">),</span>
                 <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
-                <span class="n">observed</span><span class="o">=</span><span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">msgs</span><span class="p">[:</span><span class="mi">3</span><span class="p">]),</span>
-                <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;step_id&quot;</span><span class="p">:</span> <span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">&quot;intent&quot;</span><span class="p">:</span> <span class="n">step</span><span class="o">.</span><span class="n">intent</span><span class="p">},</span>
-                <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">&quot;fix the underlying JS error; surface a user-facing recovery if relevant&quot;</span><span class="p">,</span>
-                <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+                <span class="n">observed</span><span class="o">=</span><span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">msgs</span><span class="p">[:</span><span class="mi">3</span><span class="p">]),</span>
+                <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">"step_id"</span><span class="p">:</span> <span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">"intent"</span><span class="p">:</span> <span class="n">step</span><span class="o">.</span><span class="n">intent</span><span class="p">},</span>
+                <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">"fix the underlying JS error; surface a user-facing recovery if relevant"</span><span class="p">,</span>
+                <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
                 <span class="n">confidence</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
@@ -218,25 +218,25 @@
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">steps</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span>
             <span class="n">step</span><span class="o">.</span><span class="n">action</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-            <span class="ow">and</span> <span class="n">step</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;click&quot;</span>
-            <span class="ow">and</span> <span class="n">step</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">&quot;noop&quot;</span>
+            <span class="ow">and</span> <span class="n">step</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"click"</span>
+            <span class="ow">and</span> <span class="n">step</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">"noop"</span>
             <span class="ow">and</span> <span class="n">step</span><span class="o">.</span><span class="n">network_delta</span> <span class="o">==</span> <span class="mi">0</span>
         <span class="p">):</span>
             <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">Finding</span><span class="p">(</span>
-                    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span>
-                    <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;heuristic.no-feedback&quot;</span><span class="p">,</span>
-                    <span class="n">category</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span>
-                    <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Click produced no visible change (&#39;</span><span class="si">{</span><span class="n">step</span><span class="o">.</span><span class="n">intent</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">,</span>
-                    <span class="n">heuristic</span><span class="o">=</span><span class="s2">&quot;nielsen-1&quot;</span><span class="p">,</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="s2">"ux_issue"</span><span class="p">,</span>
+                    <span class="n">signal</span><span class="o">=</span><span class="s2">"heuristic.no-feedback"</span><span class="p">,</span>
+                    <span class="n">category</span><span class="o">=</span><span class="s2">"ux"</span><span class="p">,</span>
+                    <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Click produced no visible change ('</span><span class="si">{</span><span class="n">step</span><span class="o">.</span><span class="n">intent</span><span class="si">}</span><span class="s2">')"</span><span class="p">,</span>
+                    <span class="n">heuristic</span><span class="o">=</span><span class="s2">"nielsen-1"</span><span class="p">,</span>
                     <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
-                        <span class="s2">&quot;moderate&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_steps</span>
+                        <span class="s2">"moderate"</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_steps</span>
                     <span class="p">),</span>
                     <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
-                    <span class="n">observed</span><span class="o">=</span><span class="s2">&quot;click did not change the observed state and triggered no network activity&quot;</span><span class="p">,</span>
-                    <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;step_id&quot;</span><span class="p">:</span> <span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">&quot;intent&quot;</span><span class="p">:</span> <span class="n">step</span><span class="o">.</span><span class="n">intent</span><span class="p">},</span>
-                    <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">&quot;provide immediate visual feedback (state change, spinner, message)&quot;</span><span class="p">,</span>
-                    <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+                    <span class="n">observed</span><span class="o">=</span><span class="s2">"click did not change the observed state and triggered no network activity"</span><span class="p">,</span>
+                    <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">"step_id"</span><span class="p">:</span> <span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">"intent"</span><span class="p">:</span> <span class="n">step</span><span class="o">.</span><span class="n">intent</span><span class="p">},</span>
+                    <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">"provide immediate visual feedback (state change, spinner, message)"</span><span class="p">,</span>
+                    <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
                     <span class="n">confidence</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
                     <span class="n">needs_human_review</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># could be intentional (e.g. toggling identical state)</span>
                 <span class="p">)</span>
@@ -244,33 +244,33 @@
 
     <span class="c1"># --- live-region presence (only flag if the journey had dynamic changes) ---</span>
     <span class="n">had_dynamic</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
-        <span class="n">s</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">&quot;ok&quot;</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;click&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">steps</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">"ok"</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"click"</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">steps</span>
     <span class="p">)</span>
     <span class="n">has_live_region</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
-        <span class="n">HTMLParser</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">art</span><span class="p">))</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s2">&quot;[aria-live], [role=status], [role=alert]&quot;</span><span class="p">)</span>
+        <span class="n">HTMLParser</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">art</span><span class="p">))</span><span class="o">.</span><span class="n">css_first</span><span class="p">(</span><span class="s2">"[aria-live], [role=status], [role=alert]"</span><span class="p">)</span>
         <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-        <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">)</span>
     <span class="p">)</span>
-    <span class="k">if</span> <span class="n">had_dynamic</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_live_region</span> <span class="ow">and</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">had_dynamic</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_live_region</span> <span class="ow">and</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">):</span>
         <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">Finding</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;undetermined&quot;</span><span class="p">,</span>
-                <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;heuristic.no-live-region&quot;</span><span class="p">,</span>
-                <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
-                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;No ARIA live region found for a dynamic UI&quot;</span><span class="p">,</span>
-                <span class="n">heuristic</span><span class="o">=</span><span class="s2">&quot;cw-q4&quot;</span><span class="p">,</span>
-                <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;4.1.3&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;AA&quot;</span><span class="p">},</span>
-                <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span><span class="s2">&quot;moderate&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span>
-                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">],</span>
-                <span class="n">observed</span><span class="o">=</span><span class="s2">&quot;interactions changed the UI but no aria-live/role=status region was present&quot;</span><span class="p">,</span>
-                <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">&quot;announce dynamic updates via an aria-live or role=status region&quot;</span><span class="p">,</span>
-                <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">"undetermined"</span><span class="p">,</span>
+                <span class="n">signal</span><span class="o">=</span><span class="s2">"heuristic.no-live-region"</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="s2">"No ARIA live region found for a dynamic UI"</span><span class="p">,</span>
+                <span class="n">heuristic</span><span class="o">=</span><span class="s2">"cw-q4"</span><span class="p">,</span>
+                <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"4.1.3"</span><span class="p">,</span> <span class="s2">"level"</span><span class="p">:</span> <span class="s2">"AA"</span><span class="p">},</span>
+                <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span><span class="s2">"moderate"</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span>
+                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">],</span>
+                <span class="n">observed</span><span class="o">=</span><span class="s2">"interactions changed the UI but no aria-live/role=status region was present"</span><span class="p">,</span>
+                <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">"announce dynamic updates via an aria-live or role=status region"</span><span class="p">,</span>
+                <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
                 <span class="n">confidence</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
                 <span class="n">needs_human_review</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;steps_with_console_errors&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">errors_by_step</span><span class="p">)}</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"steps_with_console_errors"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">errors_by_step</span><span class="p">)}</span>
     <span class="k">return</span> <span class="n">out</span></div>
 
 </pre></div>
@@ -282,7 +282,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

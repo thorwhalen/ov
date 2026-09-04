@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.arch.pipeline &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.arch.pipeline &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,14 +144,14 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis.arch.pipeline</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;The arch pipeline as a composable transform (§6: fingerprint -&gt; bundles -&gt; api).</span>
+<span></span><span class="sd">"""The arch pipeline as a composable transform (§6: fingerprint -&gt; bundles -&gt; api).</span>
 
 <span class="sd">The architecture lens is conceptually a three-stage deterministic pipeline. The</span>
 <span class="sd">registry already orders the arch analyzers by their declared dependencies; this</span>
 <span class="sd">module exposes that ordering and a convenience that runs *only* the arch lens</span>
 <span class="sd">over a context and returns the merged output -- useful for callers (or tests)</span>
 <span class="sd">that want architecture facts without the full UX pass.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -160,17 +160,17 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..run</span><span class="w"> </span><span class="kn">import</span> <span class="n">merge_output</span>
 
 <span class="c1">#: Canonical arch stage order (fingerprint detection -&gt; bundle recovery -&gt; API synthesis).</span>
-<span class="n">ARCH_STAGES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;rendering&quot;</span><span class="p">,</span> <span class="s2">&quot;framework&quot;</span><span class="p">,</span> <span class="s2">&quot;bundles&quot;</span><span class="p">,</span> <span class="s2">&quot;api_surface&quot;</span><span class="p">,</span> <span class="s2">&quot;dependencies&quot;</span><span class="p">)</span>
+<span class="n">ARCH_STAGES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"rendering"</span><span class="p">,</span> <span class="s2">"framework"</span><span class="p">,</span> <span class="s2">"bundles"</span><span class="p">,</span> <span class="s2">"api_surface"</span><span class="p">,</span> <span class="s2">"dependencies"</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="run_arch_pipeline">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/pipeline.html#ov.analysis.arch.pipeline.run_arch_pipeline">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">run_arch_pipeline</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the arch-lens analyzers in dependency order; return one merged output.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Run the arch-lens analyzers in dependency order; return one merged output."""</span>
     <span class="n">arch_names</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">n</span>
         <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ANALYZER_REGISTRY</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lens&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;arch&quot;</span>
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lens"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"arch"</span>
     <span class="p">]</span>
     <span class="n">merged</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ANALYZER_REGISTRY</span><span class="o">.</span><span class="n">ordered</span><span class="p">(</span><span class="n">arch_names</span><span class="p">):</span>
@@ -192,7 +192,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

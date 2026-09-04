@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.base &mdash; ov 0.1.1 documentation</title>
+  <title>ov.base &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,7 +143,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Single source of truth (SSOT) for the ``ov`` artifact schema.</span>
+<span></span><span class="sd">"""Single source of truth (SSOT) for the ``ov`` artifact schema.</span>
 
 <span class="sd">One Pydantic v2 model tree defines *what a capture is* and *what an analysis</span>
 <span class="sd">produces*. Every other module reads from these models rather than inventing its</span>
@@ -153,7 +153,7 @@
 
 <span class="sd">* **Operate value types** -- :class:`Action`, :class:`Affordance`,</span>
 <span class="sd">  :class:`Observation`, :class:`ActionResult`, :class:`ProgressSignal`. These</span>
-<span class="sd">  are the deterministic, model-free currency of the ``operate/`` &quot;hands&quot;.</span>
+<span class="sd">  are the deterministic, model-free currency of the ``operate/`` "hands".</span>
 <span class="sd">* **Capture artifacts** -- :class:`Artifact`, :class:`JourneyStep`,</span>
 <span class="sd">  :class:`CaptureRun`. What a browser session records.</span>
 <span class="sd">* **Inferred facts** -- :class:`Scored`, :class:`TechFinding`,</span>
@@ -173,7 +173,7 @@
 <span class="sd">* ``confidence`` appears twice on purpose, matching the spec: :class:`Scored`</span>
 <span class="sd">  uses an integer 0-100 (Wappalyzer-style) for *detected technologies*;</span>
 <span class="sd">  :class:`Finding` carries a float 0-1 for *analysis judgments*.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -190,46 +190,46 @@
 
 <div class="viewcode-block" id="new_id">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.new_id">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">new_id</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a short, unique, prefixed id, e.g. ``&quot;step_3f9a1c2b&quot;``.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">new_id</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"id"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Return a short, unique, prefixed id, e.g. ``"step_3f9a1c2b"``.</span>
 
-<span class="sd">    &gt;&gt;&gt; i = new_id(&quot;run&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; i.startswith(&quot;run_&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; i = new_id("run")</span>
+<span class="sd">    &gt;&gt;&gt; i.startswith("run_")</span>
 <span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; len(new_id(&quot;x&quot;).split(&quot;_&quot;)[1])</span>
+<span class="sd">    &gt;&gt;&gt; len(new_id("x").split("_")[1])</span>
 <span class="sd">    8</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span></div>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span></div>
 
 
 
 <div class="viewcode-block" id="utcnow">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.utcnow">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">utcnow</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Timezone-aware current UTC time (the project&#39;s canonical timestamp).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Timezone-aware current UTC time (the project's canonical timestamp)."""</span>
     <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span></div>
 
 
 
 <span class="c1"># --------------------------------------------------------------------------- #</span>
-<span class="c1"># Operate value types -- the model-free currency of the &quot;hands&quot;</span>
+<span class="c1"># Operate value types -- the model-free currency of the "hands"</span>
 <span class="c1"># --------------------------------------------------------------------------- #</span>
 
-<span class="n">ActionType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="s2">&quot;navigate&quot;</span><span class="p">,</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="s2">&quot;scroll&quot;</span><span class="p">,</span> <span class="s2">&quot;wait&quot;</span><span class="p">]</span>
+<span class="n">ActionType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"click"</span><span class="p">,</span> <span class="s2">"type"</span><span class="p">,</span> <span class="s2">"select"</span><span class="p">,</span> <span class="s2">"navigate"</span><span class="p">,</span> <span class="s2">"key"</span><span class="p">,</span> <span class="s2">"scroll"</span><span class="p">,</span> <span class="s2">"wait"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Action">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.Action">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Action</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A single deterministic operation against the target.</span>
+<span class="w">    </span><span class="sd">"""A single deterministic operation against the target.</span>
 
-<span class="sd">    Mirrors Playwright-MCP&#39;s require-description-and-ref safety: actions that</span>
+<span class="sd">    Mirrors Playwright-MCP's require-description-and-ref safety: actions that</span>
 <span class="sd">    touch an element carry a ``ref`` (a stable affordance handle) *and* a human</span>
 <span class="sd">    ``description`` so the journal records intent legibly.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nb">type</span><span class="p">:</span> <span class="n">ActionType</span>
-    <span class="n">ref</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># affordance ref (e.g. &quot;e7&quot;) for click/type/select</span>
+    <span class="n">ref</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># affordance ref (e.g. "e7") for click/type/select</span>
     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># human-readable target description</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># for type</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># for navigate</span>
@@ -242,15 +242,15 @@
 <div class="viewcode-block" id="Affordance">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.Affordance">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Affordance</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;One actionable element as perceived by a perception strategy.</span>
+<span class="w">    </span><span class="sd">"""One actionable element as perceived by a perception strategy.</span>
 
 <span class="sd">    ``bbox`` is ``(x, y, w, h)`` in CSS pixels when a strategy can compute it</span>
 <span class="sd">    (always for Screenshot/Hybrid, optional for pure AX snapshots).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">ref</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">role</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="n">bbox</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">editable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
@@ -260,18 +260,18 @@
 <div class="viewcode-block" id="Observation">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.Observation">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Observation</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The uniform result of any perception strategy (a pure read).</span>
+<span class="w">    </span><span class="sd">"""The uniform result of any perception strategy (a pure read).</span>
 
 <span class="sd">    ``obs_hash`` is a content hash of the salient observable state; it is what</span>
 <span class="sd">    :class:`ProgressSignal` uses to detect no-progress without an LLM.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># &quot;ax_snapshot&quot; | &quot;screenshot&quot; | &quot;hybrid&quot;</span>
+    <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># "ax_snapshot" | "screenshot" | "hybrid"</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">affordances</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Affordance</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-    <span class="n">aria_snapshot</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># YAML-ish ref-bearing tree (mode=&quot;ai&quot;)</span>
+    <span class="n">aria_snapshot</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># YAML-ish ref-bearing tree (mode="ai")</span>
     <span class="n">screenshot_artifact_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">obs_hash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">obs_hash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">t_ms</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span></div>
 
@@ -280,11 +280,11 @@
 <div class="viewcode-block" id="ActionResult">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.ActionResult">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ActionResult</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Outcome of :func:`ov.operate.act.act` -- success/error *plus* a fresh read.</span>
+<span class="w">    </span><span class="sd">"""Outcome of :func:`ov.operate.act.act` -- success/error *plus* a fresh read.</span>
 
 <span class="sd">    The fresh :class:`Observation` is the contract that lets the host (policy</span>
 <span class="sd">    layer) decide the next step without a second explicit observe call.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">action</span><span class="p">:</span> <span class="n">Action</span>
     <span class="n">ok</span><span class="p">:</span> <span class="nb">bool</span>
@@ -297,11 +297,11 @@
 <div class="viewcode-block" id="ProgressSignal">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.ProgressSignal">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ProgressSignal</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Deterministic loop / no-progress *facts* (the package never decides to stop).</span>
+<span class="w">    </span><span class="sd">"""Deterministic loop / no-progress *facts* (the package never decides to stop).</span>
 
-<span class="sd">    The host (policy layer) interprets these against its budgets. See §2.3: &quot;the</span>
-<span class="sd">    package detects and reports no-progress; the host decides to abort.&quot;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    The host (policy layer) interprets these against its budgets. See §2.3: "the</span>
+<span class="sd">    package detects and reports no-progress; the host decides to abort."</span>
+<span class="sd">    """</span>
 
     <span class="n">repeated_action</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># last (tool, args_hash) seen before</span>
     <span class="n">no_new_signal_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># consecutive steps with unchanged obs_hash</span>
@@ -321,12 +321,12 @@
 <div class="viewcode-block" id="Artifact">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.Artifact">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Artifact</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A content-addressed blob in the store, referenced by id everywhere else.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""A content-addressed blob in the store, referenced by id everywhere else."""</span>
 
-    <span class="n">artifact_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">&quot;art&quot;</span><span class="p">))</span>
-    <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># &quot;screenshot&quot; | &quot;dom&quot; | &quot;request&quot; | &quot;ax_tree&quot; | &quot;sse&quot; | ...</span>
+    <span class="n">artifact_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">"art"</span><span class="p">))</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># "screenshot" | "dom" | "request" | "ax_tree" | "sse" | ...</span>
     <span class="n">step_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># content-addressed path within the artifacts store</span>
+    <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>  <span class="c1"># content-addressed path within the artifacts store</span>
     <span class="n">content_hash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
@@ -337,13 +337,13 @@
 <div class="viewcode-block" id="JourneyStep">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.JourneyStep">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">JourneyStep</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;One recorded step of the user journey -- doubles as UX evidence (§2.3).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""One recorded step of the user journey -- doubles as UX evidence (§2.3)."""</span>
 
-    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">&quot;step&quot;</span><span class="p">))</span>
-    <span class="n">intent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># enumerate | advance | replay (+free text)</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">"step"</span><span class="p">))</span>
+    <span class="n">intent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>  <span class="c1"># enumerate | advance | replay (+free text)</span>
     <span class="n">action</span><span class="p">:</span> <span class="n">Action</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">affordances_seen</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Affordance</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-    <span class="n">outcome</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="s2">&quot;blocked&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;noop&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ok&quot;</span>
+    <span class="n">outcome</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"ok"</span><span class="p">,</span> <span class="s2">"blocked"</span><span class="p">,</span> <span class="s2">"error"</span><span class="p">,</span> <span class="s2">"noop"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"ok"</span>
     <span class="n">artifact_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
     <span class="n">pre_obs_hash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">post_obs_hash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
@@ -362,11 +362,11 @@
 <div class="viewcode-block" id="Scored">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.Scored">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Scored</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mixin for every inferred (non-observed) fact.</span>
+<span class="w">    </span><span class="sd">"""Mixin for every inferred (non-observed) fact.</span>
 
 <span class="sd">    Map-backed reconstructions must rank above name-lost (un-mapped) ones; that</span>
 <span class="sd">    ordering is expressed through ``confidence`` + ``provenance``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">confidence</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># 0-100 (Wappalyzer-style)</span>
     <span class="n">provenance</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>  <span class="c1"># artifact/journey ids</span></div>
@@ -376,7 +376,7 @@
 <div class="viewcode-block" id="TechFinding">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.TechFinding">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TechFinding</span><span class="p">(</span><span class="n">Scored</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;One detected technology (framework, library, CDN, analytics, hosting).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""One detected technology (framework, library, CDN, analytics, hosting)."""</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">categories</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
@@ -387,11 +387,11 @@
 <div class="viewcode-block" id="Endpoint">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.Endpoint">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Endpoint</span><span class="p">(</span><span class="n">Scored</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;One synthesized API endpoint, with GenSON-merged request/response schemas.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""One synthesized API endpoint, with GenSON-merged request/response schemas."""</span>
 
     <span class="n">method</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">path_template</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">kind</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;rest&quot;</span><span class="p">,</span> <span class="s2">&quot;rpc&quot;</span><span class="p">,</span> <span class="s2">&quot;graphql&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;rest&quot;</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"rest"</span><span class="p">,</span> <span class="s2">"rpc"</span><span class="p">,</span> <span class="s2">"graphql"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"rest"</span>
     <span class="n">request_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">response_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">auth</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># bearer | cookie | oauth | api-key | None</span>
@@ -407,17 +407,17 @@
 <div class="viewcode-block" id="Evidence">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.Evidence">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Evidence</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The addressable unit an LLM claim must cite (D4).</span>
+<span class="w">    </span><span class="sd">"""The addressable unit an LLM claim must cite (D4).</span>
 
 <span class="sd">    The model is shown the derived ``summary`` (a fact, not raw bytes); the</span>
 <span class="sd">    ``artifact_id`` resolves -- via a lookup tool -- to the screenshot crop,</span>
 <span class="sd">    network record or metric, for just-in-time retrieval during verification.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">evidence_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">&quot;ev&quot;</span><span class="p">))</span>
-    <span class="n">kind</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;mark&quot;</span><span class="p">,</span> <span class="s2">&quot;network&quot;</span><span class="p">,</span> <span class="s2">&quot;stack&quot;</span><span class="p">,</span> <span class="s2">&quot;metric&quot;</span><span class="p">,</span> <span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="s2">&quot;trace&quot;</span><span class="p">]</span>
+    <span class="n">evidence_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">"ev"</span><span class="p">))</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"mark"</span><span class="p">,</span> <span class="s2">"network"</span><span class="p">,</span> <span class="s2">"stack"</span><span class="p">,</span> <span class="s2">"metric"</span><span class="p">,</span> <span class="s2">"dom"</span><span class="p">,</span> <span class="s2">"trace"</span><span class="p">]</span>
     <span class="n">artifact_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="n">meta</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span></div>
 
 
@@ -425,9 +425,9 @@
 <div class="viewcode-block" id="Severity">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.Severity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Severity</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;D3: ``severity = impact_tier x reach`` (prioritizes high-reach over rare-critical).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""D3: ``severity = impact_tier x reach`` (prioritizes high-reach over rare-critical)."""</span>
 
-    <span class="n">impact_tier</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># a11y: minor|moderate|serious|critical ; ux: &quot;0&quot;..&quot;4&quot;</span>
+    <span class="n">impact_tier</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># a11y: minor|moderate|serious|critical ; ux: "0".."4"</span>
     <span class="n">reach</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>  <span class="c1"># nodes, states, fraction</span>
     <span class="n">score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span></div>
 
@@ -436,56 +436,56 @@
 <div class="viewcode-block" id="Finding">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.Finding">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Finding</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;SSOT for every UX / a11y / perf / arch / robustness finding (D3 + D4).</span>
+<span class="w">    </span><span class="sd">"""SSOT for every UX / a11y / perf / arch / robustness finding (D3 + D4).</span>
 
 <span class="sd">    The hard fact/judgment split lives here: ``evidence_refs`` are *cited*</span>
 <span class="sd">    (never authored by a model), ``judgment`` is model interpretation only. A</span>
 <span class="sd">    finding with no resolvable evidence is rejected (cite-or-abstain); the</span>
-<span class="sd">    honest &quot;can&#39;t tell from the evidence&quot; outcome is ``type=&quot;undetermined&quot;``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    honest "can't tell from the evidence" outcome is ``type="undetermined"``.</span>
+<span class="sd">    """</span>
 
-    <span class="n">finding_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">&quot;find&quot;</span><span class="p">))</span>
+    <span class="n">finding_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">"find"</span><span class="p">))</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span>
-        <span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span> <span class="s2">&quot;arch_fact&quot;</span><span class="p">,</span> <span class="s2">&quot;interaction_pattern&quot;</span><span class="p">,</span> <span class="s2">&quot;risk&quot;</span><span class="p">,</span> <span class="s2">&quot;undetermined&quot;</span>
+        <span class="s2">"ux_issue"</span><span class="p">,</span> <span class="s2">"arch_fact"</span><span class="p">,</span> <span class="s2">"interaction_pattern"</span><span class="p">,</span> <span class="s2">"risk"</span><span class="p">,</span> <span class="s2">"undetermined"</span>
     <span class="p">]</span>
-    <span class="n">signal</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># catalog key, e.g. &quot;contrast.text&quot;, &quot;form.friction&quot;</span>
-    <span class="n">category</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span> <span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="s2">&quot;performance&quot;</span><span class="p">,</span> <span class="s2">&quot;robustness&quot;</span><span class="p">,</span> <span class="s2">&quot;architecture&quot;</span><span class="p">]</span>
-    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">wcag_criterion</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># {id: &quot;1.4.3&quot;, level: &quot;AA&quot;}</span>
-    <span class="n">heuristic</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># &quot;nielsen-1&quot; | &quot;cw-q3&quot; | None</span>
-    <span class="n">engine_rule_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># &quot;axe:color-contrast&quot; | &quot;ibm:&lt;id&gt;&quot;</span>
+    <span class="n">signal</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># catalog key, e.g. "contrast.text", "form.friction"</span>
+    <span class="n">category</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"a11y"</span><span class="p">,</span> <span class="s2">"ux"</span><span class="p">,</span> <span class="s2">"performance"</span><span class="p">,</span> <span class="s2">"robustness"</span><span class="p">,</span> <span class="s2">"architecture"</span><span class="p">]</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="n">wcag_criterion</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># {id: "1.4.3", level: "AA"}</span>
+    <span class="n">heuristic</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># "nielsen-1" | "cw-q3" | None</span>
+    <span class="n">engine_rule_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># "axe:color-contrast" | "ibm:&lt;id&gt;"</span>
     <span class="n">severity</span><span class="p">:</span> <span class="n">Severity</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">evidence_refs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>  <span class="c1"># Evidence ids</span>
     <span class="n">judgment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># model interpretation ONLY</span>
     <span class="n">location</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># {state_id, url_or_route, selector...}</span>
-    <span class="n">observed</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># what the deterministic signal detected</span>
+    <span class="n">observed</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>  <span class="c1"># what the deterministic signal detected</span>
     <span class="n">metric_detail</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># CWV value/threshold/phases</span>
     <span class="n">suggested_fix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># grounded</span>
-    <span class="n">source_layer</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span> <span class="s2">&quot;llm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;deterministic&quot;</span>
+    <span class="n">source_layer</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"deterministic"</span><span class="p">,</span> <span class="s2">"llm"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"deterministic"</span>
     <span class="n">confidence</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
     <span class="n">needs_human_review</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">diff_status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;changed&quot;</span><span class="p">,</span> <span class="s2">&quot;resolved&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></div>
+    <span class="n">diff_status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"new"</span><span class="p">,</span> <span class="s2">"changed"</span><span class="p">,</span> <span class="s2">"resolved"</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 
 
 <div class="viewcode-block" id="EvidenceBundle">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.EvidenceBundle">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EvidenceBundle</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The grounded bundle a vision LLM reasons over (assembled model-free; §8.1).</span>
+<span class="w">    </span><span class="sd">"""The grounded bundle a vision LLM reasons over (assembled model-free; §8.1).</span>
 
 <span class="sd">    Layout contract: ``[role/system + cite-or-abstain] -&gt; [marked image(s)] -&gt;</span>
 <span class="sd">    [facts keyed to mark/fact ids] -&gt; [task last]``. Token cost is *computed*</span>
 <span class="sd">    (``token_budget``), not hoped for.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">step_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">contract</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># the cite-or-abstain system/role text</span>
+    <span class="n">contract</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>  <span class="c1"># the cite-or-abstain system/role text</span>
     <span class="n">marked_image_artifact_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
     <span class="n">crop_artifact_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
     <span class="n">facts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Evidence</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
     <span class="n">marks</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>  <span class="c1"># mark_id -&gt; evidence_id</span>
     <span class="n">token_budget</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">task</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></div>
+    <span class="n">task</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span></div>
 
 
 
@@ -497,13 +497,13 @@
 <div class="viewcode-block" id="CaptureRun">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.CaptureRun">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CaptureRun</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Everything one ``observe`` produced; artifacts live in the store by id.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Everything one ``observe`` produced; artifacts live in the store by id."""</span>
 
     <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">validate_assignment</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">))</span>
-    <span class="n">target_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span> <span class="s2">&quot;review&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;reconstruct&quot;</span>
+    <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">new_id</span><span class="p">(</span><span class="s2">"run"</span><span class="p">))</span>
+    <span class="n">target_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"reconstruct"</span><span class="p">,</span> <span class="s2">"review"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"reconstruct"</span>
     <span class="n">started_at</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">utcnow</span><span class="p">)</span>
     <span class="n">finished_at</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">steps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">JourneyStep</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
@@ -519,7 +519,7 @@
 <div class="viewcode-block" id="CaptureRun.artifact_by_id">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.CaptureRun.artifact_by_id">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">artifact_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifact_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Artifact</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the :class:`Artifact` with ``artifact_id`` or ``None``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the :class:`Artifact` with ``artifact_id`` or ``None``."""</span>
         <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">artifacts</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">==</span> <span class="n">artifact_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span></div>
 </div>
 
@@ -533,20 +533,20 @@
 <div class="viewcode-block" id="FindingDelta">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.FindingDelta">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FindingDelta</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;One finding&#39;s status between a run and its baseline (review-mode currency).</span>
+<span class="w">    </span><span class="sd">"""One finding's status between a run and its baseline (review-mode currency).</span>
 
 <span class="sd">    ``status`` is the per-finding cross-run verdict; ``direction`` rolls it into</span>
 <span class="sd">    the regression/improvement framing a downstream modification agent acts on.</span>
 <span class="sd">    A finding is matched across runs by a stable semantic ``key`` (see</span>
 <span class="sd">    :func:`ov.analysis.diff.finding_key`) -- never by its per-run ``finding_id``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># stable cross-run identity</span>
-    <span class="n">status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;changed&quot;</span><span class="p">,</span> <span class="s2">&quot;resolved&quot;</span><span class="p">,</span> <span class="s2">&quot;unchanged&quot;</span><span class="p">]</span>
-    <span class="n">direction</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;regression&quot;</span><span class="p">,</span> <span class="s2">&quot;improvement&quot;</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;neutral&quot;</span>
-    <span class="n">signal</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">status</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"new"</span><span class="p">,</span> <span class="s2">"changed"</span><span class="p">,</span> <span class="s2">"resolved"</span><span class="p">,</span> <span class="s2">"unchanged"</span><span class="p">]</span>
+    <span class="n">direction</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"regression"</span><span class="p">,</span> <span class="s2">"improvement"</span><span class="p">,</span> <span class="s2">"neutral"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"neutral"</span>
+    <span class="n">signal</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="n">category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="n">finding_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># current finding id (None when resolved)</span>
     <span class="n">baseline_finding_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># baseline finding id (None when new)</span>
     <span class="n">severity_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
@@ -559,7 +559,7 @@
 <div class="viewcode-block" id="RunDiff">
 <a class="viewcode-back" href="../../module_docs/ov/base.html#ov.RunDiff">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RunDiff</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Own-target regression: a run vs a stored prior baseline run (review mode, §10).</span>
+<span class="w">    </span><span class="sd">"""Own-target regression: a run vs a stored prior baseline run (review mode, §10).</span>
 
 <span class="sd">    Produced by :func:`ov.analysis.diff.diff_runs` from two analyzed</span>
 <span class="sd">    :class:`CaptureRun`s of the same target. The :attr:`finding_deltas` list is</span>
@@ -567,34 +567,34 @@
 <span class="sd">    so they serialize) and :attr:`regressions`/:attr:`improvements` are views over</span>
 <span class="sd">    the deltas -- nothing is stored twice.</span>
 
-<span class="sd">    &gt;&gt;&gt; d = RunDiff(run_id=&quot;run_b&quot;, baseline_run_id=&quot;run_a&quot;, finding_deltas=[</span>
-<span class="sd">    ...     FindingDelta(key=&quot;k1&quot;, status=&quot;new&quot;, direction=&quot;regression&quot;),</span>
-<span class="sd">    ...     FindingDelta(key=&quot;k2&quot;, status=&quot;resolved&quot;, direction=&quot;improvement&quot;),</span>
+<span class="sd">    &gt;&gt;&gt; d = RunDiff(run_id="run_b", baseline_run_id="run_a", finding_deltas=[</span>
+<span class="sd">    ...     FindingDelta(key="k1", status="new", direction="regression"),</span>
+<span class="sd">    ...     FindingDelta(key="k2", status="resolved", direction="improvement"),</span>
 <span class="sd">    ... ])</span>
-<span class="sd">    &gt;&gt;&gt; d.counts[&quot;new&quot;], d.counts[&quot;resolved&quot;], d.has_drift</span>
+<span class="sd">    &gt;&gt;&gt; d.counts["new"], d.counts["resolved"], d.has_drift</span>
 <span class="sd">    (1, 1, True)</span>
 <span class="sd">    &gt;&gt;&gt; [r.key for r in d.regressions], [i.key for i in d.improvements]</span>
-<span class="sd">    ([&#39;k1&#39;], [&#39;k2&#39;])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    (['k1'], ['k2'])</span>
+<span class="sd">    """</span>
 
     <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># the current run</span>
     <span class="n">baseline_run_id</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">target_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">target_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="n">created_at</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">utcnow</span><span class="p">)</span>
     <span class="n">finding_deltas</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">FindingDelta</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
     <span class="n">tech_added</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
     <span class="n">tech_removed</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
     <span class="n">endpoints_added</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
     <span class="n">endpoints_removed</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-    <span class="n">rendering_model_change</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># {&quot;from&quot;: ..., &quot;to&quot;: ...}</span>
+    <span class="n">rendering_model_change</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># {"from": ..., "to": ...}</span>
     <span class="n">source_maps_change</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">notes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 
     <span class="nd">@computed_field</span>  <span class="c1"># type: ignore[prop-decorator]</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">counts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Per-status tallies derived from the deltas (the headline of a diff).&quot;&quot;&quot;</span>
-        <span class="n">tally</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;new&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;changed&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;resolved&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;unchanged&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="w">        </span><span class="sd">"""Per-status tallies derived from the deltas (the headline of a diff)."""</span>
+        <span class="n">tally</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"new"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"changed"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"resolved"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"unchanged"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
         <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span><span class="p">:</span>
             <span class="n">tally</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">status</span><span class="p">]</span> <span class="o">=</span> <span class="n">tally</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">tally</span>
@@ -602,9 +602,9 @@
     <span class="nd">@computed_field</span>  <span class="c1"># type: ignore[prop-decorator]</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">has_drift</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;``True`` if anything changed across runs (findings, stack, API, or model).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""``True`` if anything changed across runs (findings, stack, API, or model)."""</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span>
-            <span class="nb">any</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;unchanged&quot;</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span><span class="p">)</span>
+            <span class="nb">any</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="s2">"unchanged"</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span><span class="p">)</span>
             <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">tech_added</span>
             <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">tech_removed</span>
             <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">endpoints_added</span>
@@ -615,13 +615,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">regressions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FindingDelta</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deltas that got worse or are newly present (a downstream fix list).&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;regression&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="sd">"""Deltas that got worse or are newly present (a downstream fix list)."""</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">"regression"</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">improvements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FindingDelta</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deltas that were resolved or got better since the baseline.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;improvement&quot;</span><span class="p">]</span></div>
+<span class="w">        </span><span class="sd">"""Deltas that were resolved or got better since the baseline."""</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">finding_deltas</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">"improvement"</span><span class="p">]</span></div>
 
 </pre></div>
 
@@ -632,7 +632,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.capture.session &mdash; ov 0.1.1 documentation</title>
+  <title>ov.capture.session &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -172,7 +172,7 @@ on the same browser, and is a context manager for safe teardown.</p>
 <dd><p>Drive one target and record everything into the store (zero-config default).</p>
 <p>Typical use is via the <a class="reference internal" href="../../ov.html#ov.observe" title="ov.observe"><code class="xref py py-func docutils literal notranslate"><span class="pre">ov.observe()</span></code></a> facade, but the session is directly
 usable:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">CaptureSession</span><span class="p">(</span><span class="n">target_url</span><span class="o">=</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">CaptureSession</span><span class="p">(</span><span class="n">target_url</span><span class="o">=</span><span class="s2">"https://example.com"</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
     <span class="n">s</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>                 <span class="c1"># navigate to target_url + capture the load state</span>
     <span class="n">run</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">run</span>
 </pre></div>
@@ -242,7 +242,7 @@ per-state probes, and record one step keyed to the produced artifacts.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

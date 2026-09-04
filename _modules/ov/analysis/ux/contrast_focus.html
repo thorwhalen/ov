@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.ux.contrast_focus &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.ux.contrast_focus &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,7 +144,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis.ux.contrast_focus</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Contrast + focus analyzer (deterministic, no engine).</span>
+<span></span><span class="sd">"""Contrast + focus analyzer (deterministic, no engine).</span>
 
 <span class="sd">Contrast ratios are computed from the captured ``a11y_styles`` artifact (effective</span>
 <span class="sd">fg/bg colors) with the exact WCAG relative-luminance formula and the 4.5:1 normal</span>
@@ -153,7 +153,7 @@
 <span class="sd">properties (keyboard traps, focus-order *logicality*, visible-focus indicator)</span>
 <span class="sd">need active key-driving and are routed to ``needs_human_review`` rather than</span>
 <span class="sd">asserted -- the honesty constraint again.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -175,13 +175,13 @@
 <div class="viewcode-block" id="relative_luminance">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.relative_luminance">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">relative_luminance</span><span class="p">(</span><span class="n">rgb</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;WCAG relative luminance of an sRGB ``(r, g, b)`` in 0-255.</span>
+<span class="w">    </span><span class="sd">"""WCAG relative luminance of an sRGB ``(r, g, b)`` in 0-255.</span>
 
 <span class="sd">    &gt;&gt;&gt; relative_luminance([255, 255, 255])</span>
 <span class="sd">    1.0</span>
 <span class="sd">    &gt;&gt;&gt; relative_luminance([0, 0, 0])</span>
 <span class="sd">    0.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">_linearize</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">rgb</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
     <span class="k">return</span> <span class="mf">0.2126</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">0.7152</span> <span class="o">*</span> <span class="n">g</span> <span class="o">+</span> <span class="mf">0.0722</span> <span class="o">*</span> <span class="n">b</span></div>
 
@@ -190,13 +190,13 @@
 <div class="viewcode-block" id="contrast_ratio">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.contrast_ratio">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">contrast_ratio</span><span class="p">(</span><span class="n">fg</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">bg</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;WCAG contrast ratio between two sRGB colors (&gt;=1.0).</span>
+<span class="w">    </span><span class="sd">"""WCAG contrast ratio between two sRGB colors (&gt;=1.0).</span>
 
 <span class="sd">    &gt;&gt;&gt; contrast_ratio([0, 0, 0], [255, 255, 255])</span>
 <span class="sd">    21.0</span>
 <span class="sd">    &gt;&gt;&gt; round(contrast_ratio([255, 255, 255], [255, 255, 255]), 1)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span> <span class="o">=</span> <span class="n">relative_luminance</span><span class="p">(</span><span class="n">fg</span><span class="p">),</span> <span class="n">relative_luminance</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
     <span class="n">lighter</span><span class="p">,</span> <span class="n">darker</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">round</span><span class="p">((</span><span class="n">lighter</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">darker</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span></div>
@@ -206,63 +206,63 @@
 <div class="viewcode-block" id="analyze_contrast_focus">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.analyze_contrast_focus">[docs]</a>
 <span class="nd">@register_analyzer</span><span class="p">(</span>
-    <span class="s2">&quot;contrast_focus&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;a11y_styles&quot;</span><span class="p">,</span> <span class="s2">&quot;dom&quot;</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,)</span>
+    <span class="s2">"contrast_focus"</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">"ux"</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">"a11y_styles"</span><span class="p">,</span> <span class="s2">"dom"</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"findings"</span><span class="p">,)</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_contrast_focus</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Emit contrast Findings + statically-detectable focus Findings.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Emit contrast Findings + statically-detectable focus Findings."""</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
-    <span class="n">style_states</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">&quot;a11y_styles&quot;</span><span class="p">)</span>
+    <span class="n">style_states</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">"a11y_styles"</span><span class="p">)</span>
     <span class="n">num_states</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">style_states</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># Contrast: dedupe by selector across states.</span>
     <span class="n">seen</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">style_states</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">state</span> <span class="ow">or</span> <span class="p">[]:</span>
-            <span class="n">fg</span><span class="p">,</span> <span class="n">bg</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fg&quot;</span><span class="p">),</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bg&quot;</span><span class="p">)</span>
+            <span class="n">fg</span><span class="p">,</span> <span class="n">bg</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"fg"</span><span class="p">),</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"bg"</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">fg</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">bg</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">ratio</span> <span class="o">=</span> <span class="n">contrast_ratio</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="n">bg</span><span class="p">)</span>
-            <span class="n">threshold</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="k">if</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;large&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="mf">4.5</span>
+            <span class="n">threshold</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="k">if</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"large"</span><span class="p">)</span> <span class="k">else</span> <span class="mf">4.5</span>
             <span class="k">if</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;selector&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">)</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"selector"</span><span class="p">,</span> <span class="s2">"?"</span><span class="p">)</span>
                 <span class="n">prior</span> <span class="o">=</span> <span class="n">seen</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">prior</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="n">prior</span><span class="p">[</span><span class="s2">&quot;ratio&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">prior</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="n">prior</span><span class="p">[</span><span class="s2">"ratio"</span><span class="p">]:</span>
                     <span class="n">seen</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-                        <span class="s2">&quot;ratio&quot;</span><span class="p">:</span> <span class="n">ratio</span><span class="p">,</span>
-                        <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="n">threshold</span><span class="p">,</span>
-                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-                        <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">"ratio"</span><span class="p">:</span> <span class="n">ratio</span><span class="p">,</span>
+                        <span class="s2">"threshold"</span><span class="p">:</span> <span class="n">threshold</span><span class="p">,</span>
+                        <span class="s2">"text"</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span>
+                        <span class="s2">"states"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                     <span class="p">}</span>
-                <span class="n">seen</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;states&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">seen</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">"states"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="n">selector</span><span class="p">,</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">seen</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">Finding</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span>
-                <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;contrast.text&quot;</span><span class="p">,</span>
-                <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
-                <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Low text contrast (</span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">&#39;ratio&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:1 &lt; </span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">&#39;threshold&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:1)&quot;</span><span class="p">,</span>
-                <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;AA&quot;</span><span class="p">},</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">"ux_issue"</span><span class="p">,</span>
+                <span class="n">signal</span><span class="o">=</span><span class="s2">"contrast.text"</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Low text contrast (</span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">'ratio'</span><span class="p">]</span><span class="si">}</span><span class="s2">:1 &lt; </span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">'threshold'</span><span class="p">]</span><span class="si">}</span><span class="s2">:1)"</span><span class="p">,</span>
+                <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1.4.3"</span><span class="p">,</span> <span class="s2">"level"</span><span class="p">:</span> <span class="s2">"AA"</span><span class="p">},</span>
                 <span class="n">engine_rule_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
-                    <span class="s2">&quot;serious&quot;</span><span class="p">,</span>
+                    <span class="s2">"serious"</span><span class="p">,</span>
                     <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                    <span class="n">states_affected</span><span class="o">=</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">],</span>
-                    <span class="n">journey_fraction</span><span class="o">=</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;states&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">num_states</span><span class="p">,</span>
+                    <span class="n">states_affected</span><span class="o">=</span><span class="n">rec</span><span class="p">[</span><span class="s2">"states"</span><span class="p">],</span>
+                    <span class="n">journey_fraction</span><span class="o">=</span><span class="n">rec</span><span class="p">[</span><span class="s2">"states"</span><span class="p">]</span> <span class="o">/</span> <span class="n">num_states</span><span class="p">,</span>
                 <span class="p">),</span>
-                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;a11y_styles&quot;</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]],</span>
-                <span class="n">observed</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;text </span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> has contrast </span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">&#39;ratio&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:1 (needs </span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">&#39;threshold&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:1)&quot;</span><span class="p">,</span>
-                <span class="n">metric_detail</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ratio&quot;</span><span class="p">:</span> <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;ratio&quot;</span><span class="p">],</span> <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;threshold&quot;</span><span class="p">]},</span>
-                <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="n">selector</span><span class="p">},</span>
-                <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">&quot;increase the contrast between text and its background&quot;</span><span class="p">,</span>
-                <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+                <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"a11y_styles"</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]],</span>
+                <span class="n">observed</span><span class="o">=</span><span class="sa">f</span><span class="s2">"text </span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> has contrast </span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">'ratio'</span><span class="p">]</span><span class="si">}</span><span class="s2">:1 (needs </span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">'threshold'</span><span class="p">]</span><span class="si">}</span><span class="s2">:1)"</span><span class="p">,</span>
+                <span class="n">metric_detail</span><span class="o">=</span><span class="p">{</span><span class="s2">"ratio"</span><span class="p">:</span> <span class="n">rec</span><span class="p">[</span><span class="s2">"ratio"</span><span class="p">],</span> <span class="s2">"threshold"</span><span class="p">:</span> <span class="n">rec</span><span class="p">[</span><span class="s2">"threshold"</span><span class="p">]},</span>
+                <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">"selector"</span><span class="p">:</span> <span class="n">selector</span><span class="p">},</span>
+                <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">"increase the contrast between text and its background"</span><span class="p">,</span>
+                <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
                 <span class="n">confidence</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
     <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_static_focus_findings</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">num_states</span><span class="p">))</span>
     <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_focus_manual_finding</span><span class="p">())</span>
-    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;low_contrast_nodes&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">),</span> <span class="s2">&quot;style_states&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">style_states</span><span class="p">)}</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"low_contrast_nodes"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">),</span> <span class="s2">"style_states"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">style_states</span><span class="p">)}</span>
     <span class="k">return</span> <span class="n">out</span></div>
 
 
@@ -270,33 +270,33 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_static_focus_findings</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">,</span> <span class="n">num_states</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]:</span>
     <span class="n">findings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">seen</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">):</span>
         <span class="n">tree</span> <span class="o">=</span> <span class="n">HTMLParser</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">art</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;[tabindex]&quot;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"[tabindex]"</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">ti</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tabindex&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">))</span>
+                <span class="n">ti</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tabindex"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">))</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="k">if</span> <span class="n">ti</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">sel</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">el</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">[tabindex=</span><span class="si">{</span><span class="n">ti</span><span class="si">}</span><span class="s2">]&quot;</span>
+                <span class="n">sel</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">el</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">[tabindex=</span><span class="si">{</span><span class="n">ti</span><span class="si">}</span><span class="s2">]"</span>
                 <span class="k">if</span> <span class="n">sel</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
                     <span class="k">continue</span>
                 <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
                 <span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                     <span class="n">Finding</span><span class="p">(</span>
-                        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span>
-                        <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;focus.tabindex-positive&quot;</span><span class="p">,</span>
-                        <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
-                        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Positive tabindex disrupts natural focus order&quot;</span><span class="p">,</span>
-                        <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2.4.3&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">},</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s2">"ux_issue"</span><span class="p">,</span>
+                        <span class="n">signal</span><span class="o">=</span><span class="s2">"focus.tabindex-positive"</span><span class="p">,</span>
+                        <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span>
+                        <span class="n">title</span><span class="o">=</span><span class="s2">"Positive tabindex disrupts natural focus order"</span><span class="p">,</span>
+                        <span class="n">wcag_criterion</span><span class="o">=</span><span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"2.4.3"</span><span class="p">,</span> <span class="s2">"level"</span><span class="p">:</span> <span class="s2">"A"</span><span class="p">},</span>
                         <span class="n">severity</span><span class="o">=</span><span class="n">make_severity</span><span class="p">(</span>
-                            <span class="s2">&quot;moderate&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_states</span>
+                            <span class="s2">"moderate"</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">journey_fraction</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">num_states</span>
                         <span class="p">),</span>
                         <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">],</span>
-                        <span class="n">observed</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;element </span><span class="si">{</span><span class="n">sel</span><span class="si">}</span><span class="s2"> uses a positive tabindex&quot;</span><span class="p">,</span>
-                        <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="n">sel</span><span class="p">},</span>
-                        <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">&quot;use tabindex=0 (or rely on DOM order) instead of a positive value&quot;</span><span class="p">,</span>
-                        <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+                        <span class="n">observed</span><span class="o">=</span><span class="sa">f</span><span class="s2">"element </span><span class="si">{</span><span class="n">sel</span><span class="si">}</span><span class="s2"> uses a positive tabindex"</span><span class="p">,</span>
+                        <span class="n">location</span><span class="o">=</span><span class="p">{</span><span class="s2">"selector"</span><span class="p">:</span> <span class="n">sel</span><span class="p">},</span>
+                        <span class="n">suggested_fix</span><span class="o">=</span><span class="s2">"use tabindex=0 (or rely on DOM order) instead of a positive value"</span><span class="p">,</span>
+                        <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
                         <span class="n">confidence</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="p">)</span>
@@ -305,17 +305,17 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_focus_manual_finding</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Finding</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">Finding</span><span class="p">(</span>
-        <span class="n">finding_id</span><span class="o">=</span><span class="n">new_id</span><span class="p">(</span><span class="s2">&quot;find&quot;</span><span class="p">),</span>
-        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;undetermined&quot;</span><span class="p">,</span>
-        <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;focus.behavioral-review-required&quot;</span><span class="p">,</span>
-        <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span>
-        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Keyboard behavior needs interactive review&quot;</span><span class="p">,</span>
+        <span class="n">finding_id</span><span class="o">=</span><span class="n">new_id</span><span class="p">(</span><span class="s2">"find"</span><span class="p">),</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">"undetermined"</span><span class="p">,</span>
+        <span class="n">signal</span><span class="o">=</span><span class="s2">"focus.behavioral-review-required"</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">"Keyboard behavior needs interactive review"</span><span class="p">,</span>
         <span class="n">observed</span><span class="o">=</span><span class="p">(</span>
-            <span class="s2">&quot;Keyboard traps, focus-order logicality, and visible-focus-indicator &quot;</span>
-            <span class="s2">&quot;quality require active key-driving and human judgment; not asserted here.&quot;</span>
+            <span class="s2">"Keyboard traps, focus-order logicality, and visible-focus-indicator "</span>
+            <span class="s2">"quality require active key-driving and human judgment; not asserted here."</span>
         <span class="p">),</span>
         <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[],</span>
-        <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+        <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
         <span class="n">confidence</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
         <span class="n">needs_human_review</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
@@ -328,7 +328,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

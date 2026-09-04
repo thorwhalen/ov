@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.capture.probes.storage &mdash; ov 0.1.1 documentation</title>
+  <title>ov.capture.probes.storage &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,13 +144,13 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.capture.probes.storage</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Storage probe: cookies, localStorage, sessionStorage, IndexedDB names.</span>
+<span></span><span class="sd">"""Storage probe: cookies, localStorage, sessionStorage, IndexedDB names.</span>
 
 <span class="sd">Values are **redacted by default** (privacy; ``config.redact_values``) -- we keep</span>
 <span class="sd">the *shape* of client state (which keys exist, how big) without persisting</span>
 <span class="sd">secrets/PII. sessionStorage is read manually (it is not in ``storage_state``) and</span>
 <span class="sd">IndexedDB is probed for database names only (deep dumps are fragile and deferred).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -161,7 +161,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">...util</span><span class="w"> </span><span class="kn">import</span> <span class="n">redact_value</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">Probe</span><span class="p">,</span> <span class="n">ProbeContext</span><span class="p">,</span> <span class="n">register_probe</span>
 
-<span class="n">_READ_JS</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">_READ_JS</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
 <span class="s2">async () =&gt; {</span>
 <span class="s2">  const dump = (s) =&gt; { const o = </span><span class="si">{}</span><span class="s2">; for (let i = 0; i &lt; s.length; i++) { const k = s.key(i); o[k] = s.getItem(k); } return o; };</span>
 <span class="s2">  let idb = [];</span>
@@ -172,7 +172,7 @@
 <span class="s2">    indexedDB: idb,</span>
 <span class="s2">  };</span>
 <span class="s2">}</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_redact_store</span><span class="p">(</span><span class="n">mapping</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">redact</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
@@ -183,11 +183,11 @@
 
 <div class="viewcode-block" id="StorageProbe">
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/storage.html#ov.capture.probes.storage.StorageProbe">[docs]</a>
-<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">&quot;storage&quot;</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;storage&quot;</span><span class="p">,))</span>
+<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">"storage"</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"storage"</span><span class="p">,))</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">StorageProbe</span><span class="p">(</span><span class="n">Probe</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Snapshot client storage (redacted) for the current state.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Snapshot client storage (redacted) for the current state."""</span>
 
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;storage&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">"storage"</span>
 
 <div class="viewcode-block" id="StorageProbe.capture">
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/storage.html#ov.capture.probes.storage.StorageProbe.capture">[docs]</a>
@@ -197,41 +197,41 @@
             <span class="k">return</span> <span class="p">[]</span>
         <span class="n">redact</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">redact_values</span>
         <span class="n">payload</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;localStorage&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;sessionStorage&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;indexedDB&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"localStorage"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"sessionStorage"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"indexedDB"</span><span class="p">:</span> <span class="p">[],</span>
         <span class="p">}</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">raw</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">_READ_JS</span><span class="p">)</span>
-            <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;localStorage&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_redact_store</span><span class="p">(</span>
-                <span class="n">raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;localStorage&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">redact</span><span class="o">=</span><span class="n">redact</span>
+            <span class="n">payload</span><span class="p">[</span><span class="s2">"localStorage"</span><span class="p">]</span> <span class="o">=</span> <span class="n">_redact_store</span><span class="p">(</span>
+                <span class="n">raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"localStorage"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">redact</span><span class="o">=</span><span class="n">redact</span>
             <span class="p">)</span>
-            <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;sessionStorage&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_redact_store</span><span class="p">(</span>
-                <span class="n">raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sessionStorage&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">redact</span><span class="o">=</span><span class="n">redact</span>
+            <span class="n">payload</span><span class="p">[</span><span class="s2">"sessionStorage"</span><span class="p">]</span> <span class="o">=</span> <span class="n">_redact_store</span><span class="p">(</span>
+                <span class="n">raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sessionStorage"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">redact</span><span class="o">=</span><span class="n">redact</span>
             <span class="p">)</span>
-            <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;indexedDB&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;indexedDB&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">payload</span><span class="p">[</span><span class="s2">"indexedDB"</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"indexedDB"</span><span class="p">,</span> <span class="p">[])</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
             <span class="k">pass</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">cookies</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">cookies</span><span class="p">()</span>
-            <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;cookies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">payload</span><span class="p">[</span><span class="s2">"cookies"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;domain&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">redact_value</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">))</span> <span class="k">if</span> <span class="n">redact</span> <span class="k">else</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;httpOnly&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;httpOnly&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;secure&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;secure&quot;</span><span class="p">),</span>
+                    <span class="s2">"name"</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">),</span>
+                    <span class="s2">"domain"</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"domain"</span><span class="p">),</span>
+                    <span class="s2">"value"</span><span class="p">:</span> <span class="n">redact_value</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"value"</span><span class="p">))</span> <span class="k">if</span> <span class="n">redact</span> <span class="k">else</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"value"</span><span class="p">),</span>
+                    <span class="s2">"httpOnly"</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"httpOnly"</span><span class="p">),</span>
+                    <span class="s2">"secure"</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"secure"</span><span class="p">),</span>
                 <span class="p">}</span>
                 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cookies</span>
             <span class="p">]</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
-            <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;cookies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">payload</span><span class="p">[</span><span class="s2">"cookies"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">art</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
-            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;storage&quot;</span><span class="p">,</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">"storage"</span><span class="p">,</span>
             <span class="n">step_id</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">step</span><span class="o">.</span><span class="n">id</span> <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">step</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;redacted&quot;</span><span class="p">:</span> <span class="n">redact</span><span class="p">},</span>
+            <span class="n">content_type</span><span class="o">=</span><span class="s2">"application/json"</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"redacted"</span><span class="p">:</span> <span class="n">redact</span><span class="p">},</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">art</span><span class="p">]</span></div>
 </div>
@@ -245,7 +245,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

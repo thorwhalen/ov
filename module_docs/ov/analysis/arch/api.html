@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.arch.api &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.arch.api &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -168,12 +168,12 @@ from request headers, and scores per-endpoint coverage. Produces
 <dt class="sig sig-object py" id="ov.analysis.arch.api.classify_endpoint">
 <span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.api.</span></span><span class="sig-name descname"><span class="pre">classify_endpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request_body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/api.html#classify_endpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.api.classify_endpoint" title="Link to this definition"></a></dt>
 <dd><p>Classify an endpoint as <code class="docutils literal notranslate"><span class="pre">rest</span></code> | <code class="docutils literal notranslate"><span class="pre">rpc</span></code> | <code class="docutils literal notranslate"><span class="pre">graphql</span></code> (pure).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/graphql&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;{ me { id } }&quot;</span><span class="p">})</span>
-<span class="go">&#39;graphql&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classify_endpoint</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/api/createUser&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="go">&#39;rpc&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classify_endpoint</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/api/users/</span><span class="si">{id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="go">&#39;rest&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_endpoint</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span> <span class="s2">"/graphql"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"query"</span><span class="p">:</span> <span class="s2">"{ me { id } }"</span><span class="p">})</span>
+<span class="go">'graphql'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classify_endpoint</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span> <span class="s2">"/api/createUser"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="go">'rpc'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classify_endpoint</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="s2">"/api/users/</span><span class="si">{id}</span><span class="s2">"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="go">'rest'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -182,10 +182,10 @@ from request headers, and scores per-endpoint coverage. Produces
 <dt class="sig sig-object py" id="ov.analysis.arch.api.infer_auth">
 <span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.api.</span></span><span class="sig-name descname"><span class="pre">infer_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request_headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/api.html#infer_auth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.api.infer_auth" title="Link to this definition"></a></dt>
 <dd><p>Infer the auth scheme from (possibly redacted) request headers (pure).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">infer_auth</span><span class="p">({</span><span class="s2">&quot;authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;redacted:40&gt;&quot;</span><span class="p">})</span>
-<span class="go">&#39;bearer&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">infer_auth</span><span class="p">({</span><span class="s2">&quot;cookie&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;redacted:20&gt;&quot;</span><span class="p">})</span>
-<span class="go">&#39;cookie&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">infer_auth</span><span class="p">({</span><span class="s2">"authorization"</span><span class="p">:</span> <span class="s2">"&lt;redacted:40&gt;"</span><span class="p">})</span>
+<span class="go">'bearer'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infer_auth</span><span class="p">({</span><span class="s2">"cookie"</span><span class="p">:</span> <span class="s2">"&lt;redacted:20&gt;"</span><span class="p">})</span>
+<span class="go">'cookie'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">infer_auth</span><span class="p">({})</span> <span class="ow">is</span> <span class="kc">None</span>
 <span class="go">True</span>
 </pre></div>
@@ -196,12 +196,12 @@ from request headers, and scores per-endpoint coverage. Produces
 <dt class="sig sig-object py" id="ov.analysis.arch.api.normalize_path">
 <span class="sig-prename descclassname"><span class="pre">ov.analysis.arch.api.</span></span><span class="sig-name descname"><span class="pre">normalize_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../../_modules/ov/analysis/arch/api.html#normalize_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.analysis.arch.api.normalize_path" title="Link to this definition"></a></dt>
 <dd><p>Templatize a URL path, replacing id-like segments with <code class="docutils literal notranslate"><span class="pre">{id}</span></code> (pure).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">normalize_path</span><span class="p">(</span><span class="s2">&quot;/api/users/42/posts/9c8&quot;</span><span class="p">)</span>  <span class="c1"># short slugs are left alone</span>
-<span class="go">&#39;/api/users/{id}/posts/9c8&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">normalize_path</span><span class="p">(</span><span class="s2">&quot;/v1/orders/550e8400-e29b-41d4-a716-446655440000&quot;</span><span class="p">)</span>
-<span class="go">&#39;/v1/orders/{id}&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">normalize_path</span><span class="p">(</span><span class="s2">&quot;/files/deadbeefcafe0001&quot;</span><span class="p">)</span>  <span class="c1"># 12+ hex looks like an id</span>
-<span class="go">&#39;/files/{id}&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">normalize_path</span><span class="p">(</span><span class="s2">"/api/users/42/posts/9c8"</span><span class="p">)</span>  <span class="c1"># short slugs are left alone</span>
+<span class="go">'/api/users/{id}/posts/9c8'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalize_path</span><span class="p">(</span><span class="s2">"/v1/orders/550e8400-e29b-41d4-a716-446655440000"</span><span class="p">)</span>
+<span class="go">'/v1/orders/{id}'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalize_path</span><span class="p">(</span><span class="s2">"/files/deadbeefcafe0001"</span><span class="p">)</span>  <span class="c1"># 12+ hex looks like an id</span>
+<span class="go">'/files/{id}'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -219,7 +219,7 @@ from request headers, and scores per-endpoint coverage. Produces
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.reporting.render &mdash; ov 0.1.1 documentation</title>
+  <title>ov.reporting.render &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,13 +144,13 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.reporting.render</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Render Markdown report sections from an analyzed run (§8.3).</span>
+<span></span><span class="sd">"""Render Markdown report sections from an analyzed run (§8.3).</span>
 
-<span class="sd">Selects the registered sections that apply to the run&#39;s mode, orders them by their</span>
+<span class="sd">Selects the registered sections that apply to the run's mode, orders them by their</span>
 <span class="sd">numeric ``order``, renders each over the run + per-analyzer summaries, and writes</span>
 <span class="sd">them to the store (and optionally an output directory). Returns the written keys</span>
 <span class="sd">or paths.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -167,28 +167,28 @@
         <span class="k">return</span> <span class="n">run_or_id</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">run_or_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">store</span><span class="o">.</span><span class="n">load_run</span><span class="p">(</span><span class="n">run_or_id</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;expected a CaptureRun or run id, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">run_or_id</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"expected a CaptureRun or run id, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">run_or_id</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_load_analyses</span><span class="p">(</span><span class="n">store</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assemble the per-section context: analyzer summaries + any review diff.</span>
+<span class="w">    </span><span class="sd">"""Assemble the per-section context: analyzer summaries + any review diff.</span>
 
 <span class="sd">    The render layer owns gathering everything a section might read. Analyzer</span>
 <span class="sd">    summaries land under their analyzer names; the own-target review diff (when</span>
-<span class="sd">    present) is injected under the reserved ``&quot;review_diff&quot;`` key so the review</span>
+<span class="sd">    present) is injected under the reserved ``"review_diff"`` key so the review</span>
 <span class="sd">    section can render drift without needing store access (sections take only</span>
 <span class="sd">    ``(run, analyses)``).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">..analysis.diff</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_diff</span>
 
     <span class="n">analyses</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">analyses</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">load_analysis</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;analysis_</span><span class="si">{</span><span class="n">run_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="n">analyses</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">load_analysis</span><span class="p">(</span><span class="sa">f</span><span class="s2">"analysis_</span><span class="si">{</span><span class="n">run_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"results"</span><span class="p">,</span> <span class="p">{}))</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="n">load_diff</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="n">run_id</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">diff</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">analyses</span><span class="p">[</span><span class="s2">&quot;review_diff&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+        <span class="n">analyses</span><span class="p">[</span><span class="s2">"review_diff"</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
     <span class="k">return</span> <span class="n">analyses</span>
 
 
@@ -197,27 +197,27 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">render_reports</span><span class="p">(</span>
     <span class="n">run_or_analyses</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">sections</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">sections</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="s2">"default"</span><span class="p">,</span>
     <span class="n">out_dir</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render and persist the report sections; return their store keys/paths.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Render and persist the report sections; return their store keys/paths."""</span>
     <span class="n">load_builtin_sections</span><span class="p">()</span>
     <span class="n">store</span> <span class="o">=</span> <span class="n">resolve_store</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
     <span class="n">run</span> <span class="o">=</span> <span class="n">_resolve_run</span><span class="p">(</span><span class="n">run_or_analyses</span><span class="p">,</span> <span class="n">store</span><span class="p">)</span>
     <span class="n">analyses</span> <span class="o">=</span> <span class="n">_load_analyses</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">)</span>
 
     <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">REPORT_SECTION_REGISTRY</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-    <span class="n">items</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">it</span><span class="p">:</span> <span class="n">it</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;order&quot;</span><span class="p">,</span> <span class="mi">999</span><span class="p">))</span>
+    <span class="n">items</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">it</span><span class="p">:</span> <span class="n">it</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"order"</span><span class="p">,</span> <span class="mi">999</span><span class="p">))</span>
 
-    <span class="k">if</span> <span class="n">sections</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">sections</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"default"</span><span class="p">,</span> <span class="s2">"all"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">wanted</span> <span class="o">=</span> <span class="p">{</span><span class="n">sections</span><span class="p">}</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sections</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="nb">set</span><span class="p">(</span><span class="n">sections</span><span class="p">)</span>
         <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="n">it</span> <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">if</span> <span class="n">it</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">wanted</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">it</span>
             <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">items</span>
-            <span class="k">if</span> <span class="n">run</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="n">it</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;modes&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span> <span class="s2">&quot;review&quot;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">run</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="n">it</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"modes"</span><span class="p">,</span> <span class="p">(</span><span class="s2">"reconstruct"</span><span class="p">,</span> <span class="s2">"review"</span><span class="p">))</span>
         <span class="p">]</span>
 
     <span class="n">out_paths</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -229,13 +229,13 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">md</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">analyses</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># noqa: BLE001 - a bad section must not abort the rest</span>
-            <span class="n">md</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="n">it</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">_section failed: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">_&quot;</span>
-            <span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;section </span><span class="si">{</span><span class="n">it</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">it</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.md&quot;</span>
+            <span class="n">md</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"# </span><span class="si">{</span><span class="n">it</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">_section failed: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">_"</span>
+            <span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"section </span><span class="si">{</span><span class="n">it</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">it</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.md"</span>
         <span class="n">key</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">save_report</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">md</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">out_dir_path</span><span class="p">:</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">out_dir_path</span> <span class="o">/</span> <span class="n">filename</span>
-            <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">md</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">md</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
             <span class="n">out_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">out_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
@@ -250,7 +250,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

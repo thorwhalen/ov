@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.operate.perception &mdash; ov 0.1.1 documentation</title>
+  <title>ov.operate.perception &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,10 +143,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.operate.perception</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Perception strategies -- pluggable ways to turn a page into an ``Observation``.</span>
+<span></span><span class="sd">"""Perception strategies -- pluggable ways to turn a page into an ``Observation``.</span>
 
 <span class="sd">A perception strategy returns a uniform :class:`~ov.base.Observation` so the rest</span>
-<span class="sd">of the operate layer (and the host&#39;s policy) stays declarative about *what* an</span>
+<span class="sd">of the operate layer (and the host's policy) stays declarative about *what* an</span>
 <span class="sd">observation is, not *how* it was grounded. Three strategies ship:</span>
 
 <span class="sd">* ``ax_snapshot`` -- affordances from an accessibility-relevant DOM walk plus the</span>
@@ -159,7 +159,7 @@
 <span class="sd">interactive element, so :func:`~ov.operate.act.act` can target it deterministically</span>
 <span class="sd">(``getByRole``-stable, survives CSS churn) -- the require-description-and-ref</span>
 <span class="sd">safety pattern from Playwright-MCP.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -169,7 +169,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..util</span><span class="w"> </span><span class="kn">import</span> <span class="n">stable_hash</span>
 
 <span class="c1">#: The attribute stamped on interactive elements to create stable refs.</span>
-<span class="n">REF_ATTR</span> <span class="o">=</span> <span class="s2">&quot;data-ov-ref&quot;</span>
+<span class="n">REF_ATTR</span> <span class="o">=</span> <span class="s2">"data-ov-ref"</span>
 
 <span class="c1">#: name -&gt; ``perceiver(page) -&gt; Observation``</span>
 <span class="n">PERCEPTION_REGISTRY</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Observation</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -178,7 +178,7 @@
 <div class="viewcode-block" id="register_perception">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/perception.html#ov.operate.register_perception">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">register_perception</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator registering a perceiver under ``name``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Decorator registering a perceiver under ``name``."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">deco</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Observation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Observation</span><span class="p">]:</span>
         <span class="n">PERCEPTION_REGISTRY</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">fn</span>
@@ -189,34 +189,34 @@
 
 
 <span class="c1"># JS that stamps refs and returns the affordance list for the current state.</span>
-<span class="n">_AFFORDANCE_JS</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">_AFFORDANCE_JS</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
 <span class="s2">(refAttr) =&gt; {</span>
 <span class="s2">  const sel = [</span>
-<span class="s2">    &#39;a[href]&#39;, &#39;button&#39;, &#39;input:not([type=hidden])&#39;, &#39;select&#39;, &#39;textarea&#39;,</span>
-<span class="s2">    &#39;[role=button]&#39;, &#39;[role=link]&#39;, &#39;[role=tab]&#39;, &#39;[role=menuitem]&#39;,</span>
-<span class="s2">    &#39;[role=checkbox]&#39;, &#39;[role=radio]&#39;, &#39;[role=switch]&#39;, &#39;[role=combobox]&#39;,</span>
-<span class="s2">    &#39;[contenteditable=true]&#39;, &#39;[onclick]&#39;</span>
-<span class="s2">  ].join(&#39;,&#39;);</span>
+<span class="s2">    'a[href]', 'button', 'input:not([type=hidden])', 'select', 'textarea',</span>
+<span class="s2">    '[role=button]', '[role=link]', '[role=tab]', '[role=menuitem]',</span>
+<span class="s2">    '[role=checkbox]', '[role=radio]', '[role=switch]', '[role=combobox]',</span>
+<span class="s2">    '[contenteditable=true]', '[onclick]'</span>
+<span class="s2">  ].join(',');</span>
 <span class="s2">  const els = Array.from(document.querySelectorAll(sel));</span>
 <span class="s2">  const out = [];</span>
 <span class="s2">  let i = 0;</span>
 <span class="s2">  for (const el of els) {</span>
 <span class="s2">    const rect = el.getBoundingClientRect();</span>
 <span class="s2">    const style = getComputedStyle(el);</span>
-<span class="s2">    if ((rect.width === 0 &amp;&amp; rect.height === 0) || style.visibility === &#39;hidden&#39; || style.display === &#39;none&#39;) continue;</span>
-<span class="s2">    const ref = &#39;e&#39; + (i++);</span>
+<span class="s2">    if ((rect.width === 0 &amp;&amp; rect.height === 0) || style.visibility === 'hidden' || style.display === 'none') continue;</span>
+<span class="s2">    const ref = 'e' + (i++);</span>
 <span class="s2">    el.setAttribute(refAttr, ref);</span>
 <span class="s2">    const tag = el.tagName.toLowerCase();</span>
-<span class="s2">    const role = el.getAttribute(&#39;role&#39;) || tag;</span>
-<span class="s2">    const name = (el.getAttribute(&#39;aria-label&#39;) || el.innerText || el.value ||</span>
-<span class="s2">                  el.getAttribute(&#39;placeholder&#39;) || el.getAttribute(&#39;title&#39;) || &#39;&#39;).trim().slice(0, 120);</span>
-<span class="s2">    const editable = [&#39;input&#39;, &#39;textarea&#39;].includes(tag) || el.getAttribute(&#39;contenteditable&#39;) === &#39;true&#39;;</span>
+<span class="s2">    const role = el.getAttribute('role') || tag;</span>
+<span class="s2">    const name = (el.getAttribute('aria-label') || el.innerText || el.value ||</span>
+<span class="s2">                  el.getAttribute('placeholder') || el.getAttribute('title') || '').trim().slice(0, 120);</span>
+<span class="s2">    const editable = ['input', 'textarea'].includes(tag) || el.getAttribute('contenteditable') === 'true';</span>
 <span class="s2">    out.push({ref, role, name, bbox: [rect.x, rect.y, rect.width, rect.height],</span>
 <span class="s2">              enabled: !el.disabled, editable});</span>
 <span class="s2">  }</span>
 <span class="s2">  return out;</span>
 <span class="s2">}</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_extract_affordances</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Affordance</span><span class="p">]:</span>
@@ -226,32 +226,32 @@
         <span class="k">return</span> <span class="p">[]</span>
     <span class="n">affordances</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">:</span>
-        <span class="n">bbox</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bbox&quot;</span><span class="p">)</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"bbox"</span><span class="p">)</span>
         <span class="n">affordances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">Affordance</span><span class="p">(</span>
-                <span class="n">ref</span><span class="o">=</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">],</span>
-                <span class="n">role</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;role&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-                <span class="n">name</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                <span class="n">ref</span><span class="o">=</span><span class="n">r</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">],</span>
+                <span class="n">role</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"role"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span>
                 <span class="n">bbox</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">bbox</span><span class="p">)</span> <span class="k">if</span> <span class="n">bbox</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">enabled</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;enabled&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-                <span class="n">editable</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;editable&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                <span class="n">enabled</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="n">editable</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"editable"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
             <span class="p">)</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">affordances</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_obs_hash</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">affordances</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Affordance</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A content hash of the salient observable state (drives progress detection).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""A content hash of the salient observable state (drives progress detection)."""</span>
     <span class="n">salient</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
-        <span class="s2">&quot;affordances&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">a</span><span class="o">.</span><span class="n">role</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">affordances</span><span class="p">),</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+        <span class="s2">"affordances"</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">a</span><span class="o">.</span><span class="n">role</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">affordances</span><span class="p">),</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">stable_hash</span><span class="p">(</span><span class="n">salient</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_base_observation</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Observation</span><span class="p">:</span>
     <span class="n">affordances</span> <span class="o">=</span> <span class="n">_extract_affordances</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">"url"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">title</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">title</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
@@ -268,12 +268,12 @@
 
 <div class="viewcode-block" id="perceive_ax_snapshot">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/perception.html#ov.operate.perceive_ax_snapshot">[docs]</a>
-<span class="nd">@register_perception</span><span class="p">(</span><span class="s2">&quot;ax_snapshot&quot;</span><span class="p">)</span>
+<span class="nd">@register_perception</span><span class="p">(</span><span class="s2">"ax_snapshot"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">perceive_ax_snapshot</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Observation</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Affordances + concise ARIA snapshot text (the cheap, deterministic default).&quot;&quot;&quot;</span>
-    <span class="n">obs</span> <span class="o">=</span> <span class="n">_base_observation</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;ax_snapshot&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""Affordances + concise ARIA snapshot text (the cheap, deterministic default)."""</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">_base_observation</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">"ax_snapshot"</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">obs</span><span class="o">.</span><span class="n">aria_snapshot</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">aria_snapshot</span><span class="p">()</span>
+        <span class="n">obs</span><span class="o">.</span><span class="n">aria_snapshot</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"body"</span><span class="p">)</span><span class="o">.</span><span class="n">aria_snapshot</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">obs</span></div>
@@ -282,21 +282,21 @@
 
 <div class="viewcode-block" id="perceive_screenshot">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/perception.html#ov.operate.perceive_screenshot">[docs]</a>
-<span class="nd">@register_perception</span><span class="p">(</span><span class="s2">&quot;screenshot&quot;</span><span class="p">)</span>
+<span class="nd">@register_perception</span><span class="p">(</span><span class="s2">"screenshot"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">perceive_screenshot</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Observation</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Affordances with bounding boxes (pairs with a screenshot artifact).&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_base_observation</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;screenshot&quot;</span><span class="p">)</span></div>
+<span class="w">    </span><span class="sd">"""Affordances with bounding boxes (pairs with a screenshot artifact)."""</span>
+    <span class="k">return</span> <span class="n">_base_observation</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">"screenshot"</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="perceive_hybrid">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/perception.html#ov.operate.perceive_hybrid">[docs]</a>
-<span class="nd">@register_perception</span><span class="p">(</span><span class="s2">&quot;hybrid&quot;</span><span class="p">)</span>
+<span class="nd">@register_perception</span><span class="p">(</span><span class="s2">"hybrid"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">perceive_hybrid</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Observation</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;AX-grounded affordances + ARIA snapshot; the robust default when AX is thin.&quot;&quot;&quot;</span>
-    <span class="n">obs</span> <span class="o">=</span> <span class="n">_base_observation</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;hybrid&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""AX-grounded affordances + ARIA snapshot; the robust default when AX is thin."""</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">_base_observation</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">"hybrid"</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">obs</span><span class="o">.</span><span class="n">aria_snapshot</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">aria_snapshot</span><span class="p">()</span>
+        <span class="n">obs</span><span class="o">.</span><span class="n">aria_snapshot</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">locator</span><span class="p">(</span><span class="s2">"body"</span><span class="p">)</span><span class="o">.</span><span class="n">aria_snapshot</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">obs</span></div>
@@ -305,16 +305,16 @@
 
 <div class="viewcode-block" id="perceive">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/perception.html#ov.operate.perceive">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">perceive</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ax_snapshot&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Observation</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dispatch to the named perception strategy (defaults to ``ax_snapshot``).</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">perceive</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ax_snapshot"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Observation</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Dispatch to the named perception strategy (defaults to ``ax_snapshot``).</span>
 
 <span class="sd">    Raises ``KeyError`` with the known strategies when ``strategy`` is unknown --</span>
-<span class="sd">    an informative error per the project&#39;s principles.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    an informative error per the project's principles.</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">strategy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PERCEPTION_REGISTRY</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;unknown perception strategy </span><span class="si">{</span><span class="n">strategy</span><span class="si">!r}</span><span class="s2">; &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;known: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">PERCEPTION_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"unknown perception strategy </span><span class="si">{</span><span class="n">strategy</span><span class="si">!r}</span><span class="s2">; "</span>
+            <span class="sa">f</span><span class="s2">"known: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">PERCEPTION_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">PERCEPTION_REGISTRY</span><span class="p">[</span><span class="n">strategy</span><span class="p">](</span><span class="n">page</span><span class="p">)</span></div>
 
@@ -327,7 +327,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

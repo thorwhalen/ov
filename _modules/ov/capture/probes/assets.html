@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.capture.probes.assets &mdash; ov 0.1.1 documentation</title>
+  <title>ov.capture.probes.assets &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,13 +144,13 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.capture.probes.assets</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Assets probe: a content-addressed inventory of loaded resources.</span>
+<span></span><span class="sd">"""Assets probe: a content-addressed inventory of loaded resources.</span>
 
 <span class="sd">Bodies are already stored by the ``network`` probe (content-addressed, so they</span>
 <span class="sd">dedupe). This probe builds the *inventory*: one manifest row per resource with</span>
 <span class="sd">url, MIME, size, hash, and the body artifact id when captured. It ``requires``</span>
 <span class="sd">the network stream and therefore runs after it (registry ordering).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -163,38 +163,38 @@
 
 <div class="viewcode-block" id="AssetsProbe">
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/assets.html#ov.capture.probes.assets.AssetsProbe">[docs]</a>
-<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">&quot;assets&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">,</span> <span class="s2">&quot;request&quot;</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;assets&quot;</span><span class="p">,))</span>
+<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">"assets"</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">"network"</span><span class="p">,</span> <span class="s2">"request"</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"assets"</span><span class="p">,))</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AssetsProbe</span><span class="p">(</span><span class="n">Probe</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build an asset inventory from the accumulated network records.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Build an asset inventory from the accumulated network records."""</span>
 
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;assets&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">"assets"</span>
 
 <div class="viewcode-block" id="AssetsProbe.finalize">
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/assets.html#ov.capture.probes.assets.AssetsProbe.finalize">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">ProbeContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]:</span>
-        <span class="n">records</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_records&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">records</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_records"</span><span class="p">,</span> <span class="p">[])</span>
         <span class="n">body_arts</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_body_artifacts&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_body_artifacts"</span><span class="p">,</span> <span class="p">[])</span>
         <span class="p">}</span>
         <span class="n">inventory</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
-            <span class="n">art</span> <span class="o">=</span> <span class="n">body_arts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body_artifact_id&quot;</span><span class="p">))</span>
+            <span class="n">art</span> <span class="o">=</span> <span class="n">body_arts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"body_artifact_id"</span><span class="p">))</span>
             <span class="n">inventory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;mime&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response_headers&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;resource_type&quot;</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resource_type&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">size</span> <span class="k">if</span> <span class="n">art</span> <span class="k">else</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body_too_large&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;hash&quot;</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">content_hash</span> <span class="k">if</span> <span class="n">art</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-                    <span class="s2">&quot;artifact_id&quot;</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body_artifact_id&quot;</span><span class="p">),</span>
+                    <span class="s2">"url"</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"url"</span><span class="p">),</span>
+                    <span class="s2">"mime"</span><span class="p">:</span> <span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"response_headers"</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content-type"</span><span class="p">),</span>
+                    <span class="s2">"status"</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">),</span>
+                    <span class="s2">"resource_type"</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"resource_type"</span><span class="p">),</span>
+                    <span class="s2">"size"</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">size</span> <span class="k">if</span> <span class="n">art</span> <span class="k">else</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"body_too_large"</span><span class="p">),</span>
+                    <span class="s2">"hash"</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">content_hash</span> <span class="k">if</span> <span class="n">art</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">"artifact_id"</span><span class="p">:</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"body_artifact_id"</span><span class="p">),</span>
                 <span class="p">}</span>
             <span class="p">)</span>
         <span class="n">art</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
-            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">inventory</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;assets&quot;</span><span class="p">,</span>
-            <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">inventory</span><span class="p">)},</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">inventory</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">"assets"</span><span class="p">,</span>
+            <span class="n">content_type</span><span class="o">=</span><span class="s2">"application/json"</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"count"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">inventory</span><span class="p">)},</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">art</span><span class="p">]</span></div>
 </div>
@@ -208,7 +208,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.arch.rendering &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.arch.rendering &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,7 +144,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis.arch.rendering</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Rendering-model classifier: CSR vs SSR/SSG via raw-HTML-vs-rendered-DOM diff (D2).</span>
+<span></span><span class="sd">"""Rendering-model classifier: CSR vs SSR/SSG via raw-HTML-vs-rendered-DOM diff (D2).</span>
 
 <span class="sd">The deterministic test compares the *server-sent* HTML (the captured document</span>
 <span class="sd">response body, pre-JS) against the *rendered* DOM (post-JS). A large divergence</span>
@@ -152,7 +152,7 @@
 <span class="sd">is computed entirely from captured artifacts -- no re-fetch -- so it stays</span>
 <span class="sd">hermetic. State-injection globals (``__NEXT_DATA__``/``__NUXT__``/``__remixContext``)</span>
 <span class="sd">corroborate SSR/SSG. SSG vs SSR needs multiple requests and is left as a refinement.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -177,12 +177,12 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_visible_text_len</span><span class="p">(</span><span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Word count of visible text (scripts/styles stripped) -- the diff signal.&quot;&quot;&quot;</span>
-    <span class="n">tree</span> <span class="o">=</span> <span class="n">HTMLParser</span><span class="p">(</span><span class="n">html</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&quot;script, style, noscript&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Word count of visible text (scripts/styles stripped) -- the diff signal."""</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">HTMLParser</span><span class="p">(</span><span class="n">html</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">"script, style, noscript"</span><span class="p">):</span>
         <span class="n">node</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
     <span class="n">body</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">body</span> <span class="ow">or</span> <span class="n">tree</span><span class="o">.</span><span class="n">root</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">body</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span> <span class="k">if</span> <span class="n">body</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">""</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 
 
@@ -191,56 +191,56 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">classify_rendering</span><span class="p">(</span>
     <span class="n">raw_html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rendered_html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">globals_present</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Classify the rendering model from raw vs rendered HTML (pure, testable).</span>
+<span class="w">    </span><span class="sd">"""Classify the rendering model from raw vs rendered HTML (pure, testable).</span>
 
 <span class="sd">    Returns ``(model, confidence_0_100, rationale)`` where model is one of</span>
 <span class="sd">    ``csr`` | ``ssr-or-ssg`` | ``hybrid`` | ``unknown``.</span>
 
-<span class="sd">    &gt;&gt;&gt; classify_rendering(&quot;&lt;html&gt;&lt;body&gt;&lt;div id=root&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&quot;,</span>
-<span class="sd">    ...                    &quot;&lt;html&gt;&lt;body&gt;&lt;div id=root&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;p&gt;lots of text here&lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&quot;)[0]</span>
-<span class="sd">    &#39;csr&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">raw_len</span> <span class="o">=</span> <span class="n">_visible_text_len</span><span class="p">(</span><span class="n">raw_html</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">rendered_len</span> <span class="o">=</span> <span class="n">_visible_text_len</span><span class="p">(</span><span class="n">rendered_html</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="sd">    &gt;&gt;&gt; classify_rendering("&lt;html&gt;&lt;body&gt;&lt;div id=root&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;",</span>
+<span class="sd">    ...                    "&lt;html&gt;&lt;body&gt;&lt;div id=root&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;p&gt;lots of text here&lt;/p&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;")[0]</span>
+<span class="sd">    'csr'</span>
+<span class="sd">    """</span>
+    <span class="n">raw_len</span> <span class="o">=</span> <span class="n">_visible_text_len</span><span class="p">(</span><span class="n">raw_html</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span>
+    <span class="n">rendered_len</span> <span class="o">=</span> <span class="n">_visible_text_len</span><span class="p">(</span><span class="n">rendered_html</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span>
     <span class="n">globals_present</span> <span class="o">=</span> <span class="n">globals_present</span> <span class="ow">or</span> <span class="p">{}</span>
     <span class="n">has_injection</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
         <span class="n">globals_present</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;__NEXT_DATA__&quot;</span><span class="p">,</span> <span class="s2">&quot;__NUXT__&quot;</span><span class="p">,</span> <span class="s2">&quot;__remixContext&quot;</span><span class="p">,</span> <span class="s2">&quot;__gatsby&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"__NEXT_DATA__"</span><span class="p">,</span> <span class="s2">"__NUXT__"</span><span class="p">,</span> <span class="s2">"__remixContext"</span><span class="p">,</span> <span class="s2">"__gatsby"</span><span class="p">)</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">rendered_len</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">_CONF_UNKNOWN</span><span class="p">,</span> <span class="s2">&quot;no rendered text to compare&quot;</span>
+        <span class="k">return</span> <span class="s2">"unknown"</span><span class="p">,</span> <span class="n">_CONF_UNKNOWN</span><span class="p">,</span> <span class="s2">"no rendered text to compare"</span>
     <span class="n">divergence</span> <span class="o">=</span> <span class="p">(</span><span class="n">rendered_len</span> <span class="o">-</span> <span class="n">raw_len</span><span class="p">)</span> <span class="o">/</span> <span class="n">rendered_len</span>
 
     <span class="k">if</span> <span class="n">raw_len</span> <span class="o">&lt;</span> <span class="n">_MIN_SERVER_WORDS</span> <span class="ow">and</span> <span class="n">divergence</span> <span class="o">&gt;</span> <span class="n">_CSR_DIVERGENCE</span><span class="p">:</span>
-        <span class="n">model</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="s2">&quot;csr&quot;</span><span class="p">,</span> <span class="n">_CONF_CSR</span>
-        <span class="n">rationale</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;server HTML had ~</span><span class="si">{</span><span class="n">raw_len</span><span class="si">}</span><span class="s2"> words, rendered ~</span><span class="si">{</span><span class="n">rendered_len</span><span class="si">}</span><span class="s2"> (divergence </span><span class="si">{</span><span class="n">divergence</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="s2">"csr"</span><span class="p">,</span> <span class="n">_CONF_CSR</span>
+        <span class="n">rationale</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"server HTML had ~</span><span class="si">{</span><span class="n">raw_len</span><span class="si">}</span><span class="s2"> words, rendered ~</span><span class="si">{</span><span class="n">rendered_len</span><span class="si">}</span><span class="s2"> (divergence </span><span class="si">{</span><span class="n">divergence</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)"</span>
     <span class="k">elif</span> <span class="n">divergence</span> <span class="o">&lt;</span> <span class="n">_SSR_DIVERGENCE</span><span class="p">:</span>
-        <span class="n">model</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="s2">&quot;ssr-or-ssg&quot;</span><span class="p">,</span> <span class="n">_CONF_SSR</span>
-        <span class="n">rationale</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;server HTML matched the rendered DOM closely (divergence </span><span class="si">{</span><span class="n">divergence</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="s2">"ssr-or-ssg"</span><span class="p">,</span> <span class="n">_CONF_SSR</span>
+        <span class="n">rationale</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"server HTML matched the rendered DOM closely (divergence </span><span class="si">{</span><span class="n">divergence</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">model</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="s2">&quot;hybrid&quot;</span><span class="p">,</span> <span class="n">_CONF_HYBRID</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="s2">"hybrid"</span><span class="p">,</span> <span class="n">_CONF_HYBRID</span>
         <span class="n">rationale</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;partial server markup, hydrated client-side (divergence </span><span class="si">{</span><span class="n">divergence</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="sa">f</span><span class="s2">"partial server markup, hydrated client-side (divergence </span><span class="si">{</span><span class="n">divergence</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)"</span>
         <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">has_injection</span> <span class="ow">and</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ssr-or-ssg&quot;</span><span class="p">,</span> <span class="s2">&quot;hybrid&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">has_injection</span> <span class="ow">and</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"ssr-or-ssg"</span><span class="p">,</span> <span class="s2">"hybrid"</span><span class="p">):</span>
         <span class="n">conf</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">_CONF_MAX</span><span class="p">,</span> <span class="n">conf</span> <span class="o">+</span> <span class="n">_INJECTION_BOOST</span><span class="p">)</span>
-        <span class="n">rationale</span> <span class="o">+=</span> <span class="s2">&quot;; state-injection global present&quot;</span>
-    <span class="k">elif</span> <span class="n">has_injection</span> <span class="ow">and</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;csr&quot;</span><span class="p">:</span>
-        <span class="n">rationale</span> <span class="o">+=</span> <span class="s2">&quot;; note: framework global present despite empty shell&quot;</span>
+        <span class="n">rationale</span> <span class="o">+=</span> <span class="s2">"; state-injection global present"</span>
+    <span class="k">elif</span> <span class="n">has_injection</span> <span class="ow">and</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">"csr"</span><span class="p">:</span>
+        <span class="n">rationale</span> <span class="o">+=</span> <span class="s2">"; note: framework global present despite empty shell"</span>
     <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">rationale</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_document_bodies</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Server-sent HTML bodies (document responses) from the network records.&quot;&quot;&quot;</span>
-    <span class="n">body_arts</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;request&quot;</span><span class="p">)}</span>
+<span class="w">    </span><span class="sd">"""Server-sent HTML bodies (document responses) from the network records."""</span>
+    <span class="n">body_arts</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"request"</span><span class="p">)}</span>
     <span class="n">htmls</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">records</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">records</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">"network"</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">records</span> <span class="ow">or</span> <span class="p">[]:</span>
-            <span class="k">if</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resource_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;document&quot;</span> <span class="ow">and</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body_artifact_id&quot;</span><span class="p">):</span>
-                <span class="n">art</span> <span class="o">=</span> <span class="n">body_arts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;body_artifact_id&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"resource_type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"document"</span> <span class="ow">and</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"body_artifact_id"</span><span class="p">):</span>
+                <span class="n">art</span> <span class="o">=</span> <span class="n">body_arts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="s2">"body_artifact_id"</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">art</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">htmls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">art</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">htmls</span>
@@ -249,42 +249,42 @@
 <div class="viewcode-block" id="analyze_rendering">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.analyze_rendering">[docs]</a>
 <span class="nd">@register_analyzer</span><span class="p">(</span>
-    <span class="s2">&quot;rendering&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="s2">&quot;network&quot;</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;rendering_model&quot;</span><span class="p">,)</span>
+    <span class="s2">"rendering"</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">"arch"</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">,</span> <span class="s2">"network"</span><span class="p">),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"rendering_model"</span><span class="p">,)</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_rendering</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set ``run.rendering_model`` and emit an arch_fact Finding.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Set ``run.rendering_model`` and emit an arch_fact Finding."""</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
-    <span class="n">dom_arts</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">)</span>
+    <span class="n">dom_arts</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"dom"</span><span class="p">)</span>
     <span class="n">raw_htmls</span> <span class="o">=</span> <span class="n">_document_bodies</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">dom_arts</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">raw_htmls</span><span class="p">:</span>
         <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;rendering_model&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;missing document body or DOM&quot;</span><span class="p">,</span>
+            <span class="s2">"rendering_model"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"missing document body or DOM"</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">out</span>
 
-    <span class="n">fp</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">&quot;fingerprint&quot;</span><span class="p">)</span>
-    <span class="n">globals_present</span> <span class="o">=</span> <span class="p">(</span><span class="n">fp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;signals&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;globals&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">fp</span> <span class="k">else</span> <span class="p">{})</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">"fingerprint"</span><span class="p">)</span>
+    <span class="n">globals_present</span> <span class="o">=</span> <span class="p">(</span><span class="n">fp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"signals"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"globals"</span><span class="p">)</span> <span class="k">if</span> <span class="n">fp</span> <span class="k">else</span> <span class="p">{})</span> <span class="ow">or</span> <span class="p">{}</span>
     <span class="n">model</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">rationale</span> <span class="o">=</span> <span class="n">classify_rendering</span><span class="p">(</span>
         <span class="n">raw_htmls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">dom_arts</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">globals_present</span>
     <span class="p">)</span>
-    <span class="n">out</span><span class="o">.</span><span class="n">run_fields</span><span class="p">[</span><span class="s2">&quot;rendering_model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">run_fields</span><span class="p">[</span><span class="s2">"rendering_model"</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
     <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
         <span class="n">Finding</span><span class="p">(</span>
-            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;arch_fact&quot;</span><span class="p">,</span>
-            <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;arch.rendering_model&quot;</span><span class="p">,</span>
-            <span class="n">category</span><span class="o">=</span><span class="s2">&quot;architecture&quot;</span><span class="p">,</span>
-            <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Rendering model: </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s2">"arch_fact"</span><span class="p">,</span>
+            <span class="n">signal</span><span class="o">=</span><span class="s2">"arch.rendering_model"</span><span class="p">,</span>
+            <span class="n">category</span><span class="o">=</span><span class="s2">"architecture"</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Rendering model: </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
             <span class="n">severity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">dom_arts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">],</span>
             <span class="n">observed</span><span class="o">=</span><span class="n">rationale</span><span class="p">,</span>
             <span class="n">judgment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">metric_detail</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">conf</span><span class="p">},</span>
-            <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+            <span class="n">metric_detail</span><span class="o">=</span><span class="p">{</span><span class="s2">"model"</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span> <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">conf</span><span class="p">},</span>
+            <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
             <span class="n">confidence</span><span class="o">=</span><span class="n">conf</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">)</span>
-    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;rendering_model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">conf</span><span class="p">,</span> <span class="s2">&quot;rationale&quot;</span><span class="p">:</span> <span class="n">rationale</span><span class="p">}</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"rendering_model"</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span> <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">conf</span><span class="p">,</span> <span class="s2">"rationale"</span><span class="p">:</span> <span class="n">rationale</span><span class="p">}</span>
     <span class="k">return</span> <span class="n">out</span></div>
 
 
@@ -292,7 +292,7 @@
 <div class="viewcode-block" id="rendering_scored">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.rendering_scored">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rendering_scored</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">confidence</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">provenance</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Scored</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrap a rendering classification as a :class:`Scored` fact (helper).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Wrap a rendering classification as a :class:`Scored` fact (helper)."""</span>
     <span class="k">return</span> <span class="n">Scored</span><span class="p">(</span><span class="n">confidence</span><span class="o">=</span><span class="n">confidence</span><span class="p">,</span> <span class="n">provenance</span><span class="o">=</span><span class="n">provenance</span><span class="p">)</span></div>
 
 </pre></div>
@@ -304,7 +304,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

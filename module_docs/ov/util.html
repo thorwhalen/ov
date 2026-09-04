@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.util &mdash; ov 0.1.1 documentation</title>
+  <title>ov.util &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -205,7 +205,7 @@ mandate (§9).</p>
 <code class="docutils literal notranslate"><span class="pre">&quot;sidecar&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;clis&quot;</span></code>); <code class="docutils literal notranslate"><span class="pre">None</span></code> checks all. The deterministic analysis
 core needs none of these – they gate <em>capture</em> and the <em>arch sidecar</em>, so
 every requirement here is reported as optional unless capture is requested.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rep</span> <span class="o">=</span> <span class="n">check_requirements</span><span class="p">(</span><span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;clis&quot;</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rep</span> <span class="o">=</span> <span class="n">check_requirements</span><span class="p">(</span><span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="s2">"clis"</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">RequirementReport</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
@@ -216,9 +216,9 @@ every requirement here is reported as optional unless capture is requested.</p>
 <dt class="sig sig-object py" id="ov.util.content_hash">
 <span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">content_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ov/util.html#content_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.content_hash" title="Link to this definition"></a></dt>
 <dd><p>Return a short, stable SHA-256 hex digest for content-addressing.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">content_hash</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
-<span class="go">&#39;2cf24dba5fb0a30e&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">content_hash</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">content_hash</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">content_hash</span><span class="p">(</span><span class="sa">b</span><span class="s2">"hello"</span><span class="p">)</span>
+<span class="go">'2cf24dba5fb0a30e'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">content_hash</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">)</span> <span class="o">==</span> <span class="n">content_hash</span><span class="p">(</span><span class="sa">b</span><span class="s2">"hello"</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -234,10 +234,10 @@ every requirement here is reported as optional unless capture is requested.</p>
 <dt class="sig sig-object py" id="ov.util.redact_value">
 <span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">redact_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ov/util.html#redact_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.redact_value" title="Link to this definition"></a></dt>
 <dd><p>Replace a value with a length-tagged placeholder (keeps shape, drops content).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">redact_value</span><span class="p">(</span><span class="s2">&quot;super-secret-token&quot;</span><span class="p">)</span>
-<span class="go">&#39;&lt;redacted:18&gt;&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">redact_value</span><span class="p">(</span><span class="s2">"super-secret-token"</span><span class="p">)</span>
+<span class="go">'&lt;redacted:18&gt;'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">redact_value</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-<span class="go">&#39;&lt;redacted&gt;&#39;</span>
+<span class="go">'&lt;redacted&gt;'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -256,7 +256,7 @@ source tree.</p>
 <span class="sig-prename descclassname"><span class="pre">ov.util.</span></span><span class="sig-name descname"><span class="pre">stable_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ov/util.html#stable_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.util.stable_hash" title="Link to this definition"></a></dt>
 <dd><p>Hash an arbitrary JSON-able object deterministically (sorted keys).</p>
 <p>Used for <code class="docutils literal notranslate"><span class="pre">obs_hash</span></code> and <code class="docutils literal notranslate"><span class="pre">args_hash</span></code> so progress detection is reproducible.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stable_hash</span><span class="p">({</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span> <span class="o">==</span> <span class="n">stable_hash</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stable_hash</span><span class="p">({</span><span class="s2">"b"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span> <span class="o">==</span> <span class="n">stable_hash</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -274,7 +274,7 @@ source tree.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

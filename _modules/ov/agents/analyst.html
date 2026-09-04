@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.agents.analyst &mdash; ov 0.1.1 documentation</title>
+  <title>ov.agents.analyst &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,7 +143,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.agents.analyst</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;The Analyst agents (UX + Arch) — grounded judgment over an evidence bundle.</span>
+<span></span><span class="sd">"""The Analyst agents (UX + Arch) — grounded judgment over an evidence bundle.</span>
 
 <span class="sd">The hard architectural seam (§8.1, D4): **analysts never touch the live browser.**</span>
 <span class="sd">They consume a *deterministic, model-free* evidence bundle — marked screenshots +</span>
@@ -153,7 +153,7 @@
 <span class="sd">1. :func:`~ov.analysis.evidence.build_evidence_bundle` assembles the bundle (Set-of-</span>
 <span class="sd">   Mark regions, computed token budget);</span>
 <span class="sd">2. the injected ``judge`` (an LLM under the cite-or-abstain contract) returns</span>
-<span class="sd">   candidate :class:`~ov.base.Finding`s (``source_layer=&quot;llm&quot;``);</span>
+<span class="sd">   candidate :class:`~ov.base.Finding`s (``source_layer="llm"``);</span>
 <span class="sd">3. :func:`~ov.analysis.reliability.verify_findings` gates them — any claim without a</span>
 <span class="sd">   *resolvable* evidence ref (or referencing an unknown mark) is **downgraded to</span>
 <span class="sd">   ``undetermined``**, never silently dropped.</span>
@@ -161,7 +161,7 @@
 <span class="sd">So the model interprets; it never authors facts. The judge is injected (DI), so the</span>
 <span class="sd">agent is unit-testable with a stub that returns canned findings — no API call, no</span>
 <span class="sd">vision model. UX routes to Sonnet, Arch to Opus (§10). Satisfies ``aw.AgenticStep``.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -176,8 +176,8 @@
 <span class="n">Judge</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="nb">list</span><span class="p">]</span>
 
 <span class="n">_LENS_DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;ux&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;sonnet&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ux_issue&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;arch&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;opus&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;architecture&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;arch_fact&quot;</span><span class="p">},</span>
+    <span class="s2">"ux"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"model"</span><span class="p">:</span> <span class="s2">"sonnet"</span><span class="p">,</span> <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"ux"</span><span class="p">,</span> <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ux_issue"</span><span class="p">},</span>
+    <span class="s2">"arch"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"model"</span><span class="p">:</span> <span class="s2">"opus"</span><span class="p">,</span> <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"architecture"</span><span class="p">,</span> <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"arch_fact"</span><span class="p">},</span>
 <span class="p">}</span>
 
 
@@ -185,10 +185,10 @@
 <a class="viewcode-back" href="../../../module_docs/ov/agents/analyst.html#ov.agents.AnalystAgent">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AnalystAgent</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Interpret a captured run&#39;s evidence bundle into grounded findings (UX or Arch).</span>
+<span class="w">    </span><span class="sd">"""Interpret a captured run's evidence bundle into grounded findings (UX or Arch).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        lens: ``&quot;ux&quot;`` or ``&quot;arch&quot;`` — selects default model + finding defaults.</span>
+<span class="sd">        lens: ``"ux"`` or ``"arch"`` — selects default model + finding defaults.</span>
 <span class="sd">        llm: the injected LLM (a callable, an object exposing ``structured`` for the</span>
 <span class="sd">            multimodal path, an ``aw`` ``StepConfig``, or ``None``). Ignored if a</span>
 <span class="sd">            ``judge`` is given.</span>
@@ -196,7 +196,7 @@
 <span class="sd">            LLM step (tests, alternative providers). Defaults to :meth:`_default_judge`.</span>
 <span class="sd">        model: model selector for the image-budget + info (defaults from the lens).</span>
 <span class="sd">        max_marks: cap on Set-of-Mark regions in the bundle.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">lens</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">llm</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
@@ -204,13 +204,13 @@
     <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">max_marks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span>
     <span class="n">task</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lens</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_LENS_DEFAULTS</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lens must be &#39;ux&#39; or &#39;arch&#39;, got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lens</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">or</span> <span class="n">_LENS_DEFAULTS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lens</span><span class="p">][</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lens</span><span class="si">}</span><span class="s2">-analyst&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"lens must be 'ux' or 'arch', got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lens</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">or</span> <span class="n">_LENS_DEFAULTS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lens</span><span class="p">][</span><span class="s2">"model"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lens</span><span class="si">}</span><span class="s2">-analyst"</span>
 
     <span class="c1"># --- aw.AgenticStep ----------------------------------------------------- #</span>
 
@@ -219,17 +219,20 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze a run (or a prebuilt bundle) → ``(verified_findings, info)`` (aw protocol).</span>
+<span class="w">        </span><span class="sd">"""Analyze a run (or a prebuilt bundle) → ``(verified_findings, info)`` (aw protocol).</span>
 
 <span class="sd">        ``input_data`` may be a :class:`~ov.base.CaptureRun`, an</span>
 <span class="sd">        :class:`~ov.base.EvidenceBundle`, or a mapping carrying ``run`` / ``store`` /</span>
 <span class="sd">        ``bundle``. The verified LLM findings are appended to ``run.findings`` (additive</span>
 <span class="sd">        — ``source_layer`` keeps them distinct from deterministic facts) and returned.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">run</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">bundle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_inputs</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">bundle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">bundle</span> <span class="o">=</span> <span class="n">build_evidence_bundle</span><span class="p">(</span>
-                <span class="n">run</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">max_marks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_marks</span><span class="p">,</span>
+                <span class="n">run</span><span class="p">,</span>
+                <span class="n">store</span><span class="p">,</span>
+                <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+                <span class="n">max_marks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_marks</span><span class="p">,</span>
                 <span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_task</span><span class="p">(),</span>
             <span class="p">)</span>
 
@@ -239,19 +242,21 @@
         <span class="n">run</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">all_findings</span><span class="p">)</span>
 
         <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-            <span class="s2">&quot;lens&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lens</span><span class="p">,</span>
-            <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
-            <span class="s2">&quot;backend&quot;</span><span class="p">:</span> <span class="s2">&quot;in-package&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;candidates&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidates</span><span class="p">),</span>
-            <span class="s2">&quot;kept&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">kept</span><span class="p">),</span>
-            <span class="s2">&quot;downgraded&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="p">),</span>
-            <span class="s2">&quot;bundle_facts&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">facts</span><span class="p">),</span>
-            <span class="s2">&quot;run_id&quot;</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span>
+            <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"agent"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">"lens"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lens</span><span class="p">,</span>
+            <span class="s2">"model"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+            <span class="s2">"backend"</span><span class="p">:</span> <span class="s2">"in-package"</span><span class="p">,</span>
+            <span class="s2">"candidates"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidates</span><span class="p">),</span>
+            <span class="s2">"kept"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">kept</span><span class="p">),</span>
+            <span class="s2">"downgraded"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">downgraded</span><span class="p">),</span>
+            <span class="s2">"bundle_facts"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">facts</span><span class="p">),</span>
+            <span class="s2">"run_id"</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">run_id</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">context</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">info</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;kept&quot;</span><span class="p">,</span> <span class="s2">&quot;downgraded&quot;</span><span class="p">,</span> <span class="s2">&quot;candidates&quot;</span><span class="p">)}</span>
+            <span class="n">context</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">k</span><span class="p">:</span> <span class="n">info</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"kept"</span><span class="p">,</span> <span class="s2">"downgraded"</span><span class="p">,</span> <span class="s2">"candidates"</span><span class="p">)</span>
+            <span class="p">}</span>
         <span class="k">return</span> <span class="n">report</span><span class="o">.</span><span class="n">all_findings</span><span class="p">,</span> <span class="n">info</span></div>
 
 
@@ -262,24 +267,30 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">CaptureRun</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">EvidenceBundle</span><span class="p">]]:</span>
         <span class="n">ctx</span> <span class="o">=</span> <span class="n">context</span> <span class="ow">or</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">EvidenceBundle</span><span class="p">):</span>
-            <span class="n">run</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">CaptureRun</span><span class="p">()</span>
-            <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;store&quot;</span><span class="p">),</span> <span class="n">input_data</span>
+            <span class="n">run</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"run"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">CaptureRun</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"store"</span><span class="p">),</span> <span class="n">input_data</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">CaptureRun</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;store&quot;</span><span class="p">),</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bundle&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"store"</span><span class="p">),</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"bundle"</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">MutableMapping</span><span class="p">):</span>
-            <span class="n">run</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">CaptureRun</span><span class="p">()</span>
-            <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="n">input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;store&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;store&quot;</span><span class="p">),</span> <span class="n">input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bundle&quot;</span><span class="p">)</span>
-        <span class="n">run</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;run&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">CaptureRun</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;store&quot;</span><span class="p">),</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bundle&quot;</span><span class="p">)</span>
+            <span class="n">run</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"run"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"run"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">CaptureRun</span><span class="p">()</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">run</span><span class="p">,</span>
+                <span class="n">input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"store"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"store"</span><span class="p">),</span>
+                <span class="n">input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"bundle"</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"run"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">CaptureRun</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">run</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"store"</span><span class="p">),</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"bundle"</span><span class="p">)</span>
 
     <span class="c1"># --- the default (LLM) judge ------------------------------------------- #</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_default_judge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="n">EvidenceBundle</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call the injected LLM under the cite-or-abstain contract; return raw findings.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_default_judge</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="n">EvidenceBundle</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Call the injected LLM under the cite-or-abstain contract; return raw findings.</span>
 
 <span class="sd">        Returns ``[]`` (no findings) when no LLM is resolvable — the deterministic</span>
 <span class="sd">        findings already on the run are the floor; the analyst layer is purely additive.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.llm</span><span class="w"> </span><span class="kn">import</span> <span class="n">structured</span>
 
         <span class="n">prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bundle_prompt</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span>
@@ -287,43 +298,52 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">structured</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_findings_schema</span><span class="p">(),</span> <span class="n">llm</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">llm</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="n">images</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">return</span> <span class="p">[]</span>
-        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"findings"</span><span class="p">,</span> <span class="p">[])</span> <span class="ow">or</span> <span class="p">[]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_findings_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;An object schema wrapping a list of :class:`~ov.base.Finding` (for structured output).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""An object schema wrapping a list of :class:`~ov.base.Finding` (for structured output)."""</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;findings&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="n">Finding</span><span class="o">.</span><span class="n">model_json_schema</span><span class="p">()}},</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;findings&quot;</span><span class="p">],</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"object"</span><span class="p">,</span>
+            <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"findings"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"array"</span><span class="p">,</span> <span class="s2">"items"</span><span class="p">:</span> <span class="n">Finding</span><span class="o">.</span><span class="n">model_json_schema</span><span class="p">()}</span>
+            <span class="p">},</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"findings"</span><span class="p">],</span>
         <span class="p">}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_bundle_prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="n">EvidenceBundle</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render the bundle as text: contract + cited facts + task (images sent separately).&quot;&quot;&quot;</span>
-        <span class="n">facts</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">ev</span><span class="o">.</span><span class="n">evidence_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ev</span><span class="o">.</span><span class="n">summary</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">ev</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mark&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">]&quot;</span> <span class="k">if</span> <span class="n">ev</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mark&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">ev</span> <span class="ow">in</span> <span class="n">bundle</span><span class="o">.</span><span class="n">facts</span>
-        <span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;  (no facts)&quot;</span>
-        <span class="n">marks</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">marks</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;(none)&quot;</span>
+<span class="w">        </span><span class="sd">"""Render the bundle as text: contract + cited facts + task (images sent separately)."""</span>
+        <span class="n">facts</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"  - </span><span class="si">{</span><span class="n">ev</span><span class="o">.</span><span class="n">evidence_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ev</span><span class="o">.</span><span class="n">summary</span><span class="si">}</span><span class="s2">"</span>
+                <span class="o">+</span> <span class="p">(</span><span class="sa">f</span><span class="s2">"  [</span><span class="si">{</span><span class="n">ev</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'mark'</span><span class="p">)</span><span class="si">}</span><span class="s2">]"</span> <span class="k">if</span> <span class="n">ev</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mark"</span><span class="p">)</span> <span class="k">else</span> <span class="s2">""</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">ev</span> <span class="ow">in</span> <span class="n">bundle</span><span class="o">.</span><span class="n">facts</span>
+            <span class="p">)</span>
+            <span class="ow">or</span> <span class="s2">"  (no facts)"</span>
+        <span class="p">)</span>
+        <span class="n">marks</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">marks</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">"(none)"</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bundle</span><span class="o">.</span><span class="n">contract</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Marked regions: </span><span class="si">{</span><span class="n">marks</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Facts you may cite (use these ids in evidence_refs):</span><span class="se">\n</span><span class="si">{</span><span class="n">facts</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Task: </span><span class="si">{</span><span class="n">bundle</span><span class="o">.</span><span class="n">task</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;Return JSON {</span><span class="se">\&quot;</span><span class="s2">findings</span><span class="se">\&quot;</span><span class="s2">: [...]}. Each finding MUST set source_layer=&quot;</span>
-            <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">llm</span><span class="se">\&quot;</span><span class="s2">, cite at least one fact/mark id in evidence_refs, and use type &quot;</span>
-            <span class="s2">&quot;&#39;undetermined&#39; when the evidence does not support a claim. Fields: type, &quot;</span>
-            <span class="s2">&quot;signal, category, title, evidence_refs, judgment, suggested_fix.&quot;</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">bundle</span><span class="o">.</span><span class="n">contract</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"Marked regions: </span><span class="si">{</span><span class="n">marks</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"Facts you may cite (use these ids in evidence_refs):</span><span class="se">\n</span><span class="si">{</span><span class="n">facts</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"Task: </span><span class="si">{</span><span class="n">bundle</span><span class="o">.</span><span class="n">task</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">"</span>
+            <span class="s1">'Return JSON {"findings": [...]}. Each finding MUST set source_layer='</span>
+            <span class="s1">'"llm", cite at least one fact/mark id in evidence_refs, and use type '</span>
+            <span class="s2">"'undetermined' when the evidence does not support a claim. Fields: type, "</span>
+            <span class="s2">"signal, category, title, evidence_refs, judgment, suggested_fix."</span>
         <span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_bundle_images</span><span class="p">(</span><span class="n">bundle</span><span class="p">:</span> <span class="n">EvidenceBundle</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve the bundle&#39;s marked-image artifacts to bytes (for a vision client).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Resolve the bundle's marked-image artifacts to bytes (for a vision client)."""</span>
         <span class="k">if</span> <span class="n">store</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span>
         <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">artifact_id</span> <span class="ow">in</span> <span class="p">(</span><span class="o">*</span><span class="n">bundle</span><span class="o">.</span><span class="n">marked_image_artifact_ids</span><span class="p">,</span> <span class="o">*</span><span class="n">bundle</span><span class="o">.</span><span class="n">crop_artifact_ids</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">artifact_id</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="o">*</span><span class="n">bundle</span><span class="o">.</span><span class="n">marked_image_artifact_ids</span><span class="p">,</span>
+            <span class="o">*</span><span class="n">bundle</span><span class="o">.</span><span class="n">crop_artifact_ids</span><span class="p">,</span>
+        <span class="p">):</span>
             <span class="n">artifact</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">artifact_by_id</span><span class="p">(</span><span class="n">artifact_id</span><span class="p">)</span>
-            <span class="n">getter</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="s2">&quot;artifact_bytes&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">getter</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="s2">"artifact_bytes"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">artifact</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">getter</span><span class="p">):</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getter</span><span class="p">(</span><span class="n">artifact</span><span class="p">))</span>
@@ -334,64 +354,72 @@
     <span class="c1"># --- coercion ----------------------------------------------------------- #</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_coerce_findings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Turn the judge&#39;s output (dicts and/or Findings) into valid LLM Findings.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Turn the judge's output (dicts and/or Findings) into valid LLM Findings."""</span>
         <span class="n">defaults</span> <span class="o">=</span> <span class="n">_LENS_DEFAULTS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lens</span><span class="p">]</span>
         <span class="n">out</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">raw</span> <span class="ow">or</span> <span class="p">[]:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">Finding</span><span class="p">):</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">source_layer</span> <span class="o">=</span> <span class="s2">&quot;llm&quot;</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">source_layer</span> <span class="o">=</span> <span class="s2">"llm"</span>
                 <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
                 <span class="k">continue</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="k">continue</span>
             <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-            <span class="c1"># Fill required fields, overriding *falsy* values (explicit null/&quot;&quot; from</span>
+            <span class="c1"># Fill required fields, overriding *falsy* values (explicit null/"" from</span>
             <span class="c1"># the judge), not just absent keys — setdefault would keep a present None</span>
             <span class="c1"># and the Finding would then fail validation and be silently dropped.</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">):</span>
-                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s2">&quot;category&quot;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">):</span>
-                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;signal&quot;</span><span class="p">):</span>
-                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;llm.finding&quot;</span>
-            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;source_layer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;llm&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"category"</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">"category"</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s2">"category"</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"signal"</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">"signal"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"llm.finding"</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">"source_layer"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"llm"</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Finding</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">Finding</span><span class="o">.</span><span class="n">model_fields</span><span class="p">}))</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">Finding</span><span class="p">(</span>
+                        <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">Finding</span><span class="o">.</span><span class="n">model_fields</span><span class="p">}</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001 - a malformed candidate is dropped, not fatal</span>
                 <span class="k">continue</span>
         <span class="k">return</span> <span class="n">out</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_default_task</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lens</span> <span class="o">==</span> <span class="s2">&quot;ux&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;Assess usability &amp; accessibility of the marked regions; cite a &quot;</span>
-                    <span class="s2">&quot;mark/fact id for every issue and give a grounded fix.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;Identify architecture facts &amp; reconstruction signals from the cited &quot;</span>
-                <span class="s2">&quot;evidence; cite a fact id for every claim.&quot;</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lens</span> <span class="o">==</span> <span class="s2">"ux"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="s2">"Assess usability &amp; accessibility of the marked regions; cite a "</span>
+                <span class="s2">"mark/fact id for every issue and give a grounded fix."</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s2">"Identify architecture facts &amp; reconstruction signals from the cited "</span>
+            <span class="s2">"evidence; cite a fact id for every claim."</span>
+        <span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="ux_analyst">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/analyst.html#ov.agents.ux_analyst">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">ux_analyst</span><span class="p">(</span><span class="n">llm</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalystAgent</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A UX/accessibility analyst (Sonnet-routed). ``llm`` is the injected model.</span>
+<span class="w">    </span><span class="sd">"""A UX/accessibility analyst (Sonnet-routed). ``llm`` is the injected model.</span>
 
 <span class="sd">    &gt;&gt;&gt; a = ux_analyst()</span>
 <span class="sd">    &gt;&gt;&gt; a.lens, a.model, a.name</span>
-<span class="sd">    (&#39;ux&#39;, &#39;sonnet&#39;, &#39;ux-analyst&#39;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">AnalystAgent</span><span class="p">(</span><span class="n">lens</span><span class="o">=</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+<span class="sd">    ('ux', 'sonnet', 'ux-analyst')</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">AnalystAgent</span><span class="p">(</span><span class="n">lens</span><span class="o">=</span><span class="s2">"ux"</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="arch_analyst">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/analyst.html#ov.agents.arch_analyst">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">arch_analyst</span><span class="p">(</span><span class="n">llm</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalystAgent</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A software-architecture analyst (Opus-routed). ``llm`` is the injected model.</span>
+<span class="w">    </span><span class="sd">"""A software-architecture analyst (Opus-routed). ``llm`` is the injected model.</span>
 
 <span class="sd">    &gt;&gt;&gt; arch_analyst().model</span>
-<span class="sd">    &#39;opus&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">AnalystAgent</span><span class="p">(</span><span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+<span class="sd">    'opus'</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">AnalystAgent</span><span class="p">(</span><span class="n">lens</span><span class="o">=</span><span class="s2">"arch"</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 </pre></div>
 
@@ -402,7 +430,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

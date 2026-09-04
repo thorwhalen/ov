@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.__main__ &mdash; ov 0.1.1 documentation</title>
+  <title>ov.__main__ &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -159,7 +159,7 @@
              
   <section id="module-ov.__main__">
 <span id="ov-main"></span><h1>ov.__main__<a class="headerlink" href="#module-ov.__main__" title="Link to this heading"></a></h1>
-<p>Command-line interface – <code class="docutils literal notranslate"><span class="pre">argh</span></code> dispatch over the same facade functions (§4).</p>
+<p>Command-line interface – <code class="docutils literal notranslate"><span class="pre">cw</span></code> dispatch over the same facade functions (§4).</p>
 <p>This is the deterministic, scriptable face of the library (dispatch-to-interface):
 <code class="docutils literal notranslate"><span class="pre">ov</span> <span class="pre">observe</span> <span class="pre">&lt;url&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">ov</span> <span class="pre">analyze</span> <span class="pre">&lt;run_id&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">ov</span> <span class="pre">report</span> <span class="pre">&lt;run_id&gt;</span></code>,
 <code class="docutils literal notranslate"><span class="pre">ov</span> <span class="pre">synopsis</span> <span class="pre">&lt;dir&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">ov</span> <span class="pre">overview</span> <span class="pre">&lt;url&gt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">ov</span> <span class="pre">check</span></code> (requirements).
@@ -192,6 +192,9 @@ Each command calls the very functions a skill or a normal caller would call.</p>
 <dt class="sig sig-object py" id="ov.__main__.main">
 <span class="sig-prename descclassname"><span class="pre">ov.__main__.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ov/__main__.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ov.__main__.main" title="Link to this definition"></a></dt>
 <dd><p>Entry point for the <code class="docutils literal notranslate"><span class="pre">ov</span></code> console script.</p>
+<p>Returns the exit code. <code class="docutils literal notranslate"><span class="pre">cw.run</span></code> returns it rather than exiting, so the
+console-script shim (which does <code class="docutils literal notranslate"><span class="pre">sys.exit(main())</span></code>) and the <code class="docutils literal notranslate"><span class="pre">__main__</span></code>
+guard below are what turn it into a process exit status.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -243,7 +246,7 @@ Each command calls the very functions a skill or a normal caller would call.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

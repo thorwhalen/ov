@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.context &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.context &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,7 +144,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis.context</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;The analysis context + analyzer output -- the currency of the pure analyzers.</span>
+<span></span><span class="sd">"""The analysis context + analyzer output -- the currency of the pure analyzers.</span>
 
 <span class="sd">Analyzers are pure functions over captured *artifacts*: they never touch a</span>
 <span class="sd">browser or a model. :class:`AnalysisContext` injects the run + store + config and</span>
@@ -153,7 +153,7 @@
 
 <span class="sd">This is the testability seam: feed an analyzer synthetic artifacts and assert on</span>
 <span class="sd">the :class:`~ov.base.Finding`s it returns -- no network, no browser, no LLM.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -169,7 +169,7 @@
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/context.html#ov.analysis.context.AnalyzerOutput">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AnalyzerOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;What an analyzer produces; merged into the run by the orchestrator.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""What an analyzer produces; merged into the run by the orchestrator."""</span>
 
     <span class="n">findings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Finding</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
     <span class="n">endpoints</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Endpoint</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
@@ -177,7 +177,7 @@
     <span class="n">run_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>  <span class="c1"># e.g. rendering_model</span>
     <span class="n">summary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
         <span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span>
-    <span class="p">)</span>  <span class="c1"># surfaced in analyze()&#39;s dict</span></div>
+    <span class="p">)</span>  <span class="c1"># surfaced in analyze()'s dict</span></div>
 
 
 
@@ -185,7 +185,7 @@
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AnalysisContext</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Everything an analyzer needs, plus artifact-reading helpers.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Everything an analyzer needs, plus artifact-reading helpers."""</span>
 
     <span class="n">run</span><span class="p">:</span> <span class="n">CaptureRun</span>
     <span class="n">store</span><span class="p">:</span> <span class="n">Any</span>  <span class="c1"># CaptureStore (avoid import cycle)</span>
@@ -195,14 +195,14 @@
 <div class="viewcode-block" id="AnalysisContext.artifacts">
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext.artifacts">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">artifacts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;All artifacts of ``kind`` in run order.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""All artifacts of ``kind`` in run order."""</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">artifacts</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">kind</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="AnalysisContext.latest">
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext.latest">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">latest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Artifact</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The last artifact of ``kind`` (or ``None``).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""The last artifact of ``kind`` (or ``None``)."""</span>
         <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">items</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">items</span> <span class="k">else</span> <span class="kc">None</span></div>
 
@@ -210,21 +210,21 @@
 <div class="viewcode-block" id="AnalysisContext.raw">
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext.raw">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifact</span><span class="p">:</span> <span class="n">Artifact</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Raw bytes for an artifact.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Raw bytes for an artifact."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">artifact_bytes</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="AnalysisContext.text">
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext.text">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifact</span><span class="p">:</span> <span class="n">Artifact</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decode an artifact&#39;s bytes as UTF-8 text.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">)</span></div>
+<span class="w">        </span><span class="sd">"""Decode an artifact's bytes as UTF-8 text."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="AnalysisContext.json">
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext.json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artifact</span><span class="p">:</span> <span class="n">Artifact</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse an artifact&#39;s bytes as JSON (``None`` on failure).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Parse an artifact's bytes as JSON (``None`` on failure)."""</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">artifact</span><span class="p">))</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
@@ -234,7 +234,7 @@
 <div class="viewcode-block" id="AnalysisContext.jsons">
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext.jsons">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">jsons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse every artifact of ``kind`` as JSON, dropping unparseable ones.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Parse every artifact of ``kind`` as JSON, dropping unparseable ones."""</span>
         <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="n">kind</span><span class="p">):</span>
             <span class="n">parsed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -246,7 +246,7 @@
 <div class="viewcode-block" id="AnalysisContext.by_step">
 <a class="viewcode-back" href="../../../module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext.by_step">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">by_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Group artifacts of ``kind`` by their ``step_id``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Group artifacts of ``kind`` by their ``step_id``."""</span>
         <span class="n">grouped</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artifact</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="n">kind</span><span class="p">):</span>
             <span class="n">grouped</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">step_id</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -262,7 +262,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.reliability &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.reliability &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -214,8 +214,8 @@ downstream agent) can confirm a finding against the original artifact/record.</p
 <p>The host answers each <em>independently</em> (via <a class="reference internal" href="#ov.analysis.reliability.lookup_evidence" title="ov.analysis.reliability.lookup_evidence"><code class="xref py py-func docutils literal notranslate"><span class="pre">lookup_evidence()</span></code></a>), not
 conditioned on the original claim – that’s what makes CoVe factored.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ov.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Finding</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span> <span class="o">=</span> <span class="n">verification_questions</span><span class="p">(</span><span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ux_issue&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;contrast.text&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">category</span><span class="o">=</span><span class="s2">&quot;a11y&quot;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="s2">&quot;contrast 2.1:1&quot;</span><span class="p">,</span> <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;art_1&quot;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span> <span class="o">=</span> <span class="n">verification_questions</span><span class="p">(</span><span class="n">Finding</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"ux_issue"</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s2">"contrast.text"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">category</span><span class="o">=</span><span class="s2">"a11y"</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="s2">"contrast 2.1:1"</span><span class="p">,</span> <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="s2">"art_1"</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">qs</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span>
 <span class="go">True</span>
 </pre></div>
@@ -248,7 +248,7 @@ the same instances, now marked <code class="docutils literal notranslate"><span 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

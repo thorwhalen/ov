@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,7 +143,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Analysis layer: deterministic analyzers over captured artifacts (Phases 2-3).</span>
+<span></span><span class="sd">"""Analysis layer: deterministic analyzers over captured artifacts (Phases 2-3).</span>
 
 <span class="sd">Analyzers are registered plugins (:data:`ANALYZER_REGISTRY`) that read a</span>
 <span class="sd">:class:`~ov.base.CaptureRun` plus its store and emit :class:`~ov.base.Finding`s /</span>
@@ -151,32 +151,32 @@
 <span class="sd">synthetic artifacts. The host (or, later, an in-package agent) adds narrative</span>
 <span class="sd">judgment *on top* of these via the evidence bundle.</span>
 
-<span class="sd">Each analyzer is registered with a ``lens`` (``&quot;ux&quot;`` or ``&quot;arch&quot;``) so</span>
+<span class="sd">Each analyzer is registered with a ``lens`` (``"ux"`` or ``"arch"``) so</span>
 <span class="sd">``ov.analyze(run, lenses=...)`` can select which to run; ``requires``/``produces``</span>
 <span class="sd">order them. The builtins are eagerly imported on first import of this package so</span>
 <span class="sd">the registry is never half-populated (same robustness rule as the probes).</span>
 
 <span class="sd">(The package is named ``analysis`` rather than ``analyze`` so it cannot shadow</span>
 <span class="sd">the ``ov.analyze`` facade *function*; see ``ov/__init__.py``.)</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Registry</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.context</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnalysisContext</span><span class="p">,</span> <span class="n">AnalyzerOutput</span>  <span class="c1"># noqa: F401</span>
 
-<span class="n">ANALYZER_REGISTRY</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">(</span><span class="s2">&quot;analyzer&quot;</span><span class="p">)</span>
+<span class="n">ANALYZER_REGISTRY</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">(</span><span class="s2">"analyzer"</span><span class="p">)</span>
 <span class="n">register_analyzer</span> <span class="o">=</span> <span class="n">ANALYZER_REGISTRY</span><span class="o">.</span><span class="n">register</span>
 
 
 <div class="viewcode-block" id="load_builtin_analyzers">
 <a class="viewcode-back" href="../../module_docs/ov/analysis.html#ov.analysis.load_builtin_analyzers">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_builtin_analyzers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Import builtin analyzer modules so their ``@register_analyzer`` runs.</span>
+<span class="w">    </span><span class="sd">"""Import builtin analyzer modules so their ``@register_analyzer`` runs.</span>
 
 <span class="sd">    Safe to call repeatedly. Invoked once at the bottom of this module so the</span>
 <span class="sd">    registry is fully populated on import (no order-dependent gaps).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">.arch</span><span class="w"> </span><span class="kn">import</span> <span class="n">api</span><span class="p">,</span> <span class="n">bundles</span><span class="p">,</span> <span class="n">dependencies</span><span class="p">,</span> <span class="n">framework</span><span class="p">,</span> <span class="n">rendering</span>  <span class="c1"># noqa: F401</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">.ux</span><span class="w"> </span><span class="kn">import</span> <span class="n">a11y</span><span class="p">,</span> <span class="n">contrast_focus</span><span class="p">,</span> <span class="n">cwv</span><span class="p">,</span> <span class="n">heuristics</span><span class="p">,</span> <span class="n">metrics</span>  <span class="c1"># noqa: F401</span></div>
 
@@ -192,7 +192,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

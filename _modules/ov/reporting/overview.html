@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.reporting.overview &mdash; ov 0.1.1 documentation</title>
+  <title>ov.reporting.overview &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,12 +144,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.reporting.overview</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;The ``overview`` one-liner: observe -&gt; analyze -&gt; report -&gt; synopsis (§4).</span>
+<span></span><span class="sd">"""The ``overview`` one-liner: observe -&gt; analyze -&gt; report -&gt; synopsis (§4).</span>
 
 <span class="sd">This is the pit-of-success entry point behind :func:`ov.overview`. It threads a</span>
 <span class="sd">single store through capture, the deterministic analyzers, report rendering, and</span>
 <span class="sd">the synopsis, returning the synopsis path/key. No model is involved.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -164,22 +164,22 @@
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">headed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span>
-    <span class="n">probes</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"reconstruct"</span><span class="p">,</span>
+    <span class="n">probes</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="s2">"default"</span><span class="p">,</span>
     <span class="n">store</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">out_dir</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">authorized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">lenses</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">),</span>
+    <span class="n">lenses</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"ux"</span><span class="p">,</span> <span class="s2">"arch"</span><span class="p">),</span>
     <span class="n">baseline</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">observe_kw</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the full deterministic pipeline and return the synopsis path/key.</span>
+<span class="w">    </span><span class="sd">"""Run the full deterministic pipeline and return the synopsis path/key.</span>
 
-<span class="sd">    In ``mode=&quot;review&quot;`` it inserts an own-target diff step between analysis and</span>
+<span class="sd">    In ``mode="review"`` it inserts an own-target diff step between analysis and</span>
 <span class="sd">    reporting: the run is compared against a stored prior baseline (``baseline``,</span>
 <span class="sd">    or the latest prior run of the same target) so the review report and synopsis</span>
 <span class="sd">    carry regression/drift detail. A first review run (no baseline) is a no-op.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">ov</span>
 
     <span class="kn">from</span><span class="w"> </span><span class="nn">..analysis.diff</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_diff</span>
@@ -198,7 +198,7 @@
         <span class="o">**</span><span class="n">observe_kw</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">run_analysis</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">lenses</span><span class="o">=</span><span class="n">lenses</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;review&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">"review"</span><span class="p">:</span>
         <span class="n">build_diff</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span>
     <span class="n">render_reports</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">build_synopsis</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span></div>
@@ -212,7 +212,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

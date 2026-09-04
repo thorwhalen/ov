@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.capture.session &mdash; ov 0.1.1 documentation</title>
+  <title>ov.capture.session &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,7 +143,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.capture.session</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;``CaptureSession`` -- owns the browser and orchestrates the probes (§3.1).</span>
+<span></span><span class="sd">"""``CaptureSession`` -- owns the browser and orchestrates the probes (§3.1).</span>
 
 <span class="sd">The session is the deterministic capture spine: it resolves and dependency-orders</span>
 <span class="sd">the enabled probes, attaches their listeners before navigation, snapshots state</span>
@@ -152,7 +152,7 @@
 
 <span class="sd">It exposes ``page`` so the ``operate`` primitives and the scripted driver can act</span>
 <span class="sd">on the same browser, and is a context manager for safe teardown.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -167,14 +167,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_probe_names</span><span class="p">(</span><span class="n">probes</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">OvConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve a probe selector into ``(known_names, unknown_names)``.</span>
+<span class="w">    </span><span class="sd">"""Resolve a probe selector into ``(known_names, unknown_names)``.</span>
 
 <span class="sd">    ``unknown_names`` lets the caller surface typos instead of silently dropping</span>
 <span class="sd">    them (informative-errors principle).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">probes</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">):</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">probes</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">"default"</span><span class="p">):</span>
         <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">default_probes</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">probes</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">probes</span> <span class="o">==</span> <span class="s2">"all"</span><span class="p">:</span>
         <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">PROBE_REGISTRY</span><span class="o">.</span><span class="n">names</span><span class="p">())</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">probes</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">probes</span><span class="p">]</span>
@@ -188,15 +188,15 @@
 <div class="viewcode-block" id="CaptureSession">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/session.html#ov.capture.session.CaptureSession">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CaptureSession</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Drive one target and record everything into the store (zero-config default).</span>
+<span class="w">    </span><span class="sd">"""Drive one target and record everything into the store (zero-config default).</span>
 
 <span class="sd">    Typical use is via the :func:`ov.observe` facade, but the session is directly</span>
 <span class="sd">    usable::</span>
 
-<span class="sd">        with CaptureSession(target_url=&quot;https://example.com&quot;) as s:</span>
+<span class="sd">        with CaptureSession(target_url="https://example.com") as s:</span>
 <span class="sd">            s.open()                 # navigate to target_url + capture the load state</span>
 <span class="sd">            run = s.run</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -204,8 +204,8 @@
         <span class="n">target_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">config</span><span class="p">:</span> <span class="n">OvConfig</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">store</span><span class="p">:</span> <span class="n">CaptureStore</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;reconstruct&quot;</span><span class="p">,</span>
-        <span class="n">probes</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"reconstruct"</span><span class="p">,</span>
+        <span class="n">probes</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span>
         <span class="n">record_har</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="n">load_builtin_probes</span><span class="p">()</span>
@@ -219,7 +219,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">probe_names</span><span class="p">,</span> <span class="n">unknown_probes</span> <span class="o">=</span> <span class="n">_resolve_probe_names</span><span class="p">(</span><span class="n">probes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">unknown_probes</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;ignored unknown probes </span><span class="si">{</span><span class="n">unknown_probes</span><span class="si">}</span><span class="s2">; known probes: </span><span class="si">{</span><span class="n">PROBE_REGISTRY</span><span class="o">.</span><span class="n">names</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"ignored unknown probes </span><span class="si">{</span><span class="n">unknown_probes</span><span class="si">}</span><span class="s2">; known probes: </span><span class="si">{</span><span class="n">PROBE_REGISTRY</span><span class="o">.</span><span class="n">names</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">browser</span> <span class="o">=</span> <span class="n">BrowserSession</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">record_har</span><span class="o">=</span><span class="n">record_har</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_probes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Probe</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -230,13 +230,13 @@
 
 <div class="viewcode-block" id="CaptureSession.start">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.start">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CaptureSession&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Launch the browser, attach CDP (Chromium), and attach all probes.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"CaptureSession"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Launch the browser, attach CDP (Chromium), and attach all probes."""</span>
         <span class="n">ordered</span> <span class="o">=</span> <span class="n">PROBE_REGISTRY</span><span class="o">.</span><span class="n">ordered</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probe_names</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_probes</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">fn</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ordered</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
         <span class="c1"># After the browser launches, any failure must still tear it down so we</span>
-        <span class="c1"># don&#39;t leak a browser/Playwright process on the error path.</span>
+        <span class="c1"># don't leak a browser/Playwright process on the error path.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">cdp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">cdp</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_ctx</span> <span class="o">=</span> <span class="n">ProbeContext</span><span class="p">(</span>
@@ -251,7 +251,7 @@
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">probe</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ctx</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001 - one bad probe must not abort capture</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;probe </span><span class="si">{</span><span class="n">probe</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed to attach&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"probe </span><span class="si">{</span><span class="n">probe</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed to attach"</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
             <span class="k">raise</span>
@@ -261,7 +261,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The active Playwright ``Page`` for ``operate`` primitives / the driver.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""The active Playwright ``Page`` for ``operate`` primitives / the driver."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">page</span>
 
     <span class="c1"># --- driving ----------------------------------------------------------- #</span>
@@ -269,14 +269,14 @@
 <div class="viewcode-block" id="CaptureSession.navigate">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.navigate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">navigate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Navigate the page to ``url`` (waits for the default load state).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Navigate the page to ``url`` (waits for the default load state)."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="CaptureSession.open">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.open">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">intent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;load&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JourneyStep</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Navigate to the target (or ``url``) and capture the initial state.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">intent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"load"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JourneyStep</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Navigate to the target (or ``url``) and capture the initial state."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">navigate</span><span class="p">(</span><span class="n">url</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">target_url</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">snapshot_state</span><span class="p">(</span><span class="n">intent</span><span class="o">=</span><span class="n">intent</span><span class="p">)</span></div>
 
@@ -284,15 +284,15 @@
 <div class="viewcode-block" id="CaptureSession.snapshot_state">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.snapshot_state">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">snapshot_state</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">intent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;observe&quot;</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ax_snapshot&quot;</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">intent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"observe"</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ax_snapshot"</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JourneyStep</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Capture all probes for the current state and journal a :class:`JourneyStep`.</span>
+<span class="w">        </span><span class="sd">"""Capture all probes for the current state and journal a :class:`JourneyStep`.</span>
 
 <span class="sd">        Bundles the §2.3 ``snapshot_state`` primitive: observe affordances, run</span>
 <span class="sd">        per-state probes, and record one step keyed to the produced artifacts.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ctx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;CaptureSession not started; call start() first&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"CaptureSession not started; call start() first"</span><span class="p">)</span>
         <span class="n">obs</span><span class="p">:</span> <span class="n">Observation</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">obs</span> <span class="o">=</span> <span class="n">observe_page</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="p">,</span> <span class="n">strategy</span><span class="p">)</span>
@@ -310,7 +310,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">art</span><span class="p">)</span>
                     <span class="n">step</span><span class="o">.</span><span class="n">artifact_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;probe </span><span class="si">{</span><span class="n">probe</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed on capture&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"probe </span><span class="si">{</span><span class="n">probe</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed on capture"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">step</span></div>
 
@@ -318,9 +318,9 @@
 <div class="viewcode-block" id="CaptureSession.capture_step">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.capture_step">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">capture_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="n">JourneyStep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JourneyStep</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run per-state probes for an externally-built step (used by the driver).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Run per-state probes for an externally-built step (used by the driver)."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ctx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;CaptureSession not started; call start() first&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"CaptureSession not started; call start() first"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ctx</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
         <span class="k">for</span> <span class="n">probe</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_probes</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -328,7 +328,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">art</span><span class="p">)</span>
                     <span class="n">step</span><span class="o">.</span><span class="n">artifact_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">art</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;probe </span><span class="si">{</span><span class="n">probe</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed on capture&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"probe </span><span class="si">{</span><span class="n">probe</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed on capture"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">step</span></div>
 
 
@@ -337,7 +337,7 @@
 <div class="viewcode-block" id="CaptureSession.finalize">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.finalize">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Flush every probe (page still alive), close the browser, store the HAR.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Flush every probe (page still alive), close the browser, store the HAR."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ctx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">utcnow</span>
@@ -348,14 +348,14 @@
                 <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">probe</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ctx</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">art</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;probe </span><span class="si">{</span><span class="n">probe</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed on finalize&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"probe </span><span class="si">{</span><span class="n">probe</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed on finalize"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># flushes HAR</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">har_bytes</span><span class="p">:</span>
             <span class="n">har_art</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">har_bytes</span><span class="p">,</span>
-                <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;har&quot;</span><span class="p">,</span>
-                <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json+har&quot;</span><span class="p">,</span>
-                <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">target_url</span><span class="p">},</span>
+                <span class="n">kind</span><span class="o">=</span><span class="s2">"har"</span><span class="p">,</span>
+                <span class="n">content_type</span><span class="o">=</span><span class="s2">"application/json+har"</span><span class="p">,</span>
+                <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"target"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">target_url</span><span class="p">},</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">har_art</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">save_run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">)</span></div>
@@ -364,14 +364,14 @@
 <div class="viewcode-block" id="CaptureSession.close">
 <a class="viewcode-back" href="../../../module_docs/ov/capture/session.html#ov.capture.session.CaptureSession.close">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Finalize if needed and tear down (idempotent).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Finalize if needed and tear down (idempotent)."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">finished_at</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_started</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CaptureSession&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"CaptureSession"</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">exc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -386,7 +386,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

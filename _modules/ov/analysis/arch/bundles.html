@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.analysis.arch.bundles &mdash; ov 0.1.1 documentation</title>
+  <title>ov.analysis.arch.bundles &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,7 +144,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.analysis.arch.bundles</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Source-map detection + recovery -- the decisive bimodal lever (D2).</span>
+<span></span><span class="sd">"""Source-map detection + recovery -- the decisive bimodal lever (D2).</span>
 
 <span class="sd">Reconstruction quality is bimodal: WITH source maps you recover the original file</span>
 <span class="sd">tree, source text, and ``node_modules`` version paths; WITHOUT them you get a</span>
@@ -159,7 +159,7 @@
 <span class="sd">surfaces recovered ``node_modules`` packages as top-provenance</span>
 <span class="sd">:class:`~ov.base.TechFinding`s for the dependency inventory. Recovered artifacts</span>
 <span class="sd">are not appended to ``run.artifacts``, so re-analysis stays idempotent.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -179,7 +179,7 @@
     <span class="n">recover_from_map</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">_MAP_MARKERS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;//# sourceMappingURL=&quot;</span><span class="p">,</span> <span class="s2">&quot;//@ sourceMappingURL=&quot;</span><span class="p">)</span>
+<span class="n">_MAP_MARKERS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"//# sourceMappingURL="</span><span class="p">,</span> <span class="s2">"//@ sourceMappingURL="</span><span class="p">)</span>
 
 <span class="c1"># Recovery caps (named, not magic): bound pathological maps / huge trees.</span>
 <span class="n">_MAX_MAPS</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># source-map documents consumed per run</span>
@@ -191,16 +191,16 @@
 <div class="viewcode-block" id="js_response_bodies">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/bundles.html#ov.analysis.arch.bundles.js_response_bodies">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">js_response_bodies</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return ``(url, text)`` for captured JS response bodies (reused across arch).&quot;&quot;&quot;</span>
-    <span class="n">body_arts</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;request&quot;</span><span class="p">)}</span>
+<span class="w">    </span><span class="sd">"""Return ``(url, text)`` for captured JS response bodies (reused across arch)."""</span>
+    <span class="n">body_arts</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"request"</span><span class="p">)}</span>
     <span class="n">out</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">records</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">records</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">"network"</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">records</span> <span class="ow">or</span> <span class="p">[]:</span>
-            <span class="n">ct</span> <span class="o">=</span> <span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response_headers&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="n">is_js</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resource_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;script&quot;</span> <span class="ow">or</span> <span class="s2">&quot;javascript&quot;</span> <span class="ow">in</span> <span class="n">ct</span>
-            <span class="k">if</span> <span class="n">is_js</span> <span class="ow">and</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body_artifact_id&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">body_arts</span><span class="p">:</span>
+            <span class="n">ct</span> <span class="o">=</span> <span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"response_headers"</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content-type"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+            <span class="n">is_js</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"resource_type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"script"</span> <span class="ow">or</span> <span class="s2">"javascript"</span> <span class="ow">in</span> <span class="n">ct</span>
+            <span class="k">if</span> <span class="n">is_js</span> <span class="ow">and</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"body_artifact_id"</span><span class="p">)</span> <span class="ow">in</span> <span class="n">body_arts</span><span class="p">:</span>
                 <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">body_arts</span><span class="p">[</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;body_artifact_id&quot;</span><span class="p">]]))</span>
+                    <span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"url"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span> <span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">body_arts</span><span class="p">[</span><span class="n">rec</span><span class="p">[</span><span class="s2">"body_artifact_id"</span><span class="p">]]))</span>
                 <span class="p">)</span>
     <span class="k">return</span> <span class="n">out</span></div>
 
@@ -211,23 +211,23 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">detect_source_maps</span><span class="p">(</span>
     <span class="n">js_bodies</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">asset_urls</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect source-map presence from JS bodies + asset urls (pure, testable).</span>
+<span class="w">    </span><span class="sd">"""Detect source-map presence from JS bodies + asset urls (pure, testable).</span>
 
-<span class="sd">    &gt;&gt;&gt; detect_source_maps([(&quot;a.js&quot;, &quot;x=1\\n//# sourceMappingURL=a.js.map&quot;)], [])[0]</span>
+<span class="sd">    &gt;&gt;&gt; detect_source_maps([("a.js", "x=1\\n//# sourceMappingURL=a.js.map")], [])[0]</span>
 <span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; detect_source_maps([(&quot;a.js&quot;, &quot;x=1&quot;)], [&quot;https://x/b.js.map&quot;])[0]</span>
+<span class="sd">    &gt;&gt;&gt; detect_source_maps([("a.js", "x=1")], ["https://x/b.js.map"])[0]</span>
 <span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; detect_source_maps([(&quot;a.js&quot;, &quot;x=1&quot;)], [])[0]</span>
+<span class="sd">    &gt;&gt;&gt; detect_source_maps([("a.js", "x=1")], [])[0]</span>
 <span class="sd">    False</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">evidence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">url</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">js_bodies</span><span class="p">:</span>
         <span class="n">tail</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2000</span><span class="p">:]</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">m</span> <span class="ow">in</span> <span class="n">tail</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">_MAP_MARKERS</span><span class="p">):</span>
-            <span class="n">evidence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sourceMappingURL in </span><span class="si">{</span><span class="n">url</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;bundle&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">evidence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"sourceMappingURL in </span><span class="si">{</span><span class="n">url</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">'bundle'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">asset_urls</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.map&quot;</span><span class="p">):</span>
-            <span class="n">evidence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;served map asset </span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".map"</span><span class="p">):</span>
+            <span class="n">evidence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"served map asset </span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">evidence</span><span class="p">),</span> <span class="n">evidence</span></div>
 
 
@@ -235,86 +235,86 @@
 <div class="viewcode-block" id="analyze_bundles">
 <a class="viewcode-back" href="../../../../module_docs/ov/analysis/arch/bundles.html#ov.analysis.arch.bundles.analyze_bundles">[docs]</a>
 <span class="nd">@register_analyzer</span><span class="p">(</span>
-    <span class="s2">&quot;bundles&quot;</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;source_maps_present&quot;</span><span class="p">,)</span>
+    <span class="s2">"bundles"</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="s2">"arch"</span><span class="p">,</span> <span class="n">requires</span><span class="o">=</span><span class="p">(</span><span class="s2">"network"</span><span class="p">,),</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"source_maps_present"</span><span class="p">,)</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyze_bundles</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalyzerOutput</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set ``run.source_maps_present`` and emit an arch_fact (+ optional recovery).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Set ``run.source_maps_present`` and emit an arch_fact (+ optional recovery)."""</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">AnalyzerOutput</span><span class="p">()</span>
     <span class="n">js_bodies</span> <span class="o">=</span> <span class="n">js_response_bodies</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
     <span class="n">asset_urls</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">inv</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">&quot;assets&quot;</span><span class="p">):</span>
-        <span class="n">asset_urls</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">(</span><span class="n">inv</span> <span class="ow">or</span> <span class="p">[]))</span>
+    <span class="k">for</span> <span class="n">inv</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">"assets"</span><span class="p">):</span>
+        <span class="n">asset_urls</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"url"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">(</span><span class="n">inv</span> <span class="ow">or</span> <span class="p">[]))</span>
 
     <span class="n">present</span><span class="p">,</span> <span class="n">evidence</span> <span class="o">=</span> <span class="n">detect_source_maps</span><span class="p">(</span><span class="n">js_bodies</span><span class="p">,</span> <span class="n">asset_urls</span><span class="p">)</span>
-    <span class="n">smap_arts</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;source_map&quot;</span><span class="p">)</span>
+    <span class="n">smap_arts</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"source_map"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">smap_arts</span><span class="p">:</span>
-        <span class="n">evidence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">smap_arts</span><span class="p">)</span><span class="si">}</span><span class="s2"> captured source-map artifact(s)&quot;</span><span class="p">)</span>
+        <span class="n">evidence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">smap_arts</span><span class="p">)</span><span class="si">}</span><span class="s2"> captured source-map artifact(s)"</span><span class="p">)</span>
 
     <span class="c1"># Recovery is attempted unconditionally: detect_source_maps only scans each</span>
-    <span class="c1"># bundle&#39;s 2 kB tail, so a large INLINE data: map (its marker pushed past the</span>
+    <span class="c1"># bundle's 2 kB tail, so a large INLINE data: map (its marker pushed past the</span>
     <span class="c1"># window by the base64 payload) or a probe-fetched source_map artifact would be</span>
     <span class="c1"># missed -- yet recovering any map is itself proof maps are present. So derive</span>
     <span class="c1"># `present` from detection OR a successful recovery, not the reverse.</span>
     <span class="n">recovery</span> <span class="o">=</span> <span class="n">_recover_sources</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">js_bodies</span><span class="p">)</span>
-    <span class="n">present</span> <span class="o">=</span> <span class="n">present</span> <span class="ow">or</span> <span class="nb">bool</span><span class="p">(</span><span class="n">smap_arts</span><span class="p">)</span> <span class="ow">or</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;maps_consumed&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;maps_consumed&quot;</span><span class="p">]:</span>
+    <span class="n">present</span> <span class="o">=</span> <span class="n">present</span> <span class="ow">or</span> <span class="nb">bool</span><span class="p">(</span><span class="n">smap_arts</span><span class="p">)</span> <span class="ow">or</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"maps_consumed"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"maps_consumed"</span><span class="p">]:</span>
         <span class="n">evidence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;recovered </span><span class="si">{</span><span class="n">recovery</span><span class="p">[</span><span class="s1">&#39;recovered_files&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> file(s) from source maps&quot;</span>
+            <span class="sa">f</span><span class="s2">"recovered </span><span class="si">{</span><span class="n">recovery</span><span class="p">[</span><span class="s1">'recovered_files'</span><span class="p">]</span><span class="si">}</span><span class="s2"> file(s) from source maps"</span>
         <span class="p">)</span>
-    <span class="n">out</span><span class="o">.</span><span class="n">run_fields</span><span class="p">[</span><span class="s2">&quot;source_maps_present&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">present</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">run_fields</span><span class="p">[</span><span class="s2">"source_maps_present"</span><span class="p">]</span> <span class="o">=</span> <span class="n">present</span>
 
     <span class="n">metric_detail</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;source_maps_present&quot;</span><span class="p">:</span> <span class="n">present</span><span class="p">,</span>
-        <span class="s2">&quot;recovered_files&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;recovered_files&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;recovered_packages&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;recovered_packages&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;had_sources_content&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;had_sources_content&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;maps_consumed&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;maps_consumed&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;skipped_unsafe_paths&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;skipped_unsafe_paths&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;file_tree_sample&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;file_tree_sample&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;packages_sample&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;packages_sample&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;manifest_uri&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;manifest_uri&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;truncated&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;truncated&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;packages_truncated&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;packages_truncated&quot;</span><span class="p">],</span>
+        <span class="s2">"source_maps_present"</span><span class="p">:</span> <span class="n">present</span><span class="p">,</span>
+        <span class="s2">"recovered_files"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"recovered_files"</span><span class="p">],</span>
+        <span class="s2">"recovered_packages"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"recovered_packages"</span><span class="p">],</span>
+        <span class="s2">"had_sources_content"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"had_sources_content"</span><span class="p">],</span>
+        <span class="s2">"maps_consumed"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"maps_consumed"</span><span class="p">],</span>
+        <span class="s2">"skipped_unsafe_paths"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"skipped_unsafe_paths"</span><span class="p">],</span>
+        <span class="s2">"file_tree_sample"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"file_tree_sample"</span><span class="p">],</span>
+        <span class="s2">"packages_sample"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"packages_sample"</span><span class="p">],</span>
+        <span class="s2">"manifest_uri"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"manifest_uri"</span><span class="p">],</span>
+        <span class="s2">"truncated"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"truncated"</span><span class="p">],</span>
+        <span class="s2">"packages_truncated"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"packages_truncated"</span><span class="p">],</span>
     <span class="p">}</span>
     <span class="c1"># Recovered node_modules versions are the top-rank dependency provenance</span>
     <span class="c1"># (sourcemap path &gt; bundle comment &gt; global signature) -&gt; TechFindings so the</span>
     <span class="c1"># existing dependency inventory + CVE scan + tech-diff pick them up. They are</span>
     <span class="c1"># the SBOM, kept out of the headline stack via is_recovered_dependency.</span>
-    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;packages&quot;</span><span class="p">][:</span><span class="n">_MAX_RECOVERED_DEPS</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"packages"</span><span class="p">][:</span><span class="n">_MAX_RECOVERED_DEPS</span><span class="p">]:</span>
         <span class="n">out</span><span class="o">.</span><span class="n">tech</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">TechFinding</span><span class="p">(</span>
                 <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
                 <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
-                <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dependency&quot;</span><span class="p">],</span>
+                <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s2">"dependency"</span><span class="p">],</span>
                 <span class="n">confidence</span><span class="o">=</span><span class="mi">95</span> <span class="k">if</span> <span class="n">version</span> <span class="k">else</span> <span class="mi">85</span><span class="p">,</span>
-                <span class="n">provenance</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sourcemap&quot;</span><span class="p">],</span>
+                <span class="n">provenance</span><span class="o">=</span><span class="p">[</span><span class="s2">"sourcemap"</span><span class="p">],</span>
             <span class="p">)</span>
         <span class="p">)</span>
 
     <span class="n">out</span><span class="o">.</span><span class="n">findings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
         <span class="n">Finding</span><span class="p">(</span>
-            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;arch_fact&quot;</span><span class="p">,</span>
-            <span class="n">signal</span><span class="o">=</span><span class="s2">&quot;arch.source_maps&quot;</span><span class="p">,</span>
-            <span class="n">category</span><span class="o">=</span><span class="s2">&quot;architecture&quot;</span><span class="p">,</span>
-            <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Source maps </span><span class="si">{</span><span class="s1">&#39;present&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">present</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;absent&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]]</span>
-            <span class="ow">or</span> <span class="p">[</span><span class="s2">&quot;network&quot;</span><span class="p">],</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s2">"arch_fact"</span><span class="p">,</span>
+            <span class="n">signal</span><span class="o">=</span><span class="s2">"arch.source_maps"</span><span class="p">,</span>
+            <span class="n">category</span><span class="o">=</span><span class="s2">"architecture"</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Source maps </span><span class="si">{</span><span class="s1">'present'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">present</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'absent'</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="n">evidence_refs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"network"</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="ow">or</span> <span class="p">[</span><span class="s2">"network"</span><span class="p">],</span>
             <span class="n">observed</span><span class="o">=</span><span class="p">(</span>
-                <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">evidence</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+                <span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">evidence</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">present</span>
-                <span class="k">else</span> <span class="s2">&quot;no sourceMappingURL markers or .map assets found&quot;</span>
+                <span class="k">else</span> <span class="s2">"no sourceMappingURL markers or .map assets found"</span>
             <span class="p">),</span>
             <span class="n">metric_detail</span><span class="o">=</span><span class="n">metric_detail</span><span class="p">,</span>
             <span class="n">judgment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">source_layer</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+            <span class="n">source_layer</span><span class="o">=</span><span class="s2">"deterministic"</span><span class="p">,</span>
             <span class="n">confidence</span><span class="o">=</span><span class="mf">0.9</span> <span class="k">if</span> <span class="n">present</span> <span class="k">else</span> <span class="mf">0.6</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">)</span>
     <span class="n">out</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;source_maps_present&quot;</span><span class="p">:</span> <span class="n">present</span><span class="p">,</span>
-        <span class="s2">&quot;recovered_files&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;recovered_files&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;recovered_packages&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;recovered_packages&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;had_sources_content&quot;</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">&quot;had_sources_content&quot;</span><span class="p">],</span>
+        <span class="s2">"source_maps_present"</span><span class="p">:</span> <span class="n">present</span><span class="p">,</span>
+        <span class="s2">"recovered_files"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"recovered_files"</span><span class="p">],</span>
+        <span class="s2">"recovered_packages"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"recovered_packages"</span><span class="p">],</span>
+        <span class="s2">"had_sources_content"</span><span class="p">:</span> <span class="n">recovery</span><span class="p">[</span><span class="s2">"had_sources_content"</span><span class="p">],</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">out</span></div>
 
@@ -323,15 +323,15 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_collect_map_texts</span><span class="p">(</span>
     <span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">,</span> <span class="n">js_bodies</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield candidate source-map JSON bodies from the captured artifacts, lazily.</span>
+<span class="w">    </span><span class="sd">"""Yield candidate source-map JSON bodies from the captured artifacts, lazily.</span>
 
-<span class="sd">    Three sources: explicit ``source_map`` artifacts (the capture probe&#39;s output),</span>
+<span class="sd">    Three sources: explicit ``source_map`` artifacts (the capture probe's output),</span>
 <span class="sd">    incidental ``.map`` response bodies captured as ``request`` bodies, and inline</span>
 <span class="sd">    ``data:`` maps embedded in JS bundles. Yielding lazily (vs. building a list)</span>
 <span class="sd">    lets the caller stop after ``_MAX_MAPS`` without decoding every captured map;</span>
 <span class="sd">    the seen-hash guard stops one logical map collected via two channels (e.g. an</span>
 <span class="sd">    explicit artifact and an inline copy) from being consumed/counted twice.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">seen</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_fresh</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -341,18 +341,18 @@
         <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;source_map&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"source_map"</span><span class="p">):</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">_fresh</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
             <span class="k">yield</span> <span class="n">text</span>
-    <span class="n">body_arts</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">&quot;request&quot;</span><span class="p">)}</span>
-    <span class="k">for</span> <span class="n">records</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">&quot;network&quot;</span><span class="p">):</span>
+    <span class="n">body_arts</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">artifacts</span><span class="p">(</span><span class="s2">"request"</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">records</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">jsons</span><span class="p">(</span><span class="s2">"network"</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">records</span> <span class="ow">or</span> <span class="p">[]:</span>
             <span class="k">if</span> <span class="p">(</span>
-                <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.map&quot;</span><span class="p">)</span>
-                <span class="ow">and</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body_artifact_id&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">body_arts</span>
+                <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"url"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".map"</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="n">rec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"body_artifact_id"</span><span class="p">)</span> <span class="ow">in</span> <span class="n">body_arts</span>
             <span class="p">):</span>
-                <span class="n">text</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">body_arts</span><span class="p">[</span><span class="n">rec</span><span class="p">[</span><span class="s2">&quot;body_artifact_id&quot;</span><span class="p">]])</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">body_arts</span><span class="p">[</span><span class="n">rec</span><span class="p">[</span><span class="s2">"body_artifact_id"</span><span class="p">]])</span>
                 <span class="k">if</span> <span class="n">_fresh</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
                     <span class="k">yield</span> <span class="n">text</span>
     <span class="k">for</span> <span class="n">_url</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">js_bodies</span><span class="p">:</span>
@@ -364,14 +364,14 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_recover_sources</span><span class="p">(</span>
     <span class="n">ctx</span><span class="p">:</span> <span class="n">AnalysisContext</span><span class="p">,</span> <span class="n">js_bodies</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recover + persist original source from captured maps (pure-Python; idempotent).</span>
+<span class="w">    </span><span class="sd">"""Recover + persist original source from captured maps (pure-Python; idempotent).</span>
 
 <span class="sd">    Recovered files are stored content-addressed (``recovered_source`` artifacts)</span>
 <span class="sd">    and indexed by ``uri`` in a ``recovered_source_manifest`` blob -- they are</span>
 <span class="sd">    *not* appended to ``run.artifacts``, so re-analysis stays duplicate-free</span>
 <span class="sd">    (identical bytes dedupe to the same uri). Always returns a well-formed summary</span>
 <span class="sd">    dict (zeroed when no maps were found). Caps are explicit, never silent.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">recovered</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">RecoveredFile</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">seen</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">skipped_unsafe</span> <span class="o">=</span> <span class="mi">0</span>
@@ -395,19 +395,19 @@
     <span class="n">manifest</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">rf</span> <span class="ow">in</span> <span class="n">persisted</span><span class="p">:</span>
         <span class="n">art</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
-            <span class="n">rf</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;recovered_source&quot;</span><span class="p">,</span>
-            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">rf</span><span class="o">.</span><span class="n">path</span><span class="p">},</span>
+            <span class="n">rf</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">"recovered_source"</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="n">rf</span><span class="o">.</span><span class="n">path</span><span class="p">},</span>
         <span class="p">)</span>
-        <span class="n">manifest</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">rf</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;uri&quot;</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">uri</span><span class="p">})</span>
+        <span class="n">manifest</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"path"</span><span class="p">:</span> <span class="n">rf</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">"uri"</span><span class="p">:</span> <span class="n">art</span><span class="o">.</span><span class="n">uri</span><span class="p">})</span>
 
     <span class="n">manifest_uri</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">manifest</span><span class="p">:</span>
         <span class="n">man</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
-            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">manifest</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
-            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;recovered_source_manifest&quot;</span><span class="p">,</span>
-            <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;file_count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">manifest</span><span class="p">)},</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">manifest</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">"recovered_source_manifest"</span><span class="p">,</span>
+            <span class="n">content_type</span><span class="o">=</span><span class="s2">"application/json"</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"file_count"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">manifest</span><span class="p">)},</span>
         <span class="p">)</span>
         <span class="n">manifest_uri</span> <span class="o">=</span> <span class="n">man</span><span class="o">.</span><span class="n">uri</span>
 
@@ -415,17 +415,17 @@
     <span class="c1"># dependency list never disagree about what was actually recovered.</span>
     <span class="n">packages</span> <span class="o">=</span> <span class="n">node_modules_packages</span><span class="p">(</span><span class="n">persisted</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;recovered_files&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">manifest</span><span class="p">),</span>
-        <span class="s2">&quot;recovered_packages&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">packages</span><span class="p">),</span>
-        <span class="s2">&quot;had_sources_content&quot;</span><span class="p">:</span> <span class="n">had_content</span><span class="p">,</span>
-        <span class="s2">&quot;maps_consumed&quot;</span><span class="p">:</span> <span class="n">maps_consumed</span><span class="p">,</span>
-        <span class="s2">&quot;skipped_unsafe_paths&quot;</span><span class="p">:</span> <span class="n">skipped_unsafe</span><span class="p">,</span>
-        <span class="s2">&quot;truncated&quot;</span><span class="p">:</span> <span class="n">truncated</span><span class="p">,</span>
-        <span class="s2">&quot;packages_truncated&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">packages</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">_MAX_RECOVERED_DEPS</span><span class="p">,</span>
-        <span class="s2">&quot;manifest_uri&quot;</span><span class="p">:</span> <span class="n">manifest_uri</span><span class="p">,</span>
-        <span class="s2">&quot;file_tree_sample&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">manifest</span><span class="p">[:</span><span class="n">_SAMPLE</span><span class="p">]],</span>
-        <span class="s2">&quot;packages_sample&quot;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">[:</span><span class="n">_SAMPLE</span><span class="p">]],</span>
-        <span class="s2">&quot;packages&quot;</span><span class="p">:</span> <span class="n">packages</span><span class="p">,</span>
+        <span class="s2">"recovered_files"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">manifest</span><span class="p">),</span>
+        <span class="s2">"recovered_packages"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">packages</span><span class="p">),</span>
+        <span class="s2">"had_sources_content"</span><span class="p">:</span> <span class="n">had_content</span><span class="p">,</span>
+        <span class="s2">"maps_consumed"</span><span class="p">:</span> <span class="n">maps_consumed</span><span class="p">,</span>
+        <span class="s2">"skipped_unsafe_paths"</span><span class="p">:</span> <span class="n">skipped_unsafe</span><span class="p">,</span>
+        <span class="s2">"truncated"</span><span class="p">:</span> <span class="n">truncated</span><span class="p">,</span>
+        <span class="s2">"packages_truncated"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">packages</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">_MAX_RECOVERED_DEPS</span><span class="p">,</span>
+        <span class="s2">"manifest_uri"</span><span class="p">:</span> <span class="n">manifest_uri</span><span class="p">,</span>
+        <span class="s2">"file_tree_sample"</span><span class="p">:</span> <span class="p">[</span><span class="n">m</span><span class="p">[</span><span class="s2">"path"</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">manifest</span><span class="p">[:</span><span class="n">_SAMPLE</span><span class="p">]],</span>
+        <span class="s2">"packages_sample"</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">[:</span><span class="n">_SAMPLE</span><span class="p">]],</span>
+        <span class="s2">"packages"</span><span class="p">:</span> <span class="n">packages</span><span class="p">,</span>
     <span class="p">}</span>
 </pre></div>
 
@@ -436,7 +436,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

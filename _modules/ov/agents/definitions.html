@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.agents.definitions &mdash; ov 0.1.1 documentation</title>
+  <title>ov.agents.definitions &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,18 +143,18 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.agents.definitions</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;SSOT: which ``ov`` skills become which agents (role, lens, model routing).</span>
+<span></span><span class="sd">"""SSOT: which ``ov`` skills become which agents (role, lens, model routing).</span>
 
 <span class="sd">The *extras* a skill needs to become an agent — model, tool allowlist, return</span>
-<span class="sd">contract, MCP exposure — live in each skill&#39;s additive ``coact:`` frontmatter block</span>
+<span class="sd">contract, MCP exposure — live in each skill's additive ``coact:`` frontmatter block</span>
 <span class="sd">(coact reads them during ``COMPLETE``). This module records only the ov-side mapping</span>
 <span class="sd">coact cannot infer: which skill plays which **role** in the study pipeline and, for</span>
 <span class="sd">analysts, which analysis **lens** it carries.</span>
 
 <span class="sd">Everything here is *data*. Add an agent by adding a row — no dispatcher to edit</span>
-<span class="sd">(open-closed). This mirrors ``ov``&#39;s other registries (probes / analyzers / report</span>
+<span class="sd">(open-closed). This mirrors ``ov``'s other registries (probes / analyzers / report</span>
 <span class="sd">sections): a capability is a registered piece of data, never a branch in a switch.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -165,41 +165,45 @@
 <a class="viewcode-back" href="../../../module_docs/ov/agents/definitions.html#ov.agents.AgentSpec">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AgentSpec</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;One ``ov`` agent: its name, role, source skill, optional lens, default model.</span>
+<span class="w">    </span><span class="sd">"""One ``ov`` agent: its name, role, source skill, optional lens, default model.</span>
 
-<span class="sd">    &gt;&gt;&gt; AgentSpec(&quot;ov-analyze-ux&quot;, &quot;analyst&quot;, &quot;ov-analyze-ux&quot;, &quot;ux&quot;).lens</span>
-<span class="sd">    &#39;ux&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; AgentSpec("ov-analyze-ux", "analyst", "ov-analyze-ux", "ux").lens</span>
+<span class="sd">    'ux'</span>
+<span class="sd">    """</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">role</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># &quot;operator&quot; | &quot;analyst&quot; | &quot;orchestrator&quot;</span>
+    <span class="n">role</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># "operator" | "analyst" | "orchestrator"</span>
     <span class="n">skill</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">lens</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># analysts only: &quot;ux&quot; | &quot;arch&quot;</span>
-    <span class="n">default_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sonnet&quot;</span>  <span class="c1"># fallback when the skill carries no coact: model</span></div>
+    <span class="n">lens</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># analysts only: "ux" | "arch"</span>
+    <span class="n">default_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"sonnet"</span>  <span class="c1"># fallback when the skill carries no coact: model</span></div>
 
 
 
 <span class="c1">#: The ``ov`` agent registry (role key -&gt; spec) — the headline of Phase 4.</span>
-<span class="c1">#: Model defaults follow the spec&#39;s §10 cost gate (Opus for design/planning</span>
+<span class="c1">#: Model defaults follow the spec's §10 cost gate (Opus for design/planning</span>
 <span class="c1">#: judgment, Sonnet for grounded UX narrative, Haiku for the throughput-bound driver).</span>
 <span class="n">OV_AGENTS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AgentSpec</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;operator&quot;</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span><span class="s2">&quot;ov-operate&quot;</span><span class="p">,</span> <span class="s2">&quot;operator&quot;</span><span class="p">,</span> <span class="s2">&quot;ov-operate&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;haiku&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;ux-analyst&quot;</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span><span class="s2">&quot;ov-analyze-ux&quot;</span><span class="p">,</span> <span class="s2">&quot;analyst&quot;</span><span class="p">,</span> <span class="s2">&quot;ov-analyze-ux&quot;</span><span class="p">,</span> <span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="s2">&quot;sonnet&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;arch-analyst&quot;</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span>
-        <span class="s2">&quot;ov-analyze-arch&quot;</span><span class="p">,</span> <span class="s2">&quot;analyst&quot;</span><span class="p">,</span> <span class="s2">&quot;ov-analyze-arch&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;opus&quot;</span>
+    <span class="s2">"operator"</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span><span class="s2">"ov-operate"</span><span class="p">,</span> <span class="s2">"operator"</span><span class="p">,</span> <span class="s2">"ov-operate"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"haiku"</span><span class="p">),</span>
+    <span class="s2">"ux-analyst"</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span>
+        <span class="s2">"ov-analyze-ux"</span><span class="p">,</span> <span class="s2">"analyst"</span><span class="p">,</span> <span class="s2">"ov-analyze-ux"</span><span class="p">,</span> <span class="s2">"ux"</span><span class="p">,</span> <span class="s2">"sonnet"</span>
     <span class="p">),</span>
-    <span class="s2">&quot;orchestrator&quot;</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span><span class="s2">&quot;study-web-app&quot;</span><span class="p">,</span> <span class="s2">&quot;orchestrator&quot;</span><span class="p">,</span> <span class="s2">&quot;study-web-app&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;opus&quot;</span><span class="p">),</span>
+    <span class="s2">"arch-analyst"</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span>
+        <span class="s2">"ov-analyze-arch"</span><span class="p">,</span> <span class="s2">"analyst"</span><span class="p">,</span> <span class="s2">"ov-analyze-arch"</span><span class="p">,</span> <span class="s2">"arch"</span><span class="p">,</span> <span class="s2">"opus"</span>
+    <span class="p">),</span>
+    <span class="s2">"orchestrator"</span><span class="p">:</span> <span class="n">AgentSpec</span><span class="p">(</span>
+        <span class="s2">"study-web-app"</span><span class="p">,</span> <span class="s2">"orchestrator"</span><span class="p">,</span> <span class="s2">"study-web-app"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"opus"</span>
+    <span class="p">),</span>
 <span class="p">}</span>
 
 
 <div class="viewcode-block" id="agents_for_role">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/definitions.html#ov.agents.agents_for_role">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">agents_for_role</span><span class="p">(</span><span class="n">role</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">AgentSpec</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;All specs with ``role`` (e.g. both analysts).</span>
+<span class="w">    </span><span class="sd">"""All specs with ``role`` (e.g. both analysts).</span>
 
-<span class="sd">    &gt;&gt;&gt; [s.lens for s in agents_for_role(&quot;analyst&quot;)]</span>
-<span class="sd">    [&#39;ux&#39;, &#39;arch&#39;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; [s.lens for s in agents_for_role("analyst")]</span>
+<span class="sd">    ['ux', 'arch']</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">spec</span> <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">OV_AGENTS</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">role</span> <span class="o">==</span> <span class="n">role</span><span class="p">]</span></div>
 
 
@@ -207,8 +211,8 @@
 <div class="viewcode-block" id="analyst_specs">
 <a class="viewcode-back" href="../../../module_docs/ov/agents/definitions.html#ov.agents.analyst_specs">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">analyst_specs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">AgentSpec</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The UX + Arch analyst specs, in pipeline order (UX then Arch).&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">agents_for_role</span><span class="p">(</span><span class="s2">&quot;analyst&quot;</span><span class="p">)</span></div>
+<span class="w">    </span><span class="sd">"""The UX + Arch analyst specs, in pipeline order (UX then Arch)."""</span>
+    <span class="k">return</span> <span class="n">agents_for_role</span><span class="p">(</span><span class="s2">"analyst"</span><span class="p">)</span></div>
 
 </pre></div>
 
@@ -219,7 +223,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

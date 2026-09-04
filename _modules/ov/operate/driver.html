@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.operate.driver &mdash; ov 0.1.1 documentation</title>
+  <title>ov.operate.driver &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -143,7 +143,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.operate.driver</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;The scripted/guided driver -- model-free journey execution (Phase 1).</span>
+<span></span><span class="sd">"""The scripted/guided driver -- model-free journey execution (Phase 1).</span>
 
 <span class="sd">Two deterministic strategies that compose the operate primitives over a</span>
 <span class="sd">:class:`~ov.capture.session.CaptureSession`:</span>
@@ -154,9 +154,9 @@
 <span class="sd">  capturing each visited page and stopping on ``max_pages`` / no-progress.</span>
 
 <span class="sd">These let the capture spine produce a real multi-state journey with **no model**.</span>
-<span class="sd">Goal-pursuit (``advance`` toward a success predicate) is the host&#39;s job via the</span>
+<span class="sd">Goal-pursuit (``advance`` toward a success predicate) is the host's job via the</span>
 <span class="sd">``ov-operate`` skill; the package supplies the hands, not the policy.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -170,10 +170,10 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.progress</span><span class="w"> </span><span class="kn">import</span> <span class="n">progress</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.strategies</span><span class="w"> </span><span class="kn">import</span> <span class="n">INTENT_ENUMERATE</span><span class="p">,</span> <span class="n">INTENT_REPLAY</span><span class="p">,</span> <span class="n">absolutize</span><span class="p">,</span> <span class="n">is_same_origin</span>
 
-<span class="n">_LINKS_JS</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">() =&gt; Array.from(document.querySelectorAll(&#39;a[href]&#39;))</span>
-<span class="s2">        .map(a =&gt; a.getAttribute(&#39;href&#39;)).filter(Boolean)</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">_LINKS_JS</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
+<span class="s2">() =&gt; Array.from(document.querySelectorAll('a[href]'))</span>
+<span class="s2">        .map(a =&gt; a.getAttribute('href')).filter(Boolean)</span>
+<span class="s2">"""</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_coerce_action</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">Action</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Action</span><span class="p">:</span>
@@ -183,12 +183,12 @@
 <div class="viewcode-block" id="replay">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/driver.html#ov.operate.driver.replay">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">replay</span><span class="p">(</span><span class="n">session</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">actions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Action</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">JourneyStep</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute a scripted action list, capturing + journaling each step.</span>
+<span class="w">    </span><span class="sd">"""Execute a scripted action list, capturing + journaling each step.</span>
 
-<span class="sd">    &gt;&gt;&gt; # actions are Action models or dicts: {&quot;type&quot;: &quot;click&quot;, &quot;ref&quot;: &quot;e3&quot;}</span>
+<span class="sd">    &gt;&gt;&gt; # actions are Action models or dicts: {"type": "click", "ref": "e3"}</span>
 <span class="sd">    &gt;&gt;&gt; callable(replay)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">steps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">JourneyStep</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
         <span class="n">action</span> <span class="o">=</span> <span class="n">_coerce_action</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
@@ -205,7 +205,7 @@
         <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">max_steps</span><span class="p">:</span>
-            <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;replay stopped: max_steps reached&quot;</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"replay stopped: max_steps reached"</span><span class="p">)</span>
             <span class="k">break</span>
     <span class="k">return</span> <span class="n">steps</span></div>
 
@@ -214,12 +214,12 @@
 <div class="viewcode-block" id="crawl">
 <a class="viewcode-back" href="../../../module_docs/ov/operate/driver.html#ov.operate.driver.crawl">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">crawl</span><span class="p">(</span><span class="n">session</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_pages</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">JourneyStep</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Politely crawl same-origin links breadth-first, capturing each page.</span>
+<span class="w">    </span><span class="sd">"""Politely crawl same-origin links breadth-first, capturing each page.</span>
 
 <span class="sd">    Stops at ``max_pages``, on ``max_steps``, or when the deterministic progress</span>
 <span class="sd">    signal reports a loop. The host can run a richer crawl; this is the model-free</span>
 <span class="sd">    baseline that yields a multi-state capture.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">base_url</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">target_url</span>
     <span class="n">visited</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">queue</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -235,7 +235,7 @@
         <span class="k">if</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="n">action</span> <span class="o">=</span> <span class="n">Action</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;navigate&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;crawl to </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">Action</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"navigate"</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">"crawl to </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="n">pre</span> <span class="o">=</span> <span class="n">observe</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">page</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">act</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">page</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">polite_rate_s</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">polite_rate_s</span><span class="p">)</span>
         <span class="n">step</span> <span class="o">=</span> <span class="n">make_step</span><span class="p">(</span>
@@ -250,7 +250,7 @@
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">sig</span><span class="o">.</span><span class="n">loop_suspected</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">session</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">max_steps</span><span class="p">:</span>
             <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;crawl stopped: </span><span class="si">{</span><span class="s1">&#39;loop_suspected&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">sig</span><span class="o">.</span><span class="n">loop_suspected</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;max_steps&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"crawl stopped: </span><span class="si">{</span><span class="s1">'loop_suspected'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">sig</span><span class="o">.</span><span class="n">loop_suspected</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'max_steps'</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
             <span class="k">break</span>
         <span class="n">queue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_discover_links</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">visited</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">queue</span><span class="p">)))</span>
@@ -259,7 +259,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_discover_links</span><span class="p">(</span><span class="n">session</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seen</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return new, same-origin, absolute links found on the current page.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return new, same-origin, absolute links found on the current page."""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">hrefs</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">_LINKS_JS</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
@@ -279,7 +279,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

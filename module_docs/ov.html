@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov &mdash; ov 0.1.1 documentation</title>
+  <title>ov &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../_static/documentation_options.js?v=92734c54"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -242,14 +242,14 @@ fields to override. The instance is snapshotted into every
 the SSOT; <a class="reference internal" href="#ov.RunDiff.counts" title="ov.RunDiff.counts"><code class="xref py py-attr docutils literal notranslate"><span class="pre">counts</span></code></a>/<a class="reference internal" href="#ov.RunDiff.has_drift" title="ov.RunDiff.has_drift"><code class="xref py py-attr docutils literal notranslate"><span class="pre">has_drift</span></code></a> are <em>derived</em> (<code class="docutils literal notranslate"><span class="pre">&#64;computed_field</span></code>,
 so they serialize) and <a class="reference internal" href="#ov.RunDiff.regressions" title="ov.RunDiff.regressions"><code class="xref py py-attr docutils literal notranslate"><span class="pre">regressions</span></code></a>/<a class="reference internal" href="#ov.RunDiff.improvements" title="ov.RunDiff.improvements"><code class="xref py py-attr docutils literal notranslate"><span class="pre">improvements</span></code></a> are views over
 the deltas – nothing is stored twice.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">RunDiff</span><span class="p">(</span><span class="n">run_id</span><span class="o">=</span><span class="s2">&quot;run_b&quot;</span><span class="p">,</span> <span class="n">baseline_run_id</span><span class="o">=</span><span class="s2">&quot;run_a&quot;</span><span class="p">,</span> <span class="n">finding_deltas</span><span class="o">=</span><span class="p">[</span>
-<span class="gp">... </span>    <span class="n">FindingDelta</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;k1&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;regression&quot;</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">FindingDelta</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;k2&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;resolved&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;improvement&quot;</span><span class="p">),</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">RunDiff</span><span class="p">(</span><span class="n">run_id</span><span class="o">=</span><span class="s2">"run_b"</span><span class="p">,</span> <span class="n">baseline_run_id</span><span class="o">=</span><span class="s2">"run_a"</span><span class="p">,</span> <span class="n">finding_deltas</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>    <span class="n">FindingDelta</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"k1"</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">"new"</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"regression"</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">FindingDelta</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"k2"</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">"resolved"</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"improvement"</span><span class="p">),</span>
 <span class="gp">... </span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">counts</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">],</span> <span class="n">d</span><span class="o">.</span><span class="n">counts</span><span class="p">[</span><span class="s2">&quot;resolved&quot;</span><span class="p">],</span> <span class="n">d</span><span class="o">.</span><span class="n">has_drift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">counts</span><span class="p">[</span><span class="s2">"new"</span><span class="p">],</span> <span class="n">d</span><span class="o">.</span><span class="n">counts</span><span class="p">[</span><span class="s2">"resolved"</span><span class="p">],</span> <span class="n">d</span><span class="o">.</span><span class="n">has_drift</span>
 <span class="go">(1, 1, True)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">key</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">regressions</span><span class="p">],</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">key</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">improvements</span><span class="p">]</span>
-<span class="go">([&#39;k1&#39;], [&#39;k2&#39;])</span>
+<span class="go">(['k1'], ['k2'])</span>
 </pre></div>
 </div>
 <dl class="py property">
@@ -301,7 +301,7 @@ evidence bundle to add narrative judgment.</p>
 <code class="docutils literal notranslate"><span class="pre">&quot;sidecar&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;clis&quot;</span></code>); <code class="docutils literal notranslate"><span class="pre">None</span></code> checks all. The deterministic analysis
 core needs none of these – they gate <em>capture</em> and the <em>arch sidecar</em>, so
 every requirement here is reported as optional unless capture is requested.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rep</span> <span class="o">=</span> <span class="n">check_requirements</span><span class="p">(</span><span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;clis&quot;</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rep</span> <span class="o">=</span> <span class="n">check_requirements</span><span class="p">(</span><span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="s2">"clis"</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">rep</span><span class="p">,</span> <span class="n">RequirementReport</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
@@ -391,7 +391,7 @@ deterministic core records it and does the baseline journey).</p></li>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

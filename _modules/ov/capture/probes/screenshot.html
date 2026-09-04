@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ov.capture.probes.screenshot &mdash; ov 0.1.1 documentation</title>
+  <title>ov.capture.probes.screenshot &mdash; ov 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -144,12 +144,12 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ov.capture.probes.screenshot</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Screenshot probe: full-page PNG per captured state.</span>
+<span></span><span class="sd">"""Screenshot probe: full-page PNG per captured state.</span>
 
 <span class="sd">Full-page screenshots ground the set-of-mark evidence bundle later (§8.1). The</span>
 <span class="sd">artifact id is recorded onto the step so the evidence assembler can resolve the</span>
 <span class="sd">exact image a finding refers to.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -159,11 +159,11 @@
 
 <div class="viewcode-block" id="ScreenshotProbe">
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/screenshot.html#ov.capture.probes.screenshot.ScreenshotProbe">[docs]</a>
-<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">&quot;screenshot&quot;</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;screenshot&quot;</span><span class="p">,))</span>
+<span class="nd">@register_probe</span><span class="p">(</span><span class="s2">"screenshot"</span><span class="p">,</span> <span class="n">produces</span><span class="o">=</span><span class="p">(</span><span class="s2">"screenshot"</span><span class="p">,))</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ScreenshotProbe</span><span class="p">(</span><span class="n">Probe</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Capture a full-page PNG of the current state.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Capture a full-page PNG of the current state."""</span>
 
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;screenshot&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">"screenshot"</span>
 
 <div class="viewcode-block" id="ScreenshotProbe.capture">
 <a class="viewcode-back" href="../../../../module_docs/ov/capture/probes/screenshot.html#ov.capture.probes.screenshot.ScreenshotProbe.capture">[docs]</a>
@@ -181,10 +181,10 @@
                 <span class="k">return</span> <span class="p">[]</span>
         <span class="n">art</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">put_artifact</span><span class="p">(</span>
             <span class="n">png</span><span class="p">,</span>
-            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;screenshot&quot;</span><span class="p">,</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">"screenshot"</span><span class="p">,</span>
             <span class="n">step_id</span><span class="o">=</span><span class="n">step_id</span><span class="p">,</span>
-            <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;image/png&quot;</span><span class="p">,</span>
-            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">},</span>
+            <span class="n">content_type</span><span class="o">=</span><span class="s2">"image/png"</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">"url"</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">url</span><span class="p">},</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">art</span><span class="p">]</span></div>
 </div>
@@ -198,7 +198,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
