@@ -16,6 +16,7 @@ no model.
 ## The simple path
 ```python
 import ov
+
 run = ov.observe("https://target", mode="reconstruct", authorized=True)
 ```
 or from the shell: `ov observe https://target`.
@@ -47,11 +48,12 @@ foreign target needs `authorized=True`. Request bodies are captured *shape-only*
 ## Inspecting the store
 ```python
 from ov.capture.stores import CaptureStore
-store = CaptureStore()                 # same root observe() used
-store.run_ids()                        # list runs
+
+store = CaptureStore()  # same root observe() used
+store.run_ids()  # list runs
 run = store.load_run(run_id)
-[a.kind for a in run.artifacts]        # what was captured
-store.artifact_bytes(run.artifacts[0]) # raw bytes by artifact
+[a.kind for a in run.artifacts]  # what was captured
+store.artifact_bytes(run.artifacts[0])  # raw bytes by artifact
 ```
 Artifact kinds: `dom`, `aria_snapshot`, `ax_tree`, `screenshot`, `network`,
 `request` (bodies), `console`, `navigation`, `fingerprint`, `assets`,

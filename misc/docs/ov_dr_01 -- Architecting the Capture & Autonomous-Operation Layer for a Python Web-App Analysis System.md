@@ -97,11 +97,12 @@ This is a capability you *expose but do not center*, with an explicit ethical/To
 ```python
 from playwright.async_api import async_playwright
 
+
 async def capture(url):
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page = await browser.new_page()
-        client = await page.context.new_cdp_session(page)   # CDP escape hatch
+        client = await page.context.new_cdp_session(page)  # CDP escape hatch
         await client.send("Network.enable")
 
         bodies = {}
@@ -114,8 +115,10 @@ async def capture(url):
             except Exception:
                 pass  # redirects / no body
 
-        client.on("Network.loadingFinished",
-                  lambda params: page.context._loop.create_task(on_finished(params)))
+        client.on(
+            "Network.loadingFinished",
+            lambda params: page.context._loop.create_task(on_finished(params)),
+        )
 
         await page.goto(url)
         await client.detach()
@@ -127,11 +130,18 @@ For bodies that still evict, switch to Fetch-stage interception: `await client.s
 **SSE frame capture (CDP):**
 
 ```python
-client.on("Network.eventSourceMessageReceived",
-          lambda e: sse_log.append({
-              "requestId": e["requestId"], "ts": e["timestamp"],
-              "event": e["eventName"], "id": e["eventId"], "data": e["data"],
-          }))
+client.on(
+    "Network.eventSourceMessageReceived",
+    lambda e: sse_log.append(
+        {
+            "requestId": e["requestId"],
+            "ts": e["timestamp"],
+            "event": e["eventName"],
+            "id": e["eventId"],
+            "data": e["data"],
+        }
+    ),
+)
 # requires await client.send("Network.enable")
 ```
 
@@ -139,9 +149,11 @@ client.on("Network.eventSourceMessageReceived",
 
 ```python
 def on_ws(ws):
-    ws.on("framesent",     lambda f: ws_log.append(("sent", ws.url, f.payload)))
+    ws.on("framesent", lambda f: ws_log.append(("sent", ws.url, f.payload)))
     ws.on("framereceived", lambda f: ws_log.append(("recv", ws.url, f.payload)))
-    ws.on("close",         lambda _: ws_log.append(("close", ws.url, None)))
+    ws.on("close", lambda _: ws_log.append(("close", ws.url, None)))
+
+
 page.on("websocket", on_ws)
 ```
 
@@ -149,19 +161,19 @@ page.on("websocket", on_ws)
 
 ```python
 context = browser.new_context(
-    record_har_path="run.har.zip",        # .zip embeds bodies as separate entries
+    record_har_path="run.har.zip",  # .zip embeds bodies as separate entries
     record_har_content="embed",
 )
 # ... drive the app ...
-context.close()   # HAR flushed on context close
+context.close()  # HAR flushed on context close
 ```
 
 **Full AX tree (CDP), per frame:**
 
 ```python
 ax = page.context.new_cdp_session(page)
-ax.send("Accessibility.enable")            # stabilizes AXNodeIds
-tree = ax.send("Accessibility.getFullAXTree")   # {"nodes": [AXNode, ...]}
+ax.send("Accessibility.enable")  # stabilizes AXNodeIds
+tree = ax.send("Accessibility.getFullAXTree")  # {"nodes": [AXNode, ...]}
 # accessible name of a node: node["name"]["value"]  (AXValue, not str)
 ```
 

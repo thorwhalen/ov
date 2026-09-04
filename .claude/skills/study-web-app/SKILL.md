@@ -56,6 +56,7 @@ its step.
 Run a capture session. The zero-config path:
 ```python
 import ov
+
 run = ov.observe("https://target", mode="reconstruct", authorized=True)
 ```
 Decide which probes you need (default is a good baseline; add `probes="all"` for
@@ -84,7 +85,7 @@ bad route, filtered-to-zero) — microcopy and recovery bugs hide there.
 
 ### 3. Analyze (deterministic) — load **`ov-analyze-ux`** and **`ov-analyze-arch`**
 ```python
-ov.analyze(run)   # runs the UX + arch analyzers, fully model-free
+ov.analyze(run)  # runs the UX + arch analyzers, fully model-free
 ```
 This populates `run.findings`, `run.api_surface`, `run.fingerprint`,
 `run.rendering_model`, `run.source_maps_present`. This deterministic layer is the
@@ -96,7 +97,10 @@ Build the evidence bundle and reason over it to add the genuinely subjective ite
 design intent). The bundle is set-of-mark grounded with a computed token budget:
 ```python
 from ov.analysis.evidence import build_evidence_bundle
-bundle = build_evidence_bundle(run, store)   # marked image + facts + cite-or-abstain contract
+
+bundle = build_evidence_bundle(
+    run, store
+)  # marked image + facts + cite-or-abstain contract
 ```
 **Grounding rules (non-negotiable):**
 - Cite-or-abstain: every claim cites a fact/mark id; if the evidence doesn't
@@ -106,20 +110,23 @@ bundle = build_evidence_bundle(run, store)   # marked image + facts + cite-or-ab
 Then gate your findings:
 ```python
 from ov.analysis.reliability import verify_findings
-report = verify_findings(your_findings, run, bundle=bundle)  # downgrades unsupported -> undetermined
+
+report = verify_findings(
+    your_findings, run, bundle=bundle
+)  # downgrades unsupported -> undetermined
 ```
 
 ### 5. Report + synopsis — load **`ov-report`**
 ```python
-ov.report(run, out_dir="out/")        # Markdown sections
-ov.synopsis(run, out="out/")          # synopsis.json (SSOT) + derived SYNOPSIS.md
+ov.report(run, out_dir="out/")  # Markdown sections
+ov.synopsis(run, out="out/")  # synopsis.json (SSOT) + derived SYNOPSIS.md
 ```
 Or the whole deterministic pipeline in one call: `ov.overview(url, out_dir="out/")`.
 
 **Review mode (own target):** add an own-target diff to detect drift/regression
 against a stored prior run before reporting:
 ```python
-ov.diff(run)                          # sets Finding.diff_status; persists a diff blob
+ov.diff(run)  # sets Finding.diff_status; persists a diff blob
 ```
 The `40_review_audit` section and the synopsis then carry a regression block
 (new/changed/resolved + stack/API drift). `ov.overview(url, mode="review")` runs

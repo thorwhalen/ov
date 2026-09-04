@@ -36,12 +36,12 @@ advances the goal) and the *stop* decision — the package only reports facts.
 from ov.operate import observe, act, journal, make_step, progress
 from ov.base import Action
 
-obs = observe(session.page)                 # -> Observation: affordances {ref, role, name, bbox, ...}
+obs = observe(session.page)  # -> Observation: affordances {ref, role, name, bbox, ...}
 res = act(session.page, Action(type="click", ref="e7", description="Sign up"))
-                                            # -> ActionResult: ok/error + a FRESH Observation
+# -> ActionResult: ok/error + a FRESH Observation
 step = make_step(intent="advance", action=res.action, pre_observation=obs, result=res)
-journal(run, step)                          # append the structured per-step record
-sig = progress(run.steps)                   # -> ProgressSignal: loop/no-progress FACTS
+journal(run, step)  # append the structured per-step record
+sig = progress(run.steps)  # -> ProgressSignal: loop/no-progress FACTS
 ```
 - `observe(page, strategy)` — strategies: `ax_snapshot` (cheap default), `screenshot`
   (pixels/bbox, for canvas/exotic UIs), `hybrid` (robust when AX is thin).

@@ -8,8 +8,8 @@ and **software architecture** and writes Markdown reports plus a single synopsis
 ```python
 import ov
 
-run = ov.observe("https://example.com")        # capture (zero config)
-print(run.fingerprint)                          # detected technologies
+run = ov.observe("https://example.com")  # capture (zero config)
+print(run.fingerprint)  # detected technologies
 print(len(run.artifacts), "artifacts captured")
 ```
 
@@ -97,7 +97,7 @@ agents.materialize()
 print(agents.estimate(["ux-analyst", "arch-analyst"]).render())
 
 # 3. In-package study (LLM dependency-injected; omit it for a deterministic run):
-result = agents.study("https://example.com", llm=my_model)   # -> synopsis + run
+result = agents.study("https://example.com", llm=my_model)  # -> synopsis + run
 ```
 
 Each agent reuses Phase 1–3 machinery unchanged and routes by the §10 cost gate

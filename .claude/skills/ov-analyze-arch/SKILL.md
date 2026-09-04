@@ -26,6 +26,7 @@ A deterministic `fingerprint → bundle-recovery → api-synthesis` pipeline pro
 ## 1. Run the pipeline
 ```python
 import ov
+
 ov.analyze(run, lenses=("arch",))
 ```
 Populates `run.fingerprint` (technologies, versions, confidence),
@@ -49,10 +50,13 @@ Check `run.source_maps_present` first. If present and you need the file tree, th
 Node sidecar recovers it:
 ```python
 from ov.analysis.arch.sidecar import Sidecar
+
 sc = Sidecar()
 if sc.available():
-    files = sc.consume_source_map(map_text)["files"]   # original paths + sourcesContent
-    lits = sc.extract_literals(js_text)                # static AST: strings/urls/routes (never evals JS)
+    files = sc.consume_source_map(map_text)["files"]  # original paths + sourcesContent
+    lits = sc.extract_literals(
+        js_text
+    )  # static AST: strings/urls/routes (never evals JS)
 ```
 `ov check` shows whether the sidecar is installed (`cd sidecar && npm install`).
 

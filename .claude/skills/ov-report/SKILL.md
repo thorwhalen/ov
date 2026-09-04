@@ -14,7 +14,8 @@ sections and compresses the findings into one synopsis.
 ## Render the section reports
 ```python
 import ov
-paths = ov.report(run, out_dir="out/")     # writes section .md files; returns paths
+
+paths = ov.report(run, out_dir="out/")  # writes section .md files; returns paths
 ```
 Default sections (by mode): `00_overview`, `10_ux_analysis`, `20_architecture`,
 `30_api_surface`, then `40_reconstruction_blueprint` (reconstruct) **or**
@@ -23,7 +24,7 @@ subset. Without `out_dir`, sections are written to the store under the run id.
 
 ## Build the synopsis (the deliverable for a downstream agent)
 ```python
-md_path = ov.synopsis(run, out="out/")     # writes synopsis.json + SYNOPSIS.md
+md_path = ov.synopsis(run, out="out/")  # writes synopsis.json + SYNOPSIS.md
 ```
 The synopsis is a **structured map-reduce** over `run.findings`:
 - Each finding maps to a compact record.
@@ -43,8 +44,8 @@ For the user's *own* app (`mode="review"`), add a diff against a stored prior ru
 of the same target. It's deterministic (no model) and cheap (artifacts are
 content-addressed):
 ```python
-diff = ov.diff(run)                 # vs the latest prior run of this target
-diff = ov.diff(run, baseline=prior_run_id)   # or pin a specific baseline
+diff = ov.diff(run)  # vs the latest prior run of this target
+diff = ov.diff(run, baseline=prior_run_id)  # or pin a specific baseline
 ```
 `ov.diff` returns a `RunDiff` (or `None` on the first run — no baseline yet). It:
 - sets `Finding.diff_status` (`new` / `changed` / `resolved`) on the run in place;
@@ -60,7 +61,9 @@ and report. From the shell: `ov diff <run_id>` or `ov overview <url> --mode revi
 
 ## One-liner
 ```python
-ov.overview("https://target", out_dir="out/")   # observe -> analyze -> report -> synopsis
+ov.overview(
+    "https://target", out_dir="out/"
+)  # observe -> analyze -> report -> synopsis
 ```
 runs the whole deterministic pipeline and returns the synopsis path. From the
 shell: `ov overview https://target`. In review mode it becomes

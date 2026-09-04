@@ -240,11 +240,16 @@ Everything extensible is a **decorated function registered into a dict**. This i
 # capture/probes/__init__.py
 PROBE_REGISTRY: dict[str, Probe] = {}
 
+
 def register_probe(name, *, requires=(), produces=()):
     """Register a capture probe. `requires`/`produces` declare artifact deps for ordering."""
+
     def deco(fn):
-        PROBE_REGISTRY[name] = Probe(name=name, fn=fn, requires=requires, produces=produces)
+        PROBE_REGISTRY[name] = Probe(
+            name=name, fn=fn, requires=requires, produces=produces
+        )
         return fn
+
     return deco
 ```
 
@@ -257,65 +262,88 @@ One Pydantic v2 model tree is the single source of truth for "what a capture con
 ```python
 class Scored(BaseModel):
     """Mixin for every inferred (non-observed) fact. D2: outputs are probabilistic."""
-    confidence: int         # 0-100 (Wappalyzer-style; API coverage maps onto this)
-    provenance: list[str]   # artifact/journey ids that produced this fact
+
+    confidence: int  # 0-100 (Wappalyzer-style; API coverage maps onto this)
+    provenance: list[str]  # artifact/journey ids that produced this fact
     # map-backed reconstructions must rank above name-lost (un-mapped) ones
 
+
 class Artifact(BaseModel):
-    kind: str               # "screenshot" | "dom" | "request" | "ax_tree" | "sse" | ...
-    step_id: str | None     # links to a journey step
-    uri: str                # content-addressed path in the store
+    kind: str  # "screenshot" | "dom" | "request" | "ax_tree" | "sse" | ...
+    step_id: str | None  # links to a journey step
+    uri: str  # content-addressed path in the store
     meta: dict
 
+
 class Evidence(BaseModel):  # D4: the addressable unit an LLM claim must cite
-    evidence_id: str        # stable id: "mark:state12#R3" | "net:fact88" | "metric:step7:inp"
+    evidence_id: str  # stable id: "mark:state12#R3" | "net:fact88" | "metric:step7:inp"
     kind: Literal["mark", "network", "stack", "metric", "dom", "trace"]
-    artifact_id: str | None # resolves (via a tool) to the screenshot crop / record / metric
-    summary: str            # the derived fact (NOT raw bytes) the model is allowed to see
+    artifact_id: (
+        str | None
+    )  # resolves (via a tool) to the screenshot crop / record / metric
+    summary: str  # the derived fact (NOT raw bytes) the model is allowed to see
+
 
 class JourneyStep(BaseModel):
     id: str
-    intent: str             # the step's stated goal (enumerate | advance | replay)
-    action: Action          # what it did
+    intent: str  # the step's stated goal (enumerate | advance | replay)
+    action: Action  # what it did
     affordances_seen: list[Affordance]
     outcome: Literal["ok", "blocked", "error", "noop"]
     artifact_ids: list[str]
     t_ms: float
 
-class TechFinding(Scored):  # one detected technology
-    name: str; categories: list[str]; version: str | None
 
-class Endpoint(Scored):     # one synthesized API endpoint
-    method: str; path_template: str
+class TechFinding(Scored):  # one detected technology
+    name: str
+    categories: list[str]
+    version: str | None
+
+
+class Endpoint(Scored):  # one synthesized API endpoint
+    method: str
+    path_template: str
     kind: Literal["rest", "rpc", "graphql"]
-    request_schema: dict | None; response_schema: dict | None  # GenSON-merged
-    auth: str | None        # bearer | cookie | oauth | api-key | None
+    request_schema: dict | None
+    response_schema: dict | None  # GenSON-merged
+    auth: str | None  # bearer | cookie | oauth | api-key | None
+
 
 class Severity(BaseModel):  # D3: severity = impact_tier × reach
-    impact_tier: str        # a11y: minor|moderate|serious|critical ; ux: "0".."4"
-    reach: dict             # {nodes, states_affected, journey_fraction}
-    score: float            # impact × reach (prioritizes high-reach over rare-critical)
+    impact_tier: str  # a11y: minor|moderate|serious|critical ; ux: "0".."4"
+    reach: dict  # {nodes, states_affected, journey_fraction}
+    score: float  # impact × reach (prioritizes high-reach over rare-critical)
 
-class Finding(BaseModel):   # SSOT for every UX / a11y / perf / arch / robustness finding (D3+D4)
+
+class Finding(
+    BaseModel
+):  # SSOT for every UX / a11y / perf / arch / robustness finding (D3+D4)
     finding_id: str
-    type: Literal["ux_issue", "arch_fact", "interaction_pattern", "risk", "undetermined"]
-    signal: str             # catalog key, e.g. "contrast.text", "form.friction"
+    type: Literal[
+        "ux_issue", "arch_fact", "interaction_pattern", "risk", "undetermined"
+    ]
+    signal: str  # catalog key, e.g. "contrast.text", "form.friction"
     category: Literal["a11y", "ux", "performance", "robustness", "architecture"]
-    wcag_criterion: dict | None     # {id: "1.4.3", level: "AA"}
-    heuristic: str | None           # "nielsen-1" | "cw-q3" | None
-    engine_rule_id: str | None      # "axe:color-contrast" | "ibm:<id>" | None
+    wcag_criterion: dict | None  # {id: "1.4.3", level: "AA"}
+    heuristic: str | None  # "nielsen-1" | "cw-q3" | None
+    engine_rule_id: str | None  # "axe:color-contrast" | "ibm:<id>" | None
     severity: Severity | None
     # D4: hard split — facts are CITED, never authored, by the model
-    evidence_refs: list[str]        # Evidence ids; a finding with none is rejected (cite-or-abstain)
-    judgment: str | None            # model interpretation ONLY (never a fact field)
-    location: dict | None           # {state_id, url_or_route, step_index, selector, ...}
-    observed: str                   # what the deterministic signal detected
-    metric_detail: dict | None      # e.g. CWV value/threshold/attribution phases
-    suggested_fix: str | None       # LLM-generated, grounded
-    source_layer: Literal["deterministic", "llm"]   # auditable provenance
+    evidence_refs: list[
+        str
+    ]  # Evidence ids; a finding with none is rejected (cite-or-abstain)
+    judgment: str | None  # model interpretation ONLY (never a fact field)
+    location: dict | None  # {state_id, url_or_route, step_index, selector, ...}
+    observed: str  # what the deterministic signal detected
+    metric_detail: dict | None  # e.g. CWV value/threshold/attribution phases
+    suggested_fix: str | None  # LLM-generated, grounded
+    source_layer: Literal["deterministic", "llm"]  # auditable provenance
     confidence: float
-    needs_human_review: bool        # routes the non-automatable ~60-70% to humans
-    diff_status: Literal["new", "changed", "resolved"] | None  # review-mode vs prior run
+    needs_human_review: bool  # routes the non-automatable ~60-70% to humans
+    diff_status: (
+        Literal["new", "changed", "resolved"] | None
+    )  # review-mode vs prior run
+
 
 class CaptureRun(BaseModel):
     run_id: str
@@ -324,10 +352,10 @@ class CaptureRun(BaseModel):
     started_at: datetime
     steps: list[JourneyStep]
     fingerprint: list[TechFinding]
-    rendering_model: str | None    # csr | ssr | ssg | streaming-ssr (Scored elsewhere)
-    source_maps_present: bool | None   # the decisive reconstruction-grade lever (D2)
+    rendering_model: str | None  # csr | ssr | ssg | streaming-ssr (Scored elsewhere)
+    source_maps_present: bool | None  # the decisive reconstruction-grade lever (D2)
     api_surface: list[Endpoint]
-    findings: list[Finding]        # UX + a11y + perf findings (D3)
+    findings: list[Finding]  # UX + a11y + perf findings (D3)
     # artifacts live in the store, referenced by id; not inlined
 ```
 
@@ -338,11 +366,12 @@ A run directory is exposed as a Mall of stores. Use `dol` for the filesystem-bac
 ```python
 class CaptureStore:
     """A store of stores for one or many runs (XDG-aligned root by default)."""
+
     def __init__(self, root):
-        self.runs        = ...  # MutableMapping[run_id, CaptureRun JSON]
-        self.artifacts   = ...  # MutableMapping[artifact_id, bytes]  (content-addressed)
-        self.reports     = ...  # MutableMapping[report_name, markdown_str]
-        self.analyses    = ...  # MutableMapping[analysis_id, analysis JSON]
+        self.runs = ...  # MutableMapping[run_id, CaptureRun JSON]
+        self.artifacts = ...  # MutableMapping[artifact_id, bytes]  (content-addressed)
+        self.reports = ...  # MutableMapping[report_name, markdown_str]
+        self.analyses = ...  # MutableMapping[analysis_id, analysis JSON]
 ```
 
 Content-address artifacts by hash so identical assets dedupe across runs; this makes own-target diffing cheap.
@@ -368,9 +397,18 @@ Authoring notes (D4): follow the Agent Skills format (`SKILL.md` with `name`/`de
 `ov/__init__.py` exposes a tiny surface. Everything below is reachable but not required.
 
 ```python
-def observe(url, *, goal=None, journey=None, mode="reconstruct",
-            probes="default", headed=False, store=None) -> CaptureRun:
+def observe(
+    url,
+    *,
+    goal=None,
+    journey=None,
+    mode="reconstruct",
+    probes="default",
+    headed=False,
+    store=None,
+) -> CaptureRun:
     """Drive the target and capture everything. Zero-config default works."""
+
 
 def analyze(run, *, lenses=("ux", "arch"), llm=None) -> dict[str, Analysis]:
     """Run the deterministic UX + architecture analyzers over a captured run.
@@ -379,11 +417,14 @@ def analyze(run, *, lenses=("ux", "arch"), llm=None) -> dict[str, Analysis]:
     analyses + evidence bundle to add narrative judgment; an in-package `llm` is
     only wired in the optional Phase-4 productization."""
 
+
 def report(run_or_analyses, *, sections="default", out_dir=None) -> list[Path]:
     """Render Markdown reports from analyses."""
 
+
 def synopsis(reports_or_dir, *, out=None) -> Path:
     """Extract-and-aggregate many reports into one synopsis for downstream agents."""
+
 
 def overview(url, **kw) -> Path:
     """observe -> analyze -> report -> synopsis, the one-liner. Returns synopsis path."""

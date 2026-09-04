@@ -27,7 +27,8 @@ facts — it interprets the evidence bundle.
 ## 1. Run the deterministic engine
 ```python
 import ov
-ov.analyze(run, lenses=("ux",))   # or ("ux","arch") for both
+
+ov.analyze(run, lenses=("ux",))  # or ("ux","arch") for both
 ```
 This emits normalized `Finding`s into `run.findings`. The analyzers:
 - **a11y** — WebAIM perennials from the DOM (missing alt, empty link/button,
@@ -56,7 +57,8 @@ For the genuinely subjective items (alt-text *meaningfulness*, error-message
 logicality), reason over the evidence bundle:
 ```python
 from ov.analysis.evidence import build_evidence_bundle
-bundle = build_evidence_bundle(run, store)   # marked screenshot + facts + token budget
+
+bundle = build_evidence_bundle(run, store)  # marked screenshot + facts + token budget
 ```
 Then, per the cite-or-abstain contract in `bundle.contract`:
 - Discuss only marked regions (R1, R2, …); never scan for new issues.
@@ -66,12 +68,21 @@ Then, per the cite-or-abstain contract in `bundle.contract`:
 
 ## 4. Gate your findings
 ```python
-from ov.analysis.reliability import verify_findings, verification_questions, apply_verification
-report = verify_findings(my_findings, run, bundle=bundle)  # cite-or-abstain + mark membership
+from ov.analysis.reliability import (
+    verify_findings,
+    verification_questions,
+    apply_verification,
+)
+
+report = verify_findings(
+    my_findings, run, bundle=bundle
+)  # cite-or-abstain + mark membership
 # for high-severity findings, run a factored check:
 for f in high_severity:
-    answers = [self_answer(q) for q in verification_questions(f)]  # answer each independently
-    apply_verification(f, answers)                                  # downgrades if it fails
+    answers = [
+        self_answer(q) for q in verification_questions(f)
+    ]  # answer each independently
+    apply_verification(f, answers)  # downgrades if it fails
 ```
 `verify_findings` keeps deterministic findings, keeps grounded LLM findings, and
 downgrades unsupported ones to `undetermined` (never silently dropped).
