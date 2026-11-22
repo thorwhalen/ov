@@ -33,6 +33,7 @@
 - [ov.analysis.ux.a11y](ov.analysis.ux.a11y.html.md): Accessibility analyzer: WebAIM perennials from the DOM + optional axe mapping.
 - [ov.analysis.ux.contrast_focus](ov.analysis.ux.contrast_focus.html.md): Contrast + focus analyzer (deterministic, no engine).
 - [ov.analysis.ux.cwv](ov.analysis.ux.cwv.html.md): Core Web Vitals analyzer: performance-as-UX from the captured &#96;perf&#96; artifacts.
+- [ov.analysis.ux.forms](ov.analysis.ux.forms.html.md): Form-records analyzer: the state-changing actions a page offers, and what guards them (#21).
 - [ov.analysis.ux.heuristics](ov.analysis.ux.heuristics.html.md): Heuristic analyzer: the automatable subset of Nielsen / cognitive-walkthrough (D3 §6).
 - [ov.analysis.ux.metrics](ov.analysis.ux.metrics.html.md): Journey-metrics analyzer: form friction, backtracking, and journey summary (D3 §5).
 - [ov.analysis.ux.severity](ov.analysis.ux.severity.html.md): Severity scoring: &#96;score = impact_tier x reach&#96; (D3 §1).

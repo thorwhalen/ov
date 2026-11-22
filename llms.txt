@@ -35,6 +35,7 @@
 - [ov.analysis.ux.a11y](_autosummary/ov.analysis.ux.a11y.html.md): Accessibility analyzer: WebAIM perennials from the DOM + optional axe mapping.
 - [ov.analysis.ux.contrast_focus](_autosummary/ov.analysis.ux.contrast_focus.html.md): Contrast + focus analyzer (deterministic, no engine).
 - [ov.analysis.ux.cwv](_autosummary/ov.analysis.ux.cwv.html.md): Core Web Vitals analyzer: performance-as-UX from the captured &#96;perf&#96; artifacts.
+- [ov.analysis.ux.forms](_autosummary/ov.analysis.ux.forms.html.md): Form-records analyzer: the state-changing actions a page offers, and what guards them (#21).
 - [ov.analysis.ux.heuristics](_autosummary/ov.analysis.ux.heuristics.html.md): Heuristic analyzer: the automatable subset of Nielsen / cognitive-walkthrough (D3 §6).
 - [ov.analysis.ux.metrics](_autosummary/ov.analysis.ux.metrics.html.md): Journey-metrics analyzer: form friction, backtracking, and journey summary (D3 §5).
 - [ov.analysis.ux.severity](_autosummary/ov.analysis.ux.severity.html.md): Severity scoring: &#96;score = impact_tier x reach&#96; (D3 §1).
@@ -70,7 +71,7 @@
 - [ov.reporting.synopsis](_autosummary/ov.reporting.synopsis.html.md): Synopsis: structured map-reduce over findings into one agent-consumable file (§8.4).
 - [ov.util](_autosummary/ov.util.html.md): Internal helpers: content-addressing, hashing, redaction, and requirements.
 - [For AI agents](ai-agents.html.md): &#96;ov&#96; ships artifacts for coding agents alongside its code. This page lists
-- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-22 08:31 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-22 08:44 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
 
 ## Optional
 

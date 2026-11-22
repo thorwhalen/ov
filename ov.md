@@ -1,4 +1,4 @@
-> built 2026-11-22 08:31 UTC from 395ebb0 (main) · ov 0.1.3. Details: build_info.json
+> built 2026-11-22 08:44 UTC from 1e9c26a (main) · ov 0.1.4. Details: build_info.json
 
 # index.html.md
 
@@ -2314,6 +2314,62 @@ Reduce one perf payload to `{inp, cls, lcp, ttfb}` (pure, testable).
   [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`float`](https://docs.python.org/3/builtins/functions.html#float) | [`None`](https://docs.python.org/3/builtins/constants.html#None)]
 
 
+# _autosummary/ov.analysis.ux.forms.html.md
+
+# ov.analysis.ux.forms
+
+Form-records analyzer: the state-changing actions a page offers, and what guards them (#21).
+
+One record per `<form>` (and per AJAX submission found in inline scripts) in the captured DOM:
+page URL, resolved action, method, encoding, fields, and the protections around it (CSRF token,
+honeypot-like fields, captcha, file upload, navigation-only forms). From the main document’s
+response headers it adds the session cookie’s `SameSite` and the framing policy. Read-only: it
+only reads captured artifacts and never submits anything. Writes one `forms` artifact (a JSON
+list) and a summary; it emits no findings.
+
+Caveat: `Set-Cookie` values are redacted at capture by default (`redact_values`), so
+`session_cookie_samesite` is `None` unless the run was captured with redaction off.
+
+### Functions
+
+| [`analyze_forms`](_autosummary/ov.analysis.ux.forms.html.md#ov.analysis.ux.forms.analyze_forms)(ctx)              | Write a `forms` artifact (JSON list of form records) for the run's captured pages.   |
+|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| [`extract_forms`](_autosummary/ov.analysis.ux.forms.html.md#ov.analysis.ux.forms.extract_forms)(html[, page_url]) | Form records for every `<form>` and inline-script AJAX POST in `html` (pure).        |
+| [`header_facts`](_autosummary/ov.analysis.ux.forms.html.md#ov.analysis.ux.forms.header_facts)(headers)           | Response-header facts that decide how a site can be posted to or framed (pure).      |
+
+### ov.analysis.ux.forms.analyze_forms(ctx)
+
+Write a `forms` artifact (JSON list of form records) for the run’s captured pages.
+
+* **Return type:**
+  [`AnalyzerOutput`](_autosummary/ov.analysis.context.html.md#ov.analysis.context.AnalyzerOutput)
+
+### ov.analysis.ux.forms.extract_forms(html, page_url='')
+
+Form records for every `<form>` and inline-script AJAX POST in `html` (pure).
+
+```pycon
+>>> recs = extract_forms('<form action="/go" method="post"><input name="_token" type="hidden"></form>', "https://x.org/a")
+>>> recs[0]["action"], recs[0]["method"], recs[0]["protections"]["csrf"]
+('https://x.org/go', 'POST', True)
+```
+
+* **Return type:**
+  [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]]
+
+### ov.analysis.ux.forms.header_facts(headers)
+
+Response-header facts that decide how a site can be posted to or framed (pure).
+
+```pycon
+>>> header_facts({"X-Frame-Options": "DENY"})["framing_blocked"]
+True
+```
+
+* **Return type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]
+
+
 # _autosummary/ov.analysis.ux.heuristics.html.md
 
 # ov.analysis.ux.heuristics
@@ -2359,13 +2415,14 @@ The hard honesty constraint (D3) lives here: automated tooling catches only
 
 ### Modules
 
-| [`a11y`](_autosummary/ov.analysis.ux.a11y.html.md#module-ov.analysis.ux.a11y)                     | Accessibility analyzer: WebAIM perennials from the DOM + optional axe mapping.         |
-|------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| [`contrast_focus`](_autosummary/ov.analysis.ux.contrast_focus.html.md#module-ov.analysis.ux.contrast_focus) | Contrast + focus analyzer (deterministic, no engine).                                  |
-| [`cwv`](_autosummary/ov.analysis.ux.cwv.html.md#module-ov.analysis.ux.cwv)                       | Core Web Vitals analyzer: performance-as-UX from the captured `perf` artifacts.        |
-| [`heuristics`](_autosummary/ov.analysis.ux.heuristics.html.md#module-ov.analysis.ux.heuristics)         | Heuristic analyzer: the automatable subset of Nielsen / cognitive-walkthrough (D3 §6). |
-| [`metrics`](_autosummary/ov.analysis.ux.metrics.html.md#module-ov.analysis.ux.metrics)               | Journey-metrics analyzer: form friction, backtracking, and journey summary (D3 §5).    |
-| [`severity`](_autosummary/ov.analysis.ux.severity.html.md#module-ov.analysis.ux.severity)             | Severity scoring: `score = impact_tier x reach` (D3 §1).                               |
+| [`a11y`](_autosummary/ov.analysis.ux.a11y.html.md#module-ov.analysis.ux.a11y)                     | Accessibility analyzer: WebAIM perennials from the DOM + optional axe mapping.               |
+|------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| [`contrast_focus`](_autosummary/ov.analysis.ux.contrast_focus.html.md#module-ov.analysis.ux.contrast_focus) | Contrast + focus analyzer (deterministic, no engine).                                        |
+| [`cwv`](_autosummary/ov.analysis.ux.cwv.html.md#module-ov.analysis.ux.cwv)                       | Core Web Vitals analyzer: performance-as-UX from the captured `perf` artifacts.              |
+| [`forms`](_autosummary/ov.analysis.ux.forms.html.md#module-ov.analysis.ux.forms)                   | Form-records analyzer: the state-changing actions a page offers, and what guards them (#21). |
+| [`heuristics`](_autosummary/ov.analysis.ux.heuristics.html.md#module-ov.analysis.ux.heuristics)         | Heuristic analyzer: the automatable subset of Nielsen / cognitive-walkthrough (D3 §6).       |
+| [`metrics`](_autosummary/ov.analysis.ux.metrics.html.md#module-ov.analysis.ux.metrics)               | Journey-metrics analyzer: form friction, backtracking, and journey summary (D3 §5).          |
+| [`severity`](_autosummary/ov.analysis.ux.severity.html.md#module-ov.analysis.ux.severity)             | Severity scoring: `score = impact_tier x reach` (D3 §1).                                     |
 
 
 # _autosummary/ov.analysis.ux.metrics.html.md
@@ -4792,18 +4849,18 @@ True
 
 # About this build
 
-This documentation was built on **2026-11-22 08:31 UTC** from commit <a href="https://github.com/thorwhalen/ov/commit/395ebb0fc94659f065fe220f43ab8f4da391d927"><code>395ebb0</code></a> on branch <code>main</code>, for **ov 0.1.3** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-11-22 08:44 UTC** from commit <a href="https://github.com/thorwhalen/ov/commit/1e9c26a46302bab4d46ff202c5647be2f373af11"><code>1e9c26a</code></a> on branch <code>main</code>, for **ov 0.1.4** (from <code>pyproject.toml</code>).
 
 #### WARNING
 The documentation and the package may be misaligned:
 
-- The documented version (0.1.3) is behind the latest release on PyPI (0.1.4): `pip install ov` gives newer code than these docs describe.
+- The documented version (0.1.4) is behind the latest release on PyPI (0.1.5): `pip install ov` gives newer code than these docs describe.
 
 ## Source
 
 |                     |                                                                                                                                                      |
 |---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/thorwhalen/ov/commit/395ebb0fc94659f065fe220f43ab8f4da391d927"><code>395ebb0fc94659f065fe220f43ab8f4da391d927</code></a> |
+| Commit              | <a href="https://github.com/thorwhalen/ov/commit/1e9c26a46302bab4d46ff202c5647be2f373af11"><code>1e9c26a46302bab4d46ff202c5647be2f373af11</code></a> |
 | Branch              | <code>main</code>                                                                                                                                    |
 | Tags at this commit | none                                                                                                                                                 |
 | Working tree        | clean                                                                                                                                                |
@@ -4814,9 +4871,9 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>thorwhalen/ov</code>                                                                 |
-| Run          | <a href="https://github.com/thorwhalen/ov/actions/runs/45003054431">45003054431</a>        |
+| Run          | <a href="https://github.com/thorwhalen/ov/actions/runs/45004122758">45004122758</a>        |
 | Ref          | <code>refs/heads/main</code>                                                               |
-| Event commit | <code>395ebb0fc94659f065fe220f43ab8f4da391d927</code> (in the history of the built commit) |
+| Event commit | <code>1e9c26a46302bab4d46ff202c5647be2f373af11</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -4841,13 +4898,13 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/ov/0.1.4/">0.1.4</a>, newer than the documented version (0.1.3).
+Latest release: <a href="https://pypi.org/project/ov/0.1.5/">0.1.5</a>, newer than the documented version (0.1.4).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/thorwhalen/ov && cd ov
-git checkout 395ebb0fc94659f065fe220f43ab8f4da391d927
+git checkout 1e9c26a46302bab4d46ff202c5647be2f373af11
 pip install "epythet==0.2.23"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

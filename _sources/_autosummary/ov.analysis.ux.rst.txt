@@ -13,6 +13,7 @@ ov.analysis.ux
    a11y
    contrast_focus
    cwv
+   forms
    heuristics
    metrics
    severity
