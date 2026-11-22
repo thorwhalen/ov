@@ -24,8 +24,12 @@ from .. import register_analyzer
 from ..context import AnalysisContext, AnalyzerOutput
 
 _NON_FIELD_INPUTS = {"submit", "button", "reset", "image"}
-_CSRF_NAME = re.compile(r"csrf|xsrf|authenticity_token|^_token$|__requestverificationtoken", re.I)
-_HONEYPOT = re.compile(r"honeypot|hp_|_hp$|^website$|^url$|leave.?blank|do.?not.?fill", re.I)
+_CSRF_NAME = re.compile(
+    r"csrf|xsrf|authenticity_token|^_token$|__requestverificationtoken", re.I
+)
+_HONEYPOT = re.compile(
+    r"honeypot|hp_|_hp$|^website$|^url$|leave.?blank|do.?not.?fill", re.I
+)
 _CAPTCHA = re.compile(r"captcha|g-recaptcha|h-captcha|cf-turnstile|turnstile", re.I)
 _AJAX_POST = re.compile(
     r"""(?:\$\.post\(\s*|\$\.ajax\(\s*\{[^}]*?url\s*:\s*|fetch\(\s*|\.open\(\s*['"]POST['"]\s*,\s*)['"]([^'"]+)['"]""",
@@ -53,7 +57,8 @@ def _field(node: Any, labels: dict[str, str]) -> dict[str, Any]:
     }
     if node.tag == "select":
         rec["options"] = [
-            o.attributes.get("value", (o.text() or "").strip()) for o in node.css("option")
+            o.attributes.get("value", (o.text() or "").strip())
+            for o in node.css("option")
         ]
     if attrs.get("accept"):
         rec["accept"] = attrs["accept"]
@@ -93,14 +98,18 @@ def extract_forms(html: str, page_url: str = "") -> list[dict[str, Any]]:
     tree = HTMLParser(html)
     labels = _label_for(tree)
     meta_csrf = any(
-        _CSRF_META.search(m.attributes.get("name") or "") for m in tree.css("meta[name]")
+        _CSRF_META.search(m.attributes.get("name") or "")
+        for m in tree.css("meta[name]")
     )
     records: list[dict[str, Any]] = []
     for form in tree.css("form"):
         nodes = [
             n
             for n in form.css("input, select, textarea")
-            if not (n.tag == "input" and (n.attributes.get("type") or "text") in _NON_FIELD_INPUTS)
+            if not (
+                n.tag == "input"
+                and (n.attributes.get("type") or "text") in _NON_FIELD_INPUTS
+            )
         ]
         fields = [_field(n, labels) for n in nodes]
         raw_action = form.attributes.get("action")
@@ -149,7 +158,9 @@ def extract_forms(html: str, page_url: str = "") -> list[dict[str, Any]]:
                     "encoding": "ajax",
                     "fields": [],
                     "protections": {
-                        "csrf": bool(re.search(r"x-csrf-token|x-xsrf-token", window, re.I)),
+                        "csrf": bool(
+                            re.search(r"x-csrf-token|x-xsrf-token", window, re.I)
+                        ),
                         "honeypot_fields": [],
                         "captcha": False,
                         "file_upload": False,
@@ -196,7 +207,13 @@ def analyze_forms(ctx: AnalysisContext) -> AnalyzerOutput:
     for art in ctx.artifacts("dom"):
         page_url = (art.meta or {}).get("url") or ctx.run.target_url
         for rec in extract_forms(ctx.text(art), page_url):
-            key = (rec["page_url"], rec["kind"], rec["action"], rec["method"], tuple(f["name"] for f in rec["fields"]))
+            key = (
+                rec["page_url"],
+                rec["kind"],
+                rec["action"],
+                rec["method"],
+                tuple(f["name"] for f in rec["fields"]),
+            )
             if key not in seen:
                 seen.add(key)
                 records.append(rec)
