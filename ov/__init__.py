@@ -62,6 +62,7 @@ def observe(
     crawl_pages: int | None = None,
     config: OvConfig | None = None,
     authorized: bool | None = None,
+    read_only: bool = False,
 ) -> CaptureRun:
     """Drive the target and capture everything. Zero-config default works.
 
@@ -78,6 +79,9 @@ def observe(
         crawl_pages: if set (>1), politely crawl that many same-origin pages.
         config: an explicit :class:`OvConfig` (overrides ``headed``).
         authorized: acknowledge authorization to study a *foreign* target.
+        read_only: abort every non-GET/HEAD/OPTIONS request in the browser (pages
+            that POST on load send nothing); the aborted ones are listed in a
+            ``blocked_requests`` artifact and a run note.
 
     Returns:
         The populated :class:`~ov.base.CaptureRun` (also persisted to the store).
@@ -91,7 +95,12 @@ def observe(
         cfg.authorized = authorized
 
     session = CaptureSession(
-        target_url=url, config=cfg, store=store, mode=mode, probes=probes
+        target_url=url,
+        config=cfg,
+        store=store,
+        mode=mode,
+        probes=probes,
+        read_only=read_only,
     )
     with session:
         session.open()
