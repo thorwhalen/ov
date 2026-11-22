@@ -31,7 +31,7 @@ def load_builtin_analyzers() -> None:
     registry is fully populated on import (no order-dependent gaps).
     """
     from .arch import api, bundles, dependencies, framework, rendering  # noqa: F401
-    from .ux import a11y, contrast_focus, cwv, heuristics, metrics  # noqa: F401
+    from .ux import a11y, contrast_focus, cwv, forms, heuristics, metrics  # noqa: F401
 
 
 load_builtin_analyzers()
