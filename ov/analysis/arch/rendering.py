@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from selectolax.parser import HTMLParser
+from selectolax.lexbor import LexborHTMLParser as HTMLParser
 
 from ...base import Finding, Scored
 from .. import register_analyzer
