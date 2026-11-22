@@ -1,0 +1,19 @@
+<html><head><meta name="csrf-token" content="abc"></head><body>
+<form id="contact" action="/contact" method="post">
+  <input type="hidden" name="_token" value="abc">
+  <label for="n">Your name</label><input id="n" name="name" required>
+  <label for="e">Email</label><input id="e" type="email" name="email" required>
+  <textarea name="msg"></textarea>
+  <input type="text" name="website" style="display:none" tabindex="-1">
+  <div class="g-recaptcha" data-sitekey="k"></div>
+  <input type="submit" value="Send">
+</form>
+<form action="/upload" method="post" enctype="multipart/form-data">
+  <label for="f">CV</label><input id="f" type="file" name="cv" accept=".pdf,.docx" required>
+</form>
+<form action="#" method="get">
+  <select name="lang"><option value="en">English</option><option value="fr">Français</option></select>
+</form>
+<script>$.post('/api/vote', {id: 1}, function(){}); // header X-CSRF-TOKEN set globally
+</script>
+</body></html>
