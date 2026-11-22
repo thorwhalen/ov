@@ -1,0 +1,16 @@
+ov.agents.mcp
+=============
+
+.. automodule:: ov.agents.mcp
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      capture_url
+      main
+      mcp_server
+      ov_tools
+      study_url
+   

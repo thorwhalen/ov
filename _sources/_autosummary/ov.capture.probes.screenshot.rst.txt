@@ -1,0 +1,12 @@
+ov.capture.probes.screenshot
+============================
+
+.. automodule:: ov.capture.probes.screenshot
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ScreenshotProbe
+   

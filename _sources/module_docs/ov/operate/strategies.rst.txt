@@ -1,4 +1,0 @@
-ov.operate.strategies
-=====================
-.. automodule:: ov.operate.strategies
-   :members:

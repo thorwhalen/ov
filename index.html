@@ -1,613 +1,573 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to ov’s documentation! &mdash; ov 0.1.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
 
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="alternate" type="text/markdown" href="index.html.md">
+<link rel="describedby" href="llms.txt" type="text/markdown">
+<link rel="alternate" type="text/markdown" href="index.html.md">
+<link rel="describedby" href="llms.txt">
+    <title>ov &#8212; ov</title>
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=92734c54"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="_static/toggleprompt.js?v=d7ede5d2"></script>
-      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_autodoc_typehints.css?v=057ac668" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/epythet.css?v=feb3a0ec" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
+
+    <script src="_static/documentation_options.js?v=360bc84d"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=fd10adb8"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ov" href="module_docs/ov.html" /> 
-</head>
+    <link rel="next" title="API reference" href="api.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.3" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-          
-          
-          <a href="#" class="icon icon-home">
-            ov
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov.html">ov</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/__main__.html">ov.__main__</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents.html">ov.agents</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_skills.html">ov.agents._skills</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_util.html">ov.agents._util</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/analyst.html">ov.agents.analyst</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/definitions.html">ov.agents.definitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/llm.html">ov.agents.llm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/mcp.html">ov.agents.mcp</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/operator.html">ov.agents.operator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/realize.html">ov.agents.realize</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis.html">ov.analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/bundles.html">ov.analysis.arch.bundles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/framework.html">ov.analysis.arch.framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html">ov.analysis.arch.sourcemaps</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/context.html">ov.analysis.context</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/diff.html">ov.analysis.diff</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/run.html">ov.analysis.run</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/cwv.html">ov.analysis.ux.cwv</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/metrics.html">ov.analysis.ux.metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/severity.html">ov.analysis.ux.severity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/base.html">ov.base</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture.html">ov.capture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/browser.html">ov.capture.browser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/cdp.html">ov.capture.cdp</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes.html">ov.capture.probes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/a11y.html">ov.capture.probes.a11y</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/session.html">ov.capture.session</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/stores.html">ov.capture.stores</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/config.html">ov.config</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate.html">ov.operate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/act.html">ov.operate.act</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/driver.html">ov.operate.driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/journal.html">ov.operate.journal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/observe.html">ov.operate.observe</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/perception.html">ov.operate.perception</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/progress.html">ov.operate.progress</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/strategies.html">ov.operate.strategies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/registry.html">ov.registry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting.html">ov.reporting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting/overview.html">ov.reporting.overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting/render.html">ov.reporting.render</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting/sections.html">ov.reporting.sections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting/synopsis.html">ov.reporting.synopsis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/util.html">ov.util</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">ov</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to ov’s documentation!</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ov</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="ai-agents.html">
+    For AI agents
+  </a>
+</li>
+
   </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="welcome-to-ov-s-documentation">
-<h1>Welcome to ov’s documentation!<a class="headerlink" href="#welcome-to-ov-s-documentation" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov.html">ov</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.CaptureRun"><code class="docutils literal notranslate"><span class="pre">CaptureRun</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.OvConfig"><code class="docutils literal notranslate"><span class="pre">OvConfig</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.RunDiff"><code class="docutils literal notranslate"><span class="pre">RunDiff</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.analyze"><code class="docutils literal notranslate"><span class="pre">analyze()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.check_requirements"><code class="docutils literal notranslate"><span class="pre">check_requirements()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.diff"><code class="docutils literal notranslate"><span class="pre">diff()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.observe"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.overview"><code class="docutils literal notranslate"><span class="pre">overview()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.report"><code class="docutils literal notranslate"><span class="pre">report()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov.html#ov.synopsis"><code class="docutils literal notranslate"><span class="pre">synopsis()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/__main__.html">ov.__main__</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.analyze"><code class="docutils literal notranslate"><span class="pre">analyze()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.check"><code class="docutils literal notranslate"><span class="pre">check()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.diff"><code class="docutils literal notranslate"><span class="pre">diff()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.evidence"><code class="docutils literal notranslate"><span class="pre">evidence()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.mcp"><code class="docutils literal notranslate"><span class="pre">mcp()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.observe"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.overview"><code class="docutils literal notranslate"><span class="pre">overview()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.report"><code class="docutils literal notranslate"><span class="pre">report()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.runs"><code class="docutils literal notranslate"><span class="pre">runs()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/__main__.html#ov.__main__.synopsis"><code class="docutils literal notranslate"><span class="pre">synopsis()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents.html">ov.agents</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.AgentSpec"><code class="docutils literal notranslate"><span class="pre">AgentSpec</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.AnalystAgent"><code class="docutils literal notranslate"><span class="pre">AnalystAgent</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.OperatorAgent"><code class="docutils literal notranslate"><span class="pre">OperatorAgent</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.Orchestrator"><code class="docutils literal notranslate"><span class="pre">Orchestrator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.agents_for_role"><code class="docutils literal notranslate"><span class="pre">agents_for_role()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.analyst_specs"><code class="docutils literal notranslate"><span class="pre">analyst_specs()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.arch_analyst"><code class="docutils literal notranslate"><span class="pre">arch_analyst()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.complete_agent"><code class="docutils literal notranslate"><span class="pre">complete_agent()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.complete_all"><code class="docutils literal notranslate"><span class="pre">complete_all()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.default_model"><code class="docutils literal notranslate"><span class="pre">default_model()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.default_skills_dir"><code class="docutils literal notranslate"><span class="pre">default_skills_dir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.materialize"><code class="docutils literal notranslate"><span class="pre">materialize()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.mcp_server"><code class="docutils literal notranslate"><span class="pre">mcp_server()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.ov_tools"><code class="docutils literal notranslate"><span class="pre">ov_tools()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.realize_agent"><code class="docutils literal notranslate"><span class="pre">realize_agent()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.resolve_llm"><code class="docutils literal notranslate"><span class="pre">resolve_llm()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.skill_path"><code class="docutils literal notranslate"><span class="pre">skill_path()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.structured"><code class="docutils literal notranslate"><span class="pre">structured()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.study"><code class="docutils literal notranslate"><span class="pre">study()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents.html#ov.agents.ux_analyst"><code class="docutils literal notranslate"><span class="pre">ux_analyst()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_skills.html">ov.agents._skills</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/_skills.html#ov.agents._skills.AGENT_SKILLS"><code class="docutils literal notranslate"><span class="pre">AGENT_SKILLS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/_skills.html#ov.agents._skills.default_skills_dir"><code class="docutils literal notranslate"><span class="pre">default_skills_dir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/_skills.html#ov.agents._skills.skill_path"><code class="docutils literal notranslate"><span class="pre">skill_path()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/_util.html">ov.agents._util</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/_util.html#ov.agents._util.require"><code class="docutils literal notranslate"><span class="pre">require()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/analyst.html">ov.agents.analyst</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/analyst.html#ov.agents.analyst.AnalystAgent"><code class="docutils literal notranslate"><span class="pre">AnalystAgent</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/analyst.html#ov.agents.analyst.Judge"><code class="docutils literal notranslate"><span class="pre">Judge</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/analyst.html#ov.agents.analyst.arch_analyst"><code class="docutils literal notranslate"><span class="pre">arch_analyst()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/analyst.html#ov.agents.analyst.ux_analyst"><code class="docutils literal notranslate"><span class="pre">ux_analyst()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/definitions.html">ov.agents.definitions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/definitions.html#ov.agents.definitions.AgentSpec"><code class="docutils literal notranslate"><span class="pre">AgentSpec</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/definitions.html#ov.agents.definitions.OV_AGENTS"><code class="docutils literal notranslate"><span class="pre">OV_AGENTS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/definitions.html#ov.agents.definitions.agents_for_role"><code class="docutils literal notranslate"><span class="pre">agents_for_role()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/definitions.html#ov.agents.definitions.analyst_specs"><code class="docutils literal notranslate"><span class="pre">analyst_specs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/llm.html">ov.agents.llm</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/llm.html#ov.agents.llm.DEFAULT_MODELS"><code class="docutils literal notranslate"><span class="pre">DEFAULT_MODELS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/llm.html#ov.agents.llm.default_model"><code class="docutils literal notranslate"><span class="pre">default_model()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/llm.html#ov.agents.llm.resolve_llm"><code class="docutils literal notranslate"><span class="pre">resolve_llm()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/llm.html#ov.agents.llm.structured"><code class="docutils literal notranslate"><span class="pre">structured()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/mcp.html">ov.agents.mcp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.capture_url"><code class="docutils literal notranslate"><span class="pre">capture_url()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.mcp_server"><code class="docutils literal notranslate"><span class="pre">mcp_server()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.ov_tools"><code class="docutils literal notranslate"><span class="pre">ov_tools()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/mcp.html#ov.agents.mcp.study_url"><code class="docutils literal notranslate"><span class="pre">study_url()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/operator.html">ov.agents.operator</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/operator.html#ov.agents.operator.Decider"><code class="docutils literal notranslate"><span class="pre">Decider</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/operator.html#ov.agents.operator.OperatorAgent"><code class="docutils literal notranslate"><span class="pre">OperatorAgent</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/operator.html#ov.agents.operator.make_llm_decider"><code class="docutils literal notranslate"><span class="pre">make_llm_decider()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html">ov.agents.orchestrator</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.Orchestrator"><code class="docutils literal notranslate"><span class="pre">Orchestrator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.OrchestratorResult"><code class="docutils literal notranslate"><span class="pre">OrchestratorResult</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/orchestrator.html#ov.agents.orchestrator.study"><code class="docutils literal notranslate"><span class="pre">study()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/agents/realize.html">ov.agents.realize</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.complete_agent"><code class="docutils literal notranslate"><span class="pre">complete_agent()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.complete_all"><code class="docutils literal notranslate"><span class="pre">complete_all()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.materialize"><code class="docutils literal notranslate"><span class="pre">materialize()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/agents/realize.html#ov.agents.realize.realize_agent"><code class="docutils literal notranslate"><span class="pre">realize_agent()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis.html">ov.analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis.html#ov.analysis.load_builtin_analyzers"><code class="docutils literal notranslate"><span class="pre">load_builtin_analyzers()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch.html">ov.analysis.arch</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/api.html">ov.analysis.arch.api</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.analyze_api"><code class="docutils literal notranslate"><span class="pre">analyze_api()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.classify_endpoint"><code class="docutils literal notranslate"><span class="pre">classify_endpoint()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.infer_auth"><code class="docutils literal notranslate"><span class="pre">infer_auth()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/api.html#ov.analysis.arch.api.normalize_path"><code class="docutils literal notranslate"><span class="pre">normalize_path()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/bundles.html">ov.analysis.arch.bundles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/bundles.html#ov.analysis.arch.bundles.analyze_bundles"><code class="docutils literal notranslate"><span class="pre">analyze_bundles()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/bundles.html#ov.analysis.arch.bundles.detect_source_maps"><code class="docutils literal notranslate"><span class="pre">detect_source_maps()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/bundles.html#ov.analysis.arch.bundles.js_response_bodies"><code class="docutils literal notranslate"><span class="pre">js_response_bodies()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/dependencies.html">ov.analysis.arch.dependencies</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/dependencies.html#ov.analysis.arch.dependencies.analyze_dependencies"><code class="docutils literal notranslate"><span class="pre">analyze_dependencies()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/framework.html">ov.analysis.arch.framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/framework.html#ov.analysis.arch.framework.analyze_framework"><code class="docutils literal notranslate"><span class="pre">analyze_framework()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/pipeline.html">ov.analysis.arch.pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/pipeline.html#ov.analysis.arch.pipeline.ARCH_STAGES"><code class="docutils literal notranslate"><span class="pre">ARCH_STAGES</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/pipeline.html#ov.analysis.arch.pipeline.run_arch_pipeline"><code class="docutils literal notranslate"><span class="pre">run_arch_pipeline()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/rendering.html">ov.analysis.arch.rendering</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.analyze_rendering"><code class="docutils literal notranslate"><span class="pre">analyze_rendering()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.classify_rendering"><code class="docutils literal notranslate"><span class="pre">classify_rendering()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/rendering.html#ov.analysis.arch.rendering.rendering_scored"><code class="docutils literal notranslate"><span class="pre">rendering_scored()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/sidecar.html">ov.analysis.arch.sidecar</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sidecar.html#ov.analysis.arch.sidecar.Sidecar"><code class="docutils literal notranslate"><span class="pre">Sidecar</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sidecar.html#ov.analysis.arch.sidecar.SidecarUnavailable"><code class="docutils literal notranslate"><span class="pre">SidecarUnavailable</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html">ov.analysis.arch.sourcemaps</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.MapRecovery"><code class="docutils literal notranslate"><span class="pre">MapRecovery</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.RecoveredFile"><code class="docutils literal notranslate"><span class="pre">RecoveredFile</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.extract_inline_map"><code class="docutils literal notranslate"><span class="pre">extract_inline_map()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.is_recovered_dependency"><code class="docutils literal notranslate"><span class="pre">is_recovered_dependency()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.node_modules_packages"><code class="docutils literal notranslate"><span class="pre">node_modules_packages()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.parse_source_map"><code class="docutils literal notranslate"><span class="pre">parse_source_map()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.recover_from_map"><code class="docutils literal notranslate"><span class="pre">recover_from_map()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/arch/sourcemaps.html#ov.analysis.arch.sourcemaps.sanitize_source_path"><code class="docutils literal notranslate"><span class="pre">sanitize_source_path()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/context.html">ov.analysis.context</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/context.html#ov.analysis.context.AnalysisContext"><code class="docutils literal notranslate"><span class="pre">AnalysisContext</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/context.html#ov.analysis.context.AnalyzerOutput"><code class="docutils literal notranslate"><span class="pre">AnalyzerOutput</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/diff.html">ov.analysis.diff</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.build_diff"><code class="docutils literal notranslate"><span class="pre">build_diff()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.diff_analysis_id"><code class="docutils literal notranslate"><span class="pre">diff_analysis_id()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.diff_runs"><code class="docutils literal notranslate"><span class="pre">diff_runs()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.find_baseline_run"><code class="docutils literal notranslate"><span class="pre">find_baseline_run()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.finding_key"><code class="docutils literal notranslate"><span class="pre">finding_key()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/diff.html#ov.analysis.diff.load_diff"><code class="docutils literal notranslate"><span class="pre">load_diff()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/evidence.html">ov.analysis.evidence</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.MODEL_CAPS"><code class="docutils literal notranslate"><span class="pre">MODEL_CAPS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.build_evidence_bundle"><code class="docutils literal notranslate"><span class="pre">build_evidence_bundle()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.fit_to_cap"><code class="docutils literal notranslate"><span class="pre">fit_to_cap()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.image_token_cost"><code class="docutils literal notranslate"><span class="pre">image_token_cost()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/evidence.html#ov.analysis.evidence.png_dimensions"><code class="docutils literal notranslate"><span class="pre">png_dimensions()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/reliability.html">ov.analysis.reliability</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.ReliabilityReport"><code class="docutils literal notranslate"><span class="pre">ReliabilityReport</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.apply_verification"><code class="docutils literal notranslate"><span class="pre">apply_verification()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.lookup_evidence"><code class="docutils literal notranslate"><span class="pre">lookup_evidence()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.resolvable"><code class="docutils literal notranslate"><span class="pre">resolvable()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.verification_questions"><code class="docutils literal notranslate"><span class="pre">verification_questions()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/reliability.html#ov.analysis.reliability.verify_findings"><code class="docutils literal notranslate"><span class="pre">verify_findings()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/run.html">ov.analysis.run</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/run.html#ov.analysis.run.merge_output"><code class="docutils literal notranslate"><span class="pre">merge_output()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/run.html#ov.analysis.run.run_analysis"><code class="docutils literal notranslate"><span class="pre">run_analysis()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux.html">ov.analysis.ux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/a11y.html">ov.analysis.ux.a11y</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/a11y.html#ov.analysis.ux.a11y.analyze_a11y"><code class="docutils literal notranslate"><span class="pre">analyze_a11y()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/contrast_focus.html">ov.analysis.ux.contrast_focus</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.analyze_contrast_focus"><code class="docutils literal notranslate"><span class="pre">analyze_contrast_focus()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.contrast_ratio"><code class="docutils literal notranslate"><span class="pre">contrast_ratio()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/contrast_focus.html#ov.analysis.ux.contrast_focus.relative_luminance"><code class="docutils literal notranslate"><span class="pre">relative_luminance()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/cwv.html">ov.analysis.ux.cwv</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/cwv.html#ov.analysis.ux.cwv.analyze_cwv"><code class="docutils literal notranslate"><span class="pre">analyze_cwv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/cwv.html#ov.analysis.ux.cwv.cwv_from_perf"><code class="docutils literal notranslate"><span class="pre">cwv_from_perf()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/heuristics.html">ov.analysis.ux.heuristics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/heuristics.html#ov.analysis.ux.heuristics.analyze_heuristics"><code class="docutils literal notranslate"><span class="pre">analyze_heuristics()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/metrics.html">ov.analysis.ux.metrics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/metrics.html#ov.analysis.ux.metrics.analyze_metrics"><code class="docutils literal notranslate"><span class="pre">analyze_metrics()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/metrics.html#ov.analysis.ux.metrics.form_friction"><code class="docutils literal notranslate"><span class="pre">form_friction()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/analysis/ux/severity.html">ov.analysis.ux.severity</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/severity.html#ov.analysis.ux.severity.A11Y_TIER_WEIGHT"><code class="docutils literal notranslate"><span class="pre">A11Y_TIER_WEIGHT</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/severity.html#ov.analysis.ux.severity.UX_TIER_WEIGHT"><code class="docutils literal notranslate"><span class="pre">UX_TIER_WEIGHT</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/severity.html#ov.analysis.ux.severity.make_severity"><code class="docutils literal notranslate"><span class="pre">make_severity()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/analysis/ux/severity.html#ov.analysis.ux.severity.tier_weight"><code class="docutils literal notranslate"><span class="pre">tier_weight()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/base.html">ov.base</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#design-notes">Design notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.ActionResult"><code class="docutils literal notranslate"><span class="pre">ActionResult</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Affordance"><code class="docutils literal notranslate"><span class="pre">Affordance</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Artifact"><code class="docutils literal notranslate"><span class="pre">Artifact</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.CaptureRun"><code class="docutils literal notranslate"><span class="pre">CaptureRun</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Endpoint"><code class="docutils literal notranslate"><span class="pre">Endpoint</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Evidence"><code class="docutils literal notranslate"><span class="pre">Evidence</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.EvidenceBundle"><code class="docutils literal notranslate"><span class="pre">EvidenceBundle</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Finding"><code class="docutils literal notranslate"><span class="pre">Finding</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.FindingDelta"><code class="docutils literal notranslate"><span class="pre">FindingDelta</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.JourneyStep"><code class="docutils literal notranslate"><span class="pre">JourneyStep</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Observation"><code class="docutils literal notranslate"><span class="pre">Observation</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.ProgressSignal"><code class="docutils literal notranslate"><span class="pre">ProgressSignal</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.RunDiff"><code class="docutils literal notranslate"><span class="pre">RunDiff</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Scored"><code class="docutils literal notranslate"><span class="pre">Scored</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.Severity"><code class="docutils literal notranslate"><span class="pre">Severity</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.TechFinding"><code class="docutils literal notranslate"><span class="pre">TechFinding</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.new_id"><code class="docutils literal notranslate"><span class="pre">new_id()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/base.html#ov.base.utcnow"><code class="docutils literal notranslate"><span class="pre">utcnow()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture.html">ov.capture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/browser.html">ov.capture.browser</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/browser.html#ov.capture.browser.BrowserNotAvailable"><code class="docutils literal notranslate"><span class="pre">BrowserNotAvailable</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/browser.html#ov.capture.browser.BrowserSession"><code class="docutils literal notranslate"><span class="pre">BrowserSession</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/cdp.html">ov.capture.cdp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/cdp.html#ov.capture.cdp.CdpSession"><code class="docutils literal notranslate"><span class="pre">CdpSession</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/cdp.html#ov.capture.cdp.flatten_ax_node"><code class="docutils literal notranslate"><span class="pre">flatten_ax_node()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes.html">ov.capture.probes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes.html#ov.capture.probes.Probe"><code class="docutils literal notranslate"><span class="pre">Probe</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes.html#ov.capture.probes.ProbeContext"><code class="docutils literal notranslate"><span class="pre">ProbeContext</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes.html#ov.capture.probes.load_builtin_probes"><code class="docutils literal notranslate"><span class="pre">load_builtin_probes()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/a11y.html">ov.capture.probes.a11y</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/a11y.html#ov.capture.probes.a11y.A11yProbe"><code class="docutils literal notranslate"><span class="pre">A11yProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/assets.html">ov.capture.probes.assets</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/assets.html#ov.capture.probes.assets.AssetsProbe"><code class="docutils literal notranslate"><span class="pre">AssetsProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/console.html">ov.capture.probes.console</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/console.html#ov.capture.probes.console.ConsoleProbe"><code class="docutils literal notranslate"><span class="pre">ConsoleProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/dom.html">ov.capture.probes.dom</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/dom.html#ov.capture.probes.dom.DomProbe"><code class="docutils literal notranslate"><span class="pre">DomProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/fingerprint.html">ov.capture.probes.fingerprint</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/fingerprint.html#ov.capture.probes.fingerprint.FingerprintProbe"><code class="docutils literal notranslate"><span class="pre">FingerprintProbe</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/fingerprint.html#ov.capture.probes.fingerprint.detect_technologies"><code class="docutils literal notranslate"><span class="pre">detect_technologies()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/navigation.html">ov.capture.probes.navigation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/navigation.html#ov.capture.probes.navigation.NavigationProbe"><code class="docutils literal notranslate"><span class="pre">NavigationProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/network.html">ov.capture.probes.network</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/network.html#ov.capture.probes.network.NetworkProbe"><code class="docutils literal notranslate"><span class="pre">NetworkProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/perf.html">ov.capture.probes.perf</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/perf.html#ov.capture.probes.perf.PerfProbe"><code class="docutils literal notranslate"><span class="pre">PerfProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/screenshot.html">ov.capture.probes.screenshot</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/screenshot.html#ov.capture.probes.screenshot.ScreenshotProbe"><code class="docutils literal notranslate"><span class="pre">ScreenshotProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/sse.html">ov.capture.probes.sse</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/sse.html#ov.capture.probes.sse.SseProbe"><code class="docutils literal notranslate"><span class="pre">SseProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/storage.html">ov.capture.probes.storage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/storage.html#ov.capture.probes.storage.StorageProbe"><code class="docutils literal notranslate"><span class="pre">StorageProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/probes/websocket.html">ov.capture.probes.websocket</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/probes/websocket.html#ov.capture.probes.websocket.WebSocketProbe"><code class="docutils literal notranslate"><span class="pre">WebSocketProbe</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/session.html">ov.capture.session</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/session.html#ov.capture.session.CaptureSession"><code class="docutils literal notranslate"><span class="pre">CaptureSession</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/capture/stores.html">ov.capture.stores</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/stores.html#ov.capture.stores.CaptureStore"><code class="docutils literal notranslate"><span class="pre">CaptureStore</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/capture/stores.html#ov.capture.stores.resolve_store"><code class="docutils literal notranslate"><span class="pre">resolve_store()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/config.html">ov.config</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/config.html#ov.config.OvConfig"><code class="docutils literal notranslate"><span class="pre">OvConfig</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/config.html#ov.config.default_store_root"><code class="docutils literal notranslate"><span class="pre">default_store_root()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate.html">ov.operate</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate.html#ov.operate.act"><code class="docutils literal notranslate"><span class="pre">act()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate.html#ov.operate.journal"><code class="docutils literal notranslate"><span class="pre">journal()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate.html#ov.operate.make_step"><code class="docutils literal notranslate"><span class="pre">make_step()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate.html#ov.operate.observe"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate.html#ov.operate.perceive"><code class="docutils literal notranslate"><span class="pre">perceive()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate.html#ov.operate.progress"><code class="docutils literal notranslate"><span class="pre">progress()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/act.html">ov.operate.act</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/act.html#ov.operate.act.act"><code class="docutils literal notranslate"><span class="pre">act()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/driver.html">ov.operate.driver</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/driver.html#ov.operate.driver.crawl"><code class="docutils literal notranslate"><span class="pre">crawl()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/driver.html#ov.operate.driver.replay"><code class="docutils literal notranslate"><span class="pre">replay()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/journal.html">ov.operate.journal</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/journal.html#ov.operate.journal.journal"><code class="docutils literal notranslate"><span class="pre">journal()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/journal.html#ov.operate.journal.make_step"><code class="docutils literal notranslate"><span class="pre">make_step()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/observe.html">ov.operate.observe</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/observe.html#ov.operate.observe.observe"><code class="docutils literal notranslate"><span class="pre">observe()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/perception.html">ov.operate.perception</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/perception.html#ov.operate.perception.PERCEPTION_REGISTRY"><code class="docutils literal notranslate"><span class="pre">PERCEPTION_REGISTRY</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/perception.html#ov.operate.perception.REF_ATTR"><code class="docutils literal notranslate"><span class="pre">REF_ATTR</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/perception.html#ov.operate.perception.perceive"><code class="docutils literal notranslate"><span class="pre">perceive()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/perception.html#ov.operate.perception.perceive_ax_snapshot"><code class="docutils literal notranslate"><span class="pre">perceive_ax_snapshot()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/perception.html#ov.operate.perception.perceive_hybrid"><code class="docutils literal notranslate"><span class="pre">perceive_hybrid()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/perception.html#ov.operate.perception.perceive_screenshot"><code class="docutils literal notranslate"><span class="pre">perceive_screenshot()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/perception.html#ov.operate.perception.register_perception"><code class="docutils literal notranslate"><span class="pre">register_perception()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/progress.html">ov.operate.progress</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/progress.html#ov.operate.progress.progress"><code class="docutils literal notranslate"><span class="pre">progress()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/operate/strategies.html">ov.operate.strategies</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/strategies.html#ov.operate.strategies.NAV_ROLES"><code class="docutils literal notranslate"><span class="pre">NAV_ROLES</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/strategies.html#ov.operate.strategies.absolutize"><code class="docutils literal notranslate"><span class="pre">absolutize()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/strategies.html#ov.operate.strategies.is_same_origin"><code class="docutils literal notranslate"><span class="pre">is_same_origin()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/operate/strategies.html#ov.operate.strategies.navigable_affordances"><code class="docutils literal notranslate"><span class="pre">navigable_affordances()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/registry.html">ov.registry</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/registry.html#ov.registry.RegisteredFn"><code class="docutils literal notranslate"><span class="pre">RegisteredFn</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/registry.html#ov.registry.Registry"><code class="docutils literal notranslate"><span class="pre">Registry</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting.html">ov.reporting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/reporting.html#ov.reporting.load_builtin_sections"><code class="docutils literal notranslate"><span class="pre">load_builtin_sections()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting/overview.html">ov.reporting.overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/reporting/overview.html#ov.reporting.overview.run_overview"><code class="docutils literal notranslate"><span class="pre">run_overview()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting/render.html">ov.reporting.render</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/reporting/render.html#ov.reporting.render.render_reports"><code class="docutils literal notranslate"><span class="pre">render_reports()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting/sections.html">ov.reporting.sections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/reporting/synopsis.html">ov.reporting.synopsis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.build_synopsis"><code class="docutils literal notranslate"><span class="pre">build_synopsis()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.build_synopsis_doc"><code class="docutils literal notranslate"><span class="pre">build_synopsis_doc()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.dedupe_findings"><code class="docutils literal notranslate"><span class="pre">dedupe_findings()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/reporting/synopsis.html#ov.reporting.synopsis.render_synopsis_md"><code class="docutils literal notranslate"><span class="pre">render_synopsis_md()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/ov/util.html">ov.util</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/util.html#ov.util.Requirement"><code class="docutils literal notranslate"><span class="pre">Requirement</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/util.html#ov.util.RequirementReport"><code class="docutils literal notranslate"><span class="pre">RequirementReport</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/util.html#ov.util.check_requirements"><code class="docutils literal notranslate"><span class="pre">check_requirements()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/util.html#ov.util.content_hash"><code class="docutils literal notranslate"><span class="pre">content_hash()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/util.html#ov.util.redact_mapping"><code class="docutils literal notranslate"><span class="pre">redact_mapping()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/util.html#ov.util.redact_value"><code class="docutils literal notranslate"><span class="pre">redact_value()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/util.html#ov.util.sidecar_dir"><code class="docutils literal notranslate"><span class="pre">sidecar_dir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/ov/util.html#ov.util.stable_hash"><code class="docutils literal notranslate"><span class="pre">stable_hash()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</div>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
-<p>Release: 0.1.2</p>
-<p>Last change: Sep 04, 2026</p>
-</section>
-
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="module_docs/ov.html" class="btn btn-neutral float-right" title="ov" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+</nav></div>
+      
     </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+      
+      
+        <div class="navbar-item">
 
-</body>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/ov" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" aria-expanded="false" aria-controls="pst-secondary-sidebar-modal">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="ai-agents.html">
+    For AI agents
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/ov" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <!-- generated by epythet -->
+<section id="ov">
+<h1>ov<a class="headerlink" href="#ov" title="Link to this heading">#</a></h1>
+<p><strong>OverView</strong> — point it at a URL and it drives the web app like a user, records
+what the app <em>does</em> (pages, DOM, screenshots, network, console, journey) and what
+it’s <em>made of</em> (HTML, JS, frameworks, API surface), then analyzes both for <strong>UX</strong>
+and <strong>software architecture</strong> and writes Markdown reports plus a single synopsis.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ov</span>
+
+<span class="n">run</span> <span class="o">=</span> <span class="n">ov</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="s2">"https://example.com"</span><span class="p">)</span>  <span class="c1"># capture (zero config)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">fingerprint</span><span class="p">)</span>  <span class="c1"># detected technologies</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">run</span><span class="o">.</span><span class="n">artifacts</span><span class="p">),</span> <span class="s2">"artifacts captured"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ov<span class="w"> </span>observe<span class="w"> </span>https://example.com<span class="w">                  </span><span class="c1"># same, from the shell</span>
+ov<span class="w"> </span>check<span class="w">                                         </span><span class="c1"># what system deps are present</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ov</span></code> is a <strong>tool + skill library with a deterministic, model-free core</strong>. The
+near-term “agent” that orchestrates it is a <em>host agent</em> (Claude Code) following
+the skills in <code class="docutils literal notranslate"><span class="pre">.claude/skills/</span></code> — <code class="docutils literal notranslate"><span class="pre">ov</span></code> supplies the hands (drive the target) and
+eyes (observe + analyze); the host supplies the control loop. Everything in the
+core runs with <strong>no model and no host</strong>, so it’s testable, cheap, and repeatable.</p>
+<section id="install">
+<h2>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w">            </span><span class="c1"># the package</span>
+playwright<span class="w"> </span>install<span class="w"> </span>chromium<span class="w"> </span><span class="c1"># the browser it drives (required for capture)</span>
+</pre></div>
+</div>
+<p>The arch/API reconstruction and evidence layers have optional extras
+(<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">&quot;.[arch,evidence]&quot;</span></code>) and an optional Node sidecar; run
+<code class="docutils literal notranslate"><span class="pre">ov</span> <span class="pre">check</span></code> (or <code class="docutils literal notranslate"><span class="pre">ov.check_requirements()</span></code>) to see what’s present and how to
+install what’s missing.</p>
+</section>
+<section id="what-it-captures">
+<h2>What it captures<a class="headerlink" href="#what-it-captures" title="Link to this heading">#</a></h2>
+<p>Capture is organized into <strong>probes</strong> — independent, registerable units that each
+write typed artifacts into a content-addressed store:</p>
+<ul class="simple">
+<li><p><strong>Behavioral</strong>: <code class="docutils literal notranslate"><span class="pre">navigation</span></code>, <code class="docutils literal notranslate"><span class="pre">network</span></code> (request/response + size-capped bodies),
+<code class="docutils literal notranslate"><span class="pre">dom</span></code> (serialized DOM + ARIA snapshot + full AX tree), <code class="docutils literal notranslate"><span class="pre">screenshot</span></code>, <code class="docutils literal notranslate"><span class="pre">console</span></code>,
+<code class="docutils literal notranslate"><span class="pre">perf</span></code>, <code class="docutils literal notranslate"><span class="pre">storage</span></code>, <code class="docutils literal notranslate"><span class="pre">websocket</span></code>, <code class="docutils literal notranslate"><span class="pre">sse</span></code>.</p></li>
+<li><p><strong>Static</strong>: <code class="docutils literal notranslate"><span class="pre">fingerprint</span></code> (framework/library detection), <code class="docutils literal notranslate"><span class="pre">assets</span></code> (inventory).</p></li>
+</ul>
+<p>The five <strong>operate</strong> primitives — <code class="docutils literal notranslate"><span class="pre">observe</span></code> / <code class="docutils literal notranslate"><span class="pre">act</span></code> / <code class="docutils literal notranslate"><span class="pre">journal</span></code> / <code class="docutils literal notranslate"><span class="pre">progress</span></code> /
+<code class="docutils literal notranslate"><span class="pre">snapshot_state</span></code> — are the deterministic, LLM-free “hands” the host (or a scripted
+driver) uses to drive a journey; the journey trace <em>is</em> the UX evidence.</p>
+</section>
+<section id="the-facade">
+<h2>The facade<a class="headerlink" href="#the-facade" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>What it does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ov.observe(url)</span></code></p></td>
+<td><p>Drive + capture → <code class="docutils literal notranslate"><span class="pre">CaptureRun</span></code> (persisted to a store)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ov.analyze(run)</span></code></p></td>
+<td><p>Deterministic UX + architecture analyzers → findings <em>(Phase 2)</em></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ov.diff(run)</span></code></p></td>
+<td><p>Own-target regression: diff a run vs a prior baseline → <code class="docutils literal notranslate"><span class="pre">RunDiff</span></code> <em>(review mode)</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ov.report(run)</span></code></p></td>
+<td><p>Render Markdown report sections <em>(Phase 2)</em></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ov.synopsis(dir)</span></code></p></td>
+<td><p>Aggregate reports into one synopsis <em>(Phase 2)</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ov.overview(url)</span></code></p></td>
+<td><p>The one-liner: observe → analyze → report → synopsis <em>(Phase 2)</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The CLI mirrors these: <code class="docutils literal notranslate"><span class="pre">ov</span> <span class="pre">observe|analyze|diff|report|synopsis|overview|check|runs|mcp</span></code>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">mode=&quot;review&quot;</span></code> (your own target), <code class="docutils literal notranslate"><span class="pre">ov.overview(url,</span> <span class="pre">mode=&quot;review&quot;)</span></code> inserts a
+diff step: it compares the run against the latest prior run of the same target and
+reports what is <strong>new</strong>, <strong>changed</strong>, or <strong>resolved</strong> — drift detection for a
+downstream creation/modification agent. Artifacts are content-addressed, so this
+own-target diffing is cheap by design. The first review run has no baseline and is
+a no-op; pass <code class="docutils literal notranslate"><span class="pre">baseline=&lt;run_id&gt;</span></code> to pin a specific prior run.</p>
+</section>
+<section id="in-package-agents-optional-ov-agents">
+<span id="in-package-agents-optional--ovagents"></span><h2>In-package agents (optional — <code class="docutils literal notranslate"><span class="pre">ov[agents]</span></code>)<a class="headerlink" href="#in-package-agents-optional-ov-agents" title="Link to this heading">#</a></h2>
+<p>The host-agent path above is the default and the pit of success. When you need a
+<em>self-contained</em> runtime — a non-Claude-Code host, programmatic use, or process
+isolation — <code class="docutils literal notranslate"><span class="pre">ov.agents</span></code> re-hosts the <strong>same</strong> skills + deterministic core as runnable
+agents. It is the spec’s “mechanical lift” (Phase 4): nothing is rewritten, the lift
+is done by <a class="reference external" href="https://github.com/thorwhalen/coact"><code class="docutils literal notranslate"><span class="pre">coact</span></code></a> (<code class="docutils literal notranslate"><span class="pre">COMPLETE</span></code> a skill into an
+agent definition, <code class="docutils literal notranslate"><span class="pre">REALIZE</span></code> it onto a backend), and <code class="docutils literal notranslate"><span class="pre">ov.agents</span></code> adds only the bits
+coact deliberately leaves out — the operator’s live-browser loop, the analyst’s
+multimodal evidence-bundle call, and the orchestration topology (via
+<a class="reference external" href="https://github.com/thorwhalen/aw"><code class="docutils literal notranslate"><span class="pre">aw</span></code></a>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">".[agents]"</span><span class="w">          </span><span class="c1"># coact[sdk,mcp] + aw + py2mcp + fastmcp</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ov</span><span class="w"> </span><span class="kn">import</span> <span class="n">agents</span>
+
+<span class="c1"># 1. Cheapest: materialize ov's agents as .claude/agents/ so Claude Code runs them</span>
+<span class="c1">#    (host backend — zero LLM, no fan-out). The host stays the manager.</span>
+<span class="n">agents</span><span class="o">.</span><span class="n">materialize</span><span class="p">()</span>
+
+<span class="c1"># 2. The cost gate before standing up an in-process fleet (~15× the tokens):</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">agents</span><span class="o">.</span><span class="n">estimate</span><span class="p">([</span><span class="s2">"ux-analyst"</span><span class="p">,</span> <span class="s2">"arch-analyst"</span><span class="p">])</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
+
+<span class="c1"># 3. In-package study (LLM dependency-injected; omit it for a deterministic run):</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">agents</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="s2">"https://example.com"</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">my_model</span><span class="p">)</span>  <span class="c1"># -&gt; synopsis + run</span>
+</pre></div>
+</div>
+<p>Each agent reuses Phase 1–3 machinery unchanged and routes by the §10 cost gate
+(operator → Haiku, UX-analyst → Sonnet, Arch-analyst / orchestrator → Opus). The
+analyst applies the <strong>cite-or-abstain</strong> contract — every LLM claim cites a
+mark/fact id or is downgraded to <code class="docutils literal notranslate"><span class="pre">undetermined</span></code>. For a foreign MCP host,
+<code class="docutils literal notranslate"><span class="pre">ov</span> <span class="pre">mcp</span></code> (or <code class="docutils literal notranslate"><span class="pre">agents.mcp_server()</span></code>) exposes <code class="docutils literal notranslate"><span class="pre">study_url</span></code> / <code class="docutils literal notranslate"><span class="pre">capture_url</span></code> via
+<a class="reference external" href="https://github.com/i2mint/py2mcp"><code class="docutils literal notranslate"><span class="pre">py2mcp</span></code></a>.</p>
+</section>
+<section id="authorization-privacy">
+<span id="authorization--privacy"></span><h2>Authorization &amp; privacy<a class="headerlink" href="#authorization-privacy" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ov</span></code> analyzes <em>publicly served</em> frontend material and observable network behavior
+of targets you are <strong>authorized</strong> to inspect. Foreign-target runs require an
+explicit <code class="docutils literal notranslate"><span class="pre">authorized=True</span></code> acknowledgement; secret/PII capture is off by default
+and storage values are redacted. It does not defeat access controls.</p>
+</section>
+<section id="status">
+<h2>Status<a class="headerlink" href="#status" title="Link to this heading">#</a></h2>
+<p>Built in phases (see the GitHub issues). <strong>Phases 1–3</strong> are shipped: the capture
+spine + operate primitives, the deterministic UX + architecture analysis +
+reports + synopsis, and the host-agent skill layer with the grounded evidence
+bundle. <strong>Phase 4</strong> adds the optional in-package agent layer (<code class="docutils literal notranslate"><span class="pre">ov[agents]</span></code>, above)
+and <strong>review mode</strong> — own-target diff / regression detection (<code class="docutils literal notranslate"><span class="pre">ov.diff</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ov.overview(url,</span> <span class="pre">mode=&quot;review&quot;)</span></code>). Its remaining depth items (source-map /
+GraphQL / Lighthouse probes) are deferred to follow-up issues.</p>
+<hr class="docutils" />
+<p><em>Author: Thor Whalen.</em></p>
+<p class="epythet-aggregates">This documentation as a single file: <a href="ov.md">ov.md</a> (Markdown, for agents).</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+<p class="epythet-provenance" style="font-size:.8em;opacity:.65;margin-top:2.5em;text-align:right">built 2026-11-22 08:31 UTC from <a href="https://github.com/thorwhalen/ov/commit/395ebb0fc94659f065fe220f43ab8f4da391d927">395ebb0</a> (main) · ov 0.1.3 · <a href="about-this-build.html">about this build</a></p>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="api.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal" tabindex="-1"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install">Install</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-captures">What it captures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-facade">The facade</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-package-agents-optional-ov-agents">In-package agents (optional — <code class="docutils literal notranslate"><span class="pre">ov[agents]</span></code>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authorization-privacy">Authorization &amp; privacy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#status">Status</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/index.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.24.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

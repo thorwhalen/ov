@@ -1,0 +1,24 @@
+ov.agents.operator
+==================
+
+.. automodule:: ov.agents.operator
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      Decider
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      make_llm_decider
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      OperatorAgent
+   

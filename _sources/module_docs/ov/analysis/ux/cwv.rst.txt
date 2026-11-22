@@ -1,4 +1,0 @@
-ov.analysis.ux.cwv
-==================
-.. automodule:: ov.analysis.ux.cwv
-   :members:

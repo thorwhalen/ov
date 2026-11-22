@@ -1,0 +1,25 @@
+ov.agents.definitions
+=====================
+
+.. automodule:: ov.agents.definitions
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      OV_AGENTS
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      agents_for_role
+      analyst_specs
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AgentSpec
+   

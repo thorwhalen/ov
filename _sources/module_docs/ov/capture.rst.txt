@@ -1,4 +1,0 @@
-ov.capture
-==========
-.. automodule:: ov.capture
-   :members:

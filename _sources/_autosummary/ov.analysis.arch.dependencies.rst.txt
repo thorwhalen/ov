@@ -1,0 +1,12 @@
+ov.analysis.arch.dependencies
+=============================
+
+.. automodule:: ov.analysis.arch.dependencies
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      analyze_dependencies
+   

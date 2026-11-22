@@ -1,0 +1,22 @@
+ov.reporting
+============
+
+.. automodule:: ov.reporting
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      load_builtin_sections
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   overview
+   render
+   sections
+   synopsis

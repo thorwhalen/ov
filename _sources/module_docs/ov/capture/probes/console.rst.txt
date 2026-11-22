@@ -1,4 +1,0 @@
-ov.capture.probes.console
-=========================
-.. automodule:: ov.capture.probes.console
-   :members:

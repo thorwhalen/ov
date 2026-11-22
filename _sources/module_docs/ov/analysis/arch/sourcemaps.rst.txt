@@ -1,4 +1,0 @@
-ov.analysis.arch.sourcemaps
-===========================
-.. automodule:: ov.analysis.arch.sourcemaps
-   :members:

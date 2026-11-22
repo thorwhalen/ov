@@ -1,0 +1,13 @@
+ov.analysis.ux.metrics
+======================
+
+.. automodule:: ov.analysis.ux.metrics
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      analyze_metrics
+      form_friction
+   

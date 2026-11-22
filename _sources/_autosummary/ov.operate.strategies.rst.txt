@@ -1,0 +1,20 @@
+ov.operate.strategies
+=====================
+
+.. automodule:: ov.operate.strategies
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      NAV_ROLES
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      absolutize
+      is_same_origin
+      navigable_affordances
+   

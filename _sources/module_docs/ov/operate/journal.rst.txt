@@ -1,4 +1,0 @@
-ov.operate.journal
-==================
-.. automodule:: ov.operate.journal
-   :members:

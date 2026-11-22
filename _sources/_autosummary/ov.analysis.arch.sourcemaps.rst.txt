@@ -1,0 +1,24 @@
+ov.analysis.arch.sourcemaps
+===========================
+
+.. automodule:: ov.analysis.arch.sourcemaps
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      extract_inline_map
+      is_recovered_dependency
+      node_modules_packages
+      parse_source_map
+      recover_from_map
+      sanitize_source_path
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      MapRecovery
+      RecoveredFile
+   

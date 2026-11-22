@@ -1,4 +1,0 @@
-ov.operate.progress
-===================
-.. automodule:: ov.operate.progress
-   :members:

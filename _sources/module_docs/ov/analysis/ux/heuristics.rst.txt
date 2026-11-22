@@ -1,4 +1,0 @@
-ov.analysis.ux.heuristics
-=========================
-.. automodule:: ov.analysis.ux.heuristics
-   :members:

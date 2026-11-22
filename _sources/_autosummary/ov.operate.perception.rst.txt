@@ -1,0 +1,23 @@
+ov.operate.perception
+=====================
+
+.. automodule:: ov.operate.perception
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      REF_ATTR
+      PERCEPTION_REGISTRY
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      perceive
+      perceive_ax_snapshot
+      perceive_hybrid
+      perceive_screenshot
+      register_perception
+   

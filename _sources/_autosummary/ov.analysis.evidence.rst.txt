@@ -1,0 +1,21 @@
+ov.analysis.evidence
+====================
+
+.. automodule:: ov.analysis.evidence
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      MODEL_CAPS
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      build_evidence_bundle
+      fit_to_cap
+      image_token_cost
+      png_dimensions
+   

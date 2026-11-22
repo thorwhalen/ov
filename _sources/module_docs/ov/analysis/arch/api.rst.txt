@@ -1,4 +1,0 @@
-ov.analysis.arch.api
-====================
-.. automodule:: ov.analysis.arch.api
-   :members:

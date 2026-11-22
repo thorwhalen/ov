@@ -1,4 +1,0 @@
-ov.capture.probes.navigation
-============================
-.. automodule:: ov.capture.probes.navigation
-   :members:

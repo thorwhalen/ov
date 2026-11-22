@@ -1,0 +1,16 @@
+ov.agents.realize
+=================
+
+.. automodule:: ov.agents.realize
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      complete_agent
+      complete_all
+      estimate
+      materialize
+      realize_agent
+   

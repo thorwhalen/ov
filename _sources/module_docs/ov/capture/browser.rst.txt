@@ -1,4 +1,0 @@
-ov.capture.browser
-==================
-.. automodule:: ov.capture.browser
-   :members:

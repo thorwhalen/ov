@@ -1,0 +1,20 @@
+ov.analysis.ux.severity
+=======================
+
+.. automodule:: ov.analysis.ux.severity
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      A11Y_TIER_WEIGHT
+      UX_TIER_WEIGHT
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      make_severity
+      tier_weight
+   

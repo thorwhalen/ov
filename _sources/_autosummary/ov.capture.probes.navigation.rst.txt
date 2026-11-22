@@ -1,0 +1,12 @@
+ov.capture.probes.navigation
+============================
+
+.. automodule:: ov.capture.probes.navigation
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      NavigationProbe
+   

@@ -1,0 +1,18 @@
+ov.capture.cdp
+==============
+
+.. automodule:: ov.capture.cdp
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      flatten_ax_node
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CdpSession
+   

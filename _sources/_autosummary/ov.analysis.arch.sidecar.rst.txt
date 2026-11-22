@@ -1,0 +1,18 @@
+ov.analysis.arch.sidecar
+========================
+
+.. automodule:: ov.analysis.arch.sidecar
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Sidecar
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      SidecarUnavailable
+   

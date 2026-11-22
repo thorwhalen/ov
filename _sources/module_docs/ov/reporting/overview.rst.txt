@@ -1,4 +1,0 @@
-ov.reporting.overview
-=====================
-.. automodule:: ov.reporting.overview
-   :members:

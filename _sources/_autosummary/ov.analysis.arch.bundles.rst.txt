@@ -1,0 +1,14 @@
+ov.analysis.arch.bundles
+========================
+
+.. automodule:: ov.analysis.arch.bundles
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      analyze_bundles
+      detect_source_maps
+      js_response_bodies
+   

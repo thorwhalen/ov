@@ -1,0 +1,18 @@
+ov.capture.browser
+==================
+
+.. automodule:: ov.capture.browser
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      BrowserSession
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      BrowserNotAvailable
+   

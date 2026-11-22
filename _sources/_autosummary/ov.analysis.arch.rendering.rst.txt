@@ -1,0 +1,14 @@
+ov.analysis.arch.rendering
+==========================
+
+.. automodule:: ov.analysis.arch.rendering
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      analyze_rendering
+      classify_rendering
+      rendering_scored
+   

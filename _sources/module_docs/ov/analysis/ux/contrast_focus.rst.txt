@@ -1,4 +1,0 @@
-ov.analysis.ux.contrast_focus
-=============================
-.. automodule:: ov.analysis.ux.contrast_focus
-   :members:

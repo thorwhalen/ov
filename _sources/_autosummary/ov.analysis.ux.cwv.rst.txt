@@ -1,0 +1,13 @@
+ov.analysis.ux.cwv
+==================
+
+.. automodule:: ov.analysis.ux.cwv
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      analyze_cwv
+      cwv_from_perf
+   

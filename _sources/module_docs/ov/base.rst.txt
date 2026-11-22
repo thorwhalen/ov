@@ -1,4 +1,0 @@
-ov.base
-=======
-.. automodule:: ov.base
-   :members:

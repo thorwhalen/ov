@@ -1,4 +1,0 @@
-ov.registry
-===========
-.. automodule:: ov.registry
-   :members:

@@ -1,0 +1,20 @@
+ov.analysis.arch
+================
+
+.. automodule:: ov.analysis.arch
+
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   api
+   bundles
+   dependencies
+   framework
+   pipeline
+   rendering
+   sidecar
+   sourcemaps

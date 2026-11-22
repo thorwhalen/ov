@@ -1,4 +1,0 @@
-ov.operate.observe
-==================
-.. automodule:: ov.operate.observe
-   :members:

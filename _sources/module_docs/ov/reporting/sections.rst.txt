@@ -1,4 +1,0 @@
-ov.reporting.sections
-=====================
-.. automodule:: ov.reporting.sections
-   :members:

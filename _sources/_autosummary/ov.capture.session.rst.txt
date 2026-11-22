@@ -1,0 +1,12 @@
+ov.capture.session
+==================
+
+.. automodule:: ov.capture.session
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CaptureSession
+   

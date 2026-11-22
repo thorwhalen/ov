@@ -1,0 +1,25 @@
+ov.agents.analyst
+=================
+
+.. automodule:: ov.agents.analyst
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      Judge
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      arch_analyst
+      ux_analyst
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AnalystAgent
+   

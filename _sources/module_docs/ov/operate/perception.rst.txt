@@ -1,4 +1,0 @@
-ov.operate.perception
-=====================
-.. automodule:: ov.operate.perception
-   :members:

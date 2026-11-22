@@ -1,0 +1,15 @@
+ov.reporting.synopsis
+=====================
+
+.. automodule:: ov.reporting.synopsis
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      build_synopsis
+      build_synopsis_doc
+      dedupe_findings
+      render_synopsis_md
+   

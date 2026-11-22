@@ -1,0 +1,15 @@
+ov.analysis.arch.api
+====================
+
+.. automodule:: ov.analysis.arch.api
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      analyze_api
+      classify_endpoint
+      infer_auth
+      normalize_path
+   

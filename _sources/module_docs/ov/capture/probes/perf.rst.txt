@@ -1,4 +1,0 @@
-ov.capture.probes.perf
-======================
-.. automodule:: ov.capture.probes.perf
-   :members:

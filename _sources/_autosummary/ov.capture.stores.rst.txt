@@ -1,0 +1,18 @@
+ov.capture.stores
+=================
+
+.. automodule:: ov.capture.stores
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      resolve_store
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CaptureStore
+   

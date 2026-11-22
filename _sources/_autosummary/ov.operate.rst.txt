@@ -1,0 +1,26 @@
+ov.operate
+==========
+
+.. automodule:: ov.operate
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      observe
+      act
+      journal
+      make_step
+      progress
+      perceive
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   driver
+   perception
+   strategies

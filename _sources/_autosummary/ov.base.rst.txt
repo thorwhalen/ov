@@ -1,0 +1,35 @@
+ov.base
+=======
+
+.. automodule:: ov.base
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      new_id
+      utcnow
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Action
+      ActionResult
+      Affordance
+      Artifact
+      CaptureRun
+      Endpoint
+      Evidence
+      EvidenceBundle
+      Finding
+      FindingDelta
+      JourneyStep
+      Observation
+      ProgressSignal
+      RunDiff
+      Scored
+      Severity
+      TechFinding
+   

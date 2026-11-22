@@ -1,0 +1,41 @@
+﻿ov
+==
+
+.. automodule:: ov
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      observe
+      analyze
+      diff
+      report
+      synopsis
+      overview
+      check_requirements
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      OvConfig
+      CaptureRun
+      RunDiff
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   agents
+   analysis
+   base
+   capture
+   config
+   operate
+   registry
+   reporting
+   util

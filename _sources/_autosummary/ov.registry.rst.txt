@@ -1,0 +1,13 @@
+ov.registry
+===========
+
+.. automodule:: ov.registry
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      RegisteredFn
+      Registry
+   

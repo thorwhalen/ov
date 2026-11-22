@@ -1,0 +1,81 @@
+# ov
+
+> OverView of a web app
+
+
+## Pages
+
+- [ov](index.html.md): &#42;&#42;OverView&#42;&#42; — point it at a URL and it drives the web app like a user, records
+- [API reference](api.html.md): | &#96;ov&#96;   | &#96;ov&#96; -- OverView: agent-driven web reconnaissance &amp; analysis.   |
+- [ov](_autosummary/ov.html.md): &#96;ov&#96; – OverView: agent-driven web reconnaissance &amp; analysis.
+- [ov.agents](_autosummary/ov.agents.html.md): &#96;ov.agents&#96; — the optional in-package agent layer (Phase 4 productization).
+- [ov.agents.analyst](_autosummary/ov.agents.analyst.html.md): The Analyst agents (UX + Arch) — grounded judgment over an evidence bundle.
+- [ov.agents.definitions](_autosummary/ov.agents.definitions.html.md): SSOT: which &#96;ov&#96; skills become which agents (role, lens, model routing).
+- [ov.agents.llm](_autosummary/ov.agents.llm.html.md): Provider-agnostic LLM facade for the &#96;ov&#96; agent layer (thin, injected, optional).
+- [ov.agents.mcp](_autosummary/ov.agents.mcp.html.md): Expose &#96;ov&#96; to non-Claude-Code hosts as an MCP server (via &#96;py2mcp&#96;).
+- [ov.agents.operator](_autosummary/ov.agents.operator.html.md): The Operator agent — the model-bound perceive→decide→act→record loop.
+- [ov.agents.orchestrator](_autosummary/ov.agents.orchestrator.html.md): The Orchestrator — a &#42;pure coordinator&#42; over the study pipeline (&#96;aw&#96; workflow).
+- [ov.agents.realize](_autosummary/ov.agents.realize.html.md): The mechanical lift — turn &#96;ov&#96;’s skills into agent definitions and realize them.
+- [ov.analysis](_autosummary/ov.analysis.html.md): Analysis layer: deterministic analyzers over captured artifacts (Phases 2-3).
+- [ov.analysis.arch](_autosummary/ov.analysis.arch.html.md): Architecture-reconstruction analyzers (§6, D2).
+- [ov.analysis.arch.api](_autosummary/ov.analysis.arch.api.html.md): API-surface synthesis: merge schemas across journeys, classify, detect auth (D2 §4).
+- [ov.analysis.arch.bundles](_autosummary/ov.analysis.arch.bundles.html.md): Source-map detection + recovery – the decisive bimodal lever (D2).
+- [ov.analysis.arch.dependencies](_autosummary/ov.analysis.arch.dependencies.html.md): Dependency inventory + known-vulnerability flags (D2).
+- [ov.analysis.arch.framework](_autosummary/ov.analysis.arch.framework.html.md): Framework / bundler / state-management / routing enrichment (D2 §5).
+- [ov.analysis.arch.pipeline](_autosummary/ov.analysis.arch.pipeline.html.md): The arch pipeline as a composable transform (§6: fingerprint -&gt; bundles -&gt; api).
+- [ov.analysis.arch.rendering](_autosummary/ov.analysis.arch.rendering.html.md): Rendering-model classifier: CSR vs SSR/SSG via raw-HTML-vs-rendered-DOM diff (D2).
+- [ov.analysis.arch.sidecar](_autosummary/ov.analysis.arch.sidecar.html.md): Python facade over the Node reverse-engineering sidecar (§6.1, D2).
+- [ov.analysis.arch.sourcemaps](_autosummary/ov.analysis.arch.sourcemaps.html.md): Pure source-map recovery: original file tree + &#96;node_modules&#96; versions (D2).
+- [ov.analysis.context](_autosummary/ov.analysis.context.html.md): The analysis context + analyzer output – the currency of the pure analyzers.
+- [ov.analysis.diff](_autosummary/ov.analysis.diff.html.md): Own-target diffing: a run vs a stored prior baseline run (review mode, §10).
+- [ov.analysis.evidence](_autosummary/ov.analysis.evidence.html.md): The evidence-bundle assembler (§8.1, D4) – deterministic, model-free.
+- [ov.analysis.reliability](_autosummary/ov.analysis.reliability.html.md): Reliability passes over findings (§5.2, D4) – deterministic gates, model-free.
+- [ov.analysis.run](_autosummary/ov.analysis.run.html.md): The analysis orchestrator – resolve, order, run analyzers, merge into the run.
+- [ov.analysis.ux](_autosummary/ov.analysis.ux.html.md): UX + accessibility deterministic analyzers (§5.1, D3).
+- [ov.analysis.ux.a11y](_autosummary/ov.analysis.ux.a11y.html.md): Accessibility analyzer: WebAIM perennials from the DOM + optional axe mapping.
+- [ov.analysis.ux.contrast_focus](_autosummary/ov.analysis.ux.contrast_focus.html.md): Contrast + focus analyzer (deterministic, no engine).
+- [ov.analysis.ux.cwv](_autosummary/ov.analysis.ux.cwv.html.md): Core Web Vitals analyzer: performance-as-UX from the captured &#96;perf&#96; artifacts.
+- [ov.analysis.ux.heuristics](_autosummary/ov.analysis.ux.heuristics.html.md): Heuristic analyzer: the automatable subset of Nielsen / cognitive-walkthrough (D3 §6).
+- [ov.analysis.ux.metrics](_autosummary/ov.analysis.ux.metrics.html.md): Journey-metrics analyzer: form friction, backtracking, and journey summary (D3 §5).
+- [ov.analysis.ux.severity](_autosummary/ov.analysis.ux.severity.html.md): Severity scoring: &#96;score = impact_tier x reach&#96; (D3 §1).
+- [ov.base](_autosummary/ov.base.html.md): Single source of truth (SSOT) for the &#96;ov&#96; artifact schema.
+- [ov.capture](_autosummary/ov.capture.html.md): Capture layer: drive a browser and record behavioral + static streams.
+- [ov.capture.browser](_autosummary/ov.capture.browser.html.md): Playwright facade – the baseline driver (§9, D1).
+- [ov.capture.cdp](_autosummary/ov.capture.cdp.html.md): The CDP escape-hatch plugin (Chromium-only) – the ~20% Playwright can’t reach.
+- [ov.capture.probes](_autosummary/ov.capture.probes.html.md): Probes – the registerable units of &#42;what intelligence to gather&#42; (§2).
+- [ov.capture.probes.a11y](_autosummary/ov.capture.probes.a11y.html.md): Accessibility-signals probe: computed text styles (for contrast) + optional axe.
+- [ov.capture.probes.assets](_autosummary/ov.capture.probes.assets.html.md): Assets probe: a content-addressed inventory of loaded resources.
+- [ov.capture.probes.console](_autosummary/ov.capture.probes.console.html.md): Console probe: console messages, page errors, and unhandled rejections.
+- [ov.capture.probes.dom](_autosummary/ov.capture.probes.dom.html.md): DOM probe: serialized DOM + ARIA snapshot (agent view) + full AX tree (evidence).
+- [ov.capture.probes.fingerprint](_autosummary/ov.capture.probes.fingerprint.html.md): Fingerprint probe: a built-in, license-clean technology detector.
+- [ov.capture.probes.navigation](_autosummary/ov.capture.probes.navigation.html.md): Navigation probe: URL changes, redirects, frame tree, and SPA history.
+- [ov.capture.probes.network](_autosummary/ov.capture.probes.network.html.md): Network probe: request/response metadata + bodies, accumulated from events.
+- [ov.capture.probes.perf](_autosummary/ov.capture.probes.perf.html.md): Performance probe: Navigation Timing, paint, web-vitals entries, CDP counters.
+- [ov.capture.probes.screenshot](_autosummary/ov.capture.probes.screenshot.html.md): Screenshot probe: full-page PNG per captured state.
+- [ov.capture.probes.sse](_autosummary/ov.capture.probes.sse.html.md): SSE probe: Server-Sent-Event frames via CDP (Chromium-only).
+- [ov.capture.probes.storage](_autosummary/ov.capture.probes.storage.html.md): Storage probe: cookies, localStorage, sessionStorage, IndexedDB names.
+- [ov.capture.probes.websocket](_autosummary/ov.capture.probes.websocket.html.md): WebSocket probe: frames sent/received and open/close, first-class (D1).
+- [ov.capture.session](_autosummary/ov.capture.session.html.md): &#96;CaptureSession&#96; – owns the browser and orchestrates the probes (§3.1).
+- [ov.capture.stores](_autosummary/ov.capture.stores.html.md): The capture store – a &#96;MutableMapping&#96; Mall over a run directory (§3.4).
+- [ov.config](_autosummary/ov.config.html.md): Configuration – the single source of truth for &#96;ov&#96;’s defaults.
+- [ov.operate](_autosummary/ov.operate.html.md): The operate layer – deterministic, LLM-free tool primitives (the “hands”).
+- [ov.operate.driver](_autosummary/ov.operate.driver.html.md): The scripted/guided driver – model-free journey execution (Phase 1).
+- [ov.operate.perception](_autosummary/ov.operate.perception.html.md): Perception strategies – pluggable ways to turn a page into an &#96;Observation&#96;.
+- [ov.operate.strategies](_autosummary/ov.operate.strategies.html.md): Journey-strategy helpers – intent shaping for the three strategies (§2.3).
+- [ov.registry](_autosummary/ov.registry.html.md): The plugin mechanism: decorated functions registered into a dict (§3.2).
+- [ov.reporting](_autosummary/ov.reporting.html.md): Report layer: registered Markdown sections + the synopsis (Phase 2).
+- [ov.reporting.overview](_autosummary/ov.reporting.overview.html.md): The &#96;overview&#96; one-liner: observe -&gt; analyze -&gt; report -&gt; synopsis (§4).
+- [ov.reporting.render](_autosummary/ov.reporting.render.html.md): Render Markdown report sections from an analyzed run (§8.3).
+- [ov.reporting.sections](_autosummary/ov.reporting.sections.html.md): The default report sections (§8.3) – each a registered Markdown fragment.
+- [ov.reporting.synopsis](_autosummary/ov.reporting.synopsis.html.md): Synopsis: structured map-reduce over findings into one agent-consumable file (§8.4).
+- [ov.util](_autosummary/ov.util.html.md): Internal helpers: content-addressing, hashing, redaction, and requirements.
+- [For AI agents](ai-agents.html.md): &#96;ov&#96; ships artifacts for coding agents alongside its code. This page lists
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-22 08:31 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
+
+## Optional
+
+- [ov.md](ov.md): Complete documentation in a single file.
+
+## Build
+
+- [build_info.json](build_info.json): build provenance (commit, version, tool versions, whether the docs match the package)

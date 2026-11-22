@@ -1,0 +1,12 @@
+ov.capture.probes.console
+=========================
+
+.. automodule:: ov.capture.probes.console
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ConsoleProbe
+   

@@ -1,0 +1,12 @@
+ov.capture.probes.assets
+========================
+
+.. automodule:: ov.capture.probes.assets
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AssetsProbe
+   

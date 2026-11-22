@@ -1,0 +1,73 @@
+# ov
+
+> OverView of a web app
+
+
+## Pages in this subsection
+
+- [ov](ov.html.md): &#96;ov&#96; – OverView: agent-driven web reconnaissance &amp; analysis.
+- [ov.agents](ov.agents.html.md): &#96;ov.agents&#96; — the optional in-package agent layer (Phase 4 productization).
+- [ov.agents.analyst](ov.agents.analyst.html.md): The Analyst agents (UX + Arch) — grounded judgment over an evidence bundle.
+- [ov.agents.definitions](ov.agents.definitions.html.md): SSOT: which &#96;ov&#96; skills become which agents (role, lens, model routing).
+- [ov.agents.llm](ov.agents.llm.html.md): Provider-agnostic LLM facade for the &#96;ov&#96; agent layer (thin, injected, optional).
+- [ov.agents.mcp](ov.agents.mcp.html.md): Expose &#96;ov&#96; to non-Claude-Code hosts as an MCP server (via &#96;py2mcp&#96;).
+- [ov.agents.operator](ov.agents.operator.html.md): The Operator agent — the model-bound perceive→decide→act→record loop.
+- [ov.agents.orchestrator](ov.agents.orchestrator.html.md): The Orchestrator — a &#42;pure coordinator&#42; over the study pipeline (&#96;aw&#96; workflow).
+- [ov.agents.realize](ov.agents.realize.html.md): The mechanical lift — turn &#96;ov&#96;’s skills into agent definitions and realize them.
+- [ov.analysis](ov.analysis.html.md): Analysis layer: deterministic analyzers over captured artifacts (Phases 2-3).
+- [ov.analysis.arch](ov.analysis.arch.html.md): Architecture-reconstruction analyzers (§6, D2).
+- [ov.analysis.arch.api](ov.analysis.arch.api.html.md): API-surface synthesis: merge schemas across journeys, classify, detect auth (D2 §4).
+- [ov.analysis.arch.bundles](ov.analysis.arch.bundles.html.md): Source-map detection + recovery – the decisive bimodal lever (D2).
+- [ov.analysis.arch.dependencies](ov.analysis.arch.dependencies.html.md): Dependency inventory + known-vulnerability flags (D2).
+- [ov.analysis.arch.framework](ov.analysis.arch.framework.html.md): Framework / bundler / state-management / routing enrichment (D2 §5).
+- [ov.analysis.arch.pipeline](ov.analysis.arch.pipeline.html.md): The arch pipeline as a composable transform (§6: fingerprint -&gt; bundles -&gt; api).
+- [ov.analysis.arch.rendering](ov.analysis.arch.rendering.html.md): Rendering-model classifier: CSR vs SSR/SSG via raw-HTML-vs-rendered-DOM diff (D2).
+- [ov.analysis.arch.sidecar](ov.analysis.arch.sidecar.html.md): Python facade over the Node reverse-engineering sidecar (§6.1, D2).
+- [ov.analysis.arch.sourcemaps](ov.analysis.arch.sourcemaps.html.md): Pure source-map recovery: original file tree + &#96;node_modules&#96; versions (D2).
+- [ov.analysis.context](ov.analysis.context.html.md): The analysis context + analyzer output – the currency of the pure analyzers.
+- [ov.analysis.diff](ov.analysis.diff.html.md): Own-target diffing: a run vs a stored prior baseline run (review mode, §10).
+- [ov.analysis.evidence](ov.analysis.evidence.html.md): The evidence-bundle assembler (§8.1, D4) – deterministic, model-free.
+- [ov.analysis.reliability](ov.analysis.reliability.html.md): Reliability passes over findings (§5.2, D4) – deterministic gates, model-free.
+- [ov.analysis.run](ov.analysis.run.html.md): The analysis orchestrator – resolve, order, run analyzers, merge into the run.
+- [ov.analysis.ux](ov.analysis.ux.html.md): UX + accessibility deterministic analyzers (§5.1, D3).
+- [ov.analysis.ux.a11y](ov.analysis.ux.a11y.html.md): Accessibility analyzer: WebAIM perennials from the DOM + optional axe mapping.
+- [ov.analysis.ux.contrast_focus](ov.analysis.ux.contrast_focus.html.md): Contrast + focus analyzer (deterministic, no engine).
+- [ov.analysis.ux.cwv](ov.analysis.ux.cwv.html.md): Core Web Vitals analyzer: performance-as-UX from the captured &#96;perf&#96; artifacts.
+- [ov.analysis.ux.heuristics](ov.analysis.ux.heuristics.html.md): Heuristic analyzer: the automatable subset of Nielsen / cognitive-walkthrough (D3 §6).
+- [ov.analysis.ux.metrics](ov.analysis.ux.metrics.html.md): Journey-metrics analyzer: form friction, backtracking, and journey summary (D3 §5).
+- [ov.analysis.ux.severity](ov.analysis.ux.severity.html.md): Severity scoring: &#96;score = impact_tier x reach&#96; (D3 §1).
+- [ov.base](ov.base.html.md): Single source of truth (SSOT) for the &#96;ov&#96; artifact schema.
+- [ov.capture](ov.capture.html.md): Capture layer: drive a browser and record behavioral + static streams.
+- [ov.capture.browser](ov.capture.browser.html.md): Playwright facade – the baseline driver (§9, D1).
+- [ov.capture.cdp](ov.capture.cdp.html.md): The CDP escape-hatch plugin (Chromium-only) – the ~20% Playwright can’t reach.
+- [ov.capture.probes](ov.capture.probes.html.md): Probes – the registerable units of &#42;what intelligence to gather&#42; (§2).
+- [ov.capture.probes.a11y](ov.capture.probes.a11y.html.md): Accessibility-signals probe: computed text styles (for contrast) + optional axe.
+- [ov.capture.probes.assets](ov.capture.probes.assets.html.md): Assets probe: a content-addressed inventory of loaded resources.
+- [ov.capture.probes.console](ov.capture.probes.console.html.md): Console probe: console messages, page errors, and unhandled rejections.
+- [ov.capture.probes.dom](ov.capture.probes.dom.html.md): DOM probe: serialized DOM + ARIA snapshot (agent view) + full AX tree (evidence).
+- [ov.capture.probes.fingerprint](ov.capture.probes.fingerprint.html.md): Fingerprint probe: a built-in, license-clean technology detector.
+- [ov.capture.probes.navigation](ov.capture.probes.navigation.html.md): Navigation probe: URL changes, redirects, frame tree, and SPA history.
+- [ov.capture.probes.network](ov.capture.probes.network.html.md): Network probe: request/response metadata + bodies, accumulated from events.
+- [ov.capture.probes.perf](ov.capture.probes.perf.html.md): Performance probe: Navigation Timing, paint, web-vitals entries, CDP counters.
+- [ov.capture.probes.screenshot](ov.capture.probes.screenshot.html.md): Screenshot probe: full-page PNG per captured state.
+- [ov.capture.probes.sse](ov.capture.probes.sse.html.md): SSE probe: Server-Sent-Event frames via CDP (Chromium-only).
+- [ov.capture.probes.storage](ov.capture.probes.storage.html.md): Storage probe: cookies, localStorage, sessionStorage, IndexedDB names.
+- [ov.capture.probes.websocket](ov.capture.probes.websocket.html.md): WebSocket probe: frames sent/received and open/close, first-class (D1).
+- [ov.capture.session](ov.capture.session.html.md): &#96;CaptureSession&#96; – owns the browser and orchestrates the probes (§3.1).
+- [ov.capture.stores](ov.capture.stores.html.md): The capture store – a &#96;MutableMapping&#96; Mall over a run directory (§3.4).
+- [ov.config](ov.config.html.md): Configuration – the single source of truth for &#96;ov&#96;’s defaults.
+- [ov.operate](ov.operate.html.md): The operate layer – deterministic, LLM-free tool primitives (the “hands”).
+- [ov.operate.driver](ov.operate.driver.html.md): The scripted/guided driver – model-free journey execution (Phase 1).
+- [ov.operate.perception](ov.operate.perception.html.md): Perception strategies – pluggable ways to turn a page into an &#96;Observation&#96;.
+- [ov.operate.strategies](ov.operate.strategies.html.md): Journey-strategy helpers – intent shaping for the three strategies (§2.3).
+- [ov.registry](ov.registry.html.md): The plugin mechanism: decorated functions registered into a dict (§3.2).
+- [ov.reporting](ov.reporting.html.md): Report layer: registered Markdown sections + the synopsis (Phase 2).
+- [ov.reporting.overview](ov.reporting.overview.html.md): The &#96;overview&#96; one-liner: observe -&gt; analyze -&gt; report -&gt; synopsis (§4).
+- [ov.reporting.render](ov.reporting.render.html.md): Render Markdown report sections from an analyzed run (§8.3).
+- [ov.reporting.sections](ov.reporting.sections.html.md): The default report sections (§8.3) – each a registered Markdown fragment.
+- [ov.reporting.synopsis](ov.reporting.synopsis.html.md): Synopsis: structured map-reduce over findings into one agent-consumable file (§8.4).
+- [ov.util](ov.util.html.md): Internal helpers: content-addressing, hashing, redaction, and requirements.
+
+## Optional
+
+- [Top-level llms.txt](../llms.txt): Complete documentation index.

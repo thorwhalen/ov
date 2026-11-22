@@ -1,0 +1,18 @@
+ov.analysis.arch.pipeline
+=========================
+
+.. automodule:: ov.analysis.arch.pipeline
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      ARCH_STAGES
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      run_arch_pipeline
+   
