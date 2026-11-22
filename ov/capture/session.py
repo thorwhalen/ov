@@ -21,6 +21,9 @@ from .probes import PROBE_REGISTRY, Probe, ProbeContext, load_builtin_probes
 from .stores import CaptureStore, resolve_store
 
 
+READ_ONLY_METHODS = frozenset({"GET", "HEAD", "OPTIONS"})
+
+
 def _resolve_probe_names(probes, config: OvConfig) -> tuple[list[str], list[str]]:
     """Resolve a probe selector into ``(known_names, unknown_names)``.
 
@@ -60,6 +63,7 @@ class CaptureSession:
         mode: str = "reconstruct",
         probes="default",
         record_har: bool = True,
+        read_only: bool = False,
     ):
         load_builtin_probes()
         self.config = config or OvConfig.from_env()
@@ -78,6 +82,8 @@ class CaptureSession:
         self._probes: list[Probe] = []
         self._ctx: ProbeContext | None = None
         self._started = False
+        self.read_only = read_only
+        self.blocked_requests: list[dict] = []
 
     # --- lifecycle --------------------------------------------------------- #
 
@@ -86,6 +92,8 @@ class CaptureSession:
         ordered = PROBE_REGISTRY.ordered(self.probe_names)
         self._probes = [item.fn() for item in ordered]
         self.browser.start()
+        if self.read_only:
+            self.browser.context.route("**/*", self._read_only_route)
         # After the browser launches, any failure must still tear it down so we
         # don't leak a browser/Playwright process on the error path.
         try:
@@ -108,6 +116,26 @@ class CaptureSession:
             raise
         self._started = True
         return self
+
+    def _read_only_route(self, route) -> None:
+        """Abort every request whose method is not GET/HEAD/OPTIONS; record it."""
+        request = route.request
+        if request.method.upper() in READ_ONLY_METHODS:
+            route.continue_()
+            return
+        try:
+            initiator = request.frame.url
+        except Exception:  # noqa: BLE001 - e.g. service-worker requests have no frame
+            initiator = None
+        self.blocked_requests.append(
+            {
+                "method": request.method,
+                "url": request.url,
+                "initiator": initiator,
+                "resource_type": request.resource_type,
+            }
+        )
+        route.abort()
 
     @property
     def page(self):
@@ -185,6 +213,20 @@ class CaptureSession:
                     self.run.artifacts.append(art)
             except Exception:  # noqa: BLE001
                 self.run.notes.append(f"probe {probe.name} failed on finalize")
+        if self.read_only:
+            import json
+
+            self.run.notes.append(
+                f"read_only: aborted {len(self.blocked_requests)} non-GET request(s)"
+            )
+            self.run.artifacts.append(
+                self.store.put_artifact(
+                    json.dumps(self.blocked_requests, indent=2).encode(),
+                    kind="blocked_requests",
+                    content_type="application/json",
+                    meta={"target": self.run.target_url},
+                )
+            )
         self.browser.close()  # flushes HAR
         if self.browser.har_bytes:
             har_art = self.store.put_artifact(
