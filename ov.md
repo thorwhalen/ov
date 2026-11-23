@@ -1,4 +1,4 @@
-> built 2026-11-22 08:44 UTC from 1e9c26a (main) · ov 0.1.4. Details: build_info.json
+> built 2026-11-23 07:50 UTC from 23e31c8 (main) · ov 0.1.5. Details: build_info.json
 
 # index.html.md
 
@@ -6,10 +6,7 @@
 
 # ov
 
-**OverView** — point it at a URL and it drives the web app like a user, records
-what the app *does* (pages, DOM, screenshots, network, console, journey) and what
-it’s *made of* (HTML, JS, frameworks, API surface), then analyzes both for **UX**
-and **software architecture** and writes Markdown reports plus a single synopsis.
+**OverView** — point it at a URL and it drives the web app like a user, records what the app *does* (pages, DOM, screenshots, network, console, journey) and what it’s *made of* (HTML, JS, frameworks, API surface), then analyzes both for **UX** and **software architecture** and writes Markdown reports plus a single synopsis.
 
 ```python
 import ov
@@ -24,11 +21,7 @@ ov observe https://example.com                  # same, from the shell
 ov check                                         # what system deps are present
 ```
 
-`ov` is a **tool + skill library with a deterministic, model-free core**. The
-near-term “agent” that orchestrates it is a *host agent* (Claude Code) following
-the skills in `.claude/skills/` — `ov` supplies the hands (drive the target) and
-eyes (observe + analyze); the host supplies the control loop. Everything in the
-core runs with **no model and no host**, so it’s testable, cheap, and repeatable.
+`ov` is a **tool + skill library with a deterministic, model-free core**. The near-term “agent” that orchestrates it is a *host agent* (Claude Code) following the skills in `.claude/skills/` — `ov` supplies the hands (drive the target) and eyes (observe + analyze); the host supplies the control loop. Everything in the core runs with **no model and no host**, so it’s testable, cheap, and repeatable.
 
 ## Install
 
@@ -37,24 +30,16 @@ pip install -e .            # the package
 playwright install chromium # the browser it drives (required for capture)
 ```
 
-The arch/API reconstruction and evidence layers have optional extras
-(`pip install -e ".[arch,evidence]"`) and an optional Node sidecar; run
-`ov check` (or `ov.check_requirements()`) to see what’s present and how to
-install what’s missing.
+The arch/API reconstruction and evidence layers have optional extras (`pip install -e ".[arch,evidence]"`) and an optional Node sidecar; run `ov check` (or `ov.check_requirements()`) to see what’s present and how to install what’s missing.
 
 ## What it captures
 
-Capture is organized into **probes** — independent, registerable units that each
-write typed artifacts into a content-addressed store:
+Capture is organized into **probes** — independent, registerable units that each write typed artifacts into a content-addressed store:
 
-- **Behavioral**: `navigation`, `network` (request/response + size-capped bodies),
-  `dom` (serialized DOM + ARIA snapshot + full AX tree), `screenshot`, `console`,
-  `perf`, `storage`, `websocket`, `sse`.
+- **Behavioral**: `navigation`, `network` (request/response + size-capped bodies), `dom` (serialized DOM + ARIA snapshot + full AX tree), `screenshot`, `console`, `perf`, `storage`, `websocket`, `sse`.
 - **Static**: `fingerprint` (framework/library detection), `assets` (inventory).
 
-The five **operate** primitives — `observe` / `act` / `journal` / `progress` /
-`snapshot_state` — are the deterministic, LLM-free “hands” the host (or a scripted
-driver) uses to drive a journey; the journey trace *is* the UX evidence.
+The five **operate** primitives — `observe` / `act` / `journal` / `progress` / `snapshot_state` — are the deterministic, LLM-free “hands” the host (or a scripted driver) uses to drive a journey; the journey trace *is* the UX evidence.
 
 ## The facade
 
@@ -69,24 +54,11 @@ driver) uses to drive a journey; the journey trace *is* the UX evidence.
 
 The CLI mirrors these: `ov observe|analyze|diff|report|synopsis|overview|check|runs|mcp`.
 
-In `mode="review"` (your own target), `ov.overview(url, mode="review")` inserts a
-diff step: it compares the run against the latest prior run of the same target and
-reports what is **new**, **changed**, or **resolved** — drift detection for a
-downstream creation/modification agent. Artifacts are content-addressed, so this
-own-target diffing is cheap by design. The first review run has no baseline and is
-a no-op; pass `baseline=<run_id>` to pin a specific prior run.
+In `mode="review"` (your own target), `ov.overview(url, mode="review")` inserts a diff step: it compares the run against the latest prior run of the same target and reports what is **new**, **changed**, or **resolved** — drift detection for a downstream creation/modification agent. Artifacts are content-addressed, so this own-target diffing is cheap by design. The first review run has no baseline and is a no-op; pass `baseline=<run_id>` to pin a specific prior run.
 
 ## In-package agents (optional — `ov[agents]`)
 
-The host-agent path above is the default and the pit of success. When you need a
-*self-contained* runtime — a non-Claude-Code host, programmatic use, or process
-isolation — `ov.agents` re-hosts the **same** skills + deterministic core as runnable
-agents. It is the spec’s “mechanical lift” (Phase 4): nothing is rewritten, the lift
-is done by [`coact`](https://github.com/thorwhalen/coact) (`COMPLETE` a skill into an
-agent definition, `REALIZE` it onto a backend), and `ov.agents` adds only the bits
-coact deliberately leaves out — the operator’s live-browser loop, the analyst’s
-multimodal evidence-bundle call, and the orchestration topology (via
-[`aw`](https://github.com/thorwhalen/aw)).
+The host-agent path above is the default and the pit of success. When you need a *self-contained* runtime — a non-Claude-Code host, programmatic use, or process isolation — `ov.agents` re-hosts the **same** skills + deterministic core as runnable agents. It is the spec’s “mechanical lift” (Phase 4): nothing is rewritten, the lift is done by [`coact`](https://github.com/thorwhalen/coact) (`COMPLETE` a skill into an agent definition, `REALIZE` it onto a backend), and `ov.agents` adds only the bits coact deliberately leaves out — the operator’s live-browser loop, the analyst’s multimodal evidence-bundle call, and the orchestration topology (via [`aw`](https://github.com/thorwhalen/aw)).
 
 ```bash
 pip install -e ".[agents]"          # coact[sdk,mcp] + aw + py2mcp + fastmcp
@@ -106,29 +78,15 @@ print(agents.estimate(["ux-analyst", "arch-analyst"]).render())
 result = agents.study("https://example.com", llm=my_model)  # -> synopsis + run
 ```
 
-Each agent reuses Phase 1–3 machinery unchanged and routes by the §10 cost gate
-(operator → Haiku, UX-analyst → Sonnet, Arch-analyst / orchestrator → Opus). The
-analyst applies the **cite-or-abstain** contract — every LLM claim cites a
-mark/fact id or is downgraded to `undetermined`. For a foreign MCP host,
-`ov mcp` (or `agents.mcp_server()`) exposes `study_url` / `capture_url` via
-[`py2mcp`](https://github.com/i2mint/py2mcp).
+Each agent reuses Phase 1–3 machinery unchanged and routes by the §10 cost gate (operator → Haiku, UX-analyst → Sonnet, Arch-analyst / orchestrator → Opus). The analyst applies the **cite-or-abstain** contract — every LLM claim cites a mark/fact id or is downgraded to `undetermined`. For a foreign MCP host, `ov mcp` (or `agents.mcp_server()`) exposes `study_url` / `capture_url` via [`py2mcp`](https://github.com/i2mint/py2mcp).
 
 ## Authorization & privacy
 
-`ov` analyzes *publicly served* frontend material and observable network behavior
-of targets you are **authorized** to inspect. Foreign-target runs require an
-explicit `authorized=True` acknowledgement; secret/PII capture is off by default
-and storage values are redacted. It does not defeat access controls.
+`ov` analyzes *publicly served* frontend material and observable network behavior of targets you are **authorized** to inspect. Foreign-target runs require an explicit `authorized=True` acknowledgement; secret/PII capture is off by default and storage values are redacted. It does not defeat access controls.
 
 ## Status
 
-Built in phases (see the GitHub issues). **Phases 1–3** are shipped: the capture
-spine + operate primitives, the deterministic UX + architecture analysis +
-reports + synopsis, and the host-agent skill layer with the grounded evidence
-bundle. **Phase 4** adds the optional in-package agent layer (`ov[agents]`, above)
-and **review mode** — own-target diff / regression detection (`ov.diff`,
-`ov.overview(url, mode="review")`). Its remaining depth items (source-map /
-GraphQL / Lighthouse probes) are deferred to follow-up issues.
+Built in phases (see the GitHub issues). **Phases 1–3** are shipped: the capture spine + operate primitives, the deterministic UX + architecture analysis + reports + synopsis, and the host-agent skill layer with the grounded evidence bundle. **Phase 4** adds the optional in-package agent layer (`ov[agents]`, above) and **review mode** — own-target diff / regression detection (`ov.diff`, `ov.overview(url, mode="review")`). Its remaining depth items (source-map / GraphQL / Lighthouse probes) are deferred to follow-up issues.
 
 ---
 
@@ -4849,18 +4807,16 @@ True
 
 # About this build
 
-This documentation was built on **2026-11-22 08:44 UTC** from commit <a href="https://github.com/thorwhalen/ov/commit/1e9c26a46302bab4d46ff202c5647be2f373af11"><code>1e9c26a</code></a> on branch <code>main</code>, for **ov 0.1.4** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-11-23 07:50 UTC** from commit <a href="https://github.com/thorwhalen/ov/commit/23e31c82ae12d5b7140dbfb2052c6d8b545858c3"><code>23e31c8</code></a> on branch <code>main</code>, for **ov 0.1.5** (from <code>pyproject.toml</code>).
 
-#### WARNING
-The documentation and the package may be misaligned:
-
-- The documented version (0.1.4) is behind the latest release on PyPI (0.1.5): `pip install ov` gives newer code than these docs describe.
+#### NOTE
+Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
 
 ## Source
 
 |                     |                                                                                                                                                      |
 |---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/thorwhalen/ov/commit/1e9c26a46302bab4d46ff202c5647be2f373af11"><code>1e9c26a46302bab4d46ff202c5647be2f373af11</code></a> |
+| Commit              | <a href="https://github.com/thorwhalen/ov/commit/23e31c82ae12d5b7140dbfb2052c6d8b545858c3"><code>23e31c82ae12d5b7140dbfb2052c6d8b545858c3</code></a> |
 | Branch              | <code>main</code>                                                                                                                                    |
 | Tags at this commit | none                                                                                                                                                 |
 | Working tree        | clean                                                                                                                                                |
@@ -4871,15 +4827,15 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>thorwhalen/ov</code>                                                                 |
-| Run          | <a href="https://github.com/thorwhalen/ov/actions/runs/45004122758">45004122758</a>        |
+| Run          | <a href="https://github.com/thorwhalen/ov/actions/runs/45133859794">45133859794</a>        |
 | Ref          | <code>refs/heads/main</code>                                                               |
-| Event commit | <code>1e9c26a46302bab4d46ff202c5647be2f373af11</code> (in the history of the built commit) |
+| Event commit | <code>23e31c82ae12d5b7140dbfb2052c6d8b545858c3</code> (in the history of the built commit) |
 
 ## Tools
 
 |          |         |
 |----------|---------|
-| epythet  | 0.2.23  |
+| epythet  | 0.2.24  |
 | Sphinx   | 9.1.1   |
 | docutils | 0.22.4  |
 | Python   | 3.12.16 |
@@ -4898,14 +4854,14 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/ov/0.1.5/">0.1.5</a>, newer than the documented version (0.1.4).
+Latest release: <a href="https://pypi.org/project/ov/0.1.5/">0.1.5</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/thorwhalen/ov && cd ov
-git checkout 1e9c26a46302bab4d46ff202c5647be2f373af11
-pip install "epythet==0.2.23"
+git checkout 23e31c82ae12d5b7140dbfb2052c6d8b545858c3
+pip install "epythet==0.2.24"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
 

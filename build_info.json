@@ -1,36 +1,36 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-22T08:44:55Z",
+  "built_at": "2026-11-23T07:50:44Z",
   "package": {
     "name": "ov",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "display_name": "ov",
     "source": "pyproject.toml"
   },
   "git": {
     "available": true,
-    "commit": "1e9c26a46302bab4d46ff202c5647be2f373af11",
-    "short_commit": "1e9c26a",
+    "commit": "23e31c82ae12d5b7140dbfb2052c6d8b545858c3",
+    "short_commit": "23e31c8",
     "branch": "main",
     "tags": [],
     "dirty": false,
     "remote_url": "https://github.com/thorwhalen/ov",
-    "commit_url": "https://github.com/thorwhalen/ov/commit/1e9c26a46302bab4d46ff202c5647be2f373af11",
+    "commit_url": "https://github.com/thorwhalen/ov/commit/23e31c82ae12d5b7140dbfb2052c6d8b545858c3",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "thorwhalen/ov",
-    "sha": "1e9c26a46302bab4d46ff202c5647be2f373af11",
+    "sha": "23e31c82ae12d5b7140dbfb2052c6d8b545858c3",
     "sha_in_history": true,
     "ref": "refs/heads/main",
     "ref_name": "main",
-    "run_id": "45004122758",
-    "run_url": "https://github.com/thorwhalen/ov/actions/runs/45004122758",
+    "run_id": "45133859794",
+    "run_url": "https://github.com/thorwhalen/ov/actions/runs/45133859794",
     "server_url": "https://github.com"
   },
   "tools": {
-    "epythet": "0.2.23",
+    "epythet": "0.2.24",
     "sphinx": "9.1.1",
     "docutils": "0.22.4",
     "python": "3.12.16"
@@ -61,15 +61,13 @@
   "pypi": {
     "checked": true,
     "latest": "0.1.5",
-    "relation": "behind",
+    "relation": "same",
     "error": null
   },
-  "reproduce": "git clone https://github.com/thorwhalen/ov && cd ov\ngit checkout 1e9c26a46302bab4d46ff202c5647be2f373af11\npip install \"epythet==0.2.23\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/thorwhalen/ov && cd ov\ngit checkout 23e31c82ae12d5b7140dbfb2052c6d8b545858c3\npip install \"epythet==0.2.24\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
-    "aligned": false,
-    "notes": [
-      "The documented version (0.1.4) is behind the latest release on PyPI (0.1.5): `pip install ov` gives newer code than these docs describe."
-    ]
+    "aligned": true,
+    "notes": []
   }
 }

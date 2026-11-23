@@ -5,7 +5,7 @@
 
 ## Pages
 
-- [ov](index.html.md): &#42;&#42;OverView&#42;&#42; — point it at a URL and it drives the web app like a user, records
+- [ov](index.html.md): &#42;&#42;OverView&#42;&#42; — point it at a URL and it drives the web app like a user, records what the app &#42;does&#42; ...
 - [API reference](api.html.md): | &#96;ov&#96;   | &#96;ov&#96; -- OverView: agent-driven web reconnaissance &amp; analysis.   |
 - [ov](_autosummary/ov.html.md): &#96;ov&#96; – OverView: agent-driven web reconnaissance &amp; analysis.
 - [ov.agents](_autosummary/ov.agents.html.md): &#96;ov.agents&#96; — the optional in-package agent layer (Phase 4 productization).
@@ -71,7 +71,7 @@
 - [ov.reporting.synopsis](_autosummary/ov.reporting.synopsis.html.md): Synopsis: structured map-reduce over findings into one agent-consumable file (§8.4).
 - [ov.util](_autosummary/ov.util.html.md): Internal helpers: content-addressing, hashing, redaction, and requirements.
 - [For AI agents](ai-agents.html.md): &#96;ov&#96; ships artifacts for coding agents alongside its code. This page lists
-- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-22 08:44 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-11-23 07:50 UTC&#42;&#42; from commit &lt;a href="https://github.com/tho...
 
 ## Optional
 
